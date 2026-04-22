@@ -1,0 +1,33 @@
+# MCP 設定（含 API keys，不可提交）
+.mcp.json
+!.mcp.json.*.example
+
+# Claude Code 個人設定
+.claude/settings.local.json
+.claude/taskmaster-data/
+.claude/sessions/
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# 暫存
+tmp/
+*.tmp
+*.bak
+
+.claude/
+VibeCoding_Workflow_Templates/
