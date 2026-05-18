@@ -30,7 +30,7 @@ SAFE_BOTTOM = Inches(6.95)
 RIGHT_TOL = Inches(0.5)
 MIN_BODY_FONT_PT = 12
 MIN_CHROME_FONT_PT = 9
-CHROME_TOP_THRESHOLD = Inches(6.4)
+CHROME_TOP_THRESHOLD = Inches(6.2)
 LINE_SPACING = 1.35
 OVERLAP_AREA_TOL = Inches(0.4) * Inches(0.4)
 
@@ -129,16 +129,24 @@ def audit():
             width, height = shape.width or 0, shape.height or 0
             right = left + width
 
-            # 1. 渲染文字撞 footer
+            # 1. 渲染文字撞 footer 或落在 footer 下方（非 chrome 字級）
             if shape.has_text_frame and shape.text_frame.text.strip():
                 rendered_h = _rendered_text_height(shape)
                 rendered_bottom = top + rendered_h
-                if rendered_bottom > SAFE_BOTTOM and top < SAFE_BOTTOM:
-                    violations[idx].append(
-                        f"[HIGH] 文字渲染撞 footer：top={_fmt(top)} + 渲染高={_fmt(rendered_h)} "
-                        f"→ 底部={_fmt(rendered_bottom)}（安全 ≤{_fmt(SAFE_BOTTOM)}）"
-                        f" 文字「{shape.text_frame.text[:25]}…」"
-                    )
+                min_size = _min_font_in_shape(shape)
+                is_chrome_size = min_size is not None and min_size <= MIN_CHROME_FONT_PT + 1
+                if rendered_bottom > SAFE_BOTTOM and not is_chrome_size:
+                    if top >= SAFE_BOTTOM:
+                        violations[idx].append(
+                            f"[HIGH] 文字落在 footer 之下：top={_fmt(top)}（>{_fmt(SAFE_BOTTOM)}），"
+                            f"字級 {min_size}pt 應為內文 文字「{shape.text_frame.text[:25]}…」"
+                        )
+                    else:
+                        violations[idx].append(
+                            f"[HIGH] 文字渲染撞 footer：top={_fmt(top)} + 渲染高={_fmt(rendered_h)} "
+                            f"→ 底部={_fmt(rendered_bottom)}（安全 ≤{_fmt(SAFE_BOTTOM)}）"
+                            f" 文字「{shape.text_frame.text[:25]}…」"
+                        )
 
             # 2. 右邊界超出
             if right > SLIDE_W + RIGHT_TOL:
