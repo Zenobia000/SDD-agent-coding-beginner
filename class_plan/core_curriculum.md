@@ -19,7 +19,7 @@
 |------|------|---------|----------------|
 | **Google AI Studio** | 瀏覽器 | ★ 最低 | 零安裝，用來「體感 prompt 的威力」—— 今天的第一口飯 |
 | **Antigravity** | IDE (桌面) | ★★ 中等 | Agent-first IDE，**今天的主戰場**，Vibe Coding 做出小專案 |
-| **Gemini CLI** | 終端機 | ★★★ 較高 | 終端機的 AI agent，用來「放大與連續化」—— 今天的收尾與延伸 |
+| **Gemini CLI** | 終端機 | ★★★ 較高 | 終端機的 AI agent，用來「放大與連續化」；同時帶到 2026 通用 coding agent 詞彙（GEMINI.md / @引用 / 工具+權限 / MCP / 跨工具對照）—— 今天的收尾與延伸 |
 
 ### 三工具的連貫邏輯（不是並列，是一條線）
 
@@ -63,7 +63,7 @@
 
 1. **AHA 1：同一題，不同 prompt，產出天差地遠** —— 出現在 AI Studio 環節
 2. **AHA 2：我不會寫程式，但我的想法真的跑起來了** —— 出現在 Antigravity 環節
-3. **AHA 3：打一行字就能執行一整件事** —— 出現在 Gemini CLI 環節
+3. **AHA 3：打一行字就能執行一整件事，而且這套技能跨工具通用** —— 出現在 Gemini CLI 環節
 
 ---
 
@@ -241,6 +241,21 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 > 這個框架在 AI Studio、Antigravity、Gemini CLI **完全通用**，是今天最重要的「跨工具遷移」資產。
 > 初學者的心法：**工具會一直換，但 STRIKE 能帶著走**。
 
+### 框架 2.5：通用 coding agent 技能（M4 補充軸線）
+
+除了 STRIKE 之外，2026 年「凡是 coding agent 都會用到」的四個觀念，學會這四個，學員之後換到 Claude Code / Cursor / Codex / Antigravity 也能無痛遷移：
+
+| 觀念 | 一句話定義 | 在 Gemini CLI 怎麼叫 | 在別家叫什麼 |
+|------|----------|--------------------|------------|
+| **專案記憶檔** | 寫一份檔案放專案根目錄，agent 開工自動讀 | `GEMINI.md`（+ `~/.gemini/GEMINI.md` 全域） | `CLAUDE.md`（Claude Code）/ `AGENTS.md`（Cursor、Antigravity）/ `.cursor/rules/*.mdc`（Cursor 進階） |
+| **@ 檔案引用** | 用 `@filename` 把檔案塞進對話，比 pipe 更直觀 | `gemini "@file.txt 摘要"` | 三家寫法相同 |
+| **內建工具 + 權限** | agent 有讀檔、跑指令、上網等內建能力；動手前會問你 | 預設確認模式；`--yolo` 關掉 | 各家寫法不同，但概念相同 |
+| **MCP** | 「AI 的 USB-C」——一次寫好就能接所有 agent | `gemini mcp add <server>` | Anthropic 2024 提出，現已是業界開放標準 |
+
+> **為什麼初學者需要知道：** 三選一就好——`@ 引用` 與 `GEMINI.md` 是今天會親手做的；`工具/權限` 與 `MCP` 是今天只要「聽過」就好，回家想玩可以延伸。**重點是建立詞彙地圖**，不是當天精通。
+>
+> **跨工具最大公約數：** `AGENTS.md` 是 2026 浮現的通用格式，Cursor 與 Antigravity 都認，是學員之後遇到別的 agent 時的第一張車票。
+
 ### 框架 3：Vibe Coding 五步流程
 
 ```
@@ -271,7 +286,7 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 - [ ] 痛點物理量檢驗單（人數份）
 - [ ] Antigravity 預備 Demo 專案 3 個（摘要、小工具、表格轉換）
 - [ ] AI Studio 的 prompt 對比範例（模糊版 vs 結構化版）
-- [ ] Gemini CLI 範例腳本（3 個）
+- [ ] Gemini CLI 範例腳本（3 個）+ GEMINI.md 範本（人數份，學員必做）
 - [ ] 部署備案 Demo 影片（若網路不穩）
 - [ ] 測試場地網路：同時 30 台連線、能連 Gemini API 與 Antigravity
 - [ ] 共用文件頁（HackMD/Notion）放所有連結、prompt、步驟

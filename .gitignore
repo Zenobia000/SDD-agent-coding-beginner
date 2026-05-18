@@ -29,5 +29,7 @@ tmp/
 *.tmp
 *.bak
 
+news-summarizer/
+
 .claude/
 VibeCoding_Workflow_Templates/

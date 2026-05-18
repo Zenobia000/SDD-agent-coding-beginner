@@ -1,6 +1,6 @@
 """Vibe Coding 一日工作坊 — 初版 PPT 產生器（Figma 風格：白底、黑字、Typography 主導）.
 
-依據 class_plan/slides_outline.md 的 53 張投影片 + 附錄三個備選 Demo 專案。
+依據 class_plan/slides_outline.md 的 59 張投影片 + 附錄三個備選 Demo 專案（共 64 張）。
 產物：class_plan/vibe_coding_workshop.pptx
 
 設計哲學（對齊 .claude/ui/figma/DESIGN.md）：
@@ -127,7 +127,7 @@ def _hairline(slide, left, top, width, *, color: RGBColor = HAIRLINE, weight: fl
     return line
 
 
-def _add_footer(slide, module_label: str, slide_no: int, total: int = 58):
+def _add_footer(slide, module_label: str, slide_no: int, total: int = 64):
     """頁尾：左下模組標籤（Mono Caps）、右下頁碼."""
     _hairline(slide, Inches(0.6), Inches(7.05), Inches(12.13))
     _add_text(
@@ -1285,7 +1285,7 @@ def s_m3_summary(prs, no):
 def s_m4_cover(prs, no):
     return s_module_divider(
         prs, no, "M4", "Gemini CLI",
-        "從「介面操作」到「打字就走」。\n你的手會比腦子先動。",
+        "從「介面操作」到「打字就走」。\n順便學 2026 通用 coding agent 技能。",
         "M4 · Gemini CLI",
     )
 
@@ -1377,11 +1377,216 @@ gemini"""
     return s
 
 
+def s_m4_three_abilities(prs, no):
+    s = _new_slide(prs, BG)
+    _mono_label(s, "M4 · The shape of a coding agent", Inches(0.8), Inches(0.7))
+    _add_text(s, "認識你的 coding agent", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
+              size=40, bold=True, letter_spacing=-1.3)
+    _add_text(s, "你今天碰到的三個工具，其實都是同一種東西。",
+              Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
+              size=18, color=MUTED, letter_spacing=-0.2)
+
+    abilities = [
+        ("🗣  聊天",    "跟你對話、寫程式碼"),
+        ("📂  看檔",    "讀你電腦上的檔案"),
+        ("🔧  用工具",  "搜尋、執行指令、呼叫服務"),
+    ]
+    for i, (a, b) in enumerate(abilities):
+        top = Inches(3.1 + i * 0.85)
+        _hairline(s, Inches(0.8), top, Inches(11.7))
+        _add_text(s, a, Inches(0.8), top + Inches(0.2), Inches(4.5), Inches(0.5),
+                  size=24, bold=True, letter_spacing=-0.4)
+        _add_text(s, b, Inches(5.5), top + Inches(0.2), Inches(7.0), Inches(0.5),
+                  size=20, color=INK_SOFT, letter_spacing=-0.3)
+    _hairline(s, Inches(0.8), Inches(5.85), Inches(11.7), color=INK)
+
+    _add_text(s, "差別只在「介面」與「能用哪些工具」。",
+              Inches(0.8), Inches(6.1), Inches(11.7), Inches(0.6),
+              size=22, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.4)
+
+    _add_footer(s, "M4 · Gemini CLI", no)
+    return s
+
+
+def s_m4_gemini_md(prs, no):
+    s = _new_slide(prs, BG)
+    _mono_label(s, "M4 · GEMINI.md — project memory", Inches(0.8), Inches(0.7))
+    _add_text(s, "GEMINI.md", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
+              size=40, bold=True, font=FONT_MONO, letter_spacing=-1.0)
+    _add_text(s, "給 agent 一份「公司守則」。每次開工自動讀。",
+              Inches(0.8), Inches(2.05), Inches(11.7), Inches(0.5),
+              size=18, color=MUTED, letter_spacing=-0.2)
+
+    code = """# 我的新聞摘要工具
+
+- 語言：Python
+- 永遠用繁體中文回覆
+- 摘要請限制在 100 字內
+- 程式碼請加註解"""
+    _add_code_block(s, code, Inches(0.8), Inches(2.85), Inches(11.7), Inches(2.2), size=14)
+
+    _add_text(s, "兩個層級（Gemini CLI 都吃）：",
+              Inches(0.8), Inches(5.25), Inches(11.7), Inches(0.4),
+              size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
+    levels = """~/.gemini/GEMINI.md   = 全域（所有專案都套用）
+./GEMINI.md           = 這個專案專用"""
+    _add_code_block(s, levels, Inches(0.8), Inches(5.65), Inches(11.7), Inches(1.1), size=14)
+
+    _add_footer(s, "M4 · Gemini CLI", no)
+    return s
+
+
+def s_m4_at_ref(prs, no):
+    s = _new_slide(prs, BG)
+    _mono_label(s, "M4 · @ reference — feed files into chat", Inches(0.8), Inches(0.7))
+    _add_text(s, "@ 引用：把檔案丟進對話",
+              Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
+              size=36, bold=True, letter_spacing=-1.2)
+
+    _add_text(s, "舊招（M4 前半教過）：",
+              Inches(0.8), Inches(2.3), Inches(11.7), Inches(0.4),
+              size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
+    _add_code_block(s, 'cat news.txt | gemini "摘要"',
+                    Inches(0.8), Inches(2.7), Inches(11.7), Inches(0.6), size=15)
+
+    _add_text(s, "新招（更簡單）：",
+              Inches(0.8), Inches(3.55), Inches(11.7), Inches(0.4),
+              size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
+    _add_code_block(s, 'gemini "@news.txt 幫我摘要"',
+                    Inches(0.8), Inches(3.95), Inches(11.7), Inches(0.6), size=15)
+
+    _hairline(s, Inches(0.8), Inches(4.85), Inches(11.7))
+    _add_text(s, "cat |  =  把檔案內容「灌」進去（單檔、純文字）",
+              Inches(0.8), Inches(5.05), Inches(11.7), Inches(0.5),
+              size=16, color=INK_SOFT, letter_spacing=-0.2)
+    _add_text(s, "@file  =  告訴 agent「自己去讀」（多檔、大檔、含程式碼）",
+              Inches(0.8), Inches(5.55), Inches(11.7), Inches(0.5),
+              size=16, color=INK_SOFT, letter_spacing=-0.2)
+
+    _add_code_block(s, 'gemini "@README.md @src/main.py 解釋這個程式怎麼跑"',
+                    Inches(0.8), Inches(6.2), Inches(11.7), Inches(0.6), size=14)
+
+    _add_footer(s, "M4 · Gemini CLI", no)
+    return s
+
+
+def s_m4_tools_perm(prs, no):
+    s = _new_slide(prs, BG)
+    _mono_label(s, "M4 · Built-in tools & safety", Inches(0.8), Inches(0.7))
+    _add_text(s, "內建工具 + 安全模式",
+              Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
+              size=36, bold=True, letter_spacing=-1.2)
+
+    _add_text(s, "Gemini CLI 不只會聊天，預設帶這些工具：",
+              Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
+              size=16, color=MUTED, letter_spacing=-0.2)
+
+    tools = [
+        ("📂  ReadFile / WriteFile", "讀寫檔案"),
+        ("🐚  Shell",                "跑指令"),
+        ("🔍  GoogleSearch",         "即時上網查"),
+        ("🌐  WebFetch",             "讀網頁"),
+    ]
+    for i, (a, b) in enumerate(tools):
+        top = Inches(2.9 + i * 0.5)
+        _add_text(s, a, Inches(1.0), top, Inches(5.5), Inches(0.4),
+                  size=18, bold=True, font=FONT_MONO, letter_spacing=-0.2)
+        _add_text(s, b, Inches(6.8), top, Inches(5.7), Inches(0.4),
+                  size=18, color=INK_SOFT, letter_spacing=-0.2)
+
+    _hairline(s, Inches(0.8), Inches(5.05), Inches(11.7), color=INK)
+    _add_text(s, "每次它要動手，會先問你「可以嗎？」",
+              Inches(0.8), Inches(5.2), Inches(11.7), Inches(0.5),
+              size=18, bold=True, letter_spacing=-0.3)
+    _add_text(s, "預設模式：每步都確認  ← 初學者請用這個",
+              Inches(1.0), Inches(5.85), Inches(11.7), Inches(0.4),
+              size=15, color=ACCENT_GOOD, letter_spacing=-0.2)
+    _add_text(s, "--yolo 模式：不問直接做  ← demo 用，別在重要專案開",
+              Inches(1.0), Inches(6.3), Inches(11.7), Inches(0.4),
+              size=15, color=ACCENT_WARN, font=FONT_MONO, letter_spacing=-0.2)
+
+    _add_footer(s, "M4 · Gemini CLI", no)
+    return s
+
+
+def s_m4_mcp(prs, no):
+    s = _new_slide(prs, BG)
+    _mono_label(s, "M4 · MCP — the USB-C for AI", Inches(0.8), Inches(0.7))
+    _add_text(s, "MCP：AI 的 USB-C",
+              Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
+              size=40, bold=True, letter_spacing=-1.3)
+
+    _add_text(s, "問題：每個工具都要重新接一次 Slack、GitHub、資料庫，超累。",
+              Inches(0.8), Inches(2.2), Inches(11.7), Inches(0.5),
+              size=16, color=MUTED, letter_spacing=-0.2)
+    _add_text(s, "解法：Model Context Protocol —— 業界共通的「插槽標準」。",
+              Inches(0.8), Inches(2.7), Inches(11.7), Inches(0.5),
+              size=18, bold=True, letter_spacing=-0.3)
+
+    _add_text(s, "常見 MCP server（會了就有得用）：",
+              Inches(0.8), Inches(3.5), Inches(11.7), Inches(0.4),
+              size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
+    mcps = [
+        ("🔧  filesystem",  "讓 agent 管理你的檔案"),
+        ("🌐  fetch",       "讓 agent 抓網頁"),
+        ("📅  google-cal",  "讓 agent 看你的行事曆"),
+        ("💬  slack",       "讓 agent 收發訊息"),
+    ]
+    for i, (a, b) in enumerate(mcps):
+        top = Inches(4.0 + i * 0.5)
+        _add_text(s, a, Inches(1.0), top, Inches(5.0), Inches(0.4),
+                  size=17, bold=True, font=FONT_MONO, letter_spacing=-0.2)
+        _add_text(s, b, Inches(6.3), top, Inches(6.2), Inches(0.4),
+                  size=17, color=INK_SOFT, letter_spacing=-0.2)
+
+    _hairline(s, Inches(0.8), Inches(6.2), Inches(11.7), color=INK)
+    _add_text(s, "今天不裝。先知道有這東西，回家想玩再裝。",
+              Inches(0.8), Inches(6.4), Inches(11.7), Inches(0.5),
+              size=18, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.3)
+
+    _add_footer(s, "M4 · Gemini CLI", no)
+    return s
+
+
+def s_m4_cross_tools(prs, no):
+    s = _new_slide(prs, BG)
+    _mono_label(s, "M4 · Same skill, different names", Inches(0.8), Inches(0.7))
+    _add_text(s, "你學的不是 Gemini CLI，是通用技能",
+              Inches(0.8), Inches(1.1), Inches(11.7), Inches(1.0),
+              size=32, bold=True, letter_spacing=-1.2)
+
+    header = "                AI Studio   Antigravity      Gemini CLI    Claude Code   Cursor"
+    rows = """專案記憶        ❌          AGENTS.md *      GEMINI.md     CLAUDE.md     .cursor/rules/
+@ 檔案引用      ❌          ✅              ✅            ✅            ✅
+STRIKE          ✅          ✅              ✅            ✅            ✅
+MCP             ❌          ✅              ✅            ✅            ✅"""
+    _add_code_block(s, header + "\n" + rows,
+                    Inches(0.4), Inches(2.3), Inches(12.5), Inches(2.4), size=12)
+
+    _add_text(s, "*  Antigravity 還會讀 ~/.gemini/GEMINI.md 做全域設定（跟 Gemini CLI 共用——同一家人）",
+              Inches(0.8), Inches(4.95), Inches(11.7), Inches(0.4),
+              size=13, color=MUTED, letter_spacing=-0.1)
+
+    _hairline(s, Inches(0.8), Inches(5.55), Inches(11.7), color=INK)
+    _add_text(s, "🟡  AGENTS.md 是 2026 新興的「跨工具通用」格式",
+              Inches(0.8), Inches(5.75), Inches(11.7), Inches(0.5),
+              size=20, bold=True, letter_spacing=-0.3)
+    _add_text(s, "    Cursor 與 Antigravity 都認得它，最值得學",
+              Inches(0.8), Inches(6.25), Inches(11.7), Inches(0.5),
+              size=18, color=INK_SOFT, letter_spacing=-0.2)
+
+    _add_footer(s, "M4 · Gemini CLI", no)
+    return s
+
+
 def s_m4_practice(prs, no):
     return s_practice_block(
         prs, no, "M4 · Gemini CLI",
-        "實作：為你的專案加一點自動化（三選一）",
+        "實作：為你的專案加一點自動化",
         [
+            "必做（5 min）：在你的專案根目錄建一份 GEMINI.md（5 行就好）",
+            "",
+            "三選一（20 min）：",
             "A.   把你專案的核心功能寫成一行指令",
             "     例：summarize.sh news.txt",
             "",
@@ -1390,7 +1595,7 @@ def s_m4_practice(prs, no):
             "",
             "C.   寫一個「每天跑一次」的小工具（不實際排程）",
         ],
-        "30 分鐘",
+        "25 分鐘",
     )
 
 
@@ -1823,8 +2028,10 @@ def build():
         s_m3_golden_quote, s_m3_natural_lang_fix, s_m3_demo_time,
         s_m3_practice1, s_m3_common_issues, s_m3_practice2,
         s_m3_cp2, s_m3_summary,
-        # M4 (7)
+        # M4 (13)
         s_m4_cover, s_m4_terminal, s_m4_continuity, s_m4_commands,
+        s_m4_three_abilities, s_m4_gemini_md, s_m4_at_ref,
+        s_m4_tools_perm, s_m4_mcp, s_m4_cross_tools,
         s_m4_practice, s_m4_decision_tree, s_m4_summary,
         # M5 (8)
         s_m5_cover, s_m5_deploy, s_m5_practice, s_m5_show,
