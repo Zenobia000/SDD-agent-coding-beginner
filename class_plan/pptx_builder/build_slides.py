@@ -214,6 +214,28 @@ def _card(slide, left, top, width, height, *, bg: RGBColor = BG, border: RGBColo
     return shape
 
 
+def _set_cell_border(cell, *, color: RGBColor = HAIRLINE, weight_pt: float = 0.5):
+    """python-pptx 沒有 cell border API，用 XML 補上四邊細線."""
+    from pptx.oxml.ns import qn
+    from lxml import etree
+
+    tc = cell._tc
+    tcPr = tc.get_or_add_tcPr()
+    for tag in ("lnL", "lnR", "lnT", "lnB"):
+        for ex in tcPr.findall(qn(f"a:{tag}")):
+            tcPr.remove(ex)
+        ln = etree.SubElement(tcPr, qn(f"a:{tag}"))
+        ln.set("w", str(int(weight_pt * 12700)))
+        ln.set("cap", "flat")
+        ln.set("cmpd", "sng")
+        ln.set("algn", "ctr")
+        sf = etree.SubElement(ln, qn("a:solidFill"))
+        clr = etree.SubElement(sf, qn("a:srgbClr"))
+        clr.set("val", str(color))
+        dash = etree.SubElement(ln, qn("a:prstDash"))
+        dash.set("val", "solid")
+
+
 def _add_code_block(slide, code: str, left, top, width, height, *, size: int = 13):
     """碼塊：極淡底、細邊框、mono 字."""
     shape = _card(slide, left, top, width, height, bg=RGBColor(0xFA, 0xFA, 0xFA), border=HAIRLINE)
@@ -260,13 +282,13 @@ def s_cover(prs, no):
         s, "用三個免費工具",
         Inches(0.8), Inches(1.85),
         Inches(11.7), Inches(1.2),
-        size=68, bold=True, color=INK, font=FONT_BOLD, letter_spacing=-3.0,
+        size=52, bold=True, color=INK, font=FONT_BOLD, letter_spacing=-2.0,
     )
     _add_text(
         s, "把你腦中的想法做成可用的小專案",
         Inches(0.8), Inches(2.9),
         Inches(11.7), Inches(1.2),
-        size=68, bold=True, color=INK, font=FONT_BOLD, letter_spacing=-3.0,
+        size=52, bold=True, color=INK, font=FONT_BOLD, letter_spacing=-2.0,
     )
 
     _hairline(s, Inches(0.8), Inches(4.7), Inches(11.7))
@@ -286,7 +308,7 @@ def s_you_too(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M0 · The honest question", Inches(0.8), Inches(0.7))
     _add_text(s, "你是不是也這樣？", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=44, bold=True, letter_spacing=-1.5)
+              size=34, bold=True, letter_spacing=-1.2)
 
     quotes = [
         '「ChatGPT 問過、Gemini 問過，但我還是不會做出任何東西。」',
@@ -327,7 +349,7 @@ def s_three_tools(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M0 · The journey", Inches(0.8), Inches(0.7))
     _add_text(s, "三個工具  ·  一條線", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=44, bold=True, letter_spacing=-1.5)
+              size=34, bold=True, letter_spacing=-1.2)
     _add_text(s, "同一個專案，三個工具輪流接棒。", Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
 
@@ -360,7 +382,7 @@ def s_schedule_rules(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M0 · Schedule & rules", Inches(0.8), Inches(0.7))
     _add_text(s, "今日時程  ·  三個規則", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
 
     schedule = [
         ("09:00", "M0", "開場"),
@@ -409,7 +431,7 @@ def s_module_divider(prs, no, module_code, module_name, subtitle, footer_text):
     _add_text(s, module_code, Inches(0.8), Inches(1.6), Inches(12), Inches(1.0),
               size=18, color=MUTED, font=FONT_MONO, letter_spacing=3.0)
     _add_text(s, module_name, Inches(0.8), Inches(2.1), Inches(12), Inches(1.4),
-              size=88, bold=True, letter_spacing=-3.5)
+              size=64, bold=True, letter_spacing=-2.5)
     _add_text(s, subtitle, Inches(0.8), Inches(4.2), Inches(12), Inches(1.6),
               size=26, color=INK_SOFT, line_spacing=1.4, letter_spacing=-0.4)
 
@@ -422,7 +444,7 @@ def s_practice_block(prs, no, module, title, steps, duration):
     s = _new_slide(prs, BG_SOFT)
     _pill(s, "Hands-on", Inches(0.8), Inches(0.7), width=Inches(1.3), fill=INK, text_color=BG, font_size=10)
     _add_text(s, title, Inches(0.8), Inches(1.3), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _hairline(s, Inches(0.8), Inches(2.4), Inches(11.7), color=INK, weight=1.0)
 
     for i, step in enumerate(steps):
@@ -445,7 +467,7 @@ def s_checkpoint(prs, no, cp_num, title, question, module):
 
     _mono_label(s, f"Checkpoint {cp_num:02d}", Inches(0.8), Inches(1.5))
     _add_text(s, f"CP{cp_num}", Inches(0.8), Inches(1.9), Inches(11.7), Inches(1.5),
-              size=72, bold=True, letter_spacing=-2.5)
+              size=54, bold=True, letter_spacing=-2.0)
     _add_text(s, title, Inches(0.8), Inches(3.4), Inches(11.7), Inches(0.8),
               size=24, color=INK_SOFT, letter_spacing=-0.3)
     _hairline(s, Inches(0.8), Inches(4.3), Inches(11.7), color=INK, weight=1.0)
@@ -473,7 +495,7 @@ def s_m1_mistake(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M1 · The most common mistake", Inches(0.8), Inches(0.7))
     _add_text(s, "新手最容易犯的錯", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
 
     blocks = [
         (Inches(0.8), "錯", "產品思維", "先想「我要做什麼產品」", "空想，容易越想越大\n做不完", ACCENT_WARN),
@@ -603,7 +625,7 @@ def s_m1_practice2(prs, no):
     s = _new_slide(prs, BG_SOFT)
     _pill(s, "Hands-on", Inches(0.8), Inches(0.7), width=Inches(1.3), fill=INK, text_color=BG, font_size=10)
     _add_text(s, "實作 2：物理量檢驗", Inches(0.8), Inches(1.3), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "挑出你要做的那一個", Inches(0.8), Inches(2.2), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
 
@@ -730,7 +752,7 @@ def s_m2_strike_hero(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M2 · The core framework", Inches(0.8), Inches(0.7))
     _add_text(s, "STRIKE 六字訣", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=44, bold=True, letter_spacing=-1.5)
+              size=34, bold=True, letter_spacing=-1.2)
     _add_text(s, "Prompt 工程的核心框架",
               Inches(0.8), Inches(2.1), Inches(11.7), Inches(0.5),
               size=16, color=MUTED, letter_spacing=-0.2)
@@ -749,7 +771,7 @@ def s_m2_strike_hero(prs, no):
         top = Inches(2.8 + row * 1.8)
         _card(s, left, top, Inches(3.85), Inches(1.55))
         _add_text(s, letter, left + Inches(0.25), top + Inches(0.05), Inches(1.0), Inches(1.2),
-                  size=52, bold=True, letter_spacing=-2.5)
+                  size=40, bold=True, letter_spacing=-2.0)
         _add_text(s, eng, left + Inches(1.4), top + Inches(0.25), Inches(2.4), Inches(0.35),
                   size=11, color=MUTED, font=FONT_MONO, letter_spacing=2.0)
         _add_text(s, cn, left + Inches(1.4), top + Inches(0.55), Inches(2.4), Inches(0.45),
@@ -855,7 +877,7 @@ def s_m2_l123(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M2 · Three attack levels", Inches(0.8), Inches(0.7))
     _add_text(s, "三層進攻策略", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "配對今天三個工具。", Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=16, color=MUTED, letter_spacing=-0.2)
 
@@ -891,7 +913,7 @@ def s_m2_ai_studio_intro(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M2 · The tool", Inches(0.8), Inches(0.7))
     _add_text(s, "Google AI Studio", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=44, bold=True, letter_spacing=-1.5)
+              size=34, bold=True, letter_spacing=-1.2)
     _add_text(s, "瀏覽器裡的 AI 實驗場。", Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
 
@@ -1026,7 +1048,7 @@ def s_m3_what_is(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M3 · Definition", Inches(0.8), Inches(0.7))
     _add_text(s, "什麼是 Vibe Coding？", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "不寫程式碼，用自然語言描述你要什麼。AI 把你的想法變成可運行的產品。",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.8),
               size=18, color=MUTED, letter_spacing=-0.2)
@@ -1051,7 +1073,7 @@ def s_m3_antigravity_intro(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M3 · The tool", Inches(0.8), Inches(0.7))
     _add_text(s, "Antigravity", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=44, bold=True, letter_spacing=-1.5)
+              size=34, bold=True, letter_spacing=-1.2)
     _add_text(s, "Agent-first IDE。不是自動補全，是整個專案都幫你做。",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
@@ -1082,7 +1104,7 @@ def s_m3_five_steps(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M3 · The loop", Inches(0.8), Inches(0.7))
     _add_text(s, "Vibe Coding 五步流程", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
 
     steps = [
         ("01", "描述需求", "用 M2 的 STRIKE（PRD = L2 精準打擊）"),
@@ -1117,9 +1139,9 @@ def s_m3_golden_quote(prs, no):
     _add_text(s, "AI 做錯了，", Inches(0.8), Inches(2.2), Inches(11.7), Inches(1.0),
               size=50, color=MUTED, letter_spacing=-1.5, align=PP_ALIGN.CENTER)
     _add_text(s, "不是去改 code，", Inches(0.8), Inches(3.3), Inches(11.7), Inches(1.3),
-              size=80, bold=True, letter_spacing=-3.0, align=PP_ALIGN.CENTER)
+              size=58, bold=True, letter_spacing=-2.0, align=PP_ALIGN.CENTER)
     _add_text(s, "是去改描述。", Inches(0.8), Inches(4.7), Inches(11.7), Inches(1.3),
-              size=80, bold=True, letter_spacing=-3.0, align=PP_ALIGN.CENTER)
+              size=58, bold=True, letter_spacing=-2.0, align=PP_ALIGN.CENTER)
 
     _add_footer(s, "M3 · Antigravity", no)
     return s
@@ -1254,7 +1276,7 @@ def s_m3_summary(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M3 · Recap", Inches(0.8), Inches(0.7))
     _add_text(s, "M3 小結", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
 
     items = [
         "Vibe Coding = 描述需求比寫 code 重要",
@@ -1294,7 +1316,7 @@ def s_m4_terminal(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · The terminal is friendly", Inches(0.8), Inches(0.7))
     _add_text(s, "終端機沒那麼可怕", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "終端機  =  用打字代替點滑鼠。",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
@@ -1381,7 +1403,7 @@ def s_m4_three_abilities(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · The shape of a coding agent", Inches(0.8), Inches(0.7))
     _add_text(s, "認識你的 coding agent", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "你今天碰到的三個工具，其實都是同一種東西。",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
@@ -1412,7 +1434,7 @@ def s_m4_gemini_md(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · GEMINI.md — project memory", Inches(0.8), Inches(0.7))
     _add_text(s, "GEMINI.md", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, font=FONT_MONO, letter_spacing=-1.0)
+              size=32, bold=True, font=FONT_MONO, letter_spacing=-0.8)
     _add_text(s, "給 agent 一份「公司守則」。每次開工自動讀。",
               Inches(0.8), Inches(2.05), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
@@ -1514,7 +1536,7 @@ def s_m4_mcp(prs, no):
     _mono_label(s, "M4 · MCP — the USB-C for AI", Inches(0.8), Inches(0.7))
     _add_text(s, "MCP：AI 的 USB-C",
               Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
 
     _add_text(s, "問題：每個工具都要重新接一次 Slack、GitHub、資料庫，超累。",
               Inches(0.8), Inches(2.2), Inches(11.7), Inches(0.5),
@@ -1558,10 +1580,10 @@ def s_m4_cross_tools(prs, no):
     # CJK 字寬不固定，用 python-pptx 原生 table 保證對齊
     headers = ["", "AI Studio", "Antigravity", "Gemini CLI", "Claude Code", "Cursor"]
     rows_data = [
-        ["專案記憶",   "❌", "AGENTS.md *", "GEMINI.md", "CLAUDE.md", ".cursor/rules/"],
-        ["@ 檔案引用", "❌", "✅",          "✅",        "✅",         "✅"],
-        ["STRIKE",     "✅", "✅",          "✅",        "✅",         "✅"],
-        ["MCP",        "❌", "✅",          "✅",        "✅",         "✅"],
+        ["專案記憶",   "—", "AGENTS.md *", "GEMINI.md", "CLAUDE.md", ".cursor/rules/"],
+        ["@ 檔案引用", "—", "✓",           "✓",         "✓",          "✓"],
+        ["STRIKE",     "✓", "✓",           "✓",         "✓",          "✓"],
+        ["MCP",        "—", "✓",           "✓",         "✓",          "✓"],
     ]
     tbl_shape = s.shapes.add_table(
         5, 6, Inches(0.6), Inches(2.05), Inches(12.13), Inches(2.7)
@@ -1588,18 +1610,22 @@ def s_m4_cross_tools(prs, no):
             run.font.size = Pt(size)
             run.font.bold = bold
             run.font.color.rgb = color
+        _set_cell_border(cell, color=CARD_BORDER, weight_pt=0.75)
 
+    HEADER_BG = RGBColor(0xEC, 0xEC, 0xE8)
+    ROW_ALT_BG = RGBColor(0xFA, 0xFA, 0xF7)
     for c, txt in enumerate(headers):
-        _style_cell(tbl.cell(0, c), txt, bold=True, bg=RGBColor(0xF5, 0xF5, 0xF3), size=13)
+        _style_cell(tbl.cell(0, c), txt, bold=True, bg=HEADER_BG, size=13)
     for r, row in enumerate(rows_data, start=1):
+        zebra_bg = ROW_ALT_BG if r % 2 == 0 else BG
         for c, txt in enumerate(row):
             highlight = (r == 1 and c == 2)  # AGENTS.md *
             _style_cell(
                 tbl.cell(r, c), txt,
                 bold=(c == 0),
                 align=PP_ALIGN.LEFT if c == 0 else PP_ALIGN.CENTER,
-                mono=(c > 0 and txt not in {"❌", "✅"}),
-                bg=HIGHLIGHT_BG if highlight else BG,
+                mono=(c > 0 and txt not in {"—", "✓"}),
+                bg=HIGHLIGHT_BG if highlight else zebra_bg,
                 size=13,
             )
 
@@ -1639,7 +1665,7 @@ def s_m4_decision_tree(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · Tool decision tree", Inches(0.8), Inches(0.7))
     _add_text(s, "三工具決策樹", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "我想做一件事，選什麼工具？",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=16, color=MUTED, letter_spacing=-0.2)
@@ -1664,7 +1690,7 @@ def s_m4_summary(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · Recap + CP3", Inches(0.8), Inches(0.7))
     _add_text(s, "M4 小結", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
 
     items = [
         "終端機 = 打字的瀏覽器",
@@ -1702,7 +1728,7 @@ def s_m5_deploy(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M5 · Three-step deploy", Inches(0.8), Inches(0.7))
     _add_text(s, "快速部署三步驟", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
-              size=40, bold=True, letter_spacing=-1.3)
+              size=32, bold=True, letter_spacing=-1.0)
     _add_text(s, "把你的 Antigravity 專案丟上網。",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=16, color=MUTED, letter_spacing=-0.2)
@@ -1751,7 +1777,7 @@ def s_m5_show(prs, no):
     _hero_gradient_strip(s, top=Inches(0), height=Inches(0.25))
     _mono_label(s, "Showcase · 15 min", Inches(0.8), Inches(1.3))
     _add_text(s, "成果展示", Inches(0.8), Inches(1.9), Inches(11.7), Inches(1.2),
-              size=72, bold=True, letter_spacing=-2.5)
+              size=54, bold=True, letter_spacing=-2.0)
     _add_text(s, "自願者上台 3 分鐘。",
               Inches(0.8), Inches(3.3), Inches(11.7), Inches(0.5),
               size=18, color=MUTED, letter_spacing=-0.2)
@@ -1861,10 +1887,10 @@ def s_m5_golden_closing(prs, no):
 
     _add_text(s, "最會定義問題的人。",
               Inches(0.8), Inches(5.0), Inches(11.7), Inches(1.0),
-              size=50, bold=True, letter_spacing=-1.8, align=PP_ALIGN.CENTER)
+              size=38, bold=True, letter_spacing=-1.5, align=PP_ALIGN.CENTER)
     _add_text(s, "能讓 AI 幫你解題的人。",
               Inches(0.8), Inches(5.9), Inches(11.7), Inches(1.0),
-              size=50, bold=True, letter_spacing=-1.8, align=PP_ALIGN.CENTER)
+              size=38, bold=True, letter_spacing=-1.5, align=PP_ALIGN.CENTER)
     _add_text(s, "── 你今天已經跨出那一步。",
               Inches(0.8), Inches(6.65), Inches(11.7), Inches(0.3),
               size=12, color=MUTED, font=FONT_MONO, letter_spacing=1.5, align=PP_ALIGN.CENTER)
@@ -1881,7 +1907,7 @@ def s_m5_thanks(prs, no):
     _mono_label(s, "Thank you", Inches(0.8), Inches(1.3))
     _add_text(s, "感謝你今天的一天。",
               Inches(0.8), Inches(1.9), Inches(11.7), Inches(1.2),
-              size=64, bold=True, letter_spacing=-2.5, align=PP_ALIGN.CENTER)
+              size=48, bold=True, letter_spacing=-2.0, align=PP_ALIGN.CENTER)
 
     _hairline(s, Inches(3), Inches(3.7), Inches(7.3))
     _mono_label(s, "Next steps", Inches(0.8), Inches(3.9), width=Inches(11.7), size=12)
@@ -1916,7 +1942,7 @@ def s_appendix_cover(prs, no):
               size=18, color=MUTED, font=FONT_MONO, letter_spacing=3.0)
     _add_text(s, "三個備選 Demo 專案",
               Inches(0.8), Inches(2.1), Inches(12), Inches(1.4),
-              size=72, bold=True, letter_spacing=-2.5)
+              size=54, bold=True, letter_spacing=-2.0)
     _add_text(s, "講師 M3 現場 Demo 三選一  ·  學員選題亦可參考。",
               Inches(0.8), Inches(4.2), Inches(12), Inches(0.6),
               size=20, color=INK_SOFT, letter_spacing=-0.2)
