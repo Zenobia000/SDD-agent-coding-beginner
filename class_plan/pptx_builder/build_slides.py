@@ -157,7 +157,7 @@ def _add_footer(slide, module_label: str, slide_no: int, total: int = 64):
     )
 
 
-def _mono_label(slide, text: str, left, top, width=Inches(8), *, color: RGBColor = MUTED, size: int = 11):
+def _mono_label(slide, text: str, left, top, width=Inches(4), *, color: RGBColor = MUTED, size: int = 11):
     """Mono caps 段落標籤."""
     _add_text(
         slide,
@@ -429,11 +429,11 @@ def s_practice_block(prs, no, module, title, steps, duration):
         _add_text(s, step, Inches(1.0), Inches(2.75 + i * 0.5), Inches(11.3), Inches(0.5),
                   size=18, color=INK_SOFT, letter_spacing=-0.2)
 
-    _hairline(s, Inches(0.8), Inches(6.3), Inches(11.7))
-    _add_text(s, "Duration", Inches(0.8), Inches(6.45), Inches(3), Inches(0.3),
+    _hairline(s, Inches(0.8), Inches(6.15), Inches(11.7))
+    _add_text(s, "Duration", Inches(0.8), Inches(6.3), Inches(3), Inches(0.3),
               size=10, color=MUTED, font=FONT_MONO, letter_spacing=2.5)
-    _add_text(s, duration, Inches(0.8), Inches(6.7), Inches(11.7), Inches(0.5),
-              size=22, bold=True, letter_spacing=-0.3)
+    _add_text(s, duration, Inches(0.8), Inches(6.55), Inches(11.7), Inches(0.4),
+              size=20, bold=True, letter_spacing=-0.3)
 
     _add_footer(s, module, no)
     return s
@@ -614,11 +614,11 @@ def s_m1_practice2(prs, no):
 選 ① + ③ 最紮實的那個  =  今天的題目"""
     _add_code_block(s, code, Inches(0.8), Inches(2.9), Inches(11.7), Inches(3.3), size=16)
 
-    _hairline(s, Inches(0.8), Inches(6.3), Inches(11.7))
-    _add_text(s, "Duration", Inches(0.8), Inches(6.45), Inches(3), Inches(0.3),
+    _hairline(s, Inches(0.8), Inches(6.15), Inches(11.7))
+    _add_text(s, "Duration", Inches(0.8), Inches(6.3), Inches(3), Inches(0.3),
               size=10, color=MUTED, font=FONT_MONO, letter_spacing=2.5)
-    _add_text(s, "15 分鐘", Inches(0.8), Inches(6.7), Inches(11.7), Inches(0.5),
-              size=22, bold=True, letter_spacing=-0.3)
+    _add_text(s, "15 分鐘", Inches(0.8), Inches(6.55), Inches(11.7), Inches(0.4),
+              size=20, bold=True, letter_spacing=-0.3)
 
     _add_footer(s, "M1 · Pain Discovery", no)
     return s
@@ -1870,7 +1870,7 @@ def s_m5_golden_closing(prs, no):
               Inches(0.8), Inches(5.9), Inches(11.7), Inches(1.0),
               size=50, bold=True, letter_spacing=-1.8, align=PP_ALIGN.CENTER)
     _add_text(s, "── 你今天已經跨出那一步。",
-              Inches(0.8), Inches(6.85), Inches(11.7), Inches(0.4),
+              Inches(0.8), Inches(6.65), Inches(11.7), Inches(0.3),
               size=12, color=MUTED, font=FONT_MONO, letter_spacing=1.5, align=PP_ALIGN.CENTER)
 
     _add_footer(s, "M5 · Deploy & Wrap-up", no)
@@ -1904,7 +1904,7 @@ def s_m5_thanks(prs, no):
               Inches(0.8), Inches(6.2), Inches(11.7), Inches(0.5),
               size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5, align=PP_ALIGN.CENTER)
     _add_text(s, "合照時間  📸",
-              Inches(0.8), Inches(6.7), Inches(11.7), Inches(0.4),
+              Inches(0.8), Inches(6.55), Inches(11.7), Inches(0.4),
               size=14, color=INK_SOFT, letter_spacing=-0.2, align=PP_ALIGN.CENTER)
 
     return s
