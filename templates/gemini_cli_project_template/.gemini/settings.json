@@ -1,0 +1,71 @@
+{
+  "_comment_1": "Gemini CLI 專案級設定。CLI 啟動時會自動載入。完整選項見 https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md",
+
+  "model": "gemini-2.0-flash",
+
+  "_comment_2": "checkpointing：每次工具呼叫前自動 snapshot 檔案，跑壞了可以 /restore 救回來。初學者強烈建議開啟。",
+  "checkpointing": {
+    "enabled": true
+  },
+
+  "_comment_3": "sandbox：把 CLI 跑在容器內，避免它誤改你系統的檔案。沒裝 Docker 可以先設 false。",
+  "sandbox": false,
+
+  "_comment_4": "fileFiltering：搜尋時自動跳過 .gitignore 內的檔案。",
+  "fileFiltering": {
+    "respectGitIgnore": true
+  },
+
+  "_comment_5": "contextFileName：除了 GEMINI.md，這些檔名也會被當成 context 載入。",
+  "contextFileName": ["GEMINI.md", "AGENTS.md"],
+
+  "_comment_6_mcp": "mcpServers：接外部服務的『擴充工具』。每一個 key 是工具名，Gemini 會自動把它的 capability 加進可用工具清單。詳見 .gemini/MCP.md。",
+  "_comment_6_mcp_hint": "初學者建議：先把所有 enabled 設 false，需要哪個再打開。把不必要的 MCP 全部關掉可大幅減少 token 消耗。",
+
+  "mcpServers": {
+    "_comment_filesystem": "本機檔案讀寫（Gemini 本來就有檔案工具，但 MCP 版可指定 allowed path，較安全）。",
+    "filesystem": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./"]
+    },
+
+    "_comment_fetch": "讓 AI 能讀網頁內容（例如把官方文件 URL 丟給它）。",
+    "fetch": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    },
+
+    "_comment_github": "讓 AI 能讀 / 寫 GitHub issue、PR、repo。需要 GITHUB_PERSONAL_ACCESS_TOKEN。",
+    "github": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+
+    "_comment_context7": "查最新官方文件（React、Next.js、Tailwind…）。比 AI 自己腦補 API 可靠很多。",
+    "context7": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+
+    "_comment_puppeteer": "讓 AI 能開瀏覽器跑你的 index.html、截圖驗證。E2E 測試 / UI 驗證很好用。",
+    "puppeteer": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    },
+
+    "_comment_sqlite": "本機 SQLite DB 操作。如果你的小專案需要存資料才打開。",
+    "sqlite": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "./data.db"]
+    }
+  }
+}
