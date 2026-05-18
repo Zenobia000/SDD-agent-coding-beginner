@@ -1457,14 +1457,14 @@ def s_m4_at_ref(prs, no):
 
     _hairline(s, Inches(0.8), Inches(4.85), Inches(11.7))
     _add_text(s, "cat |  =  把檔案內容「灌」進去（單檔、純文字）",
-              Inches(0.8), Inches(5.05), Inches(11.7), Inches(0.5),
+              Inches(0.8), Inches(5.0), Inches(11.7), Inches(0.45),
               size=16, color=INK_SOFT, letter_spacing=-0.2)
     _add_text(s, "@file  =  告訴 agent「自己去讀」（多檔、大檔、含程式碼）",
-              Inches(0.8), Inches(5.55), Inches(11.7), Inches(0.5),
+              Inches(0.8), Inches(5.45), Inches(11.7), Inches(0.45),
               size=16, color=INK_SOFT, letter_spacing=-0.2)
 
     _add_code_block(s, 'gemini "@README.md @src/main.py 解釋這個程式怎麼跑"',
-                    Inches(0.8), Inches(6.2), Inches(11.7), Inches(0.6), size=14)
+                    Inches(0.8), Inches(6.05), Inches(11.7), Inches(0.55), size=14)
 
     _add_footer(s, "M4 · Gemini CLI", no)
     return s
@@ -1524,7 +1524,7 @@ def s_m4_mcp(prs, no):
               size=18, bold=True, letter_spacing=-0.3)
 
     _add_text(s, "常見 MCP server（會了就有得用）：",
-              Inches(0.8), Inches(3.5), Inches(11.7), Inches(0.4),
+              Inches(0.8), Inches(3.45), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
     mcps = [
         ("🔧  filesystem",  "讓 agent 管理你的檔案"),
@@ -1533,15 +1533,15 @@ def s_m4_mcp(prs, no):
         ("💬  slack",       "讓 agent 收發訊息"),
     ]
     for i, (a, b) in enumerate(mcps):
-        top = Inches(4.0 + i * 0.5)
+        top = Inches(3.95 + i * 0.45)
         _add_text(s, a, Inches(1.0), top, Inches(5.0), Inches(0.4),
                   size=17, bold=True, font=FONT_MONO, letter_spacing=-0.2)
         _add_text(s, b, Inches(6.3), top, Inches(6.2), Inches(0.4),
                   size=17, color=INK_SOFT, letter_spacing=-0.2)
 
-    _hairline(s, Inches(0.8), Inches(6.2), Inches(11.7), color=INK)
+    _hairline(s, Inches(0.8), Inches(5.95), Inches(11.7), color=INK)
     _add_text(s, "今天不裝。先知道有這東西，回家想玩再裝。",
-              Inches(0.8), Inches(6.4), Inches(11.7), Inches(0.5),
+              Inches(0.8), Inches(6.15), Inches(11.7), Inches(0.5),
               size=18, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.3)
 
     _add_footer(s, "M4 · Gemini CLI", no)
@@ -1552,27 +1552,67 @@ def s_m4_cross_tools(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · Same skill, different names", Inches(0.8), Inches(0.7))
     _add_text(s, "你學的不是 Gemini CLI，是通用技能",
-              Inches(0.8), Inches(1.1), Inches(11.7), Inches(1.0),
-              size=32, bold=True, letter_spacing=-1.2)
+              Inches(0.8), Inches(1.1), Inches(11.7), Inches(0.8),
+              size=30, bold=True, letter_spacing=-1.2)
 
-    header = "                AI Studio   Antigravity      Gemini CLI    Claude Code   Cursor"
-    rows = """專案記憶        ❌          AGENTS.md *      GEMINI.md     CLAUDE.md     .cursor/rules/
-@ 檔案引用      ❌          ✅              ✅            ✅            ✅
-STRIKE          ✅          ✅              ✅            ✅            ✅
-MCP             ❌          ✅              ✅            ✅            ✅"""
-    _add_code_block(s, header + "\n" + rows,
-                    Inches(0.4), Inches(2.3), Inches(12.5), Inches(2.4), size=12)
+    # CJK 字寬不固定，用 python-pptx 原生 table 保證對齊
+    headers = ["", "AI Studio", "Antigravity", "Gemini CLI", "Claude Code", "Cursor"]
+    rows_data = [
+        ["專案記憶",   "❌", "AGENTS.md *", "GEMINI.md", "CLAUDE.md", ".cursor/rules/"],
+        ["@ 檔案引用", "❌", "✅",          "✅",        "✅",         "✅"],
+        ["STRIKE",     "✅", "✅",          "✅",        "✅",         "✅"],
+        ["MCP",        "❌", "✅",          "✅",        "✅",         "✅"],
+    ]
+    tbl_shape = s.shapes.add_table(
+        5, 6, Inches(0.6), Inches(2.05), Inches(12.13), Inches(2.7)
+    )
+    tbl = tbl_shape.table
+    col_widths = [Inches(2.0), Inches(1.7), Inches(2.0), Inches(1.85), Inches(1.85), Inches(2.0)]
+    for i, w in enumerate(col_widths):
+        tbl.columns[i].width = w
 
-    _add_text(s, "*  Antigravity 還會讀 ~/.gemini/GEMINI.md 做全域設定（跟 Gemini CLI 共用——同一家人）",
-              Inches(0.8), Inches(4.95), Inches(11.7), Inches(0.4),
+    def _style_cell(cell, txt, *, bold=False, align=PP_ALIGN.CENTER, mono=False,
+                    bg=BG, color=INK, size=13):
+        cell.text = txt
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = bg
+        cell.margin_left = Inches(0.08)
+        cell.margin_right = Inches(0.08)
+        cell.margin_top = Inches(0.05)
+        cell.margin_bottom = Inches(0.05)
+        cell.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = cell.text_frame.paragraphs[0]
+        p.alignment = align
+        for run in p.runs:
+            run.font.name = FONT_MONO if mono else FONT_BODY
+            run.font.size = Pt(size)
+            run.font.bold = bold
+            run.font.color.rgb = color
+
+    for c, txt in enumerate(headers):
+        _style_cell(tbl.cell(0, c), txt, bold=True, bg=RGBColor(0xF5, 0xF5, 0xF3), size=13)
+    for r, row in enumerate(rows_data, start=1):
+        for c, txt in enumerate(row):
+            highlight = (r == 1 and c == 2)  # AGENTS.md *
+            _style_cell(
+                tbl.cell(r, c), txt,
+                bold=(c == 0),
+                align=PP_ALIGN.LEFT if c == 0 else PP_ALIGN.CENTER,
+                mono=(c > 0 and txt not in {"❌", "✅"}),
+                bg=HIGHLIGHT_BG if highlight else BG,
+                size=13,
+            )
+
+    _add_text(s, "*  Antigravity 與 Gemini CLI 共用 ~/.gemini/GEMINI.md 做全域設定（同一家人）",
+              Inches(0.8), Inches(4.9), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, letter_spacing=-0.1)
 
-    _hairline(s, Inches(0.8), Inches(5.55), Inches(11.7), color=INK)
+    _hairline(s, Inches(0.8), Inches(5.45), Inches(11.7), color=INK)
     _add_text(s, "🟡  AGENTS.md 是 2026 新興的「跨工具通用」格式",
-              Inches(0.8), Inches(5.75), Inches(11.7), Inches(0.5),
+              Inches(0.8), Inches(5.65), Inches(11.7), Inches(0.5),
               size=20, bold=True, letter_spacing=-0.3)
     _add_text(s, "    Cursor 與 Antigravity 都認得它，最值得學",
-              Inches(0.8), Inches(6.25), Inches(11.7), Inches(0.5),
+              Inches(0.8), Inches(6.15), Inches(11.7), Inches(0.45),
               size=18, color=INK_SOFT, letter_spacing=-0.2)
 
     _add_footer(s, "M4 · Gemini CLI", no)
