@@ -21,16 +21,14 @@ Skill 是**程序性知識**：你每次都要跟 AI 講「請每次都先 ___�
 ```
 .agents/skills/
 ├── README.md                 ← 你正在看的這份
-├── test.md                   ← 單檔 Skill = /test
-├── explain.md                ← 單檔 Skill = /explain
-├── check-key.md              ← 單檔 Skill = /check-key
-├── git/
-│   └── commit.md             ← namespace = /git:commit
+├── check-key.md              ← 單檔 Skill = /check-key（部署前安全檢查）
 ├── vibe/
-│   └── plan.md               ← namespace = /vibe:plan
-└── explain-code/             ← 資料夾 Skill = /explain-code（含附件）
+│   └── plan.md               ← namespace = /vibe:plan（Vibe Coding 第 2 步：先列計畫）
+└── explain-code/             ← 資料夾 Skill = /explain-code（架構師視角講解）
     └── SKILL.md
 ```
+
+**為什麼只附 3 個？** 對 MVP vibe coding 來說，這 3 個覆蓋了 80% 學員會用到的情境。其他常見 skill（`/test`、`/explain`、`/git:commit` 等）的範例放在 [`../SKILLS.md`](../SKILLS.md) 最末「範例庫」段——**你需要時再複製貼到這裡**。
 
 **鐵則**：
 - 檔名（去掉 `.md`）= Skill 名 / slash command 名
@@ -77,14 +75,13 @@ touch .agents/skills/my-new-skill/SKILL.md
 
 | Skill | 觸發 | 用途 |
 |---|---|---|
-| `test.md` | `/test` | 跑 npm test 並回報結果摘要 |
-| `explain.md` | `/explain` | 用白話解釋本專案在做什麼 |
-| `check-key.md` | `/check-key` | 檢查 API Key 設定 / 外洩風險 |
-| `git/commit.md` | `/git:commit` | 依 Conventional Commits 格式產生 commit message |
-| `vibe/plan.md` | `/vibe:plan` | 不要直接寫 code，先列計畫等我確認 |
-| `explain-code/` | `/explain-code` | 進階版：架構師視角 × 紅綠燈 × 導師教學 |
+| `check-key.md` | `/check-key` | 部署前檢查 API Key 設定 / 外洩風險 |
+| `vibe/plan.md` | `/vibe:plan` | Vibe Coding 第 2 步：不要直接寫 code，先列計畫等我確認 |
+| `explain-code/` | `/explain-code` | 架構師視角 × 🟢🟡🔴 紅綠燈 × 導師教學 |
 
-**測試方法**：重啟 `agy` 後直接打 `/test`、`/explain` 等，看 skill 是否觸發。
+**測試方法**：重啟 `agy` 後直接打 `/check-key`、`/vibe:plan`、`/explain-code`，看 skill 是否觸發。
+
+**想加更多 skill？** 看 [`../SKILLS.md`](../SKILLS.md) 末尾的「範例庫」段，有 `/test`、`/explain`、`/git:commit` 三個常見範例可以複製。
 
 ---
 

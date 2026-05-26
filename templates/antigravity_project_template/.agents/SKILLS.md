@@ -227,9 +227,99 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 | `prd-rewrite` | 「我要寫 PRD」 | 第 1 步重述需求 |
 | `vibe-plan` | 「我要做 ___」 | 第 2 步列計畫 |
 | `pre-commit-review` | 「我寫完了」 | 第 3 步寫完後 |
-| `test` | 「跑測試」 | 第 4 步帶測試 |
+| `check-key` | 部署前 / 怕金鑰外洩時 | 第 4 步驗證 |
 
 **心法**：每次你跟 AI 講「請每次都先 ___」、「請每次寫完都 ___」這種重複指令時——那就是個 Skill。
+
+---
+
+## 範例庫：你可以自己加哪些 skill
+
+本模板預設只附 3 個必要 skill（`vibe:plan`、`explain-code`、`check-key`）。下面是「常見但非必要」的 skill 範例，**你需要時再複製貼到 `.agents/skills/` 即可**。
+
+### 範例 1：`/test` — 跑測試並回報
+
+當你的專案有 `npm test` 或類似測試指令時才有用。MVP 階段通常還沒寫測試，可以先跳過。
+
+`.agents/skills/test.md`：
+
+```markdown
+---
+name: test
+description: Use when the user asks to run tests, 跑測試, "test it", or wants a summary of test pass/fail status. Executes `npm test`, summarizes pass/fail counts, lists failures, and suggests next step.
+---
+
+# Test Skill
+
+當使用者要你「跑測試」或打 `/test` 時：
+
+1. 執行 `npm test`（依 `package.json` scripts.test 為準）
+2. 把通過 / 失敗的數量摘要給我（用一句話）
+3. 如果有失敗，列出失敗的測試名稱（不超過 5 個）
+4. 給一句「下一步建議」
+
+**禁止**：失敗時不要自動嘗試修，先回報讓使用者決定。
+```
+
+### 範例 2：`/explain` — 用白話講整個專案
+
+跟 `explain-code` 不同：`explain-code` 是「解釋某個檔案」，這個是「解釋整個專案」。給朋友看時很方便。
+
+`.agents/skills/explain.md`：
+
+```markdown
+---
+name: explain
+description: Use when the user asks "what is this project doing", "白話講一下這個專案", 想要 5 句話講完整個 repo 的目的. Reads PRD and AGENTS.md, summarizes in plain language for non-engineers.
+---
+
+# Explain Project Skill
+
+當使用者要你「白話講一下這個專案」或打 `/explain` 時，先讀：
+
+- PRD：`docs/PRD.md`
+- 站立規則：`AGENTS.md`
+
+用 5 句話跟一個完全沒寫過程式的人解釋：
+
+1. 這個專案要解決什麼問題
+2. 使用者會怎麼操作（按鈕？輸入？）
+3. 技術上大概用了什麼
+4. 目前完成到哪
+5. 下一步該做什麼
+
+語氣要像跟朋友聊天，不要用 jargon。
+```
+
+### 範例 3：`/git:commit` — Conventional Commits 格式 commit message
+
+當你開始用 git 管理專案、會手動 commit 時才用得到。學員 MVP 階段可能根本不開 git。
+
+`.agents/skills/git/commit.md`（注意要建 `git/` 子資料夾，namespace 用冒號分隔變成 `/git:commit`）：
+
+```markdown
+---
+name: git-commit
+description: Use when the user wants to write a Conventional Commits-formatted commit message, 幫我寫 commit message, 或打 /git:commit. Reads staged diff, drafts message in Conventional Commits format, prints for confirmation — does NOT auto-commit.
+---
+
+# Git Commit Skill（依 Conventional Commits 格式）
+
+當使用者要你寫 commit message 或打 `/git:commit [額外說明]` 時：
+
+1. 先跑 `git diff --staged` 看當下要 commit 的內容
+2. 把使用者的額外說明當補充資訊
+3. 依 Conventional Commits 格式產生 commit subject（< 72 字元，祈使句）
+   - 可用 type：feat / fix / refactor / docs / test / chore / perf / ci
+4. body 用 3 行內說明 **WHY**
+5. **不要直接執行 `git commit`**，把 message 印出來等我確認
+
+如果 staged diff 是空的，告訴使用者「沒有 staged 變更，請先 git add」。
+```
+
+---
+
+**心法**：不是每個 skill 都該存在於每個專案。**遇到「同樣的話我已經跟 AI 講第 3 次了」再包成 Skill**。
 
 ---
 

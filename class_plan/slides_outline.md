@@ -856,10 +856,16 @@ agy
 兩個層級（Antigravity CLI 都吃）：
   ~/.gemini/antigravity-cli/AGENTS.md   = 全域（所有專案都套用）
   ./AGENTS.md                            = 這個專案專用
+
+────────────────────────────────────────
+🔧 Debug：AI 沒讀到規則？
+   打 /memory show       → 看實際載入內容
+   改完 AGENTS.md：
+   打 /memory refresh    → 強制重讀
 ```
 
-**視覺：** 上方放一份 AGENTS.md 範本（程式碼字體），下方用兩個資料夾圖示對比「全域 vs 專案層」。
-**Speaker Notes：** AGENTS.md 是 2026 業界共識的通用檔名，Antigravity / Cursor / OpenAI Codex 都認。`/memory show` 可以看實際讀到什麼。全域路徑暫時還在 `~/.gemini/antigravity-cli/`（Google 為了讓 `agy plugin import gemini` 一鍵搬遷舊有 `~/.gemini/`）。下一張會看到這個觀念在別的工具叫什麼名字。
+**視覺：** 上方放 AGENTS.md 範本，中間兩個資料夾圖示對比「全域 vs 專案層」，底部用 hairline 分隔出一個 debug 提示區（強調色，例如橘色）。
+**Speaker Notes：** AGENTS.md 是 2026 業界共識的通用檔名，Antigravity / Cursor / OpenAI Codex 都認。**底部的 `/memory show` 是學員最常踩雷的救命指令**——「AI 好像沒讀到我寫的規則」90% 是這個 debug 解決。當場 demo 一次：改 AGENTS.md → 打 `/memory show` 看舊內容 → 打 `/memory refresh` → 再 `/memory show` 看更新後。全域路徑暫時還在 `~/.gemini/antigravity-cli/`（Google 為了讓 `agy plugin import gemini` 一鍵搬遷）。
 
 ---
 
@@ -885,7 +891,7 @@ agy
 
 ---
 
-## [S46] 內建工具 + 安全模式
+## [S46] 內建工具 + 三層保險
 
 ```
 Antigravity CLI 不只會聊天，它預設帶這些工具：
@@ -895,17 +901,18 @@ Antigravity CLI 不只會聊天，它預設帶這些工具：
   🔍 GoogleSearch            即時上網查
   🌐 WebFetch                讀網頁
 
-兩層保護傘：
+三層保險（事前 → 事中 → 事後）：
 
-  🔐 首次啟動：逐資料夾信任授權       ← 只信你自己的工作區
-  ❓ 每次要動手：先問你「可以嗎？」   ← 動檔 / 跑指令前停下
+  事前    首次啟動：逐資料夾信任授權       只信你自己的工作區
+  事中    每次動手：先問你「可以嗎？」     動檔 / 跑指令前停下
+  事後    改錯了：打 /restore 選快照回滾   比 git reset 安全（不動 git 歷史）
 
-🟡 為什麼要兩層？因為 agent 會犯錯、會誤刪檔案。
-   雙重確認 = 你的保護傘。
+🟡 三層遞進保你：信錯資料夾 / 答錯確認 / AI 改壞了，
+   都還有救命繩。
 ```
 
-**視覺：** 上半顯示四個工具 icon + 名稱；下半放一個「？」對話框圖，旁邊兩個選項「Allow / Deny」。
-**Speaker Notes：** 帶學員實際看到一次確認彈窗（demo 跑 `agy "把 a.txt 改名為 b.txt"`），讓他們親眼看到「agent 要動手前會停下來」。
+**視覺：** 上半顯示四個工具 icon + 名稱；下半「事前 / 事中 / 事後」三欄式排列，每欄用淡色卡片，事後那欄底色加強（救命繩最重要）。
+**Speaker Notes：** **「事後」這層是學員最常踩雷的救命繩**——AI 改錯 5 個檔案、你想哭，打 `/restore` 選快照就回到改之前。比 git reset 安全，不動 git 歷史。當場 demo：改一個檔 → 故意叫 AI 改錯 → 打 `/restore` → 看 CLI 列出快照清單 → 選編號 → 檔案瞬間回滾。沒開過 checkpointing 的話這時要哭。所以本模板 `.agents/settings.json` 預設 `checkpointing.enabled: true`。
 
 ---
 

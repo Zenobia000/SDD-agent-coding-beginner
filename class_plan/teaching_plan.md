@@ -335,9 +335,9 @@ AI 一本正經胡說八道？三句話救你：
 | 15:43-15:46 (3 min) | STRIKE × CLI 的連貫 | M2 學的 STRIKE，現在直接打進終端機。同 prompt 三工具通用 |
 | 15:46-15:51 (5 min) | 五個你馬上能用的指令 | pipe / 重導向 / prompt 模板 / L3 鏈式 / 互動模式（見下方示範指令集） |
 | 15:51-15:54 (3 min) | 三大能力：認識你的 coding agent | 🗣 聊天 / 📂 看檔 / 🔧 用工具——三工具骨架相同 |
-| 15:54-15:58 (4 min) | AGENTS.md：給 agent 一份公司守則 | 寫 5 行專案規則，agent 開工自動讀。兩個層級：`~/.gemini/antigravity-cli/AGENTS.md` 全域 + `./AGENTS.md` 專案。一句話交代「業界規範，Cursor / OpenAI Codex / Antigravity 都認」 |
+| 15:54-15:58 (4 min) | AGENTS.md：給 agent 一份公司守則 + Debug 流程 | 寫 5 行專案規則，agent 開工自動讀。兩個層級：`~/.gemini/antigravity-cli/AGENTS.md` 全域 + `./AGENTS.md` 專案。**現場 demo 救命指令**：「AI 沒讀到規則？打 `/memory show` 看實際載入；改完 AGENTS.md 打 `/memory refresh`」——這是 90% 學員會踩的雷，當場示範一次比講十句有用 |
 | 15:58-16:01 (3 min) | @ 引用：把檔案丟進對話 | `cat \|` vs `@file` 對比；多檔範例 `agy "@README.md @main.py 解釋"` |
-| 16:01-16:04 (3 min) | 內建工具 + 安全模式 | ReadFile/Shell/GoogleSearch/WebFetch；首次啟動逐資料夾信任 + 預設確認模式 |
+| 16:01-16:04 (3 min) | 內建工具 + 三層保險（事前/事中/事後） | ReadFile/Shell/GoogleSearch/WebFetch；三層保險：**事前**首次啟動逐資料夾信任、**事中**動手前確認、**事後** `/restore` 選快照回滾（最重要！「AI 改錯 5 個檔案怎麼辦」的救命繩，本模板 settings.json 預設 `checkpointing.enabled: true`，當場 demo 一次：故意叫 AI 改錯 → 打 `/restore` → 檔案瞬間回到改之前） |
 | 16:04-16:07 (3 min) | MCP + Skills：兩個擴充原語 | MCP 比喻成「USB-C」（外部能力），Skills 比喻成「食譜本 + hot key」（`.agents/skills/<name>.md` 既能自動觸發也能 `/xxx` 手動觸發）。今天不裝 |
 | 16:07-16:09 (2 min) | 跨工具對照表 | 同一招在 Claude Code / Cursor / Antigravity 怎麼叫；**AGENTS.md 是通用格式** |
 | 16:09-16:34 (25 min) | **🛠 實作：為你的專案加一點自動化** | **必做（5 min）**：在你的專案根目錄建 AGENTS.md（5 行）。**三選一（20 min）**：① 核心功能寫成一行 `agy` 指令 ② 自動產測試資料腳本 ③ 「每天跑一次」的小工具（用 agy 的 Scheduled Tasks） |

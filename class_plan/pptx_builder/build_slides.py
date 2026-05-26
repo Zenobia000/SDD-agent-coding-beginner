@@ -1445,14 +1445,19 @@ def s_m4_gemini_md(prs, no):
 - 永遠用繁體中文回覆
 - 摘要請限制在 100 字內
 - 程式碼請加註解"""
-    _add_code_block(s, code, Inches(0.8), Inches(2.85), Inches(11.7), Inches(2.2), size=14)
+    _add_code_block(s, code, Inches(0.8), Inches(2.85), Inches(11.7), Inches(2.05), size=14)
 
     _add_text(s, "兩個層級（Antigravity CLI 都吃）：",
-              Inches(0.8), Inches(5.25), Inches(11.7), Inches(0.4),
-              size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
+              Inches(0.8), Inches(5.05), Inches(11.7), Inches(0.35),
+              size=12, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
     levels = """~/.gemini/antigravity-cli/AGENTS.md   = 全域（過渡期沿用 .gemini/ 路徑）
 ./AGENTS.md                           = 這個專案專用"""
-    _add_code_block(s, levels, Inches(0.8), Inches(5.65), Inches(11.7), Inches(1.1), size=13)
+    _add_code_block(s, levels, Inches(0.8), Inches(5.4), Inches(11.7), Inches(0.9), size=12)
+
+    _hairline(s, Inches(0.8), Inches(6.4), Inches(11.7))
+    _add_text(s, "🔧  Debug：AI 沒讀到規則？打 /memory show 看實際載入；改完 AGENTS.md 打 /memory refresh",
+              Inches(0.8), Inches(6.5), Inches(11.7), Inches(0.45),
+              size=13, color=ACCENT_WARN, font=FONT_MONO, letter_spacing=-0.2)
 
     _add_footer(s, "M4 · Antigravity CLI", no)
     return s
@@ -1494,14 +1499,14 @@ def s_m4_at_ref(prs, no):
 
 def s_m4_tools_perm(prs, no):
     s = _new_slide(prs, BG)
-    _mono_label(s, "M4 · Built-in tools & safety", Inches(0.8), Inches(0.7))
-    _add_text(s, "內建工具 + 安全模式",
+    _mono_label(s, "M4 · Built-in tools & three-layer safety", Inches(0.8), Inches(0.7))
+    _add_text(s, "內建工具 + 三層保險",
               Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
               size=36, bold=True, letter_spacing=-1.2)
 
     _add_text(s, "Antigravity CLI 不只會聊天，預設帶這些工具：",
-              Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
-              size=16, color=MUTED, letter_spacing=-0.2)
+              Inches(0.8), Inches(2.05), Inches(11.7), Inches(0.4),
+              size=15, color=MUTED, letter_spacing=-0.2)
 
     tools = [
         ("📂  ReadFile / WriteFile", "讀寫檔案"),
@@ -1510,22 +1515,30 @@ def s_m4_tools_perm(prs, no):
         ("🌐  WebFetch",             "讀網頁"),
     ]
     for i, (a, b) in enumerate(tools):
-        top = Inches(2.9 + i * 0.5)
-        _add_text(s, a, Inches(1.0), top, Inches(5.5), Inches(0.4),
-                  size=18, bold=True, font=FONT_MONO, letter_spacing=-0.2)
-        _add_text(s, b, Inches(6.8), top, Inches(5.7), Inches(0.4),
-                  size=18, color=INK_SOFT, letter_spacing=-0.2)
+        top = Inches(2.65 + i * 0.42)
+        _add_text(s, a, Inches(1.0), top, Inches(5.5), Inches(0.35),
+                  size=16, bold=True, font=FONT_MONO, letter_spacing=-0.2)
+        _add_text(s, b, Inches(6.8), top, Inches(5.7), Inches(0.35),
+                  size=16, color=INK_SOFT, letter_spacing=-0.2)
 
-    _hairline(s, Inches(0.8), Inches(5.05), Inches(11.7), color=INK)
-    _add_text(s, "每次它要動手，會先問你「可以嗎？」",
-              Inches(0.8), Inches(5.2), Inches(11.7), Inches(0.5),
-              size=18, bold=True, letter_spacing=-0.3)
-    _add_text(s, "首次啟動：逐資料夾信任授權  ← 只信你自己的工作區",
-              Inches(1.0), Inches(5.85), Inches(11.7), Inches(0.4),
-              size=15, color=ACCENT_GOOD, letter_spacing=-0.2)
-    _add_text(s, "每次動手：先問你「可以嗎？」  ← 確認模式 = 你的保護傘",
-              Inches(1.0), Inches(6.3), Inches(11.7), Inches(0.4),
-              size=15, color=ACCENT_GOOD, letter_spacing=-0.2)
+    _hairline(s, Inches(0.8), Inches(4.5), Inches(11.7), color=INK)
+    _add_text(s, "三層保險（事前 → 事中 → 事後）：",
+              Inches(0.8), Inches(4.65), Inches(11.7), Inches(0.45),
+              size=17, bold=True, letter_spacing=-0.3)
+
+    safeties = [
+        ("事前", "首次啟動：逐資料夾信任授權", "只信你自己的工作區"),
+        ("事中", "每次動手：先問你「可以嗎？」", "確認模式 = 動檔/跑指令前停下"),
+        ("事後", "改錯了：打 /restore 選快照回滾", "比 git reset 安全（不動 git 歷史）"),
+    ]
+    for i, (when, what, why) in enumerate(safeties):
+        top = Inches(5.25 + i * 0.55)
+        _add_text(s, when, Inches(1.0), top, Inches(1.0), Inches(0.4),
+                  size=14, bold=True, color=ACCENT_GOOD, font=FONT_MONO, letter_spacing=1.0)
+        _add_text(s, what, Inches(2.1), top, Inches(5.5), Inches(0.4),
+                  size=14, bold=True, letter_spacing=-0.2)
+        _add_text(s, why, Inches(7.7), top, Inches(4.8), Inches(0.4),
+                  size=13, color=MUTED, letter_spacing=-0.1)
 
     _add_footer(s, "M4 · Antigravity CLI", no)
     return s

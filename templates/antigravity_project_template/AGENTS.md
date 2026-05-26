@@ -85,15 +85,9 @@
 ### 4.6 Skills 與 Slash Commands
 
 - `.agents/skills/` 內每份 markdown 都是 skill 兼 slash command
-- 使用者打 `/test`、`/explain`、`/git:commit`、`/vibe:plan` 等就會觸發對應 skill
+- 使用者打 `/vibe:plan`、`/explain-code`、`/check-key` 就會觸發對應 skill
 - 你也可以根據 description 自動匹配並使用 skill
 - 詳見 `.agents/SKILLS.md`
-
-### 4.7 Dynamic Subagents（進階）
-
-- 大型 refactor / 跨模組調查可以宣告 subagents 平行處理
-- **不要主動拆 subagent**，除非使用者明確說「這個跑很久請拆」
-- 初學者專案幾乎用不到，預設不拆
 
 ---
 
