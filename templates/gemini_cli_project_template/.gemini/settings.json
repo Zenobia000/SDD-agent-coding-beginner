@@ -16,8 +16,8 @@
     "respectGitIgnore": true
   },
 
-  "_comment_5": "contextFileName：除了 GEMINI.md，這些檔名也會被當成 context 載入。",
-  "contextFileName": ["GEMINI.md", "AGENTS.md"],
+  "_comment_5": "contextFileName：哪些檔名會被當成 system context 自動載入。本模板專注 Gemini CLI，只用 GEMINI.md 為單一真相來源。",
+  "contextFileName": ["GEMINI.md"],
 
   "_comment_6_mcp": "mcpServers：接外部服務的『擴充工具』。每一個 key 是工具名，Gemini 會自動把它的 capability 加進可用工具清單。詳見 .gemini/MCP.md。",
   "_comment_6_mcp_hint": "初學者建議：先把所有 enabled 設 false，需要哪個再打開。把不必要的 MCP 全部關掉可大幅減少 token 消耗。",

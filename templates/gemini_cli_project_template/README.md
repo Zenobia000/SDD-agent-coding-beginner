@@ -10,7 +10,6 @@
 my-project/
 ├── README.md                      ← 你正在看
 ├── GEMINI.md                      ← ⭐ Gemini CLI 一定會讀的「總指揮文件」
-├── AGENTS.md                      ← 跨 Agent 共用規則（如果未來改用 Codex 也能讀）
 ├── docs/
 │   └── PRD.md                     ← 從 AI Studio 帶過來的需求規格（填空）
 └── .gemini/
@@ -75,13 +74,16 @@ gemini
 
 | 狀況            | 看哪份 prompt                              |
 | ------------- | --------------------------------------- |
+| 想從 IDE 轉到 CLI、看整套協作環境 | **`docs/HANDBOOK.md`** ← 推薦先讀 |
 | 不知道怎麼開始       | `.gemini/prompts/start-project.md`      |
 | 想加新功能         | `.gemini/prompts/add-feature.md`        |
 | 跑起來有錯 / bug   | `.gemini/prompts/fix-bug.md`            |
 | AI 一直亂寫 / 越改越糟 | `.gemini/rules/03-when-stuck.md`        |
 | 想把專案放網路上給朋友看  | `.gemini/prompts/deploy.md`             |
 | AI 好像「忘了規則」   | 跑 `/memory show` 檢查 GEMINI.md 是否載入       |
-| 想讓 AI 多會新技能   | `.gemini/MCP.md`（github、fetch、puppeteer…）|
+| 想讓 AI 多會新技能（外部能力） | `.gemini/MCP.md`（github、fetch、playwright…） |
+| 想包「AI 自動觸發的流程」 | `.gemini/SKILLS.md`（2026 新原語） |
+| 想做自己的 `/xxx` 指令 | `.gemini/commands/README.md` |
 
 ---
 
