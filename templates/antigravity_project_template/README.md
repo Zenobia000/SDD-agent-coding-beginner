@@ -26,12 +26,10 @@ my-project/
     │   ├── add-feature.md         ← 加功能
     │   ├── fix-bug.md             ← 修 bug
     │   └── deploy.md              ← 想上線時
-    ├── skills/                    ← 自訂 skill / slash command（MVP 只附 3 個必要）
-    │   ├── check-key.md           ← /check-key（部署前安全檢查）
-    │   ├── vibe/plan.md           ← /vibe:plan（Vibe Coding 第 2 步）
-    │   └── explain-code/          ← /explain-code（架構師視角講解）
-    └── memory/                    ← Antigravity 長期記憶說明
-        └── README.md              ← /memory show 怎麼用
+    └── skills/                    ← 自訂 skill / slash command（只附 2 個模型本能彌補不了的）
+        ├── check-key.md           ← /check-key（部署前安全檢查）
+        └── explain-code/          ← /explain-code（架構師視角講解）
+            └── SKILL.md
 ```
 
 ---
@@ -93,7 +91,7 @@ agy
 | 叫 AI 記住某件事        | 打 `/memory add 我習慣用 pnpm 不是 npm`          |
 | 清空對話重新開始          | 打 `/clear`                                |
 | 看內建 slash 指令       | 打 `/help`                                 |
-| 觸發自訂 skill        | 打 `/check-key`、`/vibe:plan`、`/explain-code`（本模板附 3 個；更多範例見 `.agents/SKILLS.md`） |
+| 觸發自訂 skill        | 打 `/check-key`、`/explain-code`（本模板附 2 個；更多範例見 `.agents/SKILLS.md`） |
 | 從 Gemini CLI 搬過來    | 打 `agy plugin import gemini`（一次性遷移） |
 
 ---
@@ -105,7 +103,7 @@ agy
 | 想從桌面版轉到 CLI、看整套協作環境 | **`docs/HANDBOOK.md`** ← 推薦先讀 |
 | 不知道怎麼開始       | `.agents/prompts/start-project.md`      |
 | 想加新功能         | `.agents/prompts/add-feature.md`（手動複製貼全文模板） |
-| 想要 AI 動手前先列計畫 | 打 `/vibe:plan`（CLI slash 觸發，比 prompts/ 快） |
+| 想要 AI 動手前先列計畫 | 直接跟 AI 講「先列計畫等我確認」（AGENTS.md 第 3 章五步流程已要求；SOTA 模型自動會做） |
 | 跑起來有錯 / bug   | `.agents/prompts/fix-bug.md`            |
 | AI 一直亂寫 / 越改越糟 | `.agents/rules/03-when-stuck.md`        |
 | AI 改錯一堆檔案、想回到改之前 | 打 `/restore` 選快照回滾（比 git reset 安全） |

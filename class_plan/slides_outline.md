@@ -929,7 +929,7 @@ Antigravity CLI 不只會聊天，它預設帶這些工具：
 解法 ②：Skills（agent 程序知識）
   → 把重複流程包成 .agents/skills/<name>.md
   → AI 自動觸發 + 你也能 /xxx 手動觸發
-  例：/test、/git:commit、/vibe:plan
+  例：/check-key、/explain-code
 
 今天不裝、不寫，先知道有這兩個原語。
 回家想玩再開（指令 / 檔案各一行）。

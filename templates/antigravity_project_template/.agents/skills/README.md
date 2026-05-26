@@ -22,13 +22,11 @@ Skill 是**程序性知識**：你每次都要跟 AI 講「請每次都先 ___�
 .agents/skills/
 ├── README.md                 ← 你正在看的這份
 ├── check-key.md              ← 單檔 Skill = /check-key（部署前安全檢查）
-├── vibe/
-│   └── plan.md               ← namespace = /vibe:plan（Vibe Coding 第 2 步：先列計畫）
 └── explain-code/             ← 資料夾 Skill = /explain-code（架構師視角講解）
     └── SKILL.md
 ```
 
-**為什麼只附 3 個？** 對 MVP vibe coding 來說，這 3 個覆蓋了 80% 學員會用到的情境。其他常見 skill（`/test`、`/explain`、`/git:commit` 等）的範例放在 [`../SKILLS.md`](../SKILLS.md) 最末「範例庫」段——**你需要時再複製貼到這裡**。
+**為什麼只附 2 個？** 實用主義設計：只留「模型本能彌補不了」的 skill。Vibe Coding「先列計畫」流程已在 [`../../AGENTS.md`](../../AGENTS.md) 第 3 章明寫，現代 SOTA 模型會自動遵守，不需要另外做成 slash command。其他常見 skill（`/test`、`/explain`、`/git:commit` 等）的範例放在 [`../SKILLS.md`](../SKILLS.md) 最末「範例庫」段——**你需要時再複製貼到這裡**。
 
 **鐵則**：
 - 檔名（去掉 `.md`）= Skill 名 / slash command 名
@@ -76,10 +74,9 @@ touch .agents/skills/my-new-skill/SKILL.md
 | Skill | 觸發 | 用途 |
 |---|---|---|
 | `check-key.md` | `/check-key` | 部署前檢查 API Key 設定 / 外洩風險 |
-| `vibe/plan.md` | `/vibe:plan` | Vibe Coding 第 2 步：不要直接寫 code，先列計畫等我確認 |
 | `explain-code/` | `/explain-code` | 架構師視角 × 🟢🟡🔴 紅綠燈 × 導師教學 |
 
-**測試方法**：重啟 `agy` 後直接打 `/check-key`、`/vibe:plan`、`/explain-code`，看 skill 是否觸發。
+**測試方法**：重啟 `agy` 後直接打 `/check-key`、`/explain-code`，看 skill 是否觸發。
 
 **想加更多 skill？** 看 [`../SKILLS.md`](../SKILLS.md) 末尾的「範例庫」段，有 `/test`、`/explain`、`/git:commit` 三個常見範例可以複製。
 
@@ -93,9 +90,8 @@ touch .agents/skills/my-new-skill/SKILL.md
 |---|---|---|
 | `explain-code` | 「解釋這段」 | 任何步驟（debug 用） |
 | `prd-rewrite` | 「我要寫 PRD」 | 第 1 步重述需求 |
-| `vibe-plan` | 「我要做 ___」 | 第 2 步列計畫 |
 | `pre-commit-review` | 「我寫完了」 | 第 3 步寫完後 |
-| `test` | 「跑測試」 | 第 4 步帶測試 |
+| `check-key` | 部署前 / 怕金鑰外洩 | 第 4 步驗證 |
 
 ---
 

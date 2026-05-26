@@ -180,14 +180,24 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 
 `@檔案路徑` 會把整份檔案塞進 prompt。AI 重述完你看不對，就改 PRD，不是改 prompt。
 
-### 第 2 步：列計畫 → 用 Skill 標準化（`/vibe:plan`）
+### 第 2 步：列計畫 → 直接講話即可
 
-本模板已附 `.agents/skills/vibe/plan.md`，打 `/vibe:plan` 就會：
+過去工作流會把這步包成 `/vibe:plan` skill，**但 SOTA 模型（Claude Opus 4.7 / Gemini 3）已能本能遵守 AGENTS.md 的 Vibe Coding 五步流程**，包成 skill 反而是治理劇場。
+
+直接跟 AI 講：
+
+```
+先列計畫，等我確認 OK 才動手寫 code
+```
+
+它會：
 
 - 列出要新增 / 修改 / 刪除的檔案
 - 每個檔案說一句為什麼
 - 列出風險
 - **停下來等你說 OK 才動手**
+
+要保險的話，可參考 `.agents/prompts/start-project.md` 的全文模板。
 
 ### 第 3 步：寫 code → checkpointing 保命
 
@@ -240,7 +250,7 @@ AI：（呼叫 playwright MCP 啟動 chromium → 開啟檔案 → 截圖 → �
 | `/mcp` | 看當下 MCP server 狀態 | 連不上 GitHub MCP 時用 |
 | `/restore` | 回滾 checkpoint 快照 | AI 改壞檔案的救命繩 |
 | `/clear` | 清空對話從頭來 | 上下文亂掉 / token 燒太兇時 |
-| `/<skill-name>` | 手動觸發任何 skill | `/test`、`/git:commit`、`/vibe:plan` |
+| `/<skill-name>` | 手動觸發任何 skill | `/check-key`、`/explain-code`（本模板附 2 個） |
 | `/help` | 列內建指令 | 忘記內建指令時打它 |
 
 **進階一點**：`/compress` 把舊對話壓縮，保留摘要省 token。
@@ -348,7 +358,7 @@ agy plugin import gemini
 - [ ] 接受「畫面上沒有按鈕，所有事都靠打字 + 規則檔」
 - [ ] 把 `AGENTS.md` 當「給 AI 的合約」而不是文件——它每次都會讀
 - [ ] 不要每次重講偏好，**用 `/memory add` 寫進長期記憶**
-- [ ] 不要每次手動列計畫，**用 `/vibe:plan` skill 標準化開場**
+- [ ] 不要每次手動列計畫，**信任 AGENTS.md 第 3 章五步流程**（SOTA 模型會自動遵守）
 - [ ] 不要憑記憶改檔，**用 `@file` 引用 + checkpointing 保命**
 - [ ] 不要裝一堆 MCP「以防萬一」，**用一個關一個，token 是你的成本**
 - [ ] 不要把所有規則塞進 `AGENTS.md`，**拆到 `rules/` 用 `@import` 引用**
@@ -392,7 +402,7 @@ agy plugin import gemini
 2. **跑 `/memory show`** 確認你的 `AGENTS.md` 真的被載入
 3. **打開 [`.agents/MCP.md`](../.agents/MCP.md)**，啟用「初學者四件套」（filesystem + fetch + context7 + playwright）
 4. **照 [`.agents/SKILLS.md`](../.agents/SKILLS.md)** 寫你的第一個自訂 Skill
-5. **直接試打** `/test`、`/explain`、`/vibe:plan` 等本模板附的 skill
+5. **直接試打** `/check-key`、`/explain-code` 兩個本模板附的 skill
 6. **回到 [`README.md`](../README.md)**，正式開始你的專案
 
 祝 vibe coding 順利。

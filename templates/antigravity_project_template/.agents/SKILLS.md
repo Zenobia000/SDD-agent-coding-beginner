@@ -225,7 +225,6 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 |---|---|---|
 | `explain-code` | 「解釋這段」 | 任何步驟（debug 用） |
 | `prd-rewrite` | 「我要寫 PRD」 | 第 1 步重述需求 |
-| `vibe-plan` | 「我要做 ___」 | 第 2 步列計畫 |
 | `pre-commit-review` | 「我寫完了」 | 第 3 步寫完後 |
 | `check-key` | 部署前 / 怕金鑰外洩時 | 第 4 步驗證 |
 
@@ -235,7 +234,7 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 
 ## 範例庫：你可以自己加哪些 skill
 
-本模板預設只附 3 個必要 skill（`vibe:plan`、`explain-code`、`check-key`）。下面是「常見但非必要」的 skill 範例，**你需要時再複製貼到 `.agents/skills/` 即可**。
+本模板預設只附 2 個 skill（`explain-code`、`check-key`），只留「模型本能彌補不了」的。下面是「常見但非必要」的 skill 範例，**你需要時再複製貼到 `.agents/skills/` 即可**。
 
 ### 範例 1：`/test` — 跑測試並回報
 
