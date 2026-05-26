@@ -105,7 +105,7 @@ Antigravity / AI Studio 是「點選式」工具，畫面長什麼樣 AI 就吃�
 | `fileFiltering.respectGitIgnore` | 搜檔時跳過 `.gitignore` | `true`（預設） |
 | `contextFileName` | 哪些檔名會被當 GEMINI.md 讀 | `["GEMINI.md"]`（本模板專注 Gemini CLI，只用一個來源） |
 | `telemetry` | 稽核（**不會記錄你的 prompt 內容**） | 看公司政策 |
-| `mcpServers` | MCP 工具清單 | 一開始全 `enabled: false`，按需打開 |
+| `mcpServers` | MCP 工具清單 | 預設空 `{}`，要啟用就從 `.gemini/MCP.md` 複製整段貼進去（0.42+ 不再支援 `enabled` 開關） |
 
 **Checkpointing 是初學者的救命繩**：
 
@@ -180,7 +180,7 @@ Antigravity / AI Studio 是「點選式」工具，畫面長什麼樣 AI 就吃�
 
 ### 第 2 步：列計畫 → 用 Custom Command 標準化
 
-每次都要 AI「先列計畫再動手」很煩。建一個 `.gemini/commands/plan.toml`：
+每次都要 AI「先列計畫再動手」很煩。建一個 `.gemini/commands/vibe/plan.toml`（放在 `vibe/` 子資料夾，避開 Gemini 內建 `/plan`）：
 
 ```toml
 description = "請先列計畫等我確認，不要直接動手"
@@ -193,7 +193,7 @@ prompt = """
 """
 ```
 
-之後每次只要打 `/plan`，AI 就會乖乖列計畫。
+之後每次只要打 `/vibe:plan`，AI 就會乖乖列計畫。（為什麼用 namespace？因為 Gemini CLI 0.42+ 把 `/plan` 列為內建指令，命名相同會被自動改名）
 
 ### 第 3 步：寫 code → checkpointing 保命
 
@@ -332,7 +332,7 @@ find ~/.gemini/checkpoints/ -mtime +7 -delete
 ### 7.4 「token 燒得太兇」
 
 - 每次跑 `/compress` 壓縮舊對話
-- 把不必要的 MCP 全設 `enabled: false`（每個 server 都會吃 token 描述自己）
+- 把不必要的 MCP 從 `mcpServers` 整段刪掉（每個 server 都會吃 token 描述自己；0.42+ 已無 `enabled` 開關）
 - `GEMINI.md` 不要塞太多細節，用 `@file` 引用代替
 - 切換到 `gemini-2.0-flash`（比 pro 便宜很多，初學者夠用）
 
@@ -397,7 +397,7 @@ find ~/.gemini/checkpoints/ -mtime +7 -delete
 1. **跑 `/memory show`** 確認你的 `GEMINI.md` 真的被載入
 2. **打開 [`.gemini/MCP.md`](../.gemini/MCP.md)**，啟用「初學者四件套」（filesystem + fetch + context7 + playwright）
 3. **照 [`.gemini/SKILLS.md`](../.gemini/SKILLS.md)** 寫你的第一個 Skill（建議從 `explain-code` 開始）
-4. **照 [`.gemini/commands/README.md`](../.gemini/commands/README.md)** 建你的第一個 Command（建議從 `/plan` 開始）
+4. **照 [`.gemini/commands/README.md`](../.gemini/commands/README.md)** 建你的第一個 Command（建議從 `/vibe:plan` 開始 — 已有範例在 `vibe/plan.toml`）
 5. **回到 [`README.md`](../README.md)**，正式開始你的專案
 
 祝 vibe coding 順利。

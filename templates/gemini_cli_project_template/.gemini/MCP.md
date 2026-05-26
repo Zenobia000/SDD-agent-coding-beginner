@@ -1,7 +1,9 @@
 # MCP（Model Context Protocol）入門
 
 > 給 Gemini CLI 學員：MCP 是讓你的 AI「長出新工具」的標準介面。
-> 範例設定都已在 `.gemini/settings.json` 寫好，預設 `enabled: false`，按需打開即可。
+> 預設 `.gemini/settings.json` 內 `mcpServers: {}` 是空的（為了開箱即用、不裝任何外部 server）。
+> 要啟用哪個 MCP，**從下方範例複製整段 server 區塊**貼進 `mcpServers` 即可。
+> 停用就刪掉那段。新版 Gemini CLI（0.42+）不再支援 `enabled: true/false` 開關。
 
 ---
 
@@ -23,18 +25,22 @@
 
 ### 步驟 1：打開 `.gemini/settings.json`
 
-找到你想要的 MCP，把 `enabled: false` 改成 `enabled: true`：
+找到 `mcpServers: {}` 區塊，把你想啟用的 MCP **整段貼進去**（注意 JSON 逗號）：
 
 ```json
-"github": {
-  "enabled": true,
-  "command": "npx",
-  "args": ["-y", "@modelcontextprotocol/server-github"],
-  "env": {
-    "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+"mcpServers": {
+  "github": {
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github"],
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+    }
   }
 }
 ```
+
+> ⚠️ **不要再寫 `"enabled": false`** — Gemini CLI 0.42+ 的 schema 不認這個鍵會直接報錯。
+> 要停用某個 MCP，**把整段刪掉**就好（這也是為什麼預設 `mcpServers` 是空的）。
 
 ### 步驟 2：補上需要的環境變數
 
@@ -97,16 +103,27 @@ gemini
 
 | MCP | 為什麼推薦 | 安裝指令 |
 |---|---|---|
-| **filesystem** | 限制 AI 動檔範圍，比預設安全 | 已預置在 settings.json |
-| **fetch** | 讓 AI 能讀網頁 / 線上文件 | 已預置 |
-| **context7** | 杜絕 AI 用過期 API（套件更新後不會幻覺） | 已預置，建議改 `enabled: true` |
-| **playwright** | UI 自動驗證（vibe coding 五步流程第 4 步要用） | 見下方範例 |
+| **filesystem** | 限制 AI 動檔範圍，比預設安全 | 下方範例 |
+| **fetch** | 讓 AI 能讀網頁 / 線上文件 | 下方範例 |
+| **context7** | 杜絕 AI 用過期 API（套件更新後不會幻覺） | 下方範例 |
+| **playwright** | UI 自動驗證（vibe coding 五步流程第 4 步要用） | 下方範例 |
 
-把 `.gemini/settings.json` 內 `mcpServers` 的 `filesystem` / `fetch` / `context7` 的 `enabled` 都改成 `true`，並把 `puppeteer` 區塊替換成：
+把以下整段貼進 `.gemini/settings.json` 的 `mcpServers` 物件內（用逗號分隔多個 server）：
 
 ```json
+"filesystem": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-filesystem", "./"]
+},
+"fetch": {
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-fetch"]
+},
+"context7": {
+  "command": "npx",
+  "args": ["-y", "@upstash/context7-mcp"]
+},
 "playwright": {
-  "enabled": true,
   "command": "npx",
   "args": ["-y", "@playwright/mcp@latest"]
 }
@@ -120,7 +137,6 @@ gemini
 
 ```json
 "sequential-thinking": {
-  "enabled": true,
   "command": "npx",
   "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
 }
@@ -130,7 +146,6 @@ gemini
 
 ```json
 "time": {
-  "enabled": true,
   "command": "uvx",
   "args": ["mcp-server-time", "--local-timezone=Asia/Taipei"]
 }
@@ -234,5 +249,5 @@ MCP 是**讓 AI 多一個權限通道**，不是「裝飾」。每打開一個�
 
 - Gemini 預設像「只會看書寫字的小朋友」
 - 裝 MCP = 給他**新玩具**：望遠鏡（fetch）、瀏覽器（puppeteer）、GitHub 遙控器（github）
-- 每個玩具都有可能闖禍，所以**沒在用的玩具收起來**（`enabled: false`）
+- 每個玩具都有可能闖禍，所以**沒在用的玩具收起來**（從 `mcpServers` 整段刪掉）
 - 用前要先教他「這玩具的安全守則」（看本檔的安全警告表）
