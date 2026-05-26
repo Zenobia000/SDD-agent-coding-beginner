@@ -44,7 +44,7 @@ description: Use when the user asks "what does this do", "explain this code", "�
 
 - ❌ 不要憑記憶 — AI 對 code 的記憶常常變數名、行號、條件邏輯反掉
 - ❌ 不要只讀 diff — 沒完整 context 會誤判用途
-- ✅ 同時跑 `!grep -rn "<filename>" .` 看誰 import 這個檔（耦合方向必要資訊）
+- ✅ 同時跑 `grep -rn "<filename>" .` 看誰 import 這個檔（耦合方向必要資訊）
 
 ---
 

@@ -1,14 +1,16 @@
 # AI-Ready Repo 藍圖：給 Coding Agent CLI 的設定教學範例
 
 > 用途：教初學者怎麼把一個專案「升級成 AI Agent 看得懂、會遵守規則的工作環境」。
-> 對象：要開始用 Claude Code / Gemini CLI / OpenAI Codex / GitHub Copilot 協作的開發者。
-> 設計原則：**README 給人看，`AGENTS.md / CLAUDE.md / GEMINI.md` 給 Agent 工作。**
+> 對象：要開始用 Claude Code / Antigravity CLI / OpenAI Codex / GitHub Copilot 協作的開發者。
+> 設計原則：**README 給人看，`AGENTS.md / CLAUDE.md` 給 Agent 工作。**
+
+> ⚠️ **2026-05-26 重要更新**：Google I/O 2026（5/19）宣布把 Gemini CLI 統一到 Antigravity 平台，命令從 `gemini` 改為 `agy`、用 Go 重寫。**個人版 Gemini CLI 將於 2026-06-18 停止服務**（企業版 Gemini Code Assist Standard/Enterprise 不受影響）。Antigravity CLI 直接採用 `AGENTS.md` 業界規範，**不再使用 `GEMINI.md`**。下方文件保留三份檔名分離論述供歷史/相容性參考；新專案建議只寫 `AGENTS.md` + 視需要補 `CLAUDE.md`。Gemini CLI 舊有設定可一鍵搬遷：`agy plugin import gemini`。
 
 ---
 
 ## 一句話先講白
 
-**2026 年不要再把 `CLAUDE.md`、`GEMINI.md` 當成「提示詞筆記本」；它們應該被設計成 AI Agent 的「專案操作手冊 + 治理邊界 + 可執行 SOP」。**
+**2026 年不要再把 `AGENTS.md`、`CLAUDE.md` 當成「提示詞筆記本」；它們應該被設計成 AI Agent 的「專案操作手冊 + 治理邊界 + 可執行 SOP」。**
 
 換句話說：你寫文件的對象變了。
 以前我們寫文件是給新人 onboarding。

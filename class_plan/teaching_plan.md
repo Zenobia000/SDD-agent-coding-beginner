@@ -14,9 +14,9 @@
 | 10:50 - 11:00 | 休息 | ☕ | — |
 | 11:00 - 12:30 | M2 | STRIKE 戰法 × AI Studio 實作 | 35 / 55 |
 | 12:00 - 13:30 | 午休 | 🍱 | — |
-| 13:30 - 15:30 | M3 | Antigravity Vibe Coding 做小專案 ⭐ | 30 / 90 |
+| 13:30 - 15:30 | M3 | Antigravity 桌面版 Vibe Coding 做小專案 ⭐ | 30 / 90 |
 | 15:30 - 15:40 | 休息 | ☕ | — |
-| 15:40 - 16:40 | M4 | Gemini CLI × 通用 coding agent 技能 | 25 / 35 |
+| 15:40 - 16:40 | M4 | Antigravity CLI（agy）× 通用 coding agent 技能 | 25 / 35 |
 | 16:40 - 17:30 | M5 | 快速部署 + 成果展示 + 行動計畫 | 15 / 35 |
 
 **整日：教學 160 min / 實作 270 min ≈ 37 / 63**
@@ -36,8 +36,8 @@
 |------|------|------|
 | 0-5 min | 歡迎 + 自我介紹 | 講師 30 秒自介 + 今天的承諾：「下課時你會有一個能打開來用的小專案」 |
 | 5-10 min | 破冰提問 | 請 3-4 位學員用一句話回答：「你手邊有沒有一件事，心裡想過『如果有個小工具幫我做就好了』？」 |
-| 10-20 min | 今日旅程 | 用一張圖講完三個工具如何接力：AI Studio 測點子 → Antigravity 做出來 → Gemini CLI 自動化。強調「同一個專案，三個工具輪流接棒」 |
-| 20-28 min | 工具安裝檢查 | 打開三個工具確認都能連上（AI Studio 開瀏覽器登入、Antigravity 啟動 UI、Gemini CLI 打 `gemini --version`）。助教巡場處理 |
+| 10-20 min | 今日旅程 | 用一張圖講完三個工具如何接力：AI Studio 測點子 → Antigravity 桌面版做出來 → Antigravity CLI（`agy`）自動化。強調「同一個專案，三個工具輪流接棒」+ 提一句「Google I/O 2026 把 Gemini CLI 改名為 Antigravity CLI、6/18 個人版停服，今天用的是正式接班的版本」 |
+| 20-28 min | 工具安裝檢查 | 打開三個工具確認都能連上（AI Studio 開瀏覽器登入、Antigravity 桌面版啟動 UI、Antigravity CLI 打 `agy --version`）。助教巡場處理 |
 | 28-30 min | 今日規則 | ① 不會的直接舉手 ② 錯了沒關係，AI 會陪你改 ③ 下課目標：你能對朋友秀出一個東西 |
 
 ### 講師提醒
@@ -208,7 +208,7 @@
 ─────────────────────────────────────────────────
 L1 試探射擊    任務不確定、先看 AI 能做什麼  AI Studio 第一次貼
 L2 精準打擊    需求清楚、要一次到位         AI Studio PRD / Antigravity
-L3 鏈式攻擊    複雜任務、前一步→下一步      Gemini CLI + Antigravity 多輪迭代
+L3 鏈式攻擊    複雜任務、前一步→下一步      Antigravity CLI + Antigravity 桌面版多輪迭代
 ```
 
 **講師金句**：「不是所有任務都要寫完整 STRIKE。看三變數，10 秒決定打法。」
@@ -219,7 +219,7 @@ L3 鏈式攻擊    複雜任務、前一步→下一步      Gemini CLI + Antigr
 |------|--------|----------|
 | 歧義度 | 任務有多模糊？ | 高 → 補 K + E |
 | 風險度 | 做錯會怎樣？ | 高 → 加驗收 + 追問三指令 |
-| 自動化度 | 會重複用嗎？ | 高 → 做成模板（M4 CLI） |
+| 自動化度 | 會重複用嗎？ | 高 → 做成模板（M4 Antigravity CLI） |
 
 ### 防禦戰術：三個追問指令（印成速記小卡）
 
@@ -255,19 +255,19 @@ AI 一本正經胡說八道？三句話救你：
 
 ---
 
-## M3｜Antigravity Vibe Coding 做小專案 ⭐ 核心環節（13:30 - 15:30，120 min）
+## M3｜Antigravity 桌面版 Vibe Coding 做小專案 ⭐ 核心環節（13:30 - 15:30，120 min）
 
 ### 目標
-- 用自然語言（就是 M2 的 PRD prompt）在 Antigravity 做出一個可運行的小專案原型
+- 用自然語言（就是 M2 的 PRD prompt）在 Antigravity 桌面版做出一個可運行的小專案原型
 - 體驗「看 AI 規劃 → 看 code 產出 → 測試 → 自然語言修正」的 Vibe Coding 循環
 
 ### 核心教材
 
 | 時間 | 活動 | 細節 |
 |------|------|------|
-| 13:30-13:45 (15 min) | 講師 Demo：一個專案從 0 到 1 | 現場把一個 PRD 丟進 Antigravity，走完五步流程，全場看到一個小工具跑起來 |
+| 13:30-13:45 (15 min) | 講師 Demo：一個專案從 0 到 1 | 現場把一個 PRD 丟進 Antigravity 桌面版，走完五步流程，全場看到一個小工具跑起來 |
 | 13:45-13:55 (10 min) | Vibe Coding 五步流程講解 | 描述 → 看規劃 → 看 code → 測試 → 自然語言修正。**關鍵金句：「AI 做錯不是去改 code，是去改描述」** |
-| 13:55-14:55 (60 min) | **實作：學員做自己的專案（第一輪）** | 把 M2 的 PRD 丟進 Antigravity，走完五步流程。助教 3 人全場巡場 |
+| 13:55-14:55 (60 min) | **實作：學員做自己的專案（第一輪）** | 把 M2 的 PRD 丟進 Antigravity 桌面版，走完五步流程。助教 3 人全場巡場 |
 | 14:55-15:10 (15 min) | 迭代演示：常見問題 × 修正方法 | 現場示範三種常見狀況：① AI 產出錯的 UI ② 功能少了一塊 ③ 跑起來有 bug。每種都用「自然語言修正」解決 |
 | 15:10-15:30 (20 min) | **實作：加一個功能（第二輪）** | 學員為自己的專案加一個新功能（自然語言描述），體感「迭代」的感覺 |
 
@@ -300,7 +300,7 @@ AI 一本正經胡說八道？三句話救你：
 | 學員卡在「不知道怎麼描述」 | 帶回 M2 的 STRIKE 模板，檢查是不是 T / K / I 三格沒填齊（改 prompt 不是改 code） |
 | 學員想驗證 AI 的答案對不對 | 教他打追問三指令：為什麼？／還有別的嗎？／找漏洞 |
 | 學員開始自己改 code | 制止：「等等，先告訴 AI 哪裡不對，讓它改」 |
-| Antigravity 生成超慢 / 無反應 | 刷新 session，備案：改用 Gemini API + AI Studio 起草（M4 提前） |
+| Antigravity 桌面版生成超慢 / 無反應 | 刷新 session，備案：改用 Antigravity CLI（`agy`）起草（M4 提前） |
 | 學員專案跑起來了但想加功能 | 大大鼓勵！這是 AHA 2 的時刻，抓住它 |
 
 ### 學員產出
@@ -318,59 +318,70 @@ AI 一本正經胡說八道？三句話救你：
 
 ---
 
-## M4｜Gemini CLI × 通用 coding agent 技能（15:40 - 16:40，60 min）
+## M4｜Antigravity CLI（agy）× 通用 coding agent 技能（15:40 - 16:40，60 min）
+
+> **2026 工具更替注意**：Google I/O 2026（5/19）宣布把 Gemini CLI 統一到 Antigravity 平台，命令從 `gemini` 改為 `agy`，個人版 Gemini CLI 6/18 停服。本模組教的是業界 6/18 後唯一可用的 Google 終端 agent，沒有沉沒成本。
 
 ### 目標
 - 讓學員體會「同一件事用 CLI 做，更快更爽」的心流感
 - 掌握一個 CLI 指令把 M3 的專案「自動化一個步驟」
-- **建立 2026 業界通用的 coding agent 詞彙**：專案記憶檔（GEMINI.md / AGENTS.md）、@ 引用、內建工具+權限、MCP——換工具不換腦袋
+- **建立 2026 業界通用的 coding agent 詞彙**：專案記憶檔（AGENTS.md）、@ 引用、內建工具+權限、MCP、Skills——換工具不換腦袋
 
 ### 核心教材
 
 | 時間 | 活動 | 細節 |
 |------|------|------|
-| 15:40-15:43 (3 min) | 終端機破恐懼 | CLI = 「用打字代替點滑鼠」。秒講 `gemini "hello"` 為什麼跟瀏覽器一樣 |
+| 15:40-15:43 (3 min) | 終端機破恐懼 + Antigravity CLI 背景 | CLI = 「用打字代替點滑鼠」。秒講 `agy "hello"` 為什麼跟瀏覽器一樣 + 一句話交代「Gemini CLI 被收編到 Antigravity CLI，命令叫 `agy`，比舊版快、跟桌面版共用 runtime」 |
 | 15:43-15:46 (3 min) | STRIKE × CLI 的連貫 | M2 學的 STRIKE，現在直接打進終端機。同 prompt 三工具通用 |
 | 15:46-15:51 (5 min) | 五個你馬上能用的指令 | pipe / 重導向 / prompt 模板 / L3 鏈式 / 互動模式（見下方示範指令集） |
 | 15:51-15:54 (3 min) | 三大能力：認識你的 coding agent | 🗣 聊天 / 📂 看檔 / 🔧 用工具——三工具骨架相同 |
-| 15:54-15:58 (4 min) | GEMINI.md：給 agent 一份公司守則 | 寫 5 行專案規則，agent 開工自動讀。兩個層級：`~/.gemini/` 全域 + `./GEMINI.md` 專案 |
-| 15:58-16:01 (3 min) | @ 引用：把檔案丟進對話 | `cat \|` vs `@file` 對比；多檔範例 `gemini "@README.md @main.py 解釋"` |
-| 16:01-16:04 (3 min) | 內建工具 + 安全模式 | ReadFile/Shell/GoogleSearch/WebFetch；YOLO vs 預設確認模式 |
-| 16:04-16:07 (3 min) | MCP：AI 的 USB-C | 概念比喻 + 三個常見 MCP server（filesystem / fetch / google-cal）。今天不裝 |
+| 15:54-15:58 (4 min) | AGENTS.md：給 agent 一份公司守則 | 寫 5 行專案規則，agent 開工自動讀。兩個層級：`~/.gemini/antigravity-cli/AGENTS.md` 全域 + `./AGENTS.md` 專案。一句話交代「業界規範，Cursor / OpenAI Codex / Antigravity 都認」 |
+| 15:58-16:01 (3 min) | @ 引用：把檔案丟進對話 | `cat \|` vs `@file` 對比；多檔範例 `agy "@README.md @main.py 解釋"` |
+| 16:01-16:04 (3 min) | 內建工具 + 安全模式 | ReadFile/Shell/GoogleSearch/WebFetch；首次啟動逐資料夾信任 + 預設確認模式 |
+| 16:04-16:07 (3 min) | MCP + Skills：兩個擴充原語 | MCP 比喻成「USB-C」（外部能力），Skills 比喻成「食譜本 + hot key」（`.agents/skills/<name>.md` 既能自動觸發也能 `/xxx` 手動觸發）。今天不裝 |
 | 16:07-16:09 (2 min) | 跨工具對照表 | 同一招在 Claude Code / Cursor / Antigravity 怎麼叫；**AGENTS.md 是通用格式** |
-| 16:09-16:34 (25 min) | **🛠 實作：為你的專案加一點自動化** | **必做（5 min）**：在你的專案根目錄建 GEMINI.md（5 行）。**三選一（20 min）**：① 核心功能寫成一行指令 ② 自動產測試資料腳本 ③ 「每天跑一次」的小工具 |
+| 16:09-16:34 (25 min) | **🛠 實作：為你的專案加一點自動化** | **必做（5 min）**：在你的專案根目錄建 AGENTS.md（5 行）。**三選一（20 min）**：① 核心功能寫成一行 `agy` 指令 ② 自動產測試資料腳本 ③ 「每天跑一次」的小工具（用 agy 的 Scheduled Tasks） |
 | 16:34-16:37 (3 min) | 三工具反思 + 決策樹 | 請 2-3 位學員：「我今天三個工具用下來，最驚喜的是 ___」 |
 | 16:37-16:40 (3 min) | M4 小結 + CP3 | 收口「換工具不換腦袋」、發 AGENTS.md 範本卡 |
 
 ### 示範指令集（印發給學員）
 
 ```bash
-# 基本：直接問
-gemini "幫我把這段中文翻成英文：你好嗎"
+# 0. 一次性安裝（如果還沒裝）
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 
-# 管道：把檔案內容丟給 AI
-cat news.txt | gemini "用三句話摘要"
+# 1. 基本：直接問
+agy "幫我把這段中文翻成英文：你好嗎"
 
-# 檔案處理：寫入輸出
-gemini "把這段 CSV 轉成 JSON" < data.csv > data.json
+# 2. 管道：把檔案內容丟給 AI
+cat news.txt | agy "用三句話摘要"
 
-# 套 prompt 模板
-gemini "你是編輯（R），請依以下規格（K）摘要資料（I）：$(cat input.txt)"
+# 3. 檔案處理：寫入輸出
+agy "把這段 CSV 轉成 JSON" < data.csv > data.json
 
-# L3 鏈式（前一步 | 後一步）
-cat news.txt | gemini "摘要" | gemini "翻成英文"
+# 4. 套 prompt 模板
+agy "你是編輯（R），請依以下規格（K）摘要資料（I）：$(cat input.txt)"
 
-# 互動模式
-gemini
+# 5. L3 鏈式（前一步 | 後一步）
+cat news.txt | agy "摘要" | agy "翻成英文"
+
+# 6. 互動模式（TUI）
+agy
 > 你好
 > 繼續問...
 
-# 新招：@ 引用（更簡單）
-gemini "@news.txt 幫我摘要"
-gemini "@README.md @src/main.py 解釋這個程式"
+# 7. @ 引用（更簡單）
+agy "@news.txt 幫我摘要"
+agy "@README.md @src/main.py 解釋這個程式"
+
+# 8. Headless（CI / cron 用）
+agy --headless "把 @data.csv 摘要寫到 summary.md"
+
+# 9. 從 Gemini CLI 搬過來（有舊有設定的人）
+agy plugin import gemini
 ```
 
-### GEMINI.md 範本（學員今天必做，印發）
+### AGENTS.md 範本（學員今天必做，印發）
 
 ```markdown
 # [你的專案名]
@@ -389,7 +400,8 @@ gemini "@README.md @src/main.py 解釋這個程式"
 - 不要過度道歉
 ```
 
-> 放在專案根目錄。Gemini CLI 每次啟動會自動讀。
+> 放在專案根目錄。Antigravity CLI（`agy`）每次啟動會自動讀。
+> 跨工具通用：Cursor、OpenAI Codex、Antigravity 桌面版都認這份檔案。
 
 ### 工具選擇決策樹（M4 結尾發下）
 
@@ -397,24 +409,25 @@ gemini "@README.md @src/main.py 解釋這個程式"
 我想做一件小事，選什麼工具？
 
 ├─ 我在瀏覽器裡、想測想法           → AI Studio
-├─ 我要做出一個有介面的東西          → Antigravity
-├─ 我要把一個重複的事自動化         → Gemini CLI
-├─ 我要做超大專案 / 多人協作        → Antigravity（多 agent）
+├─ 我要做出一個有介面的東西          → Antigravity 桌面版
+├─ 我要把一個重複的事自動化         → Antigravity CLI（agy）
+├─ 我要做超大專案 / 多人協作        → Antigravity 桌面版（多 agent）
 └─ 我要馬上用、不想安裝任何東西     → AI Studio
 
-無論選哪個，把 STRIKE 六字訣 + 專案記憶檔（AGENTS.md / CLAUDE.md / GEMINI.md）
-的觀念帶著走——這是業界共通的「跨工具遷移資產」。
+無論選哪個，把 STRIKE 六字訣 + 專案記憶檔 AGENTS.md（業界通用格式：
+Antigravity / Cursor / OpenAI Codex 都認）的觀念帶著走——
+這是「跨工具遷移資產」，今天學的不會被任何單一工具綁架。
 ```
 
 ### 學員產出
 
-- 至少一個能跑的 CLI 指令 / 腳本
-- **一份放在專案根目錄的 GEMINI.md**
+- 至少一個能跑的 `agy` 指令 / 腳本
+- **一份放在專案根目錄的 AGENTS.md**
 - 對「三工具各自適合什麼」與「coding agent 通用詞彙」有自己的答案
 
 ### 檢查點 CP3（在這段結束時達成）
 
-> 能對旁邊的人口述：這三個工具我各自會用來做什麼；GEMINI.md / AGENTS.md 是做什麼用的。
+> 能對旁邊的人口述：這三個工具我各自會用來做什麼；AGENTS.md 是做什麼用的、為什麼業界都用這個名字。
 
 ---
 
@@ -441,7 +454,7 @@ gemini "@README.md @src/main.py 解釋這個程式"
 Week 1（工具內化）
 □ 把今天的專案加一個新功能
 □ 用 STRIKE 六字訣跑一次全新任務
-□ 用 Gemini CLI 做一件以前手動做的事
+□ 用 Antigravity CLI（agy）做一件以前手動做的事
 
 Week 2（新專案啟動）
 □ 找一個新的痛點（跑痛點物理量四問）
@@ -471,8 +484,8 @@ Week 4（心法沉澱）
 | 助教 | 時段責任 | 學員編號 |
 |------|---------|---------|
 | A | 整日巡場 + M0 環境設定 + M5 部署 | 1-8 |
-| B | 整日巡場 + M3 Antigravity 備案 | 9-16 |
-| C | 整日巡場 + M4 CLI 疑難 | 17-25 |
+| B | 整日巡場 + M3 Antigravity 桌面版備案 | 9-16 |
+| C | 整日巡場 + M4 Antigravity CLI 疑難（含 `agy` 安裝、`agy plugin import gemini` 遷移） | 17-25 |
 
 共同職責：主動發問「有沒有卡關的？」、即時補位、紀錄常見問題回饋給講師。
 
@@ -501,5 +514,5 @@ Week 4（心法沉澱）
   - [ ] 共用 HackMD / Notion 頁（所有連結、prompt、步驟）
   - [ ] AI Studio 三個對比範例（L0 一句話 / L2 完整 STRIKE / L3 鏈式）
   - [ ] Antigravity 三個 Demo 專案（摘要 / 表格轉換 / 筆記工具）
-  - [ ] Gemini CLI 五指令 + GEMINI.md 範本 + @ 引用範例（見 M4）
+  - [ ] Antigravity CLI 九指令 + AGENTS.md 範本 + @ 引用範例（見 M4）
   - [ ] 部署備案影片（5 分鐘 screencast）

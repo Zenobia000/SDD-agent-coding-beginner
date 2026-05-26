@@ -1,7 +1,7 @@
 # Vibe Coding 一日工作坊 — 教案總目錄
 
 > 8 小時｜初學者友善｜實作優先
-> 主打工具：Google AI Studio × Antigravity × Gemini CLI（全免費）
+> 主打工具：Google AI Studio × Antigravity 桌面版 × Antigravity CLI（agy，全免費）
 > 學員產出：一個可運行的小專案 + 30 天行動計畫
 
 ---
@@ -24,8 +24,8 @@
               早上                  下午                   傍晚
      ┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
      │                  │   │                  │   │                  │
-     │   AI Studio      │   │   Antigravity    │   │   Gemini CLI     │
-     │                  │   │                  │   │                  │
+     │   AI Studio      │   │   Antigravity    │   │ Antigravity CLI  │
+     │                  │   │   (桌面版)        │   │      (agy)       │
      │   測點子         │   │   做出來         │   │   自動化         │
      │   寫 prompt      │   │   Vibe Coding    │   │   下指令         │
      │                  │   │                  │   │                  │
@@ -44,7 +44,7 @@
 | 09:30 - 10:50 | **M1 找痛點** | 一句話專案定義（CP1） |
 | 11:00 - 12:30 | **M2 STRIKE 戰法 × AI Studio** | 結構化的專案 PRD（用 STRIKE 寫） |
 | 13:30 - 15:30 | **M3 Antigravity Vibe Coding** ⭐ | 可運行的小專案（CP2） |
-| 15:40 - 16:40 | **M4 Gemini CLI** | 一行指令自動化（CP3） |
+| 15:40 - 16:40 | **M4 Antigravity CLI** | 一行指令自動化（CP3） |
 | 16:40 - 17:30 | M5 部署 + 行動計畫 | 公開網址（選修）+ 30 天卡 |
 
 ---
@@ -54,7 +54,7 @@
 | 必教主題 | 主要出現位置 | 延伸應用 |
 |---------|------------|---------|
 | **如何找痛點** | M1（80 min）— 物理量四問 + 濃縮版 PainMap | M5 行動卡 Week 2 再練一次 |
-| **提示詞框架** | M2（90 min）— **STRIKE 六字訣**（S/T/R/I/K/E）+ MVP 組合 T+K+I + 三層進攻策略 L1/L2/L3 + 防禦戰術追問三指令 | 貫穿 M3、M4 — 同一套 STRIKE 用在三個工具，CLI 特別適合 L3 鏈式 |
+| **提示詞框架** | M2（90 min）— **STRIKE 六字訣**（S/T/R/I/K/E）+ MVP 組合 T+K+I + 三層進攻策略 L1/L2/L3 + 防禦戰術追問三指令 | 貫穿 M3、M4 — 同一套 STRIKE 用在三個工具，Antigravity CLI 特別適合 L3 鏈式 |
 | **Vibe Coding 三工具** | M2 / M3 / M4 依序串接 | M5 部署是 M3 產物的延伸 |
 
 ---
@@ -104,7 +104,7 @@
 | 範圍 | 五步行動法（看機會 → 轉變現） | 聚焦「做產品」一步 |
 | 主題 | AI 槓桿力策略 + 工具 + 商業化 | Vibe Coding 工具 + 實作 |
 | 受眾 | 企業主管、PM、創業者 | 初學者（包含非技術背景） |
-| 工具 | Google AI 三神器 + ChatGPT/Claude + 部署 | Google AI Studio + Antigravity + Gemini CLI |
+| 工具 | Google AI 三神器 + ChatGPT/Claude + 部署 | Google AI Studio + Antigravity 桌面版 + Antigravity CLI |
 | 實作比 | 55% | 64% |
 | 產出 | 上線產品 + 商業企劃 | 可運行小專案（選修上線）+ 行動卡 |
 | 適合場景 | 企業內訓、商業工作坊 | 公開班、初學者引流班、社群工作坊 |
@@ -127,7 +127,7 @@
   - 今日時程 × CP 檢查點
 - [ ] **Antigravity Demo 專案**（3 個範例專案，預先做好）
 - [ ] **AI Studio 對比範例**（L0 一句話 vs L2 完整 STRIKE vs L3 鏈式，3 組）
-- [ ] **Gemini CLI 範例腳本**（5 個可執行指令）
+- [ ] **Antigravity CLI 範例腳本**（5 個可執行 `agy` 指令）
 - [ ] **共用文件模板**（HackMD / Notion，放所有 prompt 和連結）
 - [ ] **學員報名表與問卷**（課前、課後）
 - [ ] **行銷文案**（一頁宣傳、FAQ）
@@ -140,3 +140,4 @@
 
 - v1.0（2026-04-19）— 初版，基於既有資料重構為 Vibe Coding 聚焦版
 - v1.1（2026-04-19）— 整合 **STRIKE 提示詞戰法**（來自 `ai_prompt_strategy_workshop_20260312172919.pptx`）取代原本的 Prompt 五要素；新增 MVP 組合 T+K+I、三層進攻策略 L1/L2/L3、三變數判斷法、防禦戰術追問三指令
+- v1.2（2026-05-26）— Google I/O 2026 (5/19) 宣布 Gemini CLI 個人版於 6/18 停服，全面改用 **Antigravity CLI（`agy`）**。M4 模組改名、教學模板從 `gemini_cli_project_template/` 改為 `antigravity_project_template/`（`.agents/` + `AGENTS.md` 業界規範）

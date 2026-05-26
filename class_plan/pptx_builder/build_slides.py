@@ -294,7 +294,7 @@ def s_cover(prs, no):
     _hairline(s, Inches(0.8), Inches(4.7), Inches(11.7))
 
     # 三工具
-    tools = ["Google AI Studio", "Antigravity", "Gemini CLI"]
+    tools = ["Google AI Studio", "Antigravity 桌面版", "Antigravity CLI"]
     for i, t in enumerate(tools):
         left = Inches(0.8 + i * 4.1)
         _mono_label(s, f"Stage {i + 1:02d}", left, Inches(5.0), width=Inches(4))
@@ -354,7 +354,7 @@ def s_three_tools(prs, no):
               size=18, color=MUTED, letter_spacing=-0.2)
 
     titles = ["早上", "下午", "傍晚"]
-    names = ["AI Studio", "Antigravity", "Gemini CLI"]
+    names = ["AI Studio", "Antigravity 桌面版", "Antigravity CLI"]
     roles = ["測點子 · 寫 prompt", "做出來 · Vibe Coding", "自動化 · 下指令"]
 
     for i in range(3):
@@ -389,7 +389,7 @@ def s_schedule_rules(prs, no):
         ("09:30", "M1", "找痛點（你今天要做什麼）"),
         ("11:00", "M2", "STRIKE 戰法 × AI Studio"),
         ("13:30", "M3", "Antigravity Vibe Coding ⭐"),
-        ("15:40", "M4", "Gemini CLI"),
+        ("15:40", "M4", "Antigravity CLI（agy）"),
         ("16:40", "M5", "部署 + 成果展示"),
     ]
     for i, (time, mod, topic) in enumerate(schedule):
@@ -884,7 +884,7 @@ def s_m2_l123(prs, no):
     levels = [
         ("L1", "試探射擊", "Recon Fire", "一句話丟出去，看 AI 能做什麼", "AI Studio 快速驗證"),
         ("L2", "精準打擊", "Precision Strike", "完整 STRIKE 六要素，一次到位", "PRD / Antigravity"),
-        ("L3", "鏈式攻擊", "Chain Attack", "複雜任務拆 3-5 步，前一步 → 下一步", "Gemini CLI 管道 & 迭代"),
+        ("L3", "鏈式攻擊", "Chain Attack", "複雜任務拆 3-5 步，前一步 → 下一步", "Antigravity CLI 管道 & 迭代"),
     ]
     for i, (lv, cn, en, desc, usage) in enumerate(levels):
         top = Inches(2.8 + i * 1.15)
@@ -918,7 +918,7 @@ def s_m2_ai_studio_intro(prs, no):
               size=18, color=MUTED, letter_spacing=-0.2)
 
     features = [
-        ("01", "零安裝", "免費，直接用 Gemini 最新模型"),
+        ("01", "零安裝", "免費，直接用 Gemini 3 系列最新模型"),
         ("02", "System Instruction", "放 S + R + K（設一次用多次）"),
         ("03", "Prompt 區", "每次放 T + I + E"),
         ("04", "Compare", "同一 prompt 比兩個模型 / 兩種寫法"),
@@ -1306,9 +1306,9 @@ def s_m3_summary(prs, no):
 
 def s_m4_cover(prs, no):
     return s_module_divider(
-        prs, no, "M4", "Gemini CLI",
-        "從「介面操作」到「打字就走」。\n順便學 2026 通用 coding agent 技能。",
-        "M4 · Gemini CLI",
+        prs, no, "M4", "Antigravity CLI（agy）",
+        "從「介面操作」到「打字就走」。\n順便學 2026 通用 coding agent 技能。\nGemini CLI 6/18 停服，本模組教 Google 唯一現役 CLI。",
+        "M4 · Antigravity CLI",
     )
 
 
@@ -1331,10 +1331,10 @@ def s_m4_terminal(prs, no):
 
     _add_text(s, "三個指令你馬上就會：", Inches(0.8), Inches(5.35), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
-    code = 'gemini "hello"\ngemini "把這句翻成英文：今天天氣真好"\ncat news.txt | gemini "用三句話摘要"'
+    code = 'agy "hello"\nagy "把這句翻成英文：今天天氣真好"\ncat news.txt | agy "用三句話摘要"'
     _add_code_block(s, code, Inches(0.8), Inches(5.75), Inches(11.7), Inches(1.1), size=13)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1348,8 +1348,8 @@ def s_m4_continuity(prs, no):
 
     mappings = [
         ("貼到 AI Studio", "瀏覽器看結果"),
-        ("丟進 Antigravity", "IDE 裡做專案"),
-        ("打進 Gemini CLI", "終端機立刻跑"),
+        ("丟進 Antigravity 桌面版", "IDE 裡做專案"),
+        ("打進 Antigravity CLI", "終端機立刻跑"),
     ]
     for i, (a, b) in enumerate(mappings):
         top = Inches(3.3 + i * 0.85)
@@ -1365,7 +1365,7 @@ def s_m4_continuity(prs, no):
               Inches(0.8), Inches(6.2), Inches(11.7), Inches(0.6),
               size=22, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.4)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1377,25 +1377,25 @@ def s_m4_commands(prs, no):
               size=36, bold=True, letter_spacing=-1.2)
 
     code = """# 1. 直接問
-gemini "幫我把這句中文翻成英文：你好嗎"
+agy "幫我把這句中文翻成英文：你好嗎"
 
 # 2. 管道：把檔案丟給 AI
-cat news.txt | gemini "用三句話摘要"
+cat news.txt | agy "用三句話摘要"
 
 # 3. 寫入輸出
-gemini "這段 CSV 轉成 JSON" < data.csv > data.json
+agy "這段 CSV 轉成 JSON" < data.csv > data.json
 
 # 4. 套 prompt 模板
-gemini "你是編輯(R)，用五要格式(K)摘要：$(cat input.txt)"
+agy "你是編輯(R)，用 STRIKE 格式(K)摘要：$(cat input.txt)"
 
 # 5. L3 鏈式（前一步 | 後一步）
-cat news.txt | gemini "摘要" | gemini "翻成英文"
+cat news.txt | agy "摘要" | agy "翻成英文"
 
-# 進階：互動模式
-gemini"""
+# 進階：互動模式（TUI）
+agy"""
     _add_code_block(s, code, Inches(0.8), Inches(2.2), Inches(11.7), Inches(4.6), size=13)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1426,18 +1426,18 @@ def s_m4_three_abilities(prs, no):
               Inches(0.8), Inches(6.1), Inches(11.7), Inches(0.6),
               size=22, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.4)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
 def s_m4_gemini_md(prs, no):
     s = _new_slide(prs, BG)
-    _mono_label(s, "M4 · GEMINI.md — project memory", Inches(0.8), Inches(0.7))
-    _add_text(s, "GEMINI.md", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
+    _mono_label(s, "M4 · AGENTS.md — project memory", Inches(0.8), Inches(0.7))
+    _add_text(s, "AGENTS.md", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
               size=32, bold=True, font=FONT_MONO, letter_spacing=-0.8)
-    _add_text(s, "給 agent 一份「公司守則」。每次開工自動讀。",
+    _add_text(s, "給 agent 一份「公司守則」。每次開工自動讀。業界共識：Antigravity / Cursor / OpenAI Codex 都認。",
               Inches(0.8), Inches(2.05), Inches(11.7), Inches(0.5),
-              size=18, color=MUTED, letter_spacing=-0.2)
+              size=16, color=MUTED, letter_spacing=-0.2)
 
     code = """# 我的新聞摘要工具
 
@@ -1447,14 +1447,14 @@ def s_m4_gemini_md(prs, no):
 - 程式碼請加註解"""
     _add_code_block(s, code, Inches(0.8), Inches(2.85), Inches(11.7), Inches(2.2), size=14)
 
-    _add_text(s, "兩個層級（Gemini CLI 都吃）：",
+    _add_text(s, "兩個層級（Antigravity CLI 都吃）：",
               Inches(0.8), Inches(5.25), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
-    levels = """~/.gemini/GEMINI.md   = 全域（所有專案都套用）
-./GEMINI.md           = 這個專案專用"""
-    _add_code_block(s, levels, Inches(0.8), Inches(5.65), Inches(11.7), Inches(1.1), size=14)
+    levels = """~/.gemini/antigravity-cli/AGENTS.md   = 全域（過渡期沿用 .gemini/ 路徑）
+./AGENTS.md                           = 這個專案專用"""
+    _add_code_block(s, levels, Inches(0.8), Inches(5.65), Inches(11.7), Inches(1.1), size=13)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1468,13 +1468,13 @@ def s_m4_at_ref(prs, no):
     _add_text(s, "舊招（M4 前半教過）：",
               Inches(0.8), Inches(2.3), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
-    _add_code_block(s, 'cat news.txt | gemini "摘要"',
+    _add_code_block(s, 'cat news.txt | agy "摘要"',
                     Inches(0.8), Inches(2.7), Inches(11.7), Inches(0.6), size=15)
 
     _add_text(s, "新招（更簡單）：",
               Inches(0.8), Inches(3.55), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, font=FONT_MONO, letter_spacing=1.5)
-    _add_code_block(s, 'gemini "@news.txt 幫我摘要"',
+    _add_code_block(s, 'agy "@news.txt 幫我摘要"',
                     Inches(0.8), Inches(3.95), Inches(11.7), Inches(0.6), size=15)
 
     _hairline(s, Inches(0.8), Inches(4.85), Inches(11.7))
@@ -1485,10 +1485,10 @@ def s_m4_at_ref(prs, no):
               Inches(0.8), Inches(5.45), Inches(11.7), Inches(0.45),
               size=16, color=INK_SOFT, letter_spacing=-0.2)
 
-    _add_code_block(s, 'gemini "@README.md @src/main.py 解釋這個程式怎麼跑"',
+    _add_code_block(s, 'agy "@README.md @src/main.py 解釋這個程式怎麼跑"',
                     Inches(0.8), Inches(6.05), Inches(11.7), Inches(0.55), size=14)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1499,7 +1499,7 @@ def s_m4_tools_perm(prs, no):
               Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
               size=36, bold=True, letter_spacing=-1.2)
 
-    _add_text(s, "Gemini CLI 不只會聊天，預設帶這些工具：",
+    _add_text(s, "Antigravity CLI 不只會聊天，預設帶這些工具：",
               Inches(0.8), Inches(2.15), Inches(11.7), Inches(0.5),
               size=16, color=MUTED, letter_spacing=-0.2)
 
@@ -1520,14 +1520,14 @@ def s_m4_tools_perm(prs, no):
     _add_text(s, "每次它要動手，會先問你「可以嗎？」",
               Inches(0.8), Inches(5.2), Inches(11.7), Inches(0.5),
               size=18, bold=True, letter_spacing=-0.3)
-    _add_text(s, "預設模式：每步都確認  ← 初學者請用這個",
+    _add_text(s, "首次啟動：逐資料夾信任授權  ← 只信你自己的工作區",
               Inches(1.0), Inches(5.85), Inches(11.7), Inches(0.4),
               size=15, color=ACCENT_GOOD, letter_spacing=-0.2)
-    _add_text(s, "--yolo 模式：不問直接做  ← demo 用，別在重要專案開",
+    _add_text(s, "每次動手：先問你「可以嗎？」  ← 確認模式 = 你的保護傘",
               Inches(1.0), Inches(6.3), Inches(11.7), Inches(0.4),
-              size=15, color=ACCENT_WARN, font=FONT_MONO, letter_spacing=-0.2)
+              size=15, color=ACCENT_GOOD, letter_spacing=-0.2)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1566,24 +1566,24 @@ def s_m4_mcp(prs, no):
               Inches(0.8), Inches(6.15), Inches(11.7), Inches(0.5),
               size=18, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.3)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
 def s_m4_cross_tools(prs, no):
     s = _new_slide(prs, BG)
     _mono_label(s, "M4 · Same skill, different names", Inches(0.8), Inches(0.7))
-    _add_text(s, "你學的不是 Gemini CLI，是通用技能",
+    _add_text(s, "你學的不是 Antigravity CLI，是通用技能",
               Inches(0.8), Inches(1.1), Inches(11.7), Inches(0.8),
               size=30, bold=True, letter_spacing=-1.2)
 
     # CJK 字寬不固定，用 python-pptx 原生 table 保證對齊
-    headers = ["", "AI Studio", "Antigravity", "Gemini CLI", "Claude Code", "Cursor"]
+    headers = ["", "AI Studio", "Antigravity 桌面", "Antigravity CLI", "Claude Code", "Cursor"]
     rows_data = [
-        ["專案記憶",   "—", "AGENTS.md *", "GEMINI.md", "CLAUDE.md", ".cursor/rules/"],
-        ["@ 檔案引用", "—", "✓",           "✓",         "✓",          "✓"],
-        ["STRIKE",     "✓", "✓",           "✓",         "✓",          "✓"],
-        ["MCP",        "—", "✓",           "✓",         "✓",          "✓"],
+        ["專案記憶",   "—", "AGENTS.md",   "AGENTS.md ⭐", "CLAUDE.md",   ".cursor/rules/"],
+        ["@ 檔案引用", "—", "✓",           "✓",            "✓",           "✓"],
+        ["STRIKE",     "✓", "✓",           "✓",            "✓",           "✓"],
+        ["MCP",        "—", "✓",           "✓",            "✓",           "✓"],
     ]
     tbl_shape = s.shapes.add_table(
         5, 6, Inches(0.6), Inches(2.05), Inches(12.13), Inches(2.7)
@@ -1619,7 +1619,7 @@ def s_m4_cross_tools(prs, no):
     for r, row in enumerate(rows_data, start=1):
         zebra_bg = ROW_ALT_BG if r % 2 == 0 else BG
         for c, txt in enumerate(row):
-            highlight = (r == 1 and c == 2)  # AGENTS.md *
+            highlight = (r == 1 and c in (2, 3))  # AGENTS.md（桌面版與 CLI 兩格都標）
             _style_cell(
                 tbl.cell(r, c), txt,
                 bold=(c == 0),
@@ -1629,33 +1629,33 @@ def s_m4_cross_tools(prs, no):
                 size=13,
             )
 
-    _add_text(s, "*  Antigravity 與 Gemini CLI 共用 ~/.gemini/GEMINI.md 做全域設定（同一家人）",
+    _add_text(s, "⭐  Antigravity CLI 用 AGENTS.md 取代舊版 GEMINI.md（agy plugin import gemini 一鍵搬）",
               Inches(0.8), Inches(4.9), Inches(11.7), Inches(0.4),
               size=13, color=MUTED, letter_spacing=-0.1)
 
     _hairline(s, Inches(0.8), Inches(5.45), Inches(11.7), color=INK)
-    _add_text(s, "🟡  AGENTS.md 是 2026 新興的「跨工具通用」格式",
+    _add_text(s, "🟡  AGENTS.md 是 2026 業界共識的「跨工具通用」格式",
               Inches(0.8), Inches(5.65), Inches(11.7), Inches(0.5),
               size=20, bold=True, letter_spacing=-0.3)
-    _add_text(s, "    Cursor 與 Antigravity 都認得它，最值得學",
+    _add_text(s, "    Antigravity / Cursor / OpenAI Codex 都認，最值得學",
               Inches(0.8), Inches(6.15), Inches(11.7), Inches(0.45),
               size=18, color=INK_SOFT, letter_spacing=-0.2)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
 def s_m4_practice(prs, no):
     return s_practice_block(
-        prs, no, "M4 · Gemini CLI",
+        prs, no, "M4 · Antigravity CLI",
         "實作：為你的專案加一點自動化",
         [
-            "必做（5 min）：在你的專案根目錄建一份 GEMINI.md（5 行就好）",
+            "必做（5 min）：在你的專案根目錄建一份 AGENTS.md（5 行就好）",
             "",
             "三選一（20 min）：",
-            "A.   把核心功能寫成一行指令     例：summarize.sh news.txt",
-            "B.   寫腳本自動產測試資料        例：gen_data.sh 10",
-            "C.   寫一個「每天跑一次」的小工具（不實際排程）",
+            "A.   把核心功能寫成一行 agy 指令     例：agy \"summarize @news.txt > out.md\"",
+            "B.   寫腳本自動產測試資料           例：agy --headless \"產 10 筆假資料 JSON\"",
+            "C.   寫一個「每天跑一次」的小工具（先手動跑；可後續用 Scheduled Tasks 排程）",
         ],
         "25 分鐘",
     )
@@ -1671,9 +1671,9 @@ def s_m4_decision_tree(prs, no):
               size=16, color=MUTED, letter_spacing=-0.2)
 
     tree = """├─  在瀏覽器、想測想法               →   AI Studio
-├─  做有介面的東西                   →   Antigravity
-├─  把重複的事自動化                 →   Gemini CLI
-├─  超大專案 / 多人協作              →   Antigravity（多 agent）
+├─  做有介面的東西                   →   Antigravity 桌面版
+├─  把重複的事自動化                 →   Antigravity CLI（agy）
+├─  超大專案 / 多人協作              →   Antigravity 桌面版（多 agent）
 └─  馬上用、不想安裝                 →   AI Studio"""
     _add_code_block(s, tree, Inches(1.2), Inches(2.9), Inches(10.9), Inches(2.6), size=15)
 
@@ -1682,7 +1682,7 @@ def s_m4_decision_tree(prs, no):
               Inches(0.8), Inches(6.1), Inches(11.7), Inches(0.8),
               size=18, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.3)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1694,9 +1694,9 @@ def s_m4_summary(prs, no):
 
     items = [
         "終端機 = 打字的瀏覽器",
-        "Gemini CLI = AI Studio 的無介面版",
+        "Antigravity CLI（agy）= AI Studio 的無介面版 + 桌面版的腳本版",
         "同一套 STRIKE，三工具通用；CLI 最適合 L3 鏈式",
-        "CLI 是你之後做「每天自動跑」的基礎",
+        "AGENTS.md 是業界共識，換工具不換腦袋",
     ]
     for i, line in enumerate(items):
         top = Inches(2.4 + i * 0.55)
@@ -1710,7 +1710,7 @@ def s_m4_summary(prs, no):
               Inches(0.8), Inches(5.2), Inches(11.7), Inches(1.0),
               size=24, bold=True, align=PP_ALIGN.CENTER, letter_spacing=-0.4)
 
-    _add_footer(s, "M4 · Gemini CLI", no)
+    _add_footer(s, "M4 · Antigravity CLI", no)
     return s
 
 
@@ -1812,7 +1812,7 @@ def s_m5_action_card(prs, no):
 
     weeks = [
         ("Week 01", "工具內化",
-         ["今天的專案加一個新功能", "用 STRIKE 六字訣跑一次全新任務", "用 Gemini CLI 做一件以前手動的事"]),
+         ["今天的專案加一個新功能", "用 STRIKE 六字訣跑一次全新任務", "用 Antigravity CLI（agy）做一件以前手動的事"]),
         ("Week 02", "新專案啟動",
          ["找一個新痛點（跑物理量四問）", "用 AI Studio 寫新專案 PRD", "在 Antigravity 做出原型"]),
         ("Week 03", "分享 & 回饋",
@@ -1964,8 +1964,8 @@ def _demo_slide(prs, no, tag, title, subtitle, ai_studio, antigravity, cli, why)
 
     stages = [
         ("AI Studio", ai_studio),
-        ("Antigravity", antigravity),
-        ("Gemini CLI", cli),
+        ("Antigravity 桌面版", antigravity),
+        ("Antigravity CLI", cli),
     ]
     for i, (name, desc) in enumerate(stages):
         top = Inches(2.75 + i * 0.85)
@@ -1991,8 +1991,8 @@ def s_demo_news(prs, no):
         "銜接性最佳的首選（教案原生示範）",
         "寫 STRIKE prompt：新聞全文 → 3 點重點 + 關注角度 + 偏見提醒",
         "單頁網頁：貼新聞 → 按鈕 → 摘要卡片（可匯出 Markdown）",
-        'cat news.txt | gemini "摘要" | gemini "翻成英文"（L3 鏈式）',
-        "教案 S16、S33 現成材料；Gemini 免費純文字額度綽綽有餘；L3 鏈式天然銜接 M4 CLI；30 人同時跑無壓力。",
+        'cat news.txt | agy "摘要" | agy "翻成英文"（L3 鏈式）',
+        "教案 S16、S33 現成材料；Gemini API 免費純文字額度綽綽有餘；L3 鏈式天然銜接 M4 CLI；30 人同時跑無壓力。",
     )
 
 
@@ -2004,7 +2004,7 @@ def s_demo_meeting(prs, no):
         "上班族 AHA 最強、專業感最高",
         "測 prompt：逐字稿 → 摘要 / 決議 / 待辦（含負責人）/ 未解議題",
         "網頁：貼逐字稿 → 產 Markdown 會議紀錄，一鍵複製到 Notion",
-        "批次處理多場會議：for f in meetings/*.txt; do gemini < $f; done",
+        "批次處理多場會議：for f in meetings/*.txt; do agy < $f; done",
         "產出物可直接在公司用；對應 M2 [S16] 的對比範例；AHA 情緒曲線最強；只需準備 1-2 份逐字稿素材。",
     )
 
@@ -2017,7 +2017,7 @@ def s_demo_pantry(prs, no):
         "最生活化、最輕鬆，適合下午氣氛放鬆時",
         "測 prompt：食材清單 + 口味偏好 → 3 道菜建議 + 步驟 + 缺什麼",
         "網頁：食材 checkbox + 時間限制 + 口味 → 食譜卡片",
-        'gemini "今晚煮什麼" --pantry fridge.txt（可定時每天 17:00 跑）',
+        'agy "今晚煮什麼 @fridge.txt"（可用 Scheduled Tasks 每天 17:00 跑）',
         "情境輕鬆，學員放鬆；現場可問「你冰箱有什麼？」互動感強；token 消耗極低；最貼近生活第 3 點需求。",
     )
 

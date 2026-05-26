@@ -1,11 +1,14 @@
 {
   "model": {
-    "name": "gemini-2.0-flash"
+    "name": "gemini-3.0-flash"
   },
   "context": {
     "fileFiltering": {
       "respectGitIgnore": true
     }
+  },
+  "checkpointing": {
+    "enabled": true
   },
   "mcpServers": {}
 }

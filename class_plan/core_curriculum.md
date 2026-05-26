@@ -18,8 +18,8 @@
 | 工具 | 形式 | 學習門檻 | 對初學者的角色 |
 |------|------|---------|----------------|
 | **Google AI Studio** | 瀏覽器 | ★ 最低 | 零安裝，用來「體感 prompt 的威力」—— 今天的第一口飯 |
-| **Antigravity** | IDE (桌面) | ★★ 中等 | Agent-first IDE，**今天的主戰場**，Vibe Coding 做出小專案 |
-| **Gemini CLI** | 終端機 | ★★★ 較高 | 終端機的 AI agent，用來「放大與連續化」；同時帶到 2026 通用 coding agent 詞彙（GEMINI.md / @引用 / 工具+權限 / MCP / 跨工具對照）—— 今天的收尾與延伸 |
+| **Antigravity 桌面版** | IDE (桌面) | ★★ 中等 | Agent-first IDE，**今天的主戰場**，Vibe Coding 做出小專案 |
+| **Antigravity CLI（`agy`）** | 終端機 | ★★★ 較高 | 終端機的 AI agent（2026 I/O 接替 Gemini CLI），用來「放大與連續化」；同時帶到 2026 通用 coding agent 詞彙（AGENTS.md / @引用 / 工具+權限 / MCP / 跨工具對照）—— 今天的收尾與延伸 |
 
 ### 三工具的連貫邏輯（不是並列，是一條線）
 
@@ -29,11 +29,11 @@
 │  ─ 測試你的點子、練習 prompt 框架、生出專案規格              │
 │          │                                                    │
 │          ▼ 把規格丟進去                                       │
-│  下午：Antigravity                                           │
+│  下午：Antigravity 桌面版                                    │
 │  ─ Vibe Coding 把規格 → 可運行的小專案                       │
 │          │                                                    │
 │          ▼ 把完成的專案再自動化一點                           │
-│  傍晚：Gemini CLI                                            │
+│  傍晚：Antigravity CLI（agy）                                │
 │  ─ 用一行指令執行、擴充、部署、寫自動化腳本                  │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -43,8 +43,8 @@
 ### 為什麼不是只教一個工具？
 
 1. **瀏覽器介面** 讓初學者敢下手（AI Studio）
-2. **IDE 可視化** 讓初學者看懂 AI 在做什麼（Antigravity）
-3. **終端機指令** 讓初學者體會「心流」與自動化延伸（Gemini CLI）
+2. **IDE 可視化** 讓初學者看懂 AI 在做什麼（Antigravity 桌面版）
+3. **終端機指令** 讓初學者體會「心流」與自動化延伸（Antigravity CLI / `agy`）
 
 三者補足「介面偏好」的光譜，學員之後自己選武器時能有判斷依據。
 
@@ -56,14 +56,14 @@
 |------|-------------------|
 | **認知** | 分辨「給 AI 的 input」決定「產出的品質」；能說出三工具各自適合什麼情境 |
 | **方法** | 會用「痛點物理量」判斷自己要做什麼；會用 **STRIKE 六字訣**（S/T/R/I/K/E）寫出結構化 prompt，並能依三變數判斷挑選 L1/L2/L3 打法 |
-| **技能** | 會在 AI Studio 測 prompt；能在 Antigravity 用自然語言做出可運行的小專案；能用 Gemini CLI 下一行指令完成任務 |
+| **技能** | 會在 AI Studio 測 prompt；能在 Antigravity 桌面版用自然語言做出可運行的小專案；能用 Antigravity CLI（`agy`）下一行指令完成任務 |
 | **產出** | 一個可打開來用的小專案（本機可跑，選修上線）+ 一份「我的 30 天 Vibe Coding 路線圖」 |
 
 ### 三個「最有感」錨點（設計課程時反覆回扣）
 
 1. **AHA 1：同一題，不同 prompt，產出天差地遠** —— 出現在 AI Studio 環節
-2. **AHA 2：我不會寫程式，但我的想法真的跑起來了** —— 出現在 Antigravity 環節
-3. **AHA 3：打一行字就能執行一整件事，而且這套技能跨工具通用** —— 出現在 Gemini CLI 環節
+2. **AHA 2：我不會寫程式，但我的想法真的跑起來了** —— 出現在 Antigravity 桌面版環節
+3. **AHA 3：打一行字就能執行一整件事，而且這套技能跨工具通用** —— 出現在 Antigravity CLI 環節
 
 ---
 
@@ -101,7 +101,7 @@
 | 單人卡 > 2 分鐘 | 助教一對一 |
 | 三人以上同一個問題 | 停下來全場講解一次 |
 | AI 產出明顯錯誤 | 當場示範「如何用自然語言修正」（不要去改 code） |
-| Antigravity 當機 | 切換 AI Studio 網頁版 Gemini 繼續 |
+| Antigravity 桌面版當機 | 切換 AI Studio 網頁版繼續 |
 
 ### D. 不做的事（保持課程清晰）
 
@@ -124,10 +124,10 @@
 │  M2  STRIKE 戰法 × AI Studio 實作          90 min        │
 │      ★ 關鍵產出：你的專案 PRD（用 STRIKE 寫出來）        │
 ├─ 12:30 ─ 午休 60 min ─────────────────────────────────┤
-│  M3  Antigravity Vibe Coding 做小專案      120 min       │
+│  M3  Antigravity 桌面版 Vibe Coding 做小專案 120 min     │
 │      ★ 關鍵產出：可運行的小專案原型                      │
 ├─ 15:30 ─ 休息 10 min ─────────────────────────────────┤
-│  M4  Gemini CLI 心流與自動化體驗           60 min        │
+│  M4  Antigravity CLI（agy）心流與自動化體驗  60 min      │
 │      ★ 關鍵產出：一行指令完成一件事                      │
 ├─ 16:40 ─────────────────────────────────────────────────┤
 │  M5  快速部署 + 成果展示 + 行動計畫        50 min        │
@@ -147,9 +147,9 @@
 |------|------|-------------|------------|
 | 痛點 | 紙筆 + ChatGPT | 「我每天花 30 分鐘讀新聞，但只記得其中 10%」 | — |
 | Prompt 框架 | AI Studio | 寫 prompt：「給你一段新聞，輸出 3 點摘要 + 我該關注的角度」，測試 5 次調整 | **L1 試探** → **L2 精準**（補齊 STRIKE 六格） |
-| Vibe Coding | Antigravity | 自然語言描述「我想要一個網頁，貼新聞進去就出摘要」→ AI 產出 HTML + JS + Gemini API 呼叫 | **L2 精準**（PRD 就是一份 STRIKE） |
-| 自動化 | Gemini CLI | 寫一個指令：`summarize news.txt` 直接在終端吐出摘要，未來可排程每天跑 | **L3 鏈式**（抓內容 → 摘要 → 寫檔） |
-| 部署 | Cloudflare Pages | 把 Antigravity 做出來的網頁丟上線，朋友能打開 | — |
+| Vibe Coding | Antigravity 桌面版 | 自然語言描述「我想要一個網頁，貼新聞進去就出摘要」→ AI 產出 HTML + JS + Gemini API 呼叫 | **L2 精準**（PRD 就是一份 STRIKE） |
+| 自動化 | Antigravity CLI（`agy`） | 寫一個指令：`agy "summarize @news.txt"` 直接在終端吐出摘要，未來可用 Scheduled Tasks 排程每天跑 | **L3 鏈式**（抓內容 → 摘要 → 寫檔） |
+| 部署 | Cloudflare Pages | 把 Antigravity 桌面版做出來的網頁丟上線，朋友能打開 | — |
 
 **每個學員會有自己的版本，但路徑一樣。** 這就是「連貫性」在學員感受上的具象化。
 
@@ -215,7 +215,7 @@ L2 精準打擊 (Precision Strike)
 L3 鏈式攻擊 (Chain Attack)
   ─ 複雜任務拆 3-5 步，每步一個 STRIKE
   ─ 前一步產出 → 下一步輸入
-  ─ 用於 Gemini CLI 自動化 & Antigravity 多輪迭代
+  ─ 用於 Antigravity CLI 自動化 & Antigravity 桌面版多輪迭代
 ```
 
 **設計巧合（其實是設計意圖）**：三層策略剛好對應今天三個工具的使用深度。
@@ -238,23 +238,24 @@ L3 鏈式攻擊 (Chain Attack)
 
 Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 
-> 這個框架在 AI Studio、Antigravity、Gemini CLI **完全通用**，是今天最重要的「跨工具遷移」資產。
+> 這個框架在 AI Studio、Antigravity 桌面版、Antigravity CLI **完全通用**，是今天最重要的「跨工具遷移」資產。
 > 初學者的心法：**工具會一直換，但 STRIKE 能帶著走**。
 
 ### 框架 2.5：通用 coding agent 技能（M4 補充軸線）
 
 除了 STRIKE 之外，2026 年「凡是 coding agent 都會用到」的四個觀念，學會這四個，學員之後換到 Claude Code / Cursor / Codex / Antigravity 也能無痛遷移：
 
-| 觀念 | 一句話定義 | 在 Gemini CLI 怎麼叫 | 在別家叫什麼 |
+| 觀念 | 一句話定義 | 在 Antigravity CLI 怎麼叫 | 在別家叫什麼 |
 |------|----------|--------------------|------------|
-| **專案記憶檔** | 寫一份檔案放專案根目錄，agent 開工自動讀 | `GEMINI.md`（+ `~/.gemini/GEMINI.md` 全域） | `CLAUDE.md`（Claude Code）/ `AGENTS.md`（Cursor、Antigravity）/ `.cursor/rules/*.mdc`（Cursor 進階） |
-| **@ 檔案引用** | 用 `@filename` 把檔案塞進對話，比 pipe 更直觀 | `gemini "@file.txt 摘要"` | 三家寫法相同 |
-| **內建工具 + 權限** | agent 有讀檔、跑指令、上網等內建能力；動手前會問你 | 預設確認模式；`--yolo` 關掉 | 各家寫法不同，但概念相同 |
-| **MCP** | 「AI 的 USB-C」——一次寫好就能接所有 agent | `gemini mcp add <server>` | Anthropic 2024 提出，現已是業界開放標準 |
+| **專案記憶檔** | 寫一份檔案放專案根目錄，agent 開工自動讀 | `AGENTS.md`（+ `~/.gemini/antigravity-cli/AGENTS.md` 全域，過渡期沿用 `.gemini/` 路徑） | `CLAUDE.md`（Claude Code）/ `AGENTS.md`（Cursor、OpenAI Codex）/ `.cursor/rules/*.mdc`（Cursor 進階） |
+| **@ 檔案引用** | 用 `@filename` 把檔案塞進對話，比 pipe 更直觀 | `agy "@file.txt 摘要"` | 三家寫法相同 |
+| **內建工具 + 權限** | agent 有讀檔、跑指令、上網等內建能力；動手前會問你 | 預設確認模式 + 首次啟動逐資料夾信任 | 各家寫法不同，但概念相同 |
+| **MCP** | 「AI 的 USB-C」——一次寫好就能接所有 agent | `.agents/settings.json` 內 `mcpServers`；`/mcp` 看狀態 | Anthropic 2024 提出，現已是業界開放標準 |
+| **Skills / Slash Commands** | 把重複流程包成 markdown，AI 自動觸發或手動 `/xxx` | `.agents/skills/<name>.md`（Antigravity 統一原語） | Claude Code 有 skills；Cursor 有 commands |
 
-> **為什麼初學者需要知道：** 三選一就好——`@ 引用` 與 `GEMINI.md` 是今天會親手做的；`工具/權限` 與 `MCP` 是今天只要「聽過」就好，回家想玩可以延伸。**重點是建立詞彙地圖**，不是當天精通。
+> **為什麼初學者需要知道：** 三選一就好——`@ 引用` 與 `AGENTS.md` 是今天會親手做的；`工具/權限`、`MCP`、`Skills` 是今天只要「聽過」就好，回家想玩可以延伸。**重點是建立詞彙地圖**，不是當天精通。
 >
-> **跨工具最大公約數：** `AGENTS.md` 是 2026 浮現的通用格式，Cursor 與 Antigravity 都認，是學員之後遇到別的 agent 時的第一張車票。
+> **跨工具最大公約數：** `AGENTS.md` 是 2026 業界共識的通用格式，Antigravity / Cursor / OpenAI Codex 都認，是學員之後遇到別的 agent 時的第一張車票。今天 Antigravity 把 Gemini CLI 也收編到這個規範下，**換工具的成本剩下最小**。
 
 ### 框架 3：Vibe Coding 五步流程
 
@@ -275,8 +276,9 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 ### 學員端（前一週發放）
 
 - [ ] 筆電（Windows / Mac 皆可，網路穩定）
-- [ ] Google 帳號（AI Studio / Gemini CLI / Antigravity 都用這個登入）
-- [ ] 預先下載 **Antigravity**（免費 Public Preview，https://antigravity.google）
+- [ ] Google 帳號（AI Studio / Antigravity 桌面版 / Antigravity CLI 都用這個登入）
+- [ ] 預先下載 **Antigravity 桌面版**（免費 Public Preview，https://antigravity.google）
+- [ ] 預先安裝 **Antigravity CLI**（`curl -fsSL https://antigravity.google/cli/install.sh | bash`，個人版 Gemini CLI 2026-06-18 停服）
 - [ ] （選修）GitHub 帳號 + Cloudflare 帳號（部署用）
 - [ ] 腦中帶著 1-2 個「我覺得好煩」的工作 / 生活痛點
 
@@ -286,9 +288,9 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 - [ ] 痛點物理量檢驗單（人數份）
 - [ ] Antigravity 預備 Demo 專案 3 個（摘要、小工具、表格轉換）
 - [ ] AI Studio 的 prompt 對比範例（模糊版 vs 結構化版）
-- [ ] Gemini CLI 範例腳本（3 個）+ GEMINI.md 範本（人數份，學員必做）
+- [ ] Antigravity CLI 範例腳本（3 個 `agy` 指令）+ AGENTS.md 範本（人數份，學員必做）
 - [ ] 部署備案 Demo 影片（若網路不穩）
-- [ ] 測試場地網路：同時 30 台連線、能連 Gemini API 與 Antigravity
+- [ ] 測試場地網路：同時 30 台連線、能連 Gemini API 與 Antigravity（含 `agy` 安裝下載）
 - [ ] 共用文件頁（HackMD/Notion）放所有連結、prompt、步驟
 
 ---
@@ -323,7 +325,8 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 
 | 風險 | 應對 |
 |------|------|
-| Antigravity 大規模當機 | 切換 Gemini CLI + AI Studio 網頁版雙工具繼續 |
+| Antigravity 桌面版大規模當機 | 切換 Antigravity CLI（`agy`）+ AI Studio 網頁版雙工具繼續 |
+| Antigravity CLI 安裝裝不起來 | 改用 Antigravity 桌面版做 M4；或讓學員用講師預備的容器化環境 |
 | Gemini API 限流 | 講師 API Key 共用 + 分批排隊 |
 | 網路不穩 | 預錄 demo 影片 + 手機熱點備用 |
 | 學員程度落差大 | 快的給「加分挑戰」（加一個功能）、慢的助教一對一 |
