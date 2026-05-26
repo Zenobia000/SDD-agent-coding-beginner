@@ -15,8 +15,9 @@ my-project/
 │   └── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
 └── .agents/
     ├── settings.json              ← Antigravity CLI 設定（model / checkpoint / MCP）
-    ├── MCP.md                     ← MCP 外掛工具入門（github / fetch / context7 等）
-    ├── SKILLS.md                  ← Skill + Slash Command 教學（2026 統一原語）
+    ├── MCP.md                     ← 三大擴充原語 ①：MCP 外掛工具（github / fetch / context7 等）
+    ├── SKILLS.md                  ← 三大擴充原語 ②：Skill + Slash Command（2026 統一）
+    ├── SUBAGENTS.md               ← 三大擴充原語 ③：Subagents 平行任務分派（2026 新功能）
     ├── rules/                     ← AI 寫 code 時必須遵守的規則
     │   ├── 01-keep-it-simple.md   ← 別寫複雜的東西
     │   ├── 02-coding-style.md     ← code 長什麼樣
@@ -111,6 +112,7 @@ agy
 | AI 好像「忘了規則」   | 跑 `/memory show` 檢查 AGENTS.md 是否載入；改完 AGENTS.md 跑 `/memory refresh` |
 | 想讓 AI 多會新技能（外部能力） | `.agents/MCP.md`（github、fetch、playwright…） |
 | 想包「AI 自動觸發的流程」或自訂指令 | `.agents/SKILLS.md` |
+| 大型任務跑很久 / 想平行加速 | `.agents/SUBAGENTS.md`（Antigravity 2026 殺手特性） |
 
 ---
 

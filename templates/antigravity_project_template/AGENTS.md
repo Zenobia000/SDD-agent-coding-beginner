@@ -75,6 +75,13 @@
 - 你也可以根據 description 自動匹配並使用 skill
 - 詳見 `.agents/SKILLS.md`
 
+### 4.5 Subagents（平行任務）
+
+- 大型 refactor / 跨檔案分析 / 超長任務時，可以派 subagent 平行處理
+- **不要主動拆**——MVP 階段、單檔小專案絕對不要派 subagent，能一條線跑就一條線
+- 使用者明確說「請用 subagents 處理」或任務真的會讓 context 爆時才派
+- 詳見 `.agents/SUBAGENTS.md`（何時用 / 怎麼派 / 彙整模式 / 除錯）
+
 > **設計理念**：原本還有「改檔前 read_file」「跑 shell 先確認」「完成標準四項自驗」等條目，這些已經是 Claude 4 / Gemini 3 級模型的本能行為（會自動做、不需要明寫），全數移除以避免治理劇場。本章只保留**模型彌補不了**的平台規範。
 
 ---

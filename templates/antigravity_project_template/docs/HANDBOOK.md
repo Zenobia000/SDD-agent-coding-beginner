@@ -43,9 +43,10 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 └── .agents/
     ├── settings.json   ◄── 基礎建設（沙箱、checkpoint、MCP 開關）
     │
-    ├── 兩大原語：
+    ├── 三大擴充原語：
     ├── MCP.md          ◄── 外部能力通道（連 GitHub / 開瀏覽器 / 查文件）
     ├── SKILLS.md       ◄── 知識封裝 + slash command（AI 自動觸發 or 手動 /xxx）
+    ├── SUBAGENTS.md    ◄── 平行任務分派（2026 殺手特性，大型任務用）
     ├── skills/         ◄── 實際的 skill 檔案放這裡
     │
     ├── rules/          AI 寫 code 時的硬約束
@@ -131,19 +132,21 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 
 ---
 
-### 3.3 兩大原語：MCP / Skill 各管什麼
+### 3.3 三大擴充原語：MCP / Skill / Subagent 各管什麼
 
-這是這份手冊**最核心的章節**。兩個名詞看起來都像「擴充工具」，但角色完全不同：
+這是這份手冊**最核心的章節**。三個名詞看起來都像「擴充工具」，但角色完全不同：
 
 | 原語 | 一句話定位 | 適合包 | 觸發方式 |
 |---|---|---|---|
 | **MCP** | 外部能力通道 | 連網路、開瀏覽器、操作 GitHub、查資料庫 | AI 自己判斷該不該叫工具 |
 | **Skill** | 程序知識 + slash command | 複雜流程、審查 checklist、固定 prompt | AI 看 description 自動匹配 / 使用者打 `/<name>` 手動觸發 |
+| **Subagent** | 平行任務分派 | 大型 refactor、跨檔案分析、超長任務 | 主 agent 主動派 / Skill body 內宣告 |
 
 **用「廚房」做比喻**：
 
 - **MCP = 烤箱、攪拌機、冰箱**：實際的「能做事的硬體」。沒有它，AI 就只能用基本刀工
 - **Skill = 食譜本 + 廚房 hot key**：教 AI「做這道菜要怎麼分步驟」。AI 看你說「我想吃義大利麵」會自己翻書；你也可以按「義大利麵」hot key 直接觸發
+- **Subagent = 派出去的工人**：包工頭（主 agent）把工程拆成 3 塊派 3 個工人並行做，工人各自工地（context 獨立）
 
 **什麼時候開哪個？看下面決策樹**：
 
@@ -152,17 +155,22 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
    │
    ├─ 是要連「外部世界」嗎？（網路、API、瀏覽器、DB）
    │       │
-   │       └─ Yes → 用 MCP   （詳見 .agents/MCP.md）
+   │       └─ Yes → 用 MCP        （詳見 .agents/MCP.md）
    │
-   └─ 是「自己會判斷該不該做」或「我打一句就要跑」的流程嗎？
+   ├─ 是「自己會判斷該不該做」或「我打一句就要跑」的流程嗎？
+   │       │
+   │       └─ Yes → 用 Skill      （詳見 .agents/SKILLS.md）
+   │
+   └─ 是「一條線跑會 context 爆 / 跑太久」的大型任務嗎？
            │
-           └─ Yes → 用 Skill （詳見 .agents/SKILLS.md）
+           └─ Yes → 派 Subagents  （詳見 .agents/SUBAGENTS.md）
 ```
 
 **反模式**（看到自己這樣寫就要警惕）：
 
 - ❌ 把 MCP 當 Skill 用：「我想要一個會自動審查 code 的 MCP」——這是 Skill 該做的，MCP 是給外部能力用的
 - ❌ 把 Skill 當文件用：寫一個塞滿 1000 行的 Skill 包山包海——Skill 應該只放「該執行什麼」，不是知識庫
+- ❌ MVP 階段就拆 subagent：殺雞用牛刀。主 agent 一條線能跑就一條線，真的卡了再拆
 
 ---
 
@@ -257,7 +265,7 @@ AI：（呼叫 playwright MCP 啟動 chromium → 開啟檔案 → 截圖 → �
 
 ---
 
-## 6. 兩大原語的相互關係（一張圖）
+## 6. 三大原語的相互關係（一張圖）
 
 ```
         ┌──────────────────────────────┐
@@ -267,26 +275,29 @@ AI：（呼叫 playwright MCP 啟動 chromium → 開啟檔案 → 截圖 → �
                        ▼
               ┌──────────────────────┐
               │ Antigravity CLI 核心  │
-              └────┬───────────┬─────┘
-                   │           │
-        ┌──────────┘           └──────────┐
-        ▼                                  ▼
-   AI 判斷「該叫工具？」             AI 判斷「該翻食譜？」
-        │                                  │
-        ▼                                  ▼
-   ┌──────────┐                      ┌──────────────────┐
-   │   MCP    │                      │  Skill           │
-   │（外部能力）│                      │ （AI 自動觸發或   │
-   └──────────┘                      │   /skill 手動觸發） │
-                                     └──────────────────┘
+              └─┬──────┬──────────┬──┘
+                │      │          │
+       ┌────────┘      │          └────────┐
+       ▼               ▼                   ▼
+  AI 判斷         AI 判斷            主 agent
+  「該叫工具？」    「該翻食譜？」      「該拆人？」
+       │               │                   │
+       ▼               ▼                   ▼
+  ┌──────────┐    ┌──────────┐       ┌──────────┐
+  │   MCP    │    │  Skill   │       │ Subagent │
+  │（外部能力）│    │（程序知識）│       │（平行工人）│
+  └──────────┘    └──────────┘       └──────────┘
 ```
 
-**搭配實例**：寫一個「自動審查 PR」流程
+**搭配實例**：寫一個「自動審查整個 monorepo 的 PR」流程
 
-1. **Skill** `pr-review/SKILL.md` 定義流程：先看 diff → 檢查命名 → 跑測試 → 寫評論
+1. **Skill** `pr-review-mono/SKILL.md` 定義流程：拆模組 → 各模組派 subagent 跑 review → 主 agent 彙整
 2. **MCP** github 提供「讀 PR / 留評論」的能力
+3. **Subagents** 每個模組（auth / api / db）一個，平行跑各自 review
 
-協同：你打 `/pr-review 123` → skill 指示 AI 呼叫 github MCP 拉 diff → 依 SKILL.md 內定義的 checklist 跑審查 → 留評論。
+協同：你打 `/pr-review-mono 123` → skill 指示主 agent 用 github MCP 拉 diff → 依模組分派 3 個 subagent → 各 subagent 平行 review → 主 agent 彙整 → 用 github MCP 寫一份結構化評論。
+
+**三原語各司其職**：MCP 提供能力、Skill 定義流程、Subagent 平行加速。
 
 ---
 
@@ -403,6 +414,7 @@ agy plugin import gemini
 3. **打開 [`.agents/MCP.md`](../.agents/MCP.md)**，啟用「初學者四件套」（filesystem + fetch + context7 + playwright）
 4. **照 [`.agents/SKILLS.md`](../.agents/SKILLS.md)** 寫你的第一個自訂 Skill
 5. **直接試打** `/check-key`、`/explain-code` 兩個本模板附的 skill
-6. **回到 [`README.md`](../README.md)**，正式開始你的專案
+6. **遇到大型任務再讀 [`.agents/SUBAGENTS.md`](../.agents/SUBAGENTS.md)**（MVP 階段先跳過）
+7. **回到 [`README.md`](../README.md)**，正式開始你的專案
 
 祝 vibe coding 順利。

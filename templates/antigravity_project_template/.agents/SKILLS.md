@@ -322,27 +322,24 @@ description: Use when the user wants to write a Conventional Commits-formatted c
 
 ---
 
-## 動態子代理（Dynamic Subagents）— Antigravity 2026 新功能
+## 跟 Subagents 的關係（概要）
 
-Antigravity CLI 新增的殺手特性：**Skill 內可以宣告子代理（subagents），讓主 agent 平行展開複雜任務**。
-
-範例（在 SKILL.md body 內）：
+Skill body 內可以宣告 **subagents** 讓主 agent 平行展開複雜任務：
 
 ```markdown
 ## 4. 分派子任務
-
-對每個受影響的模組，**派一個 subagent 並行處理**：
-
-- subagent A：分析 src/auth/ 的耦合
-- subagent B：分析 src/api/ 的耦合
-- subagent C：分析 src/db/ 的耦合
-
+對每個受影響的模組，派一個 subagent 並行處理：
+- subagent A：分析 src/auth/
+- subagent B：分析 src/api/
+- subagent C：分析 src/db/
 各自跑完後彙整成一份報告。
 ```
 
-效果：大型 refactor / 跨模組調查不用 agent 自己一條線跑到底，主 agent 派 3 個並行跑、自己等結果回來統整。
+**何時 Skill 內要派 subagent**：任務需要平行加速 / context 容易爆 / 跨模組獨立分析。
 
-> 初學者**不用一開始就用**這功能。等你寫過 5+ 個 skill、開始覺得「這 skill 要跑很久」時再考慮拆 subagent。
+**完整教學見 [`./SUBAGENTS.md`](./SUBAGENTS.md)**——包含三大原語對照、何時用、context 隔離、Map-Reduce/Pipeline/Vote 三種彙整模式、安全限制、除錯。
+
+> 初學者**先把單純 skill 寫熟**，等你寫過 5+ 個 skill、開始覺得「這 skill 要跑很久」時，再回去看 SUBAGENTS.md。
 
 ---
 
