@@ -243,7 +243,9 @@ AI：（呼叫 playwright MCP 啟動 chromium → 開啟檔案 → 截圖 → �
 | `/restore` | 回滾 checkpoint 快照 | AI 改壞檔案的救命繩 |
 | `/clear` | 清空對話從頭來 | 上下文亂掉 / token 燒太兇時 |
 | `/chat save <name>` | 把當下對話存檔，下次能載回來 | 跨天接續任務 |
-| `/help` | 列所有可用指令 | 忘記就打它 |
+| `/help` | 列內建指令 | 忘記內建指令時打它 |
+| `/commands list` | 列當下載入的自訂 command | `.gemini/commands/*.toml` 改完看是否生效 |
+| `/commands reload` | 重新掃描 commands 資料夾 | 改完 toml 不用重啟 CLI |
 
 **進階一點**：`/compress` 把舊對話壓縮，保留摘要省 token；`/bug` 直接報官方 issue（企業環境可重導向到內部工單）。
 

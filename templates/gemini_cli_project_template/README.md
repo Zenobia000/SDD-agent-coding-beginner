@@ -66,7 +66,8 @@ gemini
 | 看 AI 現在記住什麼       | 打 `/memory show`                          |
 | 叫 AI 記住某件事        | 打 `/memory add 我習慣用 pnpm 不是 npm`          |
 | 清空對話重新開始          | 打 `/clear`                                |
-| 看可用的 slash 指令     | 打 `/help`                                 |
+| 看內建 slash 指令       | 打 `/help`                                 |
+| 看自訂 `/xxx` 指令清單  | 打 `/commands list`（改完 toml 後用 `/commands reload`） |
 
 ---
 

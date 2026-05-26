@@ -7,7 +7,8 @@
 
 ## 什麼是 Slash Command？
 
-在 Gemini CLI 內打 `/help` 會看到內建指令（`/memory`、`/restore`、`/clear`…）。
+在 Gemini CLI 內打 `/help` 會看到內建指令（`/memory`、`/restore`、`/clear`…）；
+打 `/commands list` 會看到當下掃到的所有**自訂** command（含本資料夾的 toml）。
 你也可以加自己的 `/xxx` 指令，讓重複動作變成一句話。
 
 例如：
@@ -82,7 +83,7 @@ prompt = """
     └── prod.toml          → /deploy:prod
 ```
 
-避免你的 `/help` 變成 50 個指令的大亂鬥。
+避免你的 `/commands list` 變成 50 個指令的大亂鬥。
 
 ### 2. `{{args}}` —— 把使用者輸入塞進 prompt
 
@@ -168,7 +169,69 @@ prompt = """
 """
 ```
 
-把這些放到對應 `.toml` 檔，重啟 CLI 後 `/explain`、`/check-key` 就可以用了。
+把這些放到對應 `.toml` 檔，**在 CLI 內打 `/commands reload`**（或重開 CLI），`/explain`、`/check-key` 就可以用了。
+
+---
+
+## 「我建了 toml，但 CLI 讀不到」怎麼辦？
+
+依下面順序檢查：
+
+### Step 1：確認 CLI 在對的資料夾啟動
+
+```bash
+pwd        # 確認你現在在專案根目錄（也就是 .gemini/ 的上一層）
+ls .gemini/commands/   # 確認 toml 真的在這
+gemini    # 在這裡啟動
+```
+
+Gemini CLI 只會掃**當前工作目錄**的 `.gemini/commands/`，跑錯資料夾就看不到。
+
+### Step 2：在 CLI 內檢查掃描結果
+
+進入 CLI 後打：
+
+```
+/commands list
+```
+
+會列出所有被掃到的 user-level + project-level command。**如果你的 toml 在這裡看不到 → 是 CLI 沒掃到（路徑問題）**。
+
+如果有掃到但執行 `/test` 沒反應 → 是 toml 內部 prompt 寫錯。
+
+### Step 3：reload 而不是重啟
+
+```
+/commands reload
+```
+
+改完 toml 後跑這個就好，不用每次 ctrl+c 重啟 CLI。
+
+### Step 4：檢查 toml 語法
+
+最常見錯誤：
+
+| 錯誤 | 正確 |
+|---|---|
+| `@docs/PRD.md` 裸寫 | `@{docs/PRD.md}` 加大括號 |
+| `!npm test` 沒大括號 | `!{npm test}` 加大括號 |
+| `{{ args }}` 內有空格 | `{{args}}` 緊貼 |
+| `description` 寫成多行 | description 只能一行 |
+| 多行 prompt 用單引號 `'...'` | 必須用三重雙引號 `"""..."""` |
+
+### Step 5：CLI 版本太舊
+
+Custom commands 是相對較新的功能，太舊版本沒有 `/commands` 指令：
+
+```bash
+gemini --version
+# 如果低於支援版本，升級
+npm install -g @google/gemini-cli@latest
+```
+
+### Step 6：路徑優先順序
+
+如果 user 級與 project 級有同名 command，**user 級會贏**。如果你建了 `~/.gemini/commands/test.toml`，本專案的 `test.toml` 就會被遮蔽。用 `/commands list` 會看到實際載入哪個版本。
 
 ### `.gemini/commands/git/commit.toml`（示範 namespace + 雙語法）
 
