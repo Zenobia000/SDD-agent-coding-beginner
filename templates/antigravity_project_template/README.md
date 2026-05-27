@@ -8,7 +8,8 @@
 
 ```
 my-project/
-├── README.md                      ← 你正在看
+├── README.md                      ← 你正在看（入口）
+├── USAGE.md                       ← ⭐ 完整使用說明（A/B 模式 walkthrough + FAQ）
 ├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（跨工具新興共通格式）
 ├── docs/
 │   ├── PRD.md                     ← 從 AI Studio 帶過來的需求規格（填空）
@@ -69,6 +70,8 @@ my-project/
 **判斷怎麼選：**
 - 第一個專案、純嘗試 → 用 A
 - 想學「業界怎麼用 AI 做專案」、想練習 spec / TDD / git workflow → 用 B
+
+📖 **完整使用說明、Sprint walkthrough、FAQ → 看 [`USAGE.md`](./USAGE.md)**
 
 ---
 
