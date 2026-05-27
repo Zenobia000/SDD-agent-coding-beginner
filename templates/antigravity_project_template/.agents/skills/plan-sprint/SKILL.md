@@ -65,18 +65,39 @@ description: 把 PRD 拆解成可執行的 sprint backlog。**主動觸發時機
 
 ## 執行步驟
 
-### Step 1：讀取 PRD + 現有 backlog
+### Step 1：讀取 PRD + 現有 backlog + 已知 issue
 
 ```
 docs/PRD.md
 tasks/backlog.md
 tasks/sprint-current.md
+tasks/known-issues.md      ← 新增
+tasks/retros/*.md          ← 讀最新一份的 Action Items
 ```
 
 抓出：
 - PRD 中所有 user story（US-XXX）
 - 已 backlog 但尚未完成的條目
 - 上個 sprint 的 retros 提到的 follow-up
+- **`known-issues.md` 中候選排程的 issue**（特別注意「重評估時機 = 下個 sprint」的條目）
+
+### Step 1.5：known-issues review（防 issue 永遠不被排程）
+
+逐條 review `tasks/known-issues.md`：
+
+| 條件 | 行動 |
+|---|---|
+| 「重評估時機」= 本 sprint | 列入本 sprint 候選 task |
+| Warning 持續 2 sprint 沒修 | 升級成 Critical、強制排入本 sprint |
+| Info 持續 3 sprint 沒修 | 建議使用者刪除（顯然不重要） |
+| 其他 | 留在 known-issues |
+
+範例話術：
+
+> 我看到 `known-issues.md` 有 3 條 issue：
+> - ISSUE-002（Gemini retry）已過 2 sprint 沒修 → 我建議升級成 Critical 排入本 sprint
+> - ISSUE-005（Safari 字體）重評估時機是本 sprint → 你要排嗎？
+> - ISSUE-001（命名混亂）持續 3 sprint 沒修 → 建議刪除，你同意嗎？
 
 ### Step 2：跟使用者對齊 sprint 目標
 

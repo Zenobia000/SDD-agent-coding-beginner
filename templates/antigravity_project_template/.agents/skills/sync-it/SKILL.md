@@ -159,7 +159,26 @@ description: 比對 code 與文件之間的漂移（drift），列出需要更�
 - 改 code → 跑 `/tdd-cycle`（先寫測試重現問題）
 - 改文件 → 直接 edit，但要更新 `last-synced-with` frontmatter（如有）
 - 兩邊都改 → 一個 commit 修一邊，不要混在一起
+- **ADR drift（code 與 ADR 矛盾）** → **觸發 `/adr` 寫新 ADR**（不是改舊 ADR）
 - **暫不修（延後到下個 sprint）** → 跑 Step 6 寫進 known-issues.md
+
+#### 處理 ADR drift 的特例
+
+ADR 一旦 Accepted **永遠不可修改內容**。發現 code 與 ADR 不一致時：
+
+| 情境 | 行動 |
+|---|---|
+| Code 正確、ADR 過期 | 跑 `/adr` 寫新 ADR superseded 舊的 |
+| Code 偏離、ADR 仍正確 | 改 code 對齊 ADR（跑 `/tdd-cycle`） |
+| 雙方都該重議 | 跑 `/adr` 寫新 ADR、再 `/tdd-cycle` 對齊 |
+
+範例話術：
+
+> D-004 是 ADR drift：`ADR-0002` 說「採用 Vue」、`package.json` 是 React。
+>
+> ADR 不可修改，我建議跑 `/adr` 寫 ADR-0010 superseded ADR-0002，記錄這次切換的決策上下文。完成後跑 `/sync-it` 再次確認所有 drift 都對齊。
+>
+> 要跑 `/adr` 嗎？
 
 ---
 

@@ -227,6 +227,26 @@ pytest tests/unit/test_summarizer.py -v --cov=app.summarizer --cov-report=term-m
 
 ---
 
+## 🤝 與 `/explain-code` 的連動（學員卡關時）
+
+TDD 過程使用者常會問：
+- 「為什麼這樣寫？」
+- 「這段 code 在幹嘛？」
+- 「我看不懂這個函式」
+- 「Refactor 後變得更複雜了？」
+
+**這時主動建議 `/explain-code`**（不是繼續硬解釋）：
+
+> 你問「為什麼這樣寫」 — 與其我用一段話解釋，建議跑 `/explain-code @app/summarizer.py`。
+>
+> 它會用「架構師視角 + 紅綠燈訊號 + 導師教學」幫你看懂這段 code 的設計意圖、命名了哪些常見模式、未來可能怎麼演化。比我隨手解釋 systematic。
+>
+> 看完 `/explain-code` 後回來繼續 `/tdd-cycle` 寫下一個測試。
+
+`/explain-code` 是「中斷工具」 — 用完回到 TDD 主線，不影響進度。
+
+---
+
 ## 📝 Issue Logging — 寫入 `tasks/known-issues.md`
 
 跑 TDD 過程常會「**附帶發現**」一些 issue：寫測試時注意到別的 function 有邊界沒處理、發現一個現有 function 命名怪、看到 dead code⋯⋯。

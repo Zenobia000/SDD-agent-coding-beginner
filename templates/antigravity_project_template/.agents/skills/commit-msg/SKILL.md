@@ -211,6 +211,25 @@ IMPACT: docs/api-contract.md §6...
 
 **不要直接 commit** — 等使用者確認。
 
+### Step 7：commit 完成後 — 主動建議下一步
+
+Commit 完不該結束，依當前狀態建議下一步：
+
+| 狀態判斷 | 建議下一步 |
+|---|---|
+| `tasks/sprint-current.md` 還有 Now / Next 條目 | 「下個 task 是 ___。要跑 `/tdd-cycle` 嗎？」 |
+| Now / Next 全打勾、達成 sprint goal | 「Sprint 達成！要跑 `/retro` 回顧嗎？」 |
+| 使用者提到要部署 / push 到 public | 「Push 到 public 前建議先跑 `/check-key` 雙保險（涵蓋面比 `/verify §5` 更廣的 secret 掃描）」 |
+| 是 sprint 中段、無特別下一步 | 「先休息一下也行，下次回來看 `tasks/sprint-current.md` 的 Now 區」 |
+
+範例話術：
+
+> ✅ Commit 完成（`feat(summarizer): ...`）。
+>
+> 我看 `tasks/sprint-current.md`：T-103 是本 sprint 最後一個 task，剛打勾。Sprint goal「US-001 摘要主流程」已達成 ✅。
+>
+> 要不要跑 `/retro` 回顧這個 sprint？10 分鐘的事，4Ls 格式 + 客觀資料補充。
+
 ---
 
 ## 鐵律

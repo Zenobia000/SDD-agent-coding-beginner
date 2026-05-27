@@ -29,6 +29,7 @@ my-project/
 │   └── retros/                        (sprint retrospective 歸檔)
 └── .agents/
     ├── WORKFLOW.md                ← ⭐ Solo SDD Sprint 工作流總圖（10 站 + 對應 skill）
+    ├── SKILL-MAP.md               ← ⭐ 10 個 skill 完整連動地圖（Pre/Post / 依賴 / 6 種路徑 / 斷層分析）
     ├── settings.json              ← Antigravity CLI 設定（model / checkpoint / MCP）
     ├── MCP.md                     ← 三大擴充原語 ①：MCP 外掛工具
     ├── SKILLS.md                  ← 三大擴充原語 ②：Skill + Slash Command

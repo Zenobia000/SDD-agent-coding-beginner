@@ -210,7 +210,31 @@ description: 引導 sprint 回顧（4Ls format），歸檔到 tasks/retros/。**
 
 依 Action Items 更新：
 - `tasks/backlog.md` 加入新候選任務
+- `tasks/known-issues.md` **review 一次**：哪些 issue 重評估時機到了？哪些該升級？哪些該刪？
 - 若 retro 出現重大決策方向（如「下次都用 X 工具」）→ 提醒使用者寫 ADR
+
+### Step 6：橋接到下個 Sprint（連動 `/plan-sprint`）
+
+Retro 結束不該結束 — 自然過渡到下個 sprint：
+
+```
+🎯 Retro 完成（tasks/retros/2026-05-29-sprint-1.md 已寫入）。
+
+下一步建議：
+
+1. 你想立刻開新 sprint → 跑 `/plan-sprint`
+   - 我會讀本次 Action Items + known-issues.md，幫你拆下個 sprint 的 task
+
+2. 你想休息一陣再回來 → 沒問題
+   - 下次回來時打 `/plan-sprint`，我會接續這份 retro 的 Action Items
+
+3. 你想先讀本次 retro 沉澱一下 → 也很好
+   - tasks/retros/2026-05-29-sprint-1.md 已寫好，慢慢看
+
+要跑 `/plan-sprint` 嗎？
+```
+
+**鐵律**：Retro Action Items 必須在下個 sprint 的 `/plan-sprint` 被讀到。連續 2 個 sprint 沒執行的 Action Item → 升級成 backlog 條目（不能永遠停留在 retro 檔案內裝飾用）。
 
 ---
 

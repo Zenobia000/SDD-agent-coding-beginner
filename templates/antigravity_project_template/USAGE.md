@@ -389,6 +389,25 @@ A：**你不需要判斷**。本模板的 `rules/07-proactive-skill-trigger.md` 
 範例：你說「我想做摘要工具」 → AI 會自動說「動工前建議跑 `/spec-it`」。
 你只要選「要 / 不要 / 之後再說」，不需要記 8 個 skill 名稱。**第一次跑某個 skill 時，AI 會附 30 字白話介紹**。
 
+**Q：`prompts/` 和 `skills/` 有什麼差別？我該用哪個？**
+A：
+- **`prompts/`** 是「對話開場白模板」— Mode A 用、複製貼上就行。例：`prompts/start-project.md` 是「我要做一個專案，請問我 5 個問題」的固定話術。
+- **`skills/`** 是「可觸發的程序工具」— Mode B 用、可手動 `/xxx` 或 AI 自動建議。例：`/spec-it` 不只是話術，而是有 step-by-step 執行流程、會產出多個檔案。
+
+Mode A 學員直接用 `prompts/`、不必碰 `skills/`。Mode B 學員主要用 `skills/`、`prompts/` 只有部署 / 安裝等場景才用。完整連動關係見 `.agents/SKILL-MAP.md`。
+
+**Q：怎麼知道某個 skill 完成後接著該跑什麼？**
+A：看 `.agents/SKILL-MAP.md` §2 Pre/Post 矩陣與 §4 六種典型路徑。簡化版：
+- `/spec-it` 完 → `/plan-sprint`
+- `/plan-sprint` 完 → `/tdd-cycle`
+- `/tdd-cycle` 完 → `/verify`
+- `/verify` 綠 → `/sync-it`
+- `/sync-it` 無 drift → `/commit-msg`
+- `/commit-msg` 完 → 下個 `/tdd-cycle` 或 `/retro`
+- `/retro` 完 → `/plan-sprint`（下個 sprint）
+
+AI 在每個 skill 結束時會主動建議下一步，你不必背。
+
 **Q：AI 一直建議我跑 skill，太煩怎麼辦？**
 A：兩個方法 ——
 1. **每次 session 內**：說「不要建議任何 skill，我自己來」，整個 session 安靜。

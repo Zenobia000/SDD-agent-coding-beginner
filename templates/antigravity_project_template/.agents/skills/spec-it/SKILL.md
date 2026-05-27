@@ -102,6 +102,18 @@ description: 從一句話需求生成 SDD 三層 spec（PRD / API contract / BDD
 
 把每個 user story 寫進 `tasks/backlog.md`，標 Priority + Size + Status。
 
+### Step 5.5：掃 PRD 是否有未決技術選型（連動 `/adr`）
+
+掃 PRD §3 / §4 / §5 中的技術描述：
+
+- 若使用者描述「用 X 還是 Y」「__ vs __」「未定」「待選」→ 主動建議跑 `/adr`
+- 若 PRD 寫死技術（如「使用 Gemini API」，無比較）→ 跳過，不需要 ADR
+- 若是學員「不知道有哪些選項」（未來會做技術選型）→ 在 PRD §7 Open Questions 加一條 + 提示日後跑 `/adr`
+
+範例話術：
+
+> 我寫 PRD 時注意到你 §3 提到「儲存方案：localStorage / IndexedDB / Firebase 待定」 — 這是 ADR 等級的決策。要不要接著跑 `/adr` 寫 ADR-0001-data-storage？
+
 ### Step 6：產出 Sprint Briefing
 
 最後給使用者一段 markdown 總結：

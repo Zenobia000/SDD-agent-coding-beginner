@@ -136,6 +136,12 @@ description: 跑全套品質驗證（Format / Lint / Type / Test+Coverage / Secu
 - Critical CVE → 必修，不能 commit
 - Hardcoded secret → **立刻 rotate + 從 history 移除**
 
+> **注意 `/verify §5` vs `/check-key` 的分工**：
+> - `/verify §5 Security` 是 **commit 前的快速掃描**（依賴漏洞 + secret 洩漏）
+> - `/check-key` 是 **部署 / push 到 public repo 前的雙保險**（涵蓋更廣的 secret pattern + `.gitignore` 覆蓋 + 未填 placeholder）
+>
+> Commit 前跑 `/verify` 就好；要部署 / push public 前，**額外**再跑一次 `/check-key`。
+
 ### Step 3：產出 Verify Report
 
 ```markdown
