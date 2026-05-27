@@ -8,18 +8,49 @@
 
 ## 一輪 Sprint 的 10 站
 
-```
-                  意圖           設計           實作          上線
-                ┌───────┐    ┌─────────┐    ┌────────┐    ┌────────┐
-   (1) 意圖澄清  │ /spec-it │ ─→ (4) Spec │ ─→ (5) TDD │ ─→ (9) 部署 │
-   (2) 架構決策  │ /adr     │    │設計     │    │開發    │    │        │
-   (3) Backlog  │ /plan-   │    │API/DB/  │    │紅→綠→ │    │ (8) git │
-                │ sprint   │    │BDD      │    │重構    │    │commit  │
-                └───────┘    └─────────┘    └────────┘    └────────┘
-                                                  │              │
-                                                  ▼              ▼
-                                             (6) /verify     (10) /retro
-                                             (7) /sync-it
+```mermaid
+flowchart LR
+    subgraph Phase1["意圖"]
+        direction TB
+        A1["(1) /spec-it<br/>意圖澄清"]
+        A2["(2) /adr<br/>架構決策"]
+        A3["(3) /plan-sprint<br/>Backlog"]
+    end
+
+    subgraph Phase2["設計"]
+        direction TB
+        B1["(4) Spec 設計<br/>API / DB / BDD"]
+    end
+
+    subgraph Phase3["實作"]
+        direction TB
+        C1["(5) TDD 開發<br/>紅 → 綠 → 重構"]
+        C2["(6) /verify"]
+        C3["(7) /sync-it"]
+    end
+
+    subgraph Phase4["上線"]
+        direction TB
+        D1["(8) git commit"]
+        D2["(9) 部署"]
+        D3["(10) /retro"]
+    end
+
+    Phase1 --> Phase2 --> Phase3 --> Phase4
+    A1 --> A2 --> A3
+    C1 --> C2 --> C3
+    D1 --> D2 --> D3
+    D3 -.下一輪 Sprint.-> A1
+
+    classDef intent fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:#000
+    classDef design fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
+    classDef implement fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000
+    classDef deploy fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
+
+    class A1,A2,A3 intent
+    class B1 design
+    class C1,C2,C3 implement
+    class D1,D2,D3 deploy
 ```
 
 ### 每站要做什麼
