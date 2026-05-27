@@ -125,7 +125,7 @@ start.bat            # Windows（雙擊即可）
 |---|---|
 | 完全沒概念 | [`class_plan/core_curriculum.md`](./class_plan/core_curriculum.md) §0–§3（10 分鐘） |
 | 想動手做第一個專案 | [`templates/antigravity_project_template/USAGE.md`](./templates/antigravity_project_template/USAGE.md) |
-| 想理解教材為什麼這樣設計 | [`templates/ai_ready_repo_blueprint.md`](./templates/ai_ready_repo_blueprint.md) |
+| 想理解教材為什麼這樣設計 | [`templates/antigravity_project_template/ai_ready_repo_blueprint.md`](./templates/antigravity_project_template/ai_ready_repo_blueprint.md) |
 | 想看完整 8 小時流程 | [`class_plan/teaching_plan.md`](./class_plan/teaching_plan.md) |
 
 ---
@@ -187,14 +187,13 @@ ai-vibe-coding-beginner/
 │   │   ├── README.md                         模板入口
 │   │   ├── USAGE.md                          A 模式 / B 模式選擇器
 │   │   ├── AGENTS.md                         Agent 站立規則
-│   │   ├── docs/                             PRD + 7 份大廠對標 spec 範本
+│   │   ├── ai_ready_repo_blueprint.md        設計哲學（為什麼這樣設計）
+│   │   ├── terminal_configuration.md         終端機環境設定（RUN/WATCH/CHECK 哲學）
+│   │   ├── docs/                             PRD + HANDBOOK
 │   │   ├── tasks/                            Sprint backlog 系統
-│   │   └── .agents/                          10 個 SDD skill + MCP/Skills/Subagents 教學
-│   ├── ai_ready_repo_blueprint.md        設計哲學（為什麼這樣設計）
+│   │   └── .agents/                          10 個 SDD skill（含 spec-it/templates/ + adr/templates/ 共 7 份大廠對標範本） + MCP/Skills/Subagents 教學
 │   └── mvp_fill_in_prompt.md             第一個 prompt 範本
 │
-├── start / start.bat / start.ps1     ← 一鍵啟動 Terminal 工作站（zellij 三/四面板）
-├── terminal_configuration.md         ← 終端機環境設定（zsh / oh-my-zsh / zellij）
 └── LICENSE                           ← MIT
 ```
 
