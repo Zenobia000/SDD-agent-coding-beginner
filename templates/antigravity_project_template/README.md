@@ -12,26 +12,63 @@ my-project/
 ├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（跨工具新興共通格式）
 ├── docs/
 │   ├── PRD.md                     ← 從 AI Studio 帶過來的需求規格（填空）
-│   └── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
+│   ├── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
+│   └── templates/                 ← ⭐ SDD 三層 spec 範本（大廠對標版）
+│       ├── PRD-template.md            (Atlassian / Amazon PR-FAQ)
+│       ├── user-story-template.md     (Bill Wake INVEST)
+│       ├── adr-template.md            (MADR v3.0)
+│       ├── api-contract-template.md   (OpenAPI 3.0 + Stripe Errors)
+│       ├── db-schema-template.md      (PostgreSQL conventions)
+│       ├── bdd-scenarios-template.md  (Gherkin / Cucumber)
+│       └── test-cases-template.md     (AAA pattern + F.I.R.S.T.)
+├── tasks/                         ← ⭐ Solo Sprint backlog 系統
+│   ├── backlog.md                     (整個專案的未來任務總清單)
+│   ├── sprint-current.md              (當前 sprint 執行清單)
+│   ├── known-issues.md                (已知但暫不修的問題)
+│   └── retros/                        (sprint retrospective 歸檔)
 └── .agents/
+    ├── WORKFLOW.md                ← ⭐ Solo SDD Sprint 工作流總圖（10 站 + 對應 skill）
     ├── settings.json              ← Antigravity CLI 設定（model / checkpoint / MCP）
-    ├── MCP.md                     ← 三大擴充原語 ①：MCP 外掛工具（github / fetch / context7 等）
-    ├── SKILLS.md                  ← 三大擴充原語 ②：Skill + Slash Command（2026 統一）
-    ├── SUBAGENTS.md               ← 三大擴充原語 ③：Subagents 平行任務分派（2026 新功能）
+    ├── MCP.md                     ← 三大擴充原語 ①：MCP 外掛工具
+    ├── SKILLS.md                  ← 三大擴充原語 ②：Skill + Slash Command
+    ├── SUBAGENTS.md               ← 三大擴充原語 ③：Subagents 平行任務分派
     ├── rules/                     ← AI 寫 code 時必須遵守的規則
     │   ├── 01-keep-it-simple.md   ← 別寫複雜的東西
     │   ├── 02-coding-style.md     ← code 長什麼樣
-    │   └── 03-when-stuck.md       ← AI 卡住時該怎麼辦
-    ├── prompts/                   ← 你可以直接複製貼上的常用 prompt
-    │   ├── start-project.md       ← 開新專案的第一句話
-    │   ├── add-feature.md         ← 加功能
-    │   ├── fix-bug.md             ← 修 bug
-    │   └── deploy.md              ← 想上線時
-    └── skills/                    ← 自訂 skill / slash command（只附 2 個模型本能彌補不了的）
-        ├── check-key.md           ← /check-key（部署前安全檢查）
-        └── explain-code/          ← /explain-code（架構師視角講解）
-            └── SKILL.md
+    │   ├── 03-when-stuck.md       ← AI 卡住時該怎麼辦
+    │   ├── 04-spec-first.md       ← ⭐ 沒 spec 不寫 code
+    │   ├── 05-tdd-required.md     ← ⭐ 先寫測試
+    │   └── 06-doc-as-code.md      ← ⭐ 文件與 code 一起改
+    ├── prompts/                   ← 常用對話開場白
+    │   ├── start-project.md
+    │   ├── add-feature.md
+    │   ├── fix-bug.md
+    │   └── deploy.md
+    └── skills/                    ← ⭐ Slash command 工具箱
+        ├── check-key.md               (/check-key 部署前安檢)
+        ├── explain-code/SKILL.md      (/explain-code 架構師視角)
+        ├── spec-it/SKILL.md           ⭐ /spec-it    生 PRD + API + BDD
+        ├── adr/SKILL.md               ⭐ /adr        架構決策記錄
+        ├── plan-sprint/SKILL.md       ⭐ /plan-sprint backlog 拆解
+        ├── tdd-cycle/SKILL.md         ⭐ /tdd-cycle  紅綠燈循環
+        ├── verify/SKILL.md            ⭐ /verify     5 維度品質驗證
+        ├── sync-it/SKILL.md           ⭐ /sync-it    code↔文件 drift
+        ├── commit-msg/SKILL.md        ⭐ /commit-msg Conventional Commits
+        └── retro/SKILL.md             ⭐ /retro      sprint 4Ls 回顧
 ```
+
+---
+
+## 🎯 兩種使用模式
+
+| 模式 | 適合 | 怎麼用 |
+|---|---|---|
+| **A. Vibe Coding 五步**（輕量） | 純新手 / hackathon / 探索期 | `AGENTS.md §3.1` — 重述 → 計畫 → 寫 → 測 → 等回報 |
+| **B. SDD Sprint 十站**（完整） | 有程式基礎 / 要做正規專案 | `.agents/WORKFLOW.md` — 10 站工作流 + 8 個 SDD skill |
+
+**判斷怎麼選：**
+- 第一個專案、純嘗試 → 用 A
+- 想學「業界怎麼用 AI 做專案」、想練習 spec / TDD / git workflow → 用 B
 
 ---
 
@@ -113,6 +150,11 @@ agy
 | 想讓 AI 多會新技能（外部能力） | `.agents/MCP.md`（github、fetch、playwright…） |
 | 想包「AI 自動觸發的流程」或自訂指令 | `.agents/SKILLS.md` |
 | 大型任務跑很久 / 想平行加速 | `.agents/SUBAGENTS.md`（Antigravity 2026 殺手特性） |
+| 想跑 SDD 完整 Sprint（spec + TDD + 文件同步） | `.agents/WORKFLOW.md` + 8 個 SDD skill |
+| 不知道 spec 怎麼寫 | `docs/templates/`（7 份大廠對標範本） |
+| 不知道任務怎麼拆 | 打 `/plan-sprint` |
+| 想 commit 但不知道訊息怎麼寫 | 打 `/commit-msg` |
+| Sprint 結束想回顧 | 打 `/retro` |
 
 ---
 

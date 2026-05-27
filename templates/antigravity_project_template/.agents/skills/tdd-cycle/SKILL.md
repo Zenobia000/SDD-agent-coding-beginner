@@ -1,0 +1,245 @@
+---
+name: tdd-cycle
+description: 引導使用者跑完一輪 Red-Green-Refactor TDD 循環。用於實作每一個 user story / 修 bug / 加任何有行為改變的程式碼。
+---
+
+# /tdd-cycle — Red-Green-Refactor 紅綠燈
+
+## 何時觸發
+
+- 使用者說「實作 US-XXX」「寫 ___ 功能」「我要動手了」
+- 使用者打 `/tdd-cycle`
+- `/spec-it` 已產出 BDD scenario 與測試骨架，準備開始實作
+- 修 bug（先寫一個能重現 bug 的失敗測試）
+
+## 不要觸發的情況
+
+- 純樣式 / 文案修改（沒有行為變動）
+- 純 refactor，無新行為（這時跑 `/verify` 即可）
+- 沒有 PRD / spec → 先跑 `/spec-it`
+
+---
+
+## 執行步驟（Kent Beck 三步驟）
+
+### Step 0：確認前置
+
+跑這個 skill 前，確認：
+
+- [ ] `docs/PRD.md` 已存在
+- [ ] 對應的 user story（US-XXX）已寫好 AC
+- [ ] `tests/features/*.feature` 已寫 BDD scenario
+- [ ] 對應的 `tests/unit/test_*.py` 已有測試骨架
+
+任一條缺 → 停下，提醒使用者跑 `/spec-it`。
+
+---
+
+### Step 1：RED 🔴 — 寫一個失敗的測試
+
+從 `tests/unit/test_*.py` 的骨架挑一個 `test_xxx(): pass`，把它寫實：
+
+```python
+def test_summarize_with_valid_500_word_article_returns_100_word_summary():
+    # Arrange
+    article = "..." * 500
+    summarizer = Summarizer(api_key="test_key")
+
+    # Act
+    result = summarizer.summarize(article)
+
+    # Assert
+    assert result.success is True
+    assert 80 <= result.word_count <= 120
+```
+
+**寫完跑測試：**
+
+```bash
+pytest tests/unit/test_summarizer.py::test_summarize_with_valid_500_word_article_returns_100_word_summary -v
+```
+
+**預期：紅燈** ❌ — 因為 `Summarizer` 還沒實作 / `summarize()` 不存在 / 結果不符。
+
+**鐵律：**
+- 如果測試是綠燈 → 表示這個行為已經有了，跳到下一個測試
+- 如果測試錯誤是 `ImportError` 之外的事 → 測試本身寫錯了，先修測試
+
+---
+
+### Step 2：GREEN 🟢 — 寫最少的程式碼讓它通過
+
+**只寫足夠讓測試通過的程式**，不多做：
+
+```python
+# app/summarizer.py
+from dataclasses import dataclass
+
+@dataclass
+class SummaryResult:
+    success: bool
+    word_count: int
+
+class Summarizer:
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+
+    def summarize(self, article: str) -> SummaryResult:
+        # 最簡單能讓測試過的實作
+        # 真實版會呼叫 Gemini API
+        return SummaryResult(success=True, word_count=100)
+```
+
+**跑測試：**
+
+```bash
+pytest tests/unit/test_summarizer.py -v
+```
+
+**預期：綠燈** ✅
+
+**鐵律：**
+- 不要「順便」加其他功能（YAGNI — You Aren't Gonna Need It）
+- 如果還是紅燈，**只改實作、不改測試**（除非測試確實寫錯）
+- 連續紅燈 3 次 → 停下，回頭看測試是不是描述了不可能的行為
+
+---
+
+### Step 3：REFACTOR 🔵 — 重構（測試保持綠燈）
+
+現在實作很醜（hardcode `word_count=100`）。重構成真實版：
+
+```python
+# app/summarizer.py
+from dataclasses import dataclass
+import google.generativeai as genai
+
+@dataclass
+class SummaryResult:
+    success: bool
+    word_count: int
+    summary: str
+
+class Summarizer:
+    def __init__(self, api_key: str):
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel("gemini-1.5-flash")
+
+    def summarize(self, article: str, max_words: int = 100) -> SummaryResult:
+        if not article or len(article) < 100:
+            raise ValidationError("Article too short")
+
+        prompt = f"Summarize the following article in {max_words} Chinese words:\n\n{article}"
+        response = self.model.generate_content(prompt)
+        summary = response.text
+        word_count = len(summary)
+
+        return SummaryResult(
+            success=True,
+            word_count=word_count,
+            summary=summary,
+        )
+```
+
+**每改一步跑測試：**
+
+```bash
+pytest tests/unit/test_summarizer.py -v
+```
+
+**保持綠燈** ✅。如果重構過程中變紅 → 立刻 revert，思考為何 break。
+
+**重構檢查：**
+- 命名清楚嗎？
+- 函式長度 < 50 行？
+- 有重複邏輯該抽出來嗎？
+- 邊界 / 失敗 case 有對應的測試嗎？
+
+---
+
+### Step 4：循環 — 下一個測試
+
+回到 Step 1，挑下一個 `test_xxx(): pass`：
+
+```
+RED → GREEN → REFACTOR → RED（下一個） → GREEN → REFACTOR → ...
+```
+
+完成順序建議：
+
+1. **Happy path 第一個**（最樂觀的主流程）
+2. **邊界 case**（短 / 長 / 空）
+3. **失敗 case**（API 掛 / auth 錯）
+4. **參數化 case**（多語言 / 多輸入）
+
+---
+
+### Step 5：確認該 user story 全綠燈
+
+跑全套：
+
+```bash
+pytest tests/unit/test_summarizer.py -v --cov=app.summarizer --cov-report=term-missing
+```
+
+確認：
+
+- [ ] 該 user story 的所有測試全綠
+- [ ] Coverage ≥ 80%
+- [ ] BDD scenario（`tests/features/*.feature`）也跑得起來
+- [ ] 沒有 skip / xfail 殘留
+
+完成 → 跑 `/verify` 做總體驗證，再跑 `/sync-it` 同步文件，最後 `/commit-msg` 生 commit。
+
+---
+
+## 鐵律
+
+1. **永遠先寫測試**。先寫 code 再補測試 = test-last，不算 TDD
+2. **GREEN 階段只寫剛好夠用的程式**（hardcode 都可以）
+3. **REFACTOR 階段不改測試行為**（測試是合約）
+4. **每個 cycle 跑一次測試**（不要寫完三個測試才跑）
+5. **連續紅燈 > 5 分鐘 → 停下重新思考**（不要硬幹）
+6. **mock 只 mock 邊界**（API / DB），不 mock 你正在測的對象
+
+---
+
+## 觸發範例
+
+使用者：「實作 US-001 的摘要功能」
+
+AI（你）：
+> 跑 `/tdd-cycle` 紅綠燈，開始。
+>
+> **Step 0 確認前置：**
+> - ✅ `docs/PRD.md` US-001 已定義
+> - ✅ `tests/features/summarize.feature` Scenario 1 已寫
+> - ✅ `tests/unit/test_summarizer.py` 有 4 個測試骨架
+>
+> **Step 1 RED：** 我把第一個測試 `test_summarize_with_valid_500_word_article_returns_100_word_summary` 寫實⋯⋯
+>
+> ```python
+> [實際的測試 code]
+> ```
+>
+> 跑 `pytest tests/unit/test_summarizer.py::test_xxx -v` → 紅燈 ✅（預期，因 Summarizer 還沒實作）
+>
+> **Step 2 GREEN：** 寫最少的實作⋯⋯
+>
+> [繼續]
+
+---
+
+## 與其他 skill 的關係
+
+```
+/spec-it    ─→ 產出 BDD + test 骨架
+   ▼
+/tdd-cycle（這個）  ─→ 寫實作
+   ▼
+/verify     ─→ 全套驗證
+   ▼
+/sync-it    ─→ 同步文件
+   ▼
+/commit-msg ─→ 生 commit
+```

@@ -17,20 +17,25 @@
 
 開始任何工作前，**一定要先讀**：
 
-1. `docs/PRD.md` — 使用者的需求規格（從 AI Studio 帶過來的）
-2. `.agents/rules/01-keep-it-simple.md` — 簡單第一原則
-3. `.agents/rules/02-coding-style.md` — code 風格
-4. `.agents/rules/03-when-stuck.md` — 卡關 SOP
+1. `docs/PRD.md` — 使用者的需求規格
+2. `.agents/WORKFLOW.md` — Solo SDD Sprint 工作流總圖（10 站 + 對應 skill）
+3. `.agents/rules/01-keep-it-simple.md` — 簡單第一原則
+4. `.agents/rules/02-coding-style.md` — code 風格
+5. `.agents/rules/03-when-stuck.md` — 卡關 SOP
+6. `.agents/rules/04-spec-first.md` — 沒 spec 不寫 code
+7. `.agents/rules/05-tdd-required.md` — 先寫測試
+8. `.agents/rules/06-doc-as-code.md` — 文件與 code 一起改
 
 **要呼叫 MCP 工具前**，先看 `.agents/MCP.md` 該工具的安全警告。
+**新功能 / 新決策 / 寫 code 前**，先看 `.agents/WORKFLOW.md` 該走哪個 skill。
 
 讀完才開始動手。
 
 ---
 
-## 3. 工作流程（Vibe Coding 五步）
+## 3. 工作流程
 
-每次收到需求都跑這 5 步：
+### 3.1 MVP / Vibe Coding 五步（純新手 / 探索期）
 
 ```
 1. 重述需求    → 用 5 行內告訴使用者「我理解你要的是 ___」，請他確認
@@ -39,6 +44,22 @@
 4. 帶他測試    → 告訴他怎麼跑、預期看到什麼、怎麼判斷成功
 5. 等回報      → 不要主動加功能。等使用者說「下一步」才繼續
 ```
+
+### 3.2 SDD Sprint 十站（學員有程式基礎、要做正規專案時）
+
+完整流程圖與 skill 對應見 `.agents/WORKFLOW.md`：
+
+```
+意圖澄清 → 架構決策 → Backlog → Spec 設計 → TDD 開發
+/spec-it    /adr      /plan-sprint  /spec-it    /tdd-cycle
+
+驗證 → 文件同步 → Commit → 部署 → Retro
+/verify  /sync-it    /commit-msg  (deploy.md)  /retro
+```
+
+**判斷該用哪個流程：**
+- 沒有 PRD、純探索 / hackathon / 學員第一次寫 → 用 3.1 五步
+- 有 PRD、要做完整 sprint / 有交付要求 → 用 3.2 十站
 
 **金句**：使用者說「不對」時 → 不是改 code，是回到第 1 步重新對齊需求。
 

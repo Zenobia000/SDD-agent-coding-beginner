@@ -232,9 +232,44 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 
 ---
 
+## 本模板內建的 SDD Sprint Skills（10 個）
+
+本模板已內建一套**完整 Solo Sprint 工作流 skill**，覆蓋從意圖澄清到 sprint retro 的 10 站。完整流程圖見 [`WORKFLOW.md`](./WORKFLOW.md)。
+
+### Vibe Coding 基礎 skill（2 個）
+
+| Skill | 觸發 | 用途 |
+|---|---|---|
+| `/explain-code` | 「這段 code 在幹嘛」 | 架構師視角分段講解 |
+| `/check-key` | 「部署前檢查」 | 掃 hardcoded API key / secret |
+
+### SDD Sprint 工作流 skill（8 個，依工作流順序）
+
+| Skill | 觸發時機 | 對標大廠規範 |
+|---|---|---|
+| `/spec-it` | 新功能動工前 | Atlassian PRD + Bill Wake INVEST + Gherkin |
+| `/adr` | 重大技術選型 | MADR v3.0 |
+| `/plan-sprint` | sprint 開始拆任務 | Linear backlog / INVEST 拆解 |
+| `/tdd-cycle` | 寫每個功能 | Kent Beck Red-Green-Refactor + AAA pattern |
+| `/verify` | commit 前全跑 | Google Test Pyramid + OWASP |
+| `/sync-it` | code 與文件對齊 | Doc-as-Code（Stripe / Twilio） |
+| `/commit-msg` | 生 commit | Conventional Commits 1.0 |
+| `/retro` | sprint 結束 | 4Ls Retrospective |
+
+### 工作流串接
+
+```
+ /spec-it ──→ /adr ──→ /plan-sprint ──→ /tdd-cycle ──→ /verify ──→ /sync-it ──→ /commit-msg ──→ /retro
+   PRD         決策      backlog        紅綠燈        全驗證      文件同步     commit       回顧
+```
+
+詳細工作流見 [`WORKFLOW.md`](./WORKFLOW.md)。Spec 範本見 [`../docs/templates/`](../docs/templates/)。
+
+---
+
 ## 範例庫：你可以自己加哪些 skill
 
-本模板預設只附 2 個 skill（`explain-code`、`check-key`），只留「模型本能彌補不了」的。下面是「常見但非必要」的 skill 範例，**你需要時再複製貼到 `.agents/skills/` 即可**。
+下面是「常見但非必要」的 skill 範例，**你需要時再複製貼到 `.agents/skills/` 即可**。
 
 ### 範例 1：`/test` — 跑測試並回報
 
