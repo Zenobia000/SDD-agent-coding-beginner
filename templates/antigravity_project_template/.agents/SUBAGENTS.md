@@ -14,6 +14,25 @@
 
 ---
 
+## 官方架構：Technical Director（2026-05-19 I/O 確認）
+
+Antigravity 2.0 把多代理調度做成**平台級原語**，架構名稱叫 **Technical Director**：
+
+| 維度 | 內容 |
+|---|---|
+| **誰主導** | **Orchestrator（主 agent）自己決定**要不要分解、派幾個、何時收斂 |
+| **使用者角色** | 描述目標就好，**不手動配置 subagent** |
+| **Subagent 型態** | **Dynamic subagents** — on-the-fly 創建，每個有獨立 context window |
+| **內建程度** | 平台原生，**不用 tmux、不用寫 orchestrator code、不用外掛** |
+| **CLI 入口** | `agy`（取代 Gemini CLI；個人版 Gemini CLI 2026-06-18 EOL） |
+| **相關 slash command** | `/goal`、`/schedule`（2.0 新增） |
+
+→ **設計含義**：寫 skill 時，**不要把「派 subagent」當成 skill body 的硬指令**。
+應該描述「任務的範圍與獨立性」，讓 orchestrator 自己判斷要不要平行展開。
+這跟舊式「手動 orchestrator」（例如 LangGraph / CrewAI 的人工編排）哲學相反。
+
+---
+
 ## 三大擴充原語對照（MCP / Skill / Subagent）
 
 | 維度 | MCP | Skill | Subagent |
@@ -74,14 +93,15 @@
 
 主 agent 會自己分派、收結果、統整。你不需要管調度。
 
-### 方法 B：在 Skill body 內宣告（重複流程封裝）
+### 方法 B：在 Skill body 描述「任務範圍與獨立性」
 
-把「分派模式」固化成一個 skill：
+⚠️ **重要觀念**：Skill body 不要寫成「派 subagent A、B、C」的硬指令。
+應該描述「**任務的範圍 + 哪些子任務彼此獨立**」，由 orchestrator 自己判斷要不要平行展開。
 
 ```markdown
 ---
 name: cross-module-audit
-description: Use when the user asks to audit coupling / dependencies across modules. Spawns one subagent per module and aggregates findings.
+description: Use when the user asks to audit coupling / dependencies across modules. Independent per-module analysis; orchestrator may parallelize.
 ---
 
 # Cross-Module Audit Skill
@@ -90,25 +110,28 @@ description: Use when the user asks to audit coupling / dependencies across modu
 
 問使用者：要審查哪些模組？（沒指定就 grep 列出最大的 5 個）
 
-## 2. 分派 subagents
+## 2. 對每個模組獨立分析
 
-對每個模組，**派一個 subagent 並行處理**：
+**每個模組的分析互不相依**（適合 orchestrator 平行展開）：
 
-- subagent N：分析 `<module>/` 的：
-  - 循環依賴
-  - 跨層存取（UI 直接打 DB）
-  - god object（單檔超過 500 行）
-  - 命名一致性
+- 循環依賴
+- 跨層存取（UI 直接打 DB）
+- god object（單檔超過 500 行）
+- 命名一致性
 
 ## 3. 彙整
 
-收齊所有 subagent 結果後：
+收齊所有模組分析結果後：
 - 按嚴重度排序（🔴 緊急 / 🟡 留意 / 🟢 健康）
 - 列出 top 3 修復優先項
 - 給每項一句白話建議
 ```
 
-打 `/cross-module-audit` 觸發後，主 agent 看 skill body 自動派 N 個 subagent，不用使用者管細節。
+打 `/cross-module-audit` 觸發後，orchestrator 看到「N 個模組獨立分析」自然會 spawn N 個 dynamic subagents 並行（或在小規模時選擇單線跑完），使用者不用管細節。
+
+**反面教材**（不要這樣寫 skill body）：
+> ❌「派 subagent A 分析 auth、subagent B 分析 api、subagent C 分析 db」
+> — 這是 LangGraph / CrewAI 風格的手動編排，跟 Antigravity 的 Technical Director 哲學衝突。
 
 ---
 
@@ -240,10 +263,10 @@ A  B  C  (用不同方法 / 不同 prompt 跑同一題)
 
 | 限制 | 為什麼 |
 |---|---|
-| **不要無限套娃**（subagent 內再派 subagent） | 容易失控、追蹤困難。預設只允許 1 層 |
-| **不要同時派超過 5 個 subagent** | 資源 / 計費考量。Antigravity 預設並行上限 5（看 settings） |
+| **不要無限套娃**（subagent 內再派 subagent） | 容易失控、追蹤困難。Antigravity 預設限制套娃深度 |
+| **並行數由 orchestrator 動態決定** | 受 token 預算 / API 計費 / 任務獨立性影響。使用者通常不用手動限制；確切上限與計費見 [Antigravity 官方文件](https://antigravity.google/docs) |
 | **subagent 失敗時主 agent 要 fallback** | 不要靜默吞錯。失敗的 subagent 至少要在最終報告列出 |
-| **subagent 不要動破壞性指令** | 派 subagent 只給 read-only 任務最安全。要寫檔/跑 shell 由主 agent 統一執行 |
+| **subagent 不要動破壞性指令** | 派 subagent 只給 read-only 任務最安全。要寫檔 / 跑 shell 由主 agent 統一執行 |
 | **subagent 不會看到使用者中途新指令** | 派出去後使用者改主意，主 agent 必須 cancel 後重派 |
 
 ---
