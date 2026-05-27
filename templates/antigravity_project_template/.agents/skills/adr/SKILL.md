@@ -1,9 +1,63 @@
 ---
 name: adr
-description: 產生 MADR v3.0 格式的 Architecture Decision Record。用於記錄會影響整個專案、3 個月後想換很痛的決策。
+description: 產生 MADR v3.0 格式的 Architecture Decision Record。**主動觸發時機**：對話出現多個技術選項在比較（「X 還是 Y」「___ vs ___」「用 ___ 還是 ___ 比較好」），或使用者要選 LLM provider / DB / 框架 / auth / 部署目標時。注意：PRD 已寫死的技術不需要 ADR。
 ---
 
 # /adr — Architecture Decision Record 生成器
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「X 還是 Y」「用 ___ 還是 ___」「___ vs ___」
+- 「___ 跟 ___ 哪個比較好」「我該選 ___ 還是 ___」
+- 「要不要用 ___」（在多選項背景下）
+- 使用者列出 2+ 個技術選項並比較利弊
+
+### 中訊號（建議但詢問）
+
+- 「我選 ___」（在沒寫 ADR 的情況下做重大選型）
+- 對話中提到 LLM provider / DB / 主要框架 / auth 機制 / 部署目標
+- 「___ 適合嗎」「___ 有什麼好處」
+
+### 反訊號（這些不要觸發 adr）
+
+- **PRD 已經寫死**「使用 Gemini API」這類外部約束 → 不需要 ADR（PRD 已捕捉）
+- 局部小決定：「用哪個 lodash function」「fetch() 還是 axios」
+- 純樣式：「按鈕用藍色」「字體用什麼」
+- 還在探索期、沒有具體選項在競爭
+
+### 寫 ADR 的 3 題自檢（給 AI 判斷用）
+
+主動建議前，先檢查 3 題：
+
+1. 影響超出單一 user story 嗎？
+2. 有 2+ 個合理選項在競爭嗎？
+3. 3 個月後想換會痛嗎？
+
+**3 題都 Yes → 建議寫 ADR。任一 No → 不建議。**
+
+### 主動建議的話術範例
+
+> 我注意到你在比較 Gemini 跟 OpenAI — 這算是 ADR 等級的決策（影響全專案、3 個月後想換很痛、有多個競爭選項）。
+>
+> 要不要跑 `/adr`？這個 skill 會幫你寫一份 1 頁的決策記錄，3 個月後 AI 看到會自動參考、不會自作主張把 Gemini 改回 OpenAI。
+>
+> 要 / 不要 / 之後再說？
+
+### Solo dev 實際 ADR 數量參考
+
+| 專案規模 | ADR 數量 |
+|---|---|
+| 半天 demo | 0-1 個 |
+| 一週 MVP | 2-4 個 |
+| 一個月專案 | 5-10 個 |
+
+寫太多反而是 over-engineering。Solo 半天~一週專案 **0-3 個就夠用**。
+
+---
 
 ## 何時觸發
 
@@ -13,6 +67,7 @@ description: 產生 MADR v3.0 格式的 Architecture Decision Record。用於記
 
 ## 不要觸發的情況
 
+- **PRD 已涵蓋此決策**（PRD 寫「使用 X」屬於外部約束，不是決策）
 - 一次性的局部決定（用哪個 lib function、要不要加 cache）
 - 還在探索期、沒有具體選項
 - 該決策已有 ADR（這時跑 `/sync-it` 確認沒漂移）

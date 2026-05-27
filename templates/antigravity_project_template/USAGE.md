@@ -380,6 +380,21 @@ A：可以。**Solo dev 不必全用**。最小集：`/spec-it` + `/tdd-cycle` +
 **Q：我發現某個 skill 寫得不適合我的領域，能改嗎？**
 A：可以。`.agents/skills/<name>/SKILL.md` 是純 markdown，直接編輯。改完打 `/memory refresh` 重載。
 
+**Q：PRD 已經寫了「使用 Gemini API」，還要寫 ADR 嗎？**
+A：**不用**。當 PRD 已經把技術寫死成「外部約束」（例：講師要求、學員只有 Google 帳號），那就不是「決策」、是「條件」，PRD 已經捕捉到。ADR 是用來記錄**多選項在競爭、你做了選擇**的情況（「Gemini vs OpenAI vs Claude，我選 Gemini 因為 ___」）。
+判斷 3 題：1) 影響超出單一 user story？ 2) 有 2+ 個合理選項？ 3) 3 個月後想換會痛？三題都 Yes 才寫。Solo dev 半天~一週專案，0-3 個 ADR 就夠用。
+
+**Q：我新手，不會判斷何時該打哪個 skill 怎麼辦？**
+A：**你不需要判斷**。本模板的 `rules/07-proactive-skill-trigger.md` 規定 AI 要主動偵測訊號、主動建議。
+範例：你說「我想做摘要工具」 → AI 會自動說「動工前建議跑 `/spec-it`」。
+你只要選「要 / 不要 / 之後再說」，不需要記 8 個 skill 名稱。**第一次跑某個 skill 時，AI 會附 30 字白話介紹**。
+
+**Q：AI 一直建議我跑 skill，太煩怎麼辦？**
+A：兩個方法 ——
+1. **每次 session 內**：說「不要建議任何 skill，我自己來」，整個 session 安靜。
+2. **永久設定**：編輯 `.agents/settings.json` 加 `"skillTriggerMode": "passive"`，AI 只在你打 `/xxx` 時觸發、不主動建議。
+進階學員推薦 `passive`，純新手用預設 `proactive-friendly`。
+
 ---
 
 ## 6. 下一步建議

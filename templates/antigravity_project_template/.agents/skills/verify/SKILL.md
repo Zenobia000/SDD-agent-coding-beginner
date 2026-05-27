@@ -1,9 +1,43 @@
 ---
 name: verify
-description: 跑全套品質驗證（lint + type + test + coverage + security）並產出報告。用於 commit 前、PR 前、sprint 結尾。
+description: 跑全套品質驗證（Format / Lint / Type / Test+Coverage / Security 五維度）並產出報告。**主動觸發時機**：使用者說「commit 前檢查」「準備 commit」「上線前」「跑完了」「都寫完了」「應該沒問題了」「sprint 結束」，或 `/tdd-cycle` 剛完成一輪。
 ---
 
 # /verify — Quality Gate 三合一
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「commit 前檢查」「準備 commit」「我要 commit 了」
+- 「上線前」「準備部署」「準備 push」
+- 「跑完了」「寫完了」「都做完了」
+- 「應該沒問題了」「都綠燈了」
+- 「sprint 結束」「sprint 收尾」
+- `/tdd-cycle` 剛跑完一輪、所有 sprint task 都打勾
+
+### 中訊號（建議但詢問）
+
+- 「PR 前要做什麼」
+- 對話切換到「準備提交」的氛圍
+
+### 反訊號（這些不要觸發 verify）
+
+- 還在 RED-GREEN-REFACTOR 過程中 → 只跑單一測試即可
+- 沒寫過任何 code 的新專案
+- 使用者正在 debug 跑紅燈 → 不要打斷，先讓他修完
+
+### 主動建議的話術範例
+
+> 你說「應該沒問題了」 — commit 前建議跑 `/verify` 一次。
+>
+> 它會自動跑 Format / Lint / Type / Test + Coverage / Security 五項檢查（依你的技術棧選工具），3 分鐘內告訴你能不能 commit。比手動跑舒服很多。
+>
+> 要跑嗎？
+
+---
 
 ## 何時觸發
 

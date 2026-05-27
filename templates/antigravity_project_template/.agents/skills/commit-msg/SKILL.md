@@ -1,9 +1,43 @@
 ---
 name: commit-msg
-description: 生成 Conventional Commits 1.0 格式的 commit message。用於 commit 前；自動分析 staged changes 並寫出 WHY/WHAT/IMPACT body。
+description: 生成 Conventional Commits 1.0 格式的 commit message + WHY/WHAT/IMPACT body。**主動觸發時機**：使用者說「commit」「提交」「生 commit message」「準備 push」「git commit」，且 `/verify` 已過、`/sync-it` 無 drift、有 staged changes。
 ---
 
 # /commit-msg — Conventional Commits 生成器
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「commit」「提交」「我要 commit 了」
+- 「生 commit message」「寫 commit」「幫我寫 message」
+- 「準備 push」「要 push 了」
+- 「git commit」「git 提交」
+- `/verify` 全綠 + `/sync-it` 無 drift + `git status` 有 staged 變更
+
+### 中訊號（建議但詢問）
+
+- 「告一段落」「先存個檔」
+- 對話切換到「準備提交」的氛圍
+
+### 反訊號（這些不要觸發 commit-msg）
+
+- 還有紅燈測試 → 先建議 `/verify` 修
+- 還有 critical drift → 先建議 `/sync-it` 修
+- 沒有 staged changes → 提醒使用者 `git add`
+- 使用者剛口頭說「commit」但其實還在寫 code（看上下文）
+
+### 主動建議的話術範例
+
+> 你說「準備 push」 — `/verify` 全綠 ✅、`/sync-it` 無 drift ✅、有 staged changes。
+>
+> 建議跑 `/commit-msg`。它會掃 staged 變更，依 Conventional Commits 1.0 + WHY/WHAT/IMPACT 格式生 message。比起「fix bug」這種沒資訊的訊息，6 個月後的你（與 AI）會感激今天的自己。
+>
+> 要生嗎？
+
+---
 
 ## 何時觸發
 

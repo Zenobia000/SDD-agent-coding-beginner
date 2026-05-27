@@ -1,9 +1,43 @@
 ---
 name: tdd-cycle
-description: 引導使用者跑完一輪 Red-Green-Refactor TDD 循環。用於實作每一個 user story / 修 bug / 加任何有行為改變的程式碼。
+description: 引導使用者跑完一輪 Red-Green-Refactor TDD 循環。**主動觸發時機**：使用者說「實作 US-___」「寫 ___ 功能」「我要動手了」「開始 code」「修 ___ bug」，或 `/spec-it` 剛跑完、有測試骨架待填實，或專案有紅燈測試。
 ---
 
 # /tdd-cycle — Red-Green-Refactor 紅綠燈
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「實作 US-___」「實作 T-___」
+- 「寫 ___ 功能」「把 ___ 寫出來」「動手寫 ___」
+- 「我要動手了」「開始 code」「開始實作」
+- 「修 ___ bug」「___ 跑出錯誤」「___ 不 work」
+- `/spec-it` 剛產出測試骨架（`tests/unit/test_*.py` 有多個 `pass`）
+
+### 中訊號（建議但詢問）
+
+- 「加一個 function ___」「寫一個 method ___」
+- 「優化 ___」（先問是 refactor 還是行為改變）
+
+### 反訊號（這些不要觸發 tdd-cycle）
+
+- 純樣式 / CSS / 文案修改（無邏輯）
+- 純 refactor 無新行為（這時建議 `/verify` 確認測試還綠）
+- 沒 PRD / 沒測試骨架 → 先建議 `/spec-it`
+- 改 hardcoded value（如 timeout 5s → 10s）
+
+### 主動建議的話術範例
+
+> 你說「實作 US-001」 — `/spec-it` 已經產出 4 個測試骨架了，建議跑 `/tdd-cycle` 紅綠燈。
+>
+> 它會引導你「寫測試 → 跑（紅）→ 寫實作 → 跑（綠）→ 重構」三步驟，避免一次寫 200 行 code 卻沒測試覆蓋。Solo dev 容易跳測試，這個 skill 會強制你回到 TDD 節奏。
+>
+> 要跑嗎？
+
+---
 
 ## 何時觸發
 

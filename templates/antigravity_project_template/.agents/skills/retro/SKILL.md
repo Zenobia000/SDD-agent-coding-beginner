@@ -1,9 +1,43 @@
 ---
 name: retro
-description: 引導 sprint 回顧（4Ls format），歸檔到 tasks/retros/。用於 sprint 結尾。
+description: 引導 sprint 回顧（4Ls format），歸檔到 tasks/retros/。**主動觸發時機**：使用者說「sprint 結束」「跑完了」「回顧」「learn 到什麼」「下個 sprint」，或 `tasks/sprint-current.md` 的 Now/Next 條目全 done。
 ---
 
 # /retro — Sprint Retrospective
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「sprint 結束了」「sprint 跑完了」「結束了」
+- 「來回顧」「來 retro」「做個 retro」
+- 「這次學到什麼」「這次踩了什麼雷」
+- 「下個 sprint」「下一輪」「接下來呢」
+- `tasks/sprint-current.md` 的 Now/Next 區條目全打勾
+
+### 中訊號（建議但詢問）
+
+- 「今天做得不錯 / 不太順」
+- Sprint goal 已達成、commit 也 push 了
+- 即將切到新 user story 但沒做 retro
+
+### 反訊號（這些不要觸發 retro）
+
+- Sprint 還在進行中（建議 `/plan-sprint` 調整 backlog）
+- 沒有任何 commit / 進度
+- 使用者明確說「跳過 retro」
+
+### 主動建議的話術範例
+
+> 你 sprint 1 的 5 個 task 全部完成了 ✅，commit 也 push 了。建議跑 `/retro`。
+>
+> 它會問你 4 個問題（Liked / Learned / Lacked / Longed for），加上客觀資料（velocity / coverage / commit pattern），歸檔成 `tasks/retros/YYYY-MM-DD-sprint-1.md`。
+>
+> 連續 3 個 sprint 不做 retro，你會重複踩同一個雷而不自覺。10 分鐘的事，要做嗎？
+
+---
 
 ## 何時觸發
 

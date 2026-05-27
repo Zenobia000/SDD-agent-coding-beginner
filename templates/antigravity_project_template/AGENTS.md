@@ -25,6 +25,7 @@
 6. `.agents/rules/04-spec-first.md` — 沒 spec 不寫 code
 7. `.agents/rules/05-tdd-required.md` — 先寫測試
 8. `.agents/rules/06-doc-as-code.md` — 文件與 code 一起改
+9. `.agents/rules/07-proactive-skill-trigger.md` — **主動偵測訊號、主動建議 skill**
 
 **要呼叫 MCP 工具前**，先看 `.agents/MCP.md` 該工具的安全警告。
 **新功能 / 新決策 / 寫 code 前**，先看 `.agents/WORKFLOW.md` 該走哪個 skill。
@@ -95,6 +96,12 @@
 - 使用者打 `/explain-code`、`/check-key` 就會觸發對應 skill
 - 你也可以根據 description 自動匹配並使用 skill
 - 詳見 `.agents/SKILLS.md`
+
+**主動觸發守則（重要）**：
+- 你必須**持續監測對話**，比對每個 SDD skill 的「🚨 自動觸發訊號」段
+- 發現訊號 → **主動建議**：「我注意到你 ___，要不要跑 /xxx？」+ 30 字白話介紹
+- **不要直接執行** — 等使用者確認
+- 完整規則見 `.agents/rules/07-proactive-skill-trigger.md`
 
 ### 4.5 Subagents（平行任務）
 

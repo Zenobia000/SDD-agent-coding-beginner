@@ -1,9 +1,43 @@
 ---
 name: plan-sprint
-description: 把 PRD 拆解成可執行的 sprint backlog。用於 sprint 開始前，或既有 backlog 重新整理時。
+description: 把 PRD 拆解成可執行的 sprint backlog。**主動觸發時機**：使用者剛跑完 `/spec-it`（PRD 寫好了）、說「sprint 開始」「這禮拜要做什麼」「先做哪個」「拆任務」「優先排序」，或當前 sprint-current.md 條目全打勾。
 ---
 
 # /plan-sprint — Sprint Backlog 拆解
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「sprint 開始」「sprint 怎麼安排」
+- 「這禮拜要做什麼」「今天要做什麼」「先做哪個」
+- 「拆任務」「拆 backlog」「優先排序」
+- 「PRD 寫好了，下一步」（剛跑完 `/spec-it` 的延續訊號）
+- 當前 `tasks/sprint-current.md` 的 Now/Next 條目都打勾
+
+### 中訊號（建議但詢問）
+
+- 「先做 ___ 還是 ___」（多任務優先序問題）
+- 對話進入「規劃接下來」階段
+- 使用者列出 3+ 件要做的事但沒分優先級
+
+### 反訊號（這些不要觸發 plan-sprint）
+
+- 沒有 PRD → 先建議 `/spec-it`
+- Sprint 進行中、Now 區還有未完成 task → 不要打斷
+- 單一 task 的子拆解（這屬 `/tdd-cycle` 的範圍）
+
+### 主動建議的話術範例
+
+> 你剛跑完 `/spec-it`、PRD 有 4 個 user story 了。動工前建議跑 `/plan-sprint` 拆任務。
+>
+> 它會把每個 user story 拆成「半天可完成」的小 task，寫到 `tasks/sprint-current.md` 的 Now/Next/Later 區。這樣你不會「同時動 3 件事都做不完」。
+>
+> 要拆嗎？
+
+---
 
 ## 何時觸發
 

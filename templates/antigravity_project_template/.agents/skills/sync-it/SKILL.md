@@ -1,9 +1,43 @@
 ---
 name: sync-it
-description: 比對 code 與文件之間的漂移（drift），列出需要更新的文件並建議修法。用於 /tdd-cycle 完成後、commit 前；或定期巡檢時。
+description: 比對 code 與文件之間的漂移（drift），列出需要更新的文件並建議修法。**主動觸發時機**：使用者改完 API endpoint / DB schema / user story 行為後，說「文件還對嗎」「PRD 要不要動」「API 改了」，或 `/verify` 過了但有 `docs/` 檔案未動到。
 ---
 
 # /sync-it — Doc-as-Code Drift Detector
+
+## 🚨 自動觸發訊號（AI 主動偵測）
+
+依 `rules/07-proactive-skill-trigger.md`，AI 要監測對話、發現訊號主動建議。
+
+### 強訊號（高機率該觸發）
+
+- 「我改了 API」「endpoint 改名」「schema 改了」
+- 「文件還對嗎」「PRD 還對嗎」「API contract 要不要動」
+- 改了 `app/routes/`、`db/migrations/`、`app/models/` 等 contract 邊界檔
+- `/verify` 已過綠燈、要 commit 前
+- Sprint 結尾、commit 累積 5+ 個沒同步文件
+
+### 中訊號（建議但詢問）
+
+- 對話中提到 endpoint path 變更
+- 對話中提到欄位 / response schema 變更
+- 改 BDD scenario 但沒改對應的 PRD AC
+
+### 反訊號（這些不要觸發 sync-it）
+
+- 純樣式 / 註解修改 → 無 drift 風險
+- 純 refactor，無 contract 改動
+- 還沒有任何 spec → 先跑 `/spec-it`
+
+### 主動建議的話術範例
+
+> 你說「我改了 API path 從 /api/summary 到 /v1/summaries」 — 這會讓 `docs/api-contract.md` 漂移。
+>
+> 建議跑 `/sync-it`，它會比對你的 code 改動與 `docs/`、`tests/features/` 的所有 spec，列出哪些文件要跟著動。漏了 sync 會導致下次 AI 讀過期文件、寫錯前提。
+>
+> 要跑嗎？
+
+---
 
 ## 何時觸發
 

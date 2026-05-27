@@ -26,6 +26,8 @@
 
 `AGENTS.md` 是 Antigravity 平台採用的標準入口格式。**站立規則寫一份，Antigravity 桌面版與 CLI（`agy`）都吃**。
 
+> **想直接動手？** 本檔所有設計都已實作在 `templates/antigravity_project_template/`，整包複製即可。對應的「實際操作手冊」是 `templates/antigravity_project_template/USAGE.md`（A 模式 / B 模式選擇器）。
+
 ---
 
 ## 第 1 步：先看「最小但完整」的目錄藍圖（推薦初學者從這版開始）
@@ -34,29 +36,30 @@
 repo-root/
 ├── README.md                    # 給人看的入口
 ├── AGENTS.md                    # ⭐ Antigravity 一定會讀的「站立規則」
+├── USAGE.md                     # 選 Mode A（Vibe Coding 五步）或 Mode B（SDD Sprint 十站）
 ├── .agents/
 │   ├── settings.json            # Antigravity CLI 設定（model / checkpoint / MCP）
 │   ├── MCP.md                   # 三大擴充原語 ①：MCP 外部工具
 │   ├── SKILLS.md                # 三大擴充原語 ②：Skill + Slash Command
 │   ├── SUBAGENTS.md             # 三大擴充原語 ③：平行任務分派
-│   ├── rules/                   # AI 寫 code 時的硬約束
+│   ├── WORKFLOW.md              # 工作流封裝：Solo SDD Sprint 10 站
+│   ├── rules/                   # AI 寫 code 時的硬約束（細分主題）
 │   ├── prompts/                 # 常用對話開場白
-│   └── skills/                  # 自訂 skill / slash command
+│   └── skills/                  # 自訂 skill / slash command（每個 skill 也是 `/<name>`）
 ├── docs/
-│   ├── PRD.md                   # 需求規格
-│   ├── architecture.md          # 系統架構真相來源
-│   ├── domain-model.md          # 領域模型與核心概念
-│   ├── api-contract.md          # API 契約
-│   ├── testing-strategy.md      # 測試策略
-│   ├── security.md              # 安全與權限邊界
-│   └── deployment.md            # 部署與環境
-└── adr/
-    ├── ADR-0001-tech-stack.md
-    ├── ADR-0002-architecture-boundary.md
-    └── ADR-0003-agent-governance.md
+│   ├── PRD.md                   # 需求規格（單一 source of truth）
+│   ├── HANDBOOK.md              # Antigravity CLI 操作手冊（給學員）
+│   └── templates/               # 可複用範本：PRD / API / DB / BDD / ADR / test-cases
+└── tasks/
+    ├── backlog.md               # Now / Next / Later / Blocked
+    ├── sprint-current.md        # 當前 sprint 拆解的任務清單
+    ├── known-issues.md          # 已知問題與 workaround
+    └── retros/                  # 每 sprint retrospective
 ```
 
 這樣的結構能支撐：Antigravity 桌面版、Antigravity CLI（`agy`）、團隊開發、CI/CD、Agentic coding 工作流。
+
+> **ADR 在哪？** 為了避免初學者一上手就被 8 個 ADR 嚇到，template 把 ADR 範本放在 `docs/templates/adr-template.md`。需要記錄技術決策時，自行建立 `adr/ADR-0001-<topic>.md` 即可（詳見第 6 步）。
 
 ---
 
@@ -65,20 +68,24 @@ repo-root/
 | 文件                            | 主要對象               | 用途                              |
 | ----------------------------- | ------------------ | ------------------------------- |
 | `README.md`                   | 人類新人               | 安裝、介紹、Quick Start               |
+| `USAGE.md`                    | 人類學員              | 選擇 Mode A / Mode B 走哪條路徑       |
 | `AGENTS.md`                   | Antigravity Agent  | 站立規則、跨對話一致的專案總綱                 |
 | `.agents/settings.json`       | Antigravity CLI    | model / checkpoint / MCP 等執行設定 |
+| `.agents/WORKFLOW.md`         | Antigravity Agent  | 工作流封裝（Sprint 10 站 + 3 層 Spec）  |
 | `.agents/rules/*.md`          | Antigravity Agent  | 撰寫 code 時的硬約束（細分主題）             |
 | `.agents/skills/*.md`         | Antigravity Agent  | 可手動 / 自動觸發的 slash command       |
-| `docs/architecture.md`        | 人類 + Agent         | 系統結構真相來源                        |
-| `adr/*.md`                    | 人類 + Agent         | 技術決策歷史                          |
-| `docs/testing-strategy.md`    | Agent + QA         | 測試邊界與驗證流程                       |
-| `docs/security.md`            | Agent + DevOps     | 權限、資料、危險操作邊界                    |
+| `docs/PRD.md`                 | 人類 + Agent         | 需求規格（單一 source of truth）       |
+| `docs/HANDBOOK.md`            | 人類學員              | CLI / harness engineering 學習指引 |
+| `docs/templates/*.md`         | 人類 + Agent         | 可複用範本（PRD / API / DB / BDD / ADR） |
+| `tasks/*.md`                  | 人類 + Agent         | Sprint backlog / 已知問題 / retros |
+| `adr/*.md`                    | 人類 + Agent         | 技術決策歷史（template 不預設此目錄，自行建立）  |
 
 關鍵心法：
 
 - **站立規則放 `AGENTS.md`**（每次對話都生效）
-- **執行細節放 `.agents/`**（settings + rules + skills）
+- **執行細節放 `.agents/`**（settings + WORKFLOW + rules + skills）
 - **系統真相放 `docs/` 與 `adr/`**
+- **學員指引放 `USAGE.md` + `docs/HANDBOOK.md`**（給人類，不給 AI 讀）
 
 ---
 
@@ -169,7 +176,32 @@ Antigravity 把「擴充能力」分成三個原語，分別放在 `.agents/` �
 
 ---
 
+## 第 4.5 步：工作流封裝（`.agents/WORKFLOW.md`）
+
+三大原語是「能力」；WORKFLOW.md 是把這些能力**串成可重複的工作流**的入口。
+
+`templates/antigravity_project_template/.agents/WORKFLOW.md` 內建 **Solo SDD Sprint 10 站**，分四個階段：
+
+| 階段 | 站 | 觸發 skill | 主要產出 |
+|---|---|---|---|
+| **意圖** | 1-3 | `/spec-it` `/adr` `/plan-sprint` | PRD、ADR、Sprint backlog |
+| **設計** | 4 | `/spec-it`（L2+L3） | API contract / DB schema / BDD scenarios |
+| **實作** | 5-7 | `/tdd-cycle` `/verify` `/sync-it` | code + 綠燈測試 + 同步文件 |
+| **上線** | 8-10 | `/commit-msg` + 部署 + `/retro` | Conventional commit、部署、retrospective |
+
+### 為什麼要把工作流「寫成檔案」？
+
+- **AI 沒有持久記憶**：流程寫成檔案，每次新對話 AI 都會自動讀進來，不需重講
+- **3 層 Spec 強迫設計先行**：L1 PRD（意圖）→ L2 API/DB（介面）→ L3 BDD（行為），缺一層 AI 就會自由發揮
+- **每站對應一個 skill**：AI 看 WORKFLOW.md 就知道現在該觸發哪個 `/<command>`、要產出什麼
+
+> **與 USAGE.md 的關係**：USAGE.md 教使用者「選 A / B 哪條路」；WORKFLOW.md 是 B 路徑（SDD Sprint）的詳細站別。A 路徑（Vibe Coding 五步）寫在 `AGENTS.md §3.1`。
+
+---
+
 ## 第 5 步：系統真相層 —— `docs/` 該放什麼？
+
+> **Template 的取捨**：學員版 template 只放 `docs/PRD.md` + `docs/HANDBOOK.md`，把下面這些「成熟階段才需要」的文件改放在 `docs/templates/` 當範本。等專案規模大到需要時，才從 templates/ 抄出來填。下面列出的章節是各文件的**建議綱要**，方便你決定要不要加。
 
 ### `docs/architecture.md`（最重要的真相來源）
 
@@ -265,6 +297,8 @@ Antigravity 把「擴充能力」分成三個原語，分別放在 `.agents/` �
 
 ADR (Architecture Decision Record) 是避免 AI 亂改架構的關鍵防線。每個重要決策獨立一份，append-only，永不修改已通過的 ADR。
 
+> **Template 的取捨**：學員版 template **不預設 `adr/` 目錄**——避免一開始就要面對 8 個 ADR 的心理負擔。ADR 範本放在 `docs/templates/adr-template.md`，並提供 `/adr` skill 引導你寫第一份。需要時自己 `mkdir adr/` 即可。
+
 ### ADR 範本
 
 ```markdown
@@ -305,14 +339,19 @@ adr/
 
 ### 最佳分工表
 
-| 文件                  | 該放什麼                       | 不該放什麼                |
-| ------------------- | -------------------------- | -------------------- |
-| `AGENTS.md`         | 角色、必讀清單、工作流程、平台規範、絕對禁止     | 完整 PRD、完整 ADR、太長的架構細節 |
-| `.agents/rules/*`   | 細分主題的硬約束（命名、錯誤處理、安全）       | 一次性任務指令              |
-| `.agents/skills/*`  | 可手動 / 自動觸發的程序流程            | 通用文件全文               |
-| `README.md`         | 給新人看的安裝與介紹                 | 給 Agent 的細碎工作規則      |
-| `docs/*.md`         | 系統真相來源                     | prompt-style 指令     |
-| `adr/*.md`          | 技術決策歷史                     | 當前操作 SOP            |
+| 文件                       | 該放什麼                       | 不該放什麼                |
+| ------------------------ | -------------------------- | -------------------- |
+| `README.md`              | 給新人看的安裝與介紹                 | 給 Agent 的細碎工作規則      |
+| `USAGE.md`               | 模式選擇器（A vs B 路徑）、第一次跑的 walkthrough | 完整工作流細節（那是 WORKFLOW.md 的事） |
+| `AGENTS.md`              | 角色、必讀清單、工作流程、平台規範、絕對禁止     | 完整 PRD、完整 ADR、太長的架構細節 |
+| `.agents/WORKFLOW.md`    | Sprint 站別、3 層 Spec、每站觸發的 skill | 各 skill 的具體步驟（那是 `.agents/skills/*` 的事） |
+| `.agents/rules/*`        | 細分主題的硬約束（命名、錯誤處理、安全）       | 一次性任務指令              |
+| `.agents/skills/*`       | 可手動 / 自動觸發的程序流程            | 通用文件全文               |
+| `docs/PRD.md`            | 當前產品需求、acceptance criteria | 歷史版本（用 git history）  |
+| `docs/HANDBOOK.md`       | CLI / harness engineering 學員指引 | 給 AI 的執行規則（那是 AGENTS.md 的事） |
+| `docs/templates/*`       | 可複用的文件範本                   | 已填好的真實內容             |
+| `tasks/*`                | sprint backlog、known-issues、retros | 給 AI 的硬約束（那是 rules/ 的事） |
+| `adr/*.md`               | 技術決策歷史                     | 當前操作 SOP            |
 
 ---
 
@@ -342,32 +381,36 @@ adr/
 
 ## 第 9 步：完整版藍圖（給已經上手的人）
 
-當你的專案規模變大，可以擴充成這個樣子：
+當你的專案規模變大，從學員版 template 升級成這個樣子（**新增的目錄/檔案標 `←` 註記**）：
 
 ```text
 repo-root/
 ├── README.md
 ├── AGENTS.md
+├── USAGE.md
 ├── .agents/
 │   ├── settings.json
 │   ├── MCP.md
 │   ├── SKILLS.md
 │   ├── SUBAGENTS.md
+│   ├── WORKFLOW.md
 │   ├── rules/
 │   ├── prompts/
 │   ├── skills/
-│   └── memory/
+│   └── memory/                ← 長期慣例、跨 sprint 學到的 pattern
 ├── docs/
 │   ├── PRD.md
-│   ├── architecture.md
-│   ├── domain-model.md
-│   ├── api-contract.md
-│   ├── testing-strategy.md
-│   ├── quality-gate.md
-│   ├── security.md
-│   ├── deployment.md
-│   └── observability.md
-├── adr/
+│   ├── HANDBOOK.md
+│   ├── templates/
+│   ├── architecture.md        ← 系統規模 > 5 模組時加
+│   ├── domain-model.md        ← 出現多個 entity 時加
+│   ├── api-contract.md        ← 對外 API 多於 5 個時加
+│   ├── testing-strategy.md    ← 測試金字塔需要顯式規範時加
+│   ├── quality-gate.md        ← 有 CI/CD 時加
+│   ├── security.md            ← 處理敏感資料時加
+│   ├── deployment.md          ← 上 production 前加
+│   └── observability.md       ← 要監控 SLO 時加
+├── adr/                       ← 首次架構決策時建立
 │   ├── ADR-0001-tech-stack.md
 │   ├── ADR-0002-frontend-framework.md
 │   ├── ADR-0003-backend-framework.md
@@ -378,8 +421,10 @@ repo-root/
 │   └── ADR-0008-ai-agent-governance.md
 └── tasks/
     ├── backlog.md
+    ├── sprint-current.md
     ├── known-issues.md
-    └── release-plan.md
+    ├── retros/
+    └── release-plan.md        ← 開始有 release cadence 時加
 ```
 
 額外的任務管理層：
@@ -388,12 +433,20 @@ repo-root/
 # tasks/backlog.md
 ## Now / Next / Later / Blocked
 
+# tasks/sprint-current.md
+## Sprint 目標 / 任務拆解（每個任務半天可完成） / Definition of Done
+
 # tasks/known-issues.md
 ## Issue / Impact / Workaround / Owner / Target Fix
+
+# tasks/retros/YYYY-MM-DD.md
+## 4Ls：Liked / Learned / Lacked / Longed for
 
 # tasks/release-plan.md
 ## Version / Scope / Risk / Test Plan / Rollback Plan
 ```
+
+> **升級節奏**：不要一次把所有 `←` 註記的檔案都建出來。每次只在「真的需要」時加一個——例如出現第二個 entity 才加 `domain-model.md`，第一次上線前才加 `deployment.md`。提前加會變成文件腐爛源頭。
 
 ---
 
@@ -437,13 +490,24 @@ repo-root/
 
 ## 附錄：建議的 onboarding 步驟（給今天就要動手的人）
 
-1. **複製本檔的「最小但完整」目錄藍圖**到你的 repo（或直接用 `templates/antigravity_project_template/` 整包複製）
+### 快速路徑（推薦）
+
+1. **整包複製 `templates/antigravity_project_template/`** 到你的 repo 根目錄
+2. **打開 `USAGE.md`** 選 Mode A（Vibe Coding 五步）或 Mode B（SDD Sprint 十站）
+3. **填 `docs/PRD.md`** 第 1-3 節（不會填 → 用 `/spec-it` 讓 AI 問你）
+4. **用 `agy` 開啟資料夾**，跑 `/memory show` 確認 `AGENTS.md` 有被讀到
+5. **開始用 Antigravity 改 code**
+
+### 從零自建（給想理解每個檔案存在原因的人）
+
+1. **複製第 1 步的「最小但完整」目錄藍圖**
 2. **先填 `AGENTS.md` 第 1-3 節**（角色 / 必讀清單 / 工作流程），其他章節先留 TODO
 3. **建立 `.agents/settings.json`**（最小設定：model + checkpointing）
-4. **建立 `docs/PRD.md` 與 `docs/architecture.md` 各一份骨架**（即使只有標題也好）
-5. **建立 `adr/ADR-0001-tech-stack.md`**（記錄你選用的語言與框架）
-6. 用 `agy` 開啟資料夾，跑 `/memory show` 確認 `AGENTS.md` 有被讀到
-7. 開始用 Antigravity 改 code
+4. **建立 `.agents/WORKFLOW.md`**（從 template 複製 Sprint 10 站結構）
+5. **建立 `docs/PRD.md` 骨架**（即使只有標題也好）
+6. **規模大到需要決策記錄時**，再 `mkdir adr/` + 用 `docs/templates/adr-template.md` 建第一份 ADR
+7. 用 `agy` 開啟資料夾，跑 `/memory show` 確認 `AGENTS.md` 有被讀到
+8. 開始用 Antigravity 改 code
 
 這個流程跑兩週，你的 repo 就會變成「Antigravity 進來就上手」的工作環境。
 
