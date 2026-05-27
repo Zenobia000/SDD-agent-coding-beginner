@@ -11,17 +11,12 @@ my-project/
 ├── README.md                      ← 你正在看（入口）
 ├── USAGE.md                       ← ⭐ 完整使用說明（A/B 模式 walkthrough + FAQ）
 ├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（跨工具新興共通格式）
+├── RUNBOOK.md                     ← ⭐ 端到端 walkthrough（AI Studio meta-prompt → agy SDD Sprint）
+├── ai_ready_repo_blueprint.md     ← 整套 template 為什麼這樣設計
+├── terminal_configuration.md      ← Terminal 工作站哲學（RUN/WATCH/CHECK）
 ├── docs/
 │   ├── PRD.md                     ← 從 AI Studio 帶過來的需求規格（填空）
-│   ├── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
-│   └── templates/                 ← ⭐ SDD 三層 spec 範本（大廠對標版）
-│       ├── PRD-template.md            (Atlassian / Amazon PR-FAQ)
-│       ├── user-story-template.md     (Bill Wake INVEST)
-│       ├── adr-template.md            (MADR v3.0)
-│       ├── api-contract-template.md   (OpenAPI 3.0 + Stripe Errors)
-│       ├── db-schema-template.md      (PostgreSQL conventions)
-│       ├── bdd-scenarios-template.md  (Gherkin / Cucumber)
-│       └── test-cases-template.md     (AAA pattern + F.I.R.S.T.)
+│   └── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
 ├── tasks/                         ← ⭐ Solo Sprint backlog 系統
 │   ├── backlog.md                     (整個專案的未來任務總清單)
 │   ├── sprint-current.md              (當前 sprint 執行清單)
@@ -49,8 +44,12 @@ my-project/
     └── skills/                    ← ⭐ Slash command 工具箱
         ├── check-key.md               (/check-key 部署前安檢)
         ├── explain-code/SKILL.md      (/explain-code 架構師視角)
-        ├── spec-it/SKILL.md           ⭐ /spec-it    生 PRD + API + BDD
-        ├── adr/SKILL.md               ⭐ /adr        架構決策記錄
+        ├── spec-it/
+        │   ├── SKILL.md               ⭐ /spec-it    生 PRD + API + BDD
+        │   └── templates/             ⭐ 6 份大廠對標 spec 範本（PRD / user-story / api-contract / db-schema / bdd / test-cases）
+        ├── adr/
+        │   ├── SKILL.md               ⭐ /adr        架構決策記錄
+        │   └── templates/adr-template.md  (MADR v3.0)
         ├── plan-sprint/SKILL.md       ⭐ /plan-sprint backlog 拆解
         ├── tdd-cycle/SKILL.md         ⭐ /tdd-cycle  紅綠燈循環
         ├── verify/SKILL.md            ⭐ /verify     5 維度品質驗證
@@ -156,6 +155,7 @@ agy
 | 大型任務跑很久 / 想平行加速 | `.agents/SUBAGENTS.md`（Antigravity 2026 殺手特性） |
 | 想跑 SDD 完整 Sprint（spec + TDD + 文件同步） | `.agents/WORKFLOW.md` + 8 個 SDD skill |
 | 不知道 spec 怎麼寫 | `.agents/skills/spec-it/templates/` (6 份) + `.agents/skills/adr/templates/` (ADR) — 共 7 份大廠對標範本，與 skill 共置 |
+| 想看「從一句痛點到可跑 app」完整流程 | [`RUNBOOK.md`](./RUNBOOK.md) — SmartTrip FX 端到端 walkthrough（AI Studio meta-prompt → agy SDD Sprint） |
 | 不知道任務怎麼拆 | 打 `/plan-sprint` |
 | 想 commit 但不知道訊息怎麼寫 | 打 `/commit-msg` |
 | Sprint 結束想回顧 | 打 `/retro` |
