@@ -30,34 +30,21 @@
 
 ---
 
-## 第 1 步：先看「最小但完整」的目錄藍圖（推薦初學者從這版開始）
+## 第 1 步：先看「最小但完整」的目錄藍圖
+
+> 完整目錄樹（含每個 skill / template / rule 檔名與註解）→ [`antigravity_project_template/README.md` §這個資料夾裡有什麼](./antigravity_project_template/README.md#-這個資料夾裡有什麼)（單一 SoT）
+
+**最小骨架**（4 層分區，職責對應第 7 步分工表）：
 
 ```text
 repo-root/
-├── README.md                    # 給人看的入口
-├── AGENTS.md                    # ⭐ Antigravity 一定會讀的「站立規則」
-├── USAGE.md                     # 選 Mode A（Vibe Coding 五步）或 Mode B（SDD Sprint 十站）
-├── .agents/
-│   ├── settings.json            # Antigravity CLI 設定（model / checkpoint / MCP）
-│   ├── MCP.md                   # 三大擴充原語 ①：MCP 外部工具
-│   ├── SKILLS.md                # 三大擴充原語 ②：Skill + Slash Command
-│   ├── SUBAGENTS.md             # 三大擴充原語 ③：平行任務分派
-│   ├── WORKFLOW.md              # 工作流封裝：Solo SDD Sprint 10 站
-│   ├── rules/                   # AI 寫 code 時的硬約束（細分主題）
-│   ├── prompts/                 # 常用對話開場白
-│   └── skills/                  # 自訂 skill / slash command（每個 skill 也是 `/<name>`）
-├── docs/
-│   ├── PRD.md                   # 需求規格（單一 source of truth）
-│   ├── HANDBOOK.md              # Antigravity CLI 操作手冊（給學員）
-│   └── templates/               # 可複用範本：PRD / API / DB / BDD / ADR / test-cases
-└── tasks/
-    ├── backlog.md               # Now / Next / Later / Blocked
-    ├── sprint-current.md        # 當前 sprint 拆解的任務清單
-    ├── known-issues.md          # 已知問題與 workaround
-    └── retros/                  # 每 sprint retrospective
+├── README.md / USAGE.md / AGENTS.md       # 入口三件套（人類 + Agent）
+├── .agents/                               # Agent 執行細節（settings / WORKFLOW / SKILL-MAP / MCP / SKILLS / SUBAGENTS / rules / prompts / skills）
+├── docs/                                  # 系統真相（PRD / HANDBOOK / templates）
+└── tasks/                                 # Sprint 治理（backlog / sprint-current / known-issues / retros）
 ```
 
-這樣的結構能支撐：Antigravity 桌面版、Antigravity CLI（`agy`）、團隊開發、CI/CD、Agentic coding 工作流。
+這個結構支撐：Antigravity 桌面版、Antigravity CLI（`agy`）、團隊開發、CI/CD、Agentic coding 工作流。
 
 > **ADR 在哪？** 為了避免初學者一上手就被 8 個 ADR 嚇到，template 把 ADR 範本放在 `docs/templates/adr-template.md`。需要記錄技術決策時，自行建立 `adr/ADR-0001-<topic>.md` 即可（詳見第 6 步）。
 
@@ -154,25 +141,18 @@ repo-root/
 
 Antigravity 把「擴充能力」分成三個原語，分別放在 `.agents/` 下：
 
-### 4.1 MCP（外部能力通道）
+| 原語 | 角色 | 教學文件 |
+|---|---|---|
+| **MCP** | 外部能力通道（連 GitHub / 開瀏覽器 / 查文件） | [`antigravity_project_template/.agents/MCP.md`](./antigravity_project_template/.agents/MCP.md) |
+| **Skills + Slash Commands** | 程序知識封裝 + hot key | [`antigravity_project_template/.agents/SKILLS.md`](./antigravity_project_template/.agents/SKILLS.md) |
+| **Subagents** | 平行任務分派（大型 refactor / 跨檔案分析） | [`antigravity_project_template/.agents/SUBAGENTS.md`](./antigravity_project_template/.agents/SUBAGENTS.md) |
 
-- 在 `.agents/settings.json` 的 `mcpServers` 區塊宣告
-- 詳細用法與安全警告寫在 `.agents/MCP.md`
-- 常見：filesystem / fetch / github / playwright
-- 心法：MCP 是「AI 的 USB-C」，**一次寫好就能接所有支援 MCP 的 agent**
+> 三大原語的**完整對照表 + 判斷練習** → [`SUBAGENTS.md` §三大擴充原語對照](./antigravity_project_template/.agents/SUBAGENTS.md#三大擴充原語對照mcp--skill--subagent)（單一 SoT，避免重複寫三次）
 
-### 4.2 Skills + Slash Commands（程序知識封裝）
-
-- `.agents/skills/<name>.md` 同時是 skill 也是 slash command
-- AI 可依 description 自動觸發，使用者也能打 `/<name>` 手動觸發
-- 詳細結構寫在 `.agents/SKILLS.md`
-- 適合放：審查流程、debug SOP、特定領域的撰寫規範
-
-### 4.3 Subagents（平行任務分派）
-
-- 大型 refactor / 跨檔案分析 / 超長任務時可派 subagent 平行處理
-- 詳細用法寫在 `.agents/SUBAGENTS.md`
-- **MVP 階段不要派**——能一條線跑就一條線
+**心法**：
+- MCP 是「AI 的 USB-C」，一次寫好就能接所有支援 MCP 的 agent
+- Skill 是「該怎麼做的食譜」，AI 看 description 自動翻
+- Subagent 是「派出去的工人」，MVP 階段不要派——能一條線跑就一條線
 
 ---
 
@@ -180,14 +160,9 @@ Antigravity 把「擴充能力」分成三個原語，分別放在 `.agents/` �
 
 三大原語是「能力」；WORKFLOW.md 是把這些能力**串成可重複的工作流**的入口。
 
-`templates/antigravity_project_template/.agents/WORKFLOW.md` 內建 **Solo SDD Sprint 10 站**，分四個階段：
-
-| 階段 | 站 | 觸發 skill | 主要產出 |
-|---|---|---|---|
-| **意圖** | 1-3 | `/spec-it` `/adr` `/plan-sprint` | PRD、ADR、Sprint backlog |
-| **設計** | 4 | `/spec-it`（L2+L3） | API contract / DB schema / BDD scenarios |
-| **實作** | 5-7 | `/tdd-cycle` `/verify` `/sync-it` | code + 綠燈測試 + 同步文件 |
-| **上線** | 8-10 | `/commit-msg` + 部署 + `/retro` | Conventional commit、部署、retrospective |
+> **完整 10 站工作流（Mermaid 圖 + 每站產出 + 大廠對標）** → [`antigravity_project_template/.agents/WORKFLOW.md`](./antigravity_project_template/.agents/WORKFLOW.md)（單一 SoT）
+>
+> **Skill 之間的依賴與斷層分析** → [`antigravity_project_template/.agents/SKILL-MAP.md`](./antigravity_project_template/.agents/SKILL-MAP.md)
 
 ### 為什麼要把工作流「寫成檔案」？
 
@@ -381,51 +356,28 @@ adr/
 
 ## 第 9 步：完整版藍圖（給已經上手的人）
 
-當你的專案規模變大，從學員版 template 升級成這個樣子（**新增的目錄/檔案標 `←` 註記**）：
+學員版 template 的目錄樹見[第 1 步連結到的 README](./antigravity_project_template/README.md#-這個資料夾裡有什麼)。當專案規模變大，**漸進加入以下檔案**（不要一次全建）：
 
-```text
-repo-root/
-├── README.md
-├── AGENTS.md
-├── USAGE.md
-├── .agents/
-│   ├── settings.json
-│   ├── MCP.md
-│   ├── SKILLS.md
-│   ├── SUBAGENTS.md
-│   ├── WORKFLOW.md
-│   ├── rules/
-│   ├── prompts/
-│   ├── skills/
-│   └── memory/                ← 長期慣例、跨 sprint 學到的 pattern
-├── docs/
-│   ├── PRD.md
-│   ├── HANDBOOK.md
-│   ├── templates/
-│   ├── architecture.md        ← 系統規模 > 5 模組時加
-│   ├── domain-model.md        ← 出現多個 entity 時加
-│   ├── api-contract.md        ← 對外 API 多於 5 個時加
-│   ├── testing-strategy.md    ← 測試金字塔需要顯式規範時加
-│   ├── quality-gate.md        ← 有 CI/CD 時加
-│   ├── security.md            ← 處理敏感資料時加
-│   ├── deployment.md          ← 上 production 前加
-│   └── observability.md       ← 要監控 SLO 時加
-├── adr/                       ← 首次架構決策時建立
-│   ├── ADR-0001-tech-stack.md
-│   ├── ADR-0002-frontend-framework.md
-│   ├── ADR-0003-backend-framework.md
-│   ├── ADR-0004-database-design.md
-│   ├── ADR-0005-authentication.md
-│   ├── ADR-0006-deployment-strategy.md
-│   ├── ADR-0007-observability.md
-│   └── ADR-0008-ai-agent-governance.md
-└── tasks/
-    ├── backlog.md
-    ├── sprint-current.md
-    ├── known-issues.md
-    ├── retros/
-    └── release-plan.md        ← 開始有 release cadence 時加
-```
+**`.agents/` 新增**：
+- `memory/` — 長期慣例、跨 sprint 學到的 pattern
+
+**`docs/` 漸進加入**：
+| 加什麼 | 何時加 |
+|---|---|
+| `architecture.md` | 系統規模 > 5 模組時 |
+| `domain-model.md` | 出現多個 entity 時 |
+| `api-contract.md` | 對外 API 多於 5 個時 |
+| `testing-strategy.md` | 測試金字塔需要顯式規範時 |
+| `quality-gate.md` | 有 CI/CD 時 |
+| `security.md` | 處理敏感資料時 |
+| `deployment.md` | 上 production 前 |
+| `observability.md` | 要監控 SLO 時 |
+
+**`adr/` 首次架構決策時建立**（建議 8 份骨架）：
+`ADR-0001-tech-stack` / `0002-frontend-framework` / `0003-backend-framework` / `0004-database-design` / `0005-authentication` / `0006-deployment-strategy` / `0007-observability` / `0008-ai-agent-governance`
+
+**`tasks/` 新增**：
+- `release-plan.md` — 開始有 release cadence 時加
 
 額外的任務管理層：
 
