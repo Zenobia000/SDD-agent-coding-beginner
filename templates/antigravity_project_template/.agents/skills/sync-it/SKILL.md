@@ -159,6 +159,57 @@ description: 比對 code 與文件之間的漂移（drift），列出需要更�
 - 改 code → 跑 `/tdd-cycle`（先寫測試重現問題）
 - 改文件 → 直接 edit，但要更新 `last-synced-with` frontmatter（如有）
 - 兩邊都改 → 一個 commit 修一邊，不要混在一起
+- **暫不修（延後到下個 sprint）** → 跑 Step 6 寫進 known-issues.md
+
+---
+
+## 📝 Issue Logging — 寫入 `tasks/known-issues.md`
+
+`/sync-it` 列出的 drift report 有三種嚴重度（Critical / Warning / Info）。**Critical 必須當下修；Warning / Info 可以延後**，但**不能口頭說「之後再說」就忘** — 要寫進 `known-issues.md`。
+
+### 觸發 Issue Logging 的情境
+
+| Drift 等級 | 處理 |
+|---|---|
+| 🔴 **Critical**（API path 漂移、PRD AC 未驗證） | **必須當下修**，不能進 known-issues |
+| 🟡 **Warning**（缺對應測試、文件 frontmatter 過期） | 詢問使用者：修 / 進 known-issues |
+| 🟢 **Info**（ADR 提及的舊技術未更新、文件命名輕微不一致） | 直接建議進 known-issues |
+
+### 建議的問法
+
+drift report 列完後，對每個 Warning / Info：
+
+```
+D-002（缺對應測試）— Warning 級別。三個選項：
+1. 現在補測試（建議，跑 /tdd-cycle 補 10 分鐘）
+2. 記進 known-issues.md 當 ISSUE-NNN
+3. 直接刪掉這條 BDD scenario（如果它已經不再準確）
+
+你選？
+```
+
+### 主動建議的話術（Info 級別）
+
+> D-004（ADR-0002 寫「採用 Vue」但 package.json 是 React）是 Info 級別 drift。
+>
+> 這需要寫一份新 ADR superseded 它，但這 sprint 你顯然沒空。我建議：
+> - 現在進 `tasks/known-issues.md` 當 ISSUE-NNN，延後原因「需要先寫 ADR-NNNN，這 sprint 沒空」
+> - 重評估時機填「下個 sprint retro」
+>
+> 我幫你寫進去？
+
+### 寫入要求
+
+依 `tasks/known-issues.md` 既有格式，9 個欄位都要填。**特別注意**：
+- **影響範圍**：寫明哪個 user story / API endpoint / table 受影響
+- **修法草案**：drift report 已經給了建議，直接抄
+- **延後原因**：不是「懶得修」，要寫具體（如「需要先做 ADR」「需要跟 PO 確認」）
+
+### 鐵律
+
+- **Critical drift** 不能延後 — 必須當下修，不進 known-issues
+- **Warning 持續 2 sprint 沒修** → 升級成 Critical
+- **Info 持續 3 sprint 沒修** → 直接刪除（顯然不重要）
 
 ---
 

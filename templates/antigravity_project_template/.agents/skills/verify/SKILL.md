@@ -185,6 +185,54 @@ description: 跑全套品質驗證（Format / Lint / Type / Test+Coverage / Secu
 
 ---
 
+## 📝 Issue Logging — 寫入 `tasks/known-issues.md`
+
+`/verify` 是最容易發現 issue 的時機。但**不是每個 fail 都該當下修** — 有些 fail 屬於「這 sprint 不在 scope、但確實是 bug」，要記下來不能假裝沒看到。
+
+### 觸發 Issue Logging 的情境
+
+| 維度 | 何時要 log issue |
+|---|---|
+| **Test fail** | 紅燈測試屬於下個 sprint 的 user story / 屬於既有 bug 非本 sprint 範圍 |
+| **Coverage 不達標** | 缺的覆蓋是「非主流程的歷史 code」、本 sprint 不打算補 |
+| **Lint warning** | 風格 warning 不阻擋功能、批次整理留下個 sprint |
+| **Security warning** | 中 / 低嚴重度漏洞（Critical / High 必須當下修，不能 log） |
+
+### 建議的問法
+
+報告產出後，對每個 fail 問使用者：
+
+```
+測試 test_xxx 紅燈。三個選項：
+1. 現在修（建議，5 分鐘內）
+2. 記進 known-issues.md 當 ISSUE-NNN，下個 sprint 處理
+3. 它其實已經是 known issue 了（哪個 ISSUE-NNN？）
+
+你選？
+```
+
+### 主動建議的話術
+
+> `test_api_503_with_retry` 紅燈，但這跟 `tasks/known-issues.md` 的 ISSUE-002（Gemini 偶發 503）是同類。
+>
+> 你不在這 sprint 修的話，要不要：
+> - 把 ISSUE-002 的「重評估時機」改成 next sprint
+> - 或新增 ISSUE-003 補上這個測試案例的失敗細節
+>
+> 還是現在直接修？
+
+### 寫入要求
+
+依 `tasks/known-issues.md` 既有格式，9 個欄位都要填。
+
+### 鐵律
+
+- **Critical / High Security 漏洞**不能進 known-issues — 必須當下修
+- **主流程紅燈**不能進 known-issues — 必須當下修
+- **進 known-issues 的 fail 需要「延後原因」明確**（不是「懶得修」）
+
+---
+
 ## 一鍵指令（建議寫進 Makefile / package.json scripts）
 
 ```makefile

@@ -227,6 +227,33 @@ pytest tests/unit/test_summarizer.py -v --cov=app.summarizer --cov-report=term-m
 
 ---
 
+## 📝 Issue Logging — 寫入 `tasks/known-issues.md`
+
+跑 TDD 過程常會「**附帶發現**」一些 issue：寫測試時注意到別的 function 有邊界沒處理、發現一個現有 function 命名怪、看到 dead code⋯⋯。
+
+**這些不在當前 task 範圍 → 不要順手修**（會偏離 sprint goal），但**也不能假裝沒看到**（會忘記、累積技術債）。
+
+### 觸發 Issue Logging 的情境
+
+- 寫測試時發現「**另一個 function 也有 bug**」（不在當前 user story 範圍）
+- 寫實作時看到「**這段命名混亂 / 重複邏輯 / dead code**」
+- Mock 邊界時發現「**真實 API 行為與文件不符**」（但這不是本 task 要修）
+
+### 主動建議的話術
+
+> 我寫 `test_summarize_with_empty_string` 時注意到 `_validate_input()` 對純空白字串（`"   "`）也沒處理 — 這不在 T-102 範圍，但是個真的 bug。
+>
+> 要不要先記到 `tasks/known-issues.md` 當作 ISSUE-NNN？格式照那邊既有的範本（發現日 / 影響範圍 / 嚴重度 / 重現步驟 / 延後原因）。等 sprint retro 再決定排哪 sprint 修。
+
+### 寫入要求
+
+依 `tasks/known-issues.md` 既有格式寫，9 個欄位都要填：
+- 發現日（today）/ 影響範圍 / 嚴重度（Critical/High/Medium/Low）/ 重現步驟 / 預期 / 實際 / 暫時對策 / 修法草案 / 延後原因 / 重評估時機
+
+**鐵律**：Critical 嚴重度**不能**進 known-issues — 當下停下處理（會壞主流程 / 有資料風險 / 有安全漏洞的事不能延後）。
+
+---
+
 ## 鐵律
 
 1. **永遠先寫測試**。先寫 code 再補測試 = test-last，不算 TDD
