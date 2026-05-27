@@ -10,7 +10,7 @@
 ## 怎麼用這份 runbook
 
 **適用對象**：
-- 跑過一次 `mvp_fill_in_prompt.md` 的學員（如果完全沒跑過，先去那邊）
+- 跑過一次 [`MVP_RUNBOOK.md`](./MVP_RUNBOOK.md) 的學員（如果完全沒跑過，先去那邊）
 - 想做完整 SDD Sprint（Mode B）的人
 - 已經會跟 AI 對話，但每次「做完原型不知道下一步」的人
 
@@ -87,7 +87,7 @@
 
 ### 3. 對照範例（SmartTrip FX 種子簡報）
 
-> 完整版見 [`../../種子簡報.md`](../../種子簡報.md)，這裡擷取重點：
+> 完整版見 [`../種子簡報.md`](../種子簡報.md)，這裡擷取重點：
 
 ```markdown
 ## 目標受眾
@@ -1046,12 +1046,12 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 
 # 延伸閱讀
 
-- [`README.md`](./README.md) — Antigravity template 入口
-- [`USAGE.md`](./USAGE.md) — Mode A vs Mode B 選擇器
-- [`.agents/WORKFLOW.md`](./.agents/WORKFLOW.md) — 10 站工作流總圖
-- [`.agents/SKILL-MAP.md`](./.agents/SKILL-MAP.md) — 10 個 skill 連動關係
-- [`mvp_fill_in_prompt.md`](../mvp_fill_in_prompt.md) — 進度比較慢的學生用的填空版
-- [`ai_ready_repo_blueprint.md`](./ai_ready_repo_blueprint.md) — 整套 template 為什麼這樣設計
+- [`antigravity_project_template/README.md`](./antigravity_project_template/README.md) — Antigravity template 入口
+- [`antigravity_project_template/USAGE.md`](./antigravity_project_template/USAGE.md) — Mode A vs Mode B 選擇器
+- [`antigravity_project_template/.agents/WORKFLOW.md`](./antigravity_project_template/.agents/WORKFLOW.md) — 10 站工作流總圖
+- [`antigravity_project_template/.agents/SKILL-MAP.md`](./antigravity_project_template/.agents/SKILL-MAP.md) — 10 個 skill 連動關係
+- [`MVP_RUNBOOK.md`](./MVP_RUNBOOK.md) — 進度比較慢的學生用的填空版
+- [`antigravity_project_template/ai_ready_repo_blueprint.md`](./antigravity_project_template/ai_ready_repo_blueprint.md) — 整套 template 為什麼這樣設計
 
 ---
 

@@ -11,7 +11,6 @@ my-project/
 ├── README.md                      ← 你正在看（入口）
 ├── USAGE.md                       ← ⭐ 完整使用說明（A/B 模式 walkthrough + FAQ）
 ├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（跨工具新興共通格式）
-├── RUNBOOK.md                     ← ⭐ 端到端 walkthrough（AI Studio meta-prompt → agy SDD Sprint）
 ├── ai_ready_repo_blueprint.md     ← 整套 template 為什麼這樣設計
 ├── terminal_configuration.md      ← Terminal 工作站哲學（RUN/WATCH/CHECK）
 ├── docs/
@@ -155,7 +154,8 @@ agy
 | 大型任務跑很久 / 想平行加速 | `.agents/SUBAGENTS.md`（Antigravity 2026 殺手特性） |
 | 想跑 SDD 完整 Sprint（spec + TDD + 文件同步） | `.agents/WORKFLOW.md` + 8 個 SDD skill |
 | 不知道 spec 怎麼寫 | `.agents/skills/spec-it/templates/` (6 份) + `.agents/skills/adr/templates/` (ADR) — 共 7 份大廠對標範本，與 skill 共置 |
-| 想看「從一句痛點到可跑 app」完整流程 | [`RUNBOOK.md`](./RUNBOOK.md) — SmartTrip FX 端到端 walkthrough（AI Studio meta-prompt → agy SDD Sprint） |
+| 想看「從一句痛點到可跑 app」完整流程 | [`../SDD_RUNBOOK.md`](../SDD_RUNBOOK.md) — SmartTrip FX 端到端 walkthrough（AI Studio meta-prompt → agy SDD Sprint） |
+| 進度比較慢、要 MVP 填空版 | [`../MVP_RUNBOOK.md`](../MVP_RUNBOOK.md) — STRIKE 三格急救組合 |
 | 不知道任務怎麼拆 | 打 `/plan-sprint` |
 | 想 commit 但不知道訊息怎麼寫 | 打 `/commit-msg` |
 | Sprint 結束想回顧 | 打 `/retro` |

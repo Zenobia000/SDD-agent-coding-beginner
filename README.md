@@ -192,7 +192,8 @@ ai-vibe-coding-beginner/
 │   │   ├── docs/                             PRD + HANDBOOK
 │   │   ├── tasks/                            Sprint backlog 系統
 │   │   └── .agents/                          10 個 SDD skill（含 spec-it/templates/ + adr/templates/ 共 7 份大廠對標範本） + MCP/Skills/Subagents 教學
-│   └── mvp_fill_in_prompt.md             第一個 prompt 範本
+│   ├── MVP_RUNBOOK.md                    ⭐ MVP 填空版（STRIKE 三格急救）
+│   └── SDD_RUNBOOK.md                    ⭐ SDD 完整版（AI Studio → agy 端到端 walkthrough）
 │
 └── LICENSE                           ← MIT
 ```
