@@ -11,11 +11,6 @@ my-project/
 ├── README.md                      ← 你正在看（入口）
 ├── USAGE.md                       ← ⭐ 完整使用說明（A/B 模式 walkthrough + FAQ）
 ├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（跨工具新興共通格式）
-├── start / start.bat / start.ps1  ← ⭐ 一鍵啟動 Terminal 工作站（跨 Mac/Linux/WSL/Windows）
-├── .workstation/                  ← zellij 分割視窗 layout（RUN/WATCH/CHECK）
-│   ├── layout.kdl                     (3 格：主任務 / 日誌 / 驗證)
-│   ├── layout-4.kdl                   (4 格：含環境啟動)
-│   └── README.md                      (安裝、自訂、操作說明)
 ├── docs/
 │   ├── PRD.md                     ← 從 AI Studio 帶過來的需求規格（填空）
 │   ├── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
@@ -164,7 +159,6 @@ agy
 | 不知道任務怎麼拆 | 打 `/plan-sprint` |
 | 想 commit 但不知道訊息怎麼寫 | 打 `/commit-msg` |
 | Sprint 結束想回顧 | 打 `/retro` |
-| 每次開發都要手動 `cd` + 開分割視窗很煩 | 雙擊 `start.bat`（Windows）或 `./start`（Mac/Linux/WSL）一鍵切好 RUN/WATCH/CHECK 三格。底層用 **zellij**（跨平台 terminal multiplexer，需一次性安裝）→ 見 [.workstation/README.md](./.workstation/README.md) |
 
 ---
 
