@@ -339,7 +339,7 @@ AI 一本正經胡說八道？三句話救你：
 | 15:58-16:01 (3 min) | @ 引用：把檔案丟進對話 | `cat \|` vs `@file` 對比；多檔範例 `agy "@README.md @main.py 解釋"` |
 | 16:01-16:04 (3 min) | 內建工具 + 三層保險（事前/事中/事後） | ReadFile/Shell/GoogleSearch/WebFetch；三層保險：**事前**首次啟動逐資料夾信任、**事中**動手前確認、**事後** `/restore` 選快照回滾（最重要！「AI 改錯 5 個檔案怎麼辦」的救命繩，本模板 settings.json 預設 `checkpointing.enabled: true`，當場 demo 一次：故意叫 AI 改錯 → 打 `/restore` → 檔案瞬間回到改之前） |
 | 16:04-16:07 (3 min) | MCP + Skills：兩個擴充原語 | MCP 比喻成「USB-C」（外部能力），Skills 比喻成「食譜本 + hot key」（`.agents/skills/<name>.md` 既能自動觸發也能 `/xxx` 手動觸發）。今天不裝 |
-| 16:07-16:09 (2 min) | 跨工具對照表 | 同一招在 Claude Code / Cursor / Antigravity 怎麼叫；**AGENTS.md 是通用格式** |
+| 16:07-16:09 (2 min) | 跨工具對照表 | 同一招在 Claude Code / Cursor / Antigravity 怎麼叫；**AGENTS.md 是新興跨工具共通格式（Codex / Antigravity 原生讀；Claude / Cursor 各有原生入口需橋接）** |
 | 16:09-16:34 (25 min) | **🛠 實作：為你的專案加一點自動化** | **必做（5 min）**：在你的專案根目錄建 AGENTS.md（5 行）。**三選一（20 min）**：① 核心功能寫成一行 `agy` 指令 ② 自動產測試資料腳本 ③ 「每天跑一次」的小工具（用 agy 的 Scheduled Tasks） |
 | 16:34-16:37 (3 min) | 三工具反思 + 決策樹 | 請 2-3 位學員：「我今天三個工具用下來，最驚喜的是 ___」 |
 | 16:37-16:40 (3 min) | M4 小結 + CP3 | 收口「換工具不換腦袋」、發 AGENTS.md 範本卡 |
@@ -401,7 +401,8 @@ agy plugin import gemini
 ```
 
 > 放在專案根目錄。Antigravity CLI（`agy`）每次啟動會自動讀。
-> 跨工具通用：Cursor、OpenAI Codex、Antigravity 桌面版都認這份檔案。
+> **原生支援**：Antigravity（CLI / 桌面版）、OpenAI Codex。
+> **需橋接**：Claude Code（主吃 `CLAUDE.md`，可 symlink）、Cursor（主吃 `.cursor/rules/`，可在 rules 檔加一行 `See AGENTS.md`）。
 
 ### 工具選擇決策樹（M4 結尾發下）
 
@@ -414,8 +415,8 @@ agy plugin import gemini
 ├─ 我要做超大專案 / 多人協作        → Antigravity 桌面版（多 agent）
 └─ 我要馬上用、不想安裝任何東西     → AI Studio
 
-無論選哪個，把 STRIKE 六字訣 + 專案記憶檔 AGENTS.md（業界通用格式：
-Antigravity / Cursor / OpenAI Codex 都認）的觀念帶著走——
+無論選哪個，把 STRIKE 六字訣 + 專案記憶檔 AGENTS.md（跨工具新興共通格式：
+Antigravity / OpenAI Codex 原生讀；Claude Code / Cursor 各有原生入口可橋接）的觀念帶著走——
 這是「跨工具遷移資產」，今天學的不會被任何單一工具綁架。
 ```
 

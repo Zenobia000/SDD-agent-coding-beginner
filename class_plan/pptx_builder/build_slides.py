@@ -1435,7 +1435,7 @@ def s_m4_gemini_md(prs, no):
     _mono_label(s, "M4 · AGENTS.md — project memory", Inches(0.8), Inches(0.7))
     _add_text(s, "AGENTS.md", Inches(0.8), Inches(1.15), Inches(11.7), Inches(1.0),
               size=32, bold=True, font=FONT_MONO, letter_spacing=-0.8)
-    _add_text(s, "給 agent 一份「公司守則」。每次開工自動讀。業界共識：Antigravity / Cursor / OpenAI Codex 都認。",
+    _add_text(s, "給 agent 一份「公司守則」。每次開工自動讀。跨工具新興共通格式：Antigravity / Codex 原生；Claude / Cursor 需橋接。",
               Inches(0.8), Inches(2.05), Inches(11.7), Inches(0.5),
               size=16, color=MUTED, letter_spacing=-0.2)
 
@@ -1647,10 +1647,10 @@ def s_m4_cross_tools(prs, no):
               size=13, color=MUTED, letter_spacing=-0.1)
 
     _hairline(s, Inches(0.8), Inches(5.45), Inches(11.7), color=INK)
-    _add_text(s, "🟡  AGENTS.md 是 2026 業界共識的「跨工具通用」格式",
+    _add_text(s, "🟡  AGENTS.md 是 2026 跨工具新興共通格式",
               Inches(0.8), Inches(5.65), Inches(11.7), Inches(0.5),
               size=20, bold=True, letter_spacing=-0.3)
-    _add_text(s, "    Antigravity / Cursor / OpenAI Codex 都認，最值得學",
+    _add_text(s, "    Antigravity / OpenAI Codex 原生讀；Claude Code / Cursor 需各寫一行 rules 橋接",
               Inches(0.8), Inches(6.15), Inches(11.7), Inches(0.45),
               size=18, color=INK_SOFT, letter_spacing=-0.2)
 
@@ -1709,7 +1709,7 @@ def s_m4_summary(prs, no):
         "終端機 = 打字的瀏覽器",
         "Antigravity CLI（agy）= AI Studio 的無介面版 + 桌面版的腳本版",
         "同一套 STRIKE，三工具通用；CLI 最適合 L3 鏈式",
-        "AGENTS.md 是業界共識，換工具不換腦袋",
+        "AGENTS.md 是跨工具共通格式（Codex/Antigravity 原生；Claude/Cursor 可橋接），換工具不換腦袋",
     ]
     for i, line in enumerate(items):
         top = Inches(2.4 + i * 0.55)

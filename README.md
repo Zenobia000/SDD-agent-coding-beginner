@@ -140,4 +140,4 @@
 
 - v1.0（2026-04-19）— 初版，基於既有資料重構為 Vibe Coding 聚焦版
 - v1.1（2026-04-19）— 整合 **STRIKE 提示詞戰法**（來自 `ai_prompt_strategy_workshop_20260312172919.pptx`）取代原本的 Prompt 五要素；新增 MVP 組合 T+K+I、三層進攻策略 L1/L2/L3、三變數判斷法、防禦戰術追問三指令
-- v1.2（2026-05-26）— Google I/O 2026 (5/19) 宣布 Gemini CLI 個人版於 6/18 停服，全面改用 **Antigravity CLI（`agy`）**。M4 模組改名、教學模板從 `gemini_cli_project_template/` 改為 `antigravity_project_template/`（`.agents/` + `AGENTS.md` 業界規範）
+- v1.2（2026-05-26）— Google I/O 2026 (5/19) 宣布 Gemini CLI 個人版於 6/18 停服，全面改用 **Antigravity CLI（`agy`）**。M4 模組改名、教學模板從 `gemini_cli_project_template/` 改為 `antigravity_project_template/`（採用 `.agents/` + `AGENTS.md` 跨工具共通格式）

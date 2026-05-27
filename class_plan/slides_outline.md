@@ -865,7 +865,7 @@ agy
 ```
 
 **視覺：** 上方放 AGENTS.md 範本，中間兩個資料夾圖示對比「全域 vs 專案層」，底部用 hairline 分隔出一個 debug 提示區（強調色，例如橘色）。
-**Speaker Notes：** AGENTS.md 是 2026 業界共識的通用檔名，Antigravity / Cursor / OpenAI Codex 都認。**底部的 `/memory show` 是學員最常踩雷的救命指令**——「AI 好像沒讀到我寫的規則」90% 是這個 debug 解決。當場 demo 一次：改 AGENTS.md → 打 `/memory show` 看舊內容 → 打 `/memory refresh` → 再 `/memory show` 看更新後。全域路徑暫時還在 `~/.gemini/antigravity-cli/`（Google 為了讓 `agy plugin import gemini` 一鍵搬遷）。
+**Speaker Notes：** AGENTS.md 是 2026 年正在成形的跨工具共通格式——**OpenAI Codex 與 Antigravity 原生讀**；Claude Code 主吃 `CLAUDE.md`、Cursor 主吃 `.cursor/rules/`，要對齊可在那邊加一行 rules 指向 AGENTS.md。**底部的 `/memory show` 是學員最常踩雷的救命指令**——「AI 好像沒讀到我寫的規則」90% 是這個 debug 解決。當場 demo 一次：改 AGENTS.md → 打 `/memory show` 看舊內容 → 打 `/memory refresh` → 再 `/memory show` 看更新後。全域路徑暫時還在 `~/.gemini/antigravity-cli/`（Google 為了讓 `agy plugin import gemini` 一鍵搬遷）。
 
 ---
 
@@ -887,7 +887,7 @@ agy
 ```
 
 **視覺：** 左右兩欄對比，cat | 用箭頭灌入、@ 用箭頭指向檔案（agent 主動讀）。
-**Speaker Notes：** @ 是業界共識——Cursor、Claude Code、Antigravity 都用同樣語法。先用 cat 練手感、再升級到 @，學員會自己「啊這個更方便」。
+**Speaker Notes：** @ 語法已是跨工具慣例——Cursor、Claude Code、Antigravity 都用同樣寫法。先用 cat 練手感、再升級到 @，學員會自己「啊這個更方便」。
 
 ---
 
@@ -955,13 +955,14 @@ STRIKE        ✅         ✅           ✅              ✅           ✅
 MCP           ❌         ✅           ✅              ✅           ✅
 Skills        ❌         ✅           ✅              ✅           部分
 
-🟡 AGENTS.md 是 2026 業界共識的通用格式
-   Antigravity / Cursor / OpenAI Codex 都認得它，最值得學
+🟡 AGENTS.md 是 2026 跨工具新興共通格式
+   Antigravity / OpenAI Codex 原生讀；
+   Claude Code / Cursor 各有原生入口，需各寫一行 rules 橋接
    ⭐ Antigravity CLI 把 Gemini CLI 的舊 GEMINI.md 也統一改用 AGENTS.md
 ```
 
 **視覺：** 大表格，欄位用淡灰邊線。AGENTS.md 那兩格用 highlight 底色標記。
-**Speaker Notes：** 收網時刻——三個重點：(1) 同一個觀念在不同工具有不同檔名，但本質一樣；(2) AGENTS.md 已經是業界收斂的通用格式，今天 Google 把自家 CLI 也收編到這個規範下；(3) 學員之後換工具，這套詞彙是搬得走的資產。如果有人問「我以前的 GEMINI.md 怎麼辦」，答 `agy plugin import gemini` 一鍵搬。
+**Speaker Notes：** 收網時刻——三個重點：(1) 同一個觀念在不同工具有不同檔名，但本質一樣；(2) AGENTS.md 是業界正在收斂的跨工具共通格式（Codex / Antigravity 原生；Claude / Cursor 需橋接），今天 Google 把自家 CLI 也收編到這個規範下；(3) 學員之後換工具，這套詞彙是搬得走的資產。如果有人問「我以前的 GEMINI.md 怎麼辦」，答 `agy plugin import gemini` 一鍵搬。
 
 ---
 
@@ -1016,11 +1017,11 @@ C. 寫一個「每天跑一次」的小工具
 ✦ Antigravity CLI（agy）= AI Studio 的無介面版 + 桌面版的腳本版
 ✦ 同一套 STRIKE，三個工具通用；CLI 最適合 L3 鏈式
 ✦ 通用技能：AGENTS.md / @引用 / 工具+權限 / MCP / Skills
-✦ 換工具不換腦袋，AGENTS.md 是業界共識的跨工具格式
+✦ 換工具不換腦袋，AGENTS.md 是跨工具新興共通格式（Codex / Antigravity 原生；Claude / Cursor 可橋接）
 
 ✅ CP3：
 能對旁邊的人口述：這三個工具我各自會用來做什麼
-+ AGENTS.md 是做什麼用的、為什麼業界都用這個名字
++ AGENTS.md 是做什麼用的、為什麼跨工具會收斂到這個名字
 ```
 
 ---

@@ -44,7 +44,7 @@ Antigravity CLI 啟動時會掃描以下位置：
 | **User**（全域） | `~/.gemini/antigravity-cli/skills/` | 你個人習慣的審查 / 思考流程 |
 | **Workspace**（專案） | `<project>/.agents/skills/` | 專案專屬的流程，**會跟 git 走** |
 
-> 過渡期說明：Antigravity CLI 的全域目錄仍然落在 `~/.gemini/antigravity-cli/`（Google 把 Gemini CLI 的舊家底沿用過來方便 `agy plugin import gemini` 一鍵搬遷）。專案目錄則統一用 `.agents/`（對齊 AGENTS.md 業界規範）。
+> 過渡期說明：Antigravity CLI 的全域目錄仍然落在 `~/.gemini/antigravity-cli/`（Google 把 Gemini CLI 的舊家底沿用過來方便 `agy plugin import gemini` 一鍵搬遷）。專案目錄則統一用 `.agents/`（對齊 `AGENTS.md` 跨工具共通格式）。
 
 **初學者只要管 Workspace skill**：放在 `.agents/skills/` 下，跟著專案進 git，未來團隊或下個專案都能複用。
 

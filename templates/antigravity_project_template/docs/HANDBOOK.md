@@ -34,7 +34,7 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 ```
 你的專案資料夾/
 │
-├── AGENTS.md ◄──────── AI 啟動時自動讀，叫做「站立規則」（業界統一規範）
+├── AGENTS.md ◄──────── AI 啟動時自動讀，叫做「站立規則」（跨工具新興共通格式）
 │
 ├── docs/
 │   ├── PRD.md          需求規格（@docs/PRD.md 引用給 AI 看）
@@ -76,7 +76,7 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 | Project    | `<repo>/AGENTS.md`                    | 專案規範（角色、技術棧、禁止項）  |
 | Subdir     | `<repo>/src/AGENTS.md`                | 模組級別 invariants    |
 
-> 過渡期說明：全域目錄沿用 `~/.gemini/antigravity-cli/`（Google 為了讓 `agy plugin import gemini` 一鍵搬遷舊有 `~/.gemini/`）。專案目錄統一改成 `AGENTS.md`（業界規範，Cursor / OpenAI Codex / Antigravity 都認）。
+> 過渡期說明：全域目錄沿用 `~/.gemini/antigravity-cli/`（Google 為了讓 `agy plugin import gemini` 一鍵搬遷舊有 `~/.gemini/`）。專案目錄改用 `AGENTS.md`（**Antigravity 與 OpenAI Codex 原生讀**；Claude Code 主吃 `CLAUDE.md`、Cursor 主吃 `.cursor/rules/`，要覆蓋這兩家需另寫 rules 檔指向 `AGENTS.md`）。
 
 **怎麼確認 AI 真的有讀到？**
 

@@ -247,7 +247,7 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 
 | 觀念 | 一句話定義 | 在 Antigravity CLI 怎麼叫 | 在別家叫什麼 |
 |------|----------|--------------------|------------|
-| **專案記憶檔** | 寫一份檔案放專案根目錄，agent 開工自動讀 | `AGENTS.md`（+ `~/.gemini/antigravity-cli/AGENTS.md` 全域，過渡期沿用 `.gemini/` 路徑） | `CLAUDE.md`（Claude Code）/ `AGENTS.md`（Cursor、OpenAI Codex）/ `.cursor/rules/*.mdc`（Cursor 進階） |
+| **專案記憶檔** | 寫一份檔案放專案根目錄，agent 開工自動讀 | `AGENTS.md`（+ `~/.gemini/antigravity-cli/AGENTS.md` 全域，過渡期沿用 `.gemini/` 路徑） | `CLAUDE.md`（Claude Code 原生）/ `AGENTS.md`（OpenAI Codex 原生）/ `.cursor/rules/*.mdc`（Cursor 原生）/ `.github/copilot-instructions.md`（Copilot 原生） |
 | **@ 檔案引用** | 用 `@filename` 把檔案塞進對話，比 pipe 更直觀 | `agy "@file.txt 摘要"` | 三家寫法相同 |
 | **內建工具 + 權限** | agent 有讀檔、跑指令、上網等內建能力；動手前會問你 | 預設確認模式 + 首次啟動逐資料夾信任 | 各家寫法不同，但概念相同 |
 | **MCP** | 「AI 的 USB-C」——一次寫好就能接所有 agent | `.agents/settings.json` 內 `mcpServers`；`/mcp` 看狀態 | Anthropic 2024 提出，現已是業界開放標準 |
@@ -255,7 +255,7 @@ Vibe Coding 遇到 bug / 不對勁時，這三句話比直接改 code 有用。
 
 > **為什麼初學者需要知道：** 三選一就好——`@ 引用` 與 `AGENTS.md` 是今天會親手做的；`工具/權限`、`MCP`、`Skills` 是今天只要「聽過」就好，回家想玩可以延伸。**重點是建立詞彙地圖**，不是當天精通。
 >
-> **跨工具最大公約數：** `AGENTS.md` 是 2026 業界共識的通用格式，Antigravity / Cursor / OpenAI Codex 都認，是學員之後遇到別的 agent 時的第一張車票。今天 Antigravity 把 Gemini CLI 也收編到這個規範下，**換工具的成本剩下最小**。
+> **跨工具最大公約數：** `AGENTS.md` 是 2026 年正在成形的跨工具共通格式——**OpenAI Codex 與 Antigravity 原生讀**；Claude Code 主吃 `CLAUDE.md`、Cursor 主吃 `.cursor/rules/`、Copilot 主吃 `.github/copilot-instructions.md`，這幾家若要對齊，可以把 `AGENTS.md` 當「母檔」、各自寫一行 rules 指向它。**學會這個觀念，換工具的成本剩下最小**。
 
 ### 框架 3：Vibe Coding 五步流程
 

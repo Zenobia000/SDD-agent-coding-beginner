@@ -4,7 +4,7 @@
 > 對象：要開始用 Claude Code / Antigravity CLI / OpenAI Codex / GitHub Copilot 協作的開發者。
 > 設計原則：**README 給人看，`AGENTS.md / CLAUDE.md` 給 Agent 工作。**
 
-> ⚠️ **2026-05-26 重要更新**：Google I/O 2026（5/19）宣布把 Gemini CLI 統一到 Antigravity 平台，命令從 `gemini` 改為 `agy`、用 Go 重寫。**個人版 Gemini CLI 將於 2026-06-18 停止服務**（企業版 Gemini Code Assist Standard/Enterprise 不受影響）。Antigravity CLI 直接採用 `AGENTS.md` 業界規範，**不再使用 `GEMINI.md`**。下方文件保留三份檔名分離論述供歷史/相容性參考；新專案建議只寫 `AGENTS.md` + 視需要補 `CLAUDE.md`。Gemini CLI 舊有設定可一鍵搬遷：`agy plugin import gemini`。
+> ⚠️ **2026-05-26 重要更新**：Google I/O 2026（5/19）宣布把 Gemini CLI 統一到 Antigravity 平台，命令從 `gemini` 改為 `agy`、用 Go 重寫。**個人版 Gemini CLI 將於 2026-06-18 停止服務**（企業版 Gemini Code Assist Standard/Enterprise 不受影響）。Antigravity CLI 直接採用 `AGENTS.md` 作為主入口（與 OpenAI Codex 對齊的跨工具共通格式），**不再使用 `GEMINI.md`**。下方文件保留三份檔名分離論述供歷史/相容性參考；新專案建議只寫 `AGENTS.md` + 視需要補 `CLAUDE.md`。Gemini CLI 舊有設定可一鍵搬遷：`agy plugin import gemini`。
 
 ---
 
@@ -20,12 +20,16 @@
 
 ## 第 0 步：先理解這些 `.md` 在系統裡的角色
 
-主流 AI coding agent 都已支援「專案上下文文件」：
+主流 AI coding agent 各自有「專案上下文文件」入口，**並非所有工具都原生讀 `AGENTS.md`**：
 
-- **OpenAI Codex** 工作前讀取 `AGENTS.md`，可由全域指引 + 專案層級覆蓋。
-- **Google Gemini CLI** 用 `GEMINI.md` 作為預設 context file，可放專案指令、persona、coding style。
-- **Anthropic Claude Code** 讀取分層 `CLAUDE.md` 作為工作記憶。
-- **GitHub Copilot** 讀取 `.github/copilot-instructions.md`。
+- **OpenAI Codex** 原生讀取 `AGENTS.md`（業界首批採用者）。
+- **Google Antigravity（CLI `agy` / 桌面版）** 採用 `AGENTS.md` 作為主入口（接續 Gemini CLI；舊有 `GEMINI.md` 用法已於 2026 隨 Gemini CLI 個人版 EOL 一併淘汰）。
+- **Anthropic Claude Code** 原生讀取分層 `CLAUDE.md`；`AGENTS.md` 支援屬社群需求（[GitHub issue #6235](https://github.com/anthropics/claude-code/issues/6235)），可用 symlink 過渡。
+- **GitHub Copilot** 讀取 `.github/copilot-instructions.md`，**不會**自動讀 `AGENTS.md`。
+- **Cursor** 讀取 `.cursor/rules/*.mdc`（新版）或 `.cursorrules`（舊版），**不會**自動讀 `AGENTS.md`。
+- **Windsurf** 讀取 `.windsurfrules`，**不會**自動讀 `AGENTS.md`。
+
+> **心法**：`AGENTS.md` 是**新興跨工具共通格式**，不是所有 IDE 都保證原生支援的官方標準。實務上把它當「母檔」（single source of truth），再各自橋接到不支援的工具的原生規則檔。
 
 它們的本質都不是「文件」，而是：
 
@@ -41,12 +45,13 @@
 
 **因為檔名是給工具看的協議，不是給人看的標籤。**
 
-| 面向         | AGENTS.md       | CLAUDE.md                  | GEMINI.md                |
-| ---------- | --------------- | -------------------------- | ------------------------ |
-| **誰會自動讀**  | Codex、Cursor 等多家 | 只有 Claude Code             | 只有 Gemini CLI            |
-| **載入機制**   | 整檔注入            | 分層 merge（global + project） | 單檔 + memory tool 動態加     |
-| **失效時的行為** | Codex 直接忽略      | Claude 仍會工作但少了 guardrail   | Gemini 不會自動 fallback     |
-| **慣用語法**   | 偏 README 風      | 指令式 / forbidden list 風     | 偏 memory bullet 風        |
+| 面向         | AGENTS.md                       | CLAUDE.md                  | GEMINI.md（已 EOL）       |
+| ---------- | ------------------------------- | -------------------------- | ----------------------- |
+| **誰會自動讀**  | OpenAI Codex、Antigravity（agy / 桌面版） | Claude Code                | Gemini CLI（2026-06-18 個人版停服） |
+| **誰不會自動讀** | Cursor、Windsurf、GitHub Copilot（需橋接） | Codex、Antigravity（除非 symlink） | 同左                       |
+| **載入機制**   | 整檔注入                            | 分層 merge（global + project） | 單檔 + memory tool 動態加    |
+| **失效時的行為** | 不支援的工具直接忽略                      | Claude 仍會工作但少了 guardrail   | Gemini 不會自動 fallback    |
+| **慣用語法**   | 偏 README 風                      | 指令式 / forbidden list 風     | 偏 memory bullet 風       |
 
 就算內容 100% 相同，Claude Code **不會去讀** `GEMINI.md`，反之亦然。
 
@@ -94,7 +99,18 @@ repo-root/
     └── ADR-0003-agent-governance.md
 ```
 
-這樣已經可以支撐：Claude Code、Gemini CLI、Codex、GitHub Copilot、Cursor / Windsurf、團隊開發、CI/CD、Agentic coding 工作流。
+這份結構**原生支援**：Codex、Antigravity（CLI `agy` / 桌面版）、Claude Code、GitHub Copilot。
+
+**Cursor / Windsurf 需要再加各自的 rules 檔**（內容可以只寫一行指向 `AGENTS.md`，不必重寫規則）：
+
+```bash
+# Cursor（新版用 .mdc，舊版用 .cursorrules）
+mkdir -p .cursor/rules
+echo "See AGENTS.md for project conventions." > .cursor/rules/main.mdc
+
+# Windsurf
+echo "See AGENTS.md for project conventions." > .windsurfrules
+```
 
 ---
 

@@ -9,7 +9,7 @@
 ```
 my-project/
 ├── README.md                      ← 你正在看
-├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（業界統一規範）
+├── AGENTS.md                      ← ⭐ Antigravity 一定會讀的「總指揮文件」（跨工具新興共通格式）
 ├── docs/
 │   ├── PRD.md                     ← 從 AI Studio 帶過來的需求規格（填空）
 │   └── HANDBOOK.md                ← Antigravity CLI 完整操作手冊（從 IDE 轉 CLI 必讀）
