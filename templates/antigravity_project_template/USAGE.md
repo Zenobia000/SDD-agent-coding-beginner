@@ -85,18 +85,15 @@ AI 會依五步流程動作。你的工作：
 
 ### 1.5 卡關時看哪
 
-| 狀況 | 看哪份 |
-|---|---|
-| 不知道怎麼開始 | `.agents/prompts/start-project.md` |
-| AI 一直亂寫 | `.agents/rules/03-when-stuck.md` |
-| AI 改錯一堆檔案 | 打 `/restore` |
-| 想上線給朋友看 | `.agents/prompts/deploy.md` |
+完整對照表（17 種狀況）→ [`README.md` §卡住時看哪裡](./README.md#-卡住時看哪裡)。
 
 ### 1.6 Mode A 三不要
 
 1. ❌ **不要自己改 code** — 改不好還會壞掉。改「需求描述」讓 AI 重做。
 2. ❌ **不要一次給太多需求** — 一次加一個小功能，跑得起來再加下一個。
 3. ❌ **不要刪 `.agents/` 資料夾** — 它是 AI 的「規則書」。
+
+> 本節是 Mode A 三不要的**單一 SoT**。README 與本檔 §7 口訣都連回這裡。
 
 ---
 
@@ -111,15 +108,9 @@ AI 會依五步流程動作。你的工作：
 
 ### 2.2 十站流程總圖
 
-完整流程圖見 `.agents/WORKFLOW.md`：
+**完整 Mermaid 流程圖 + 每站產出 + 大廠對標** → [`.agents/WORKFLOW.md`](./.agents/WORKFLOW.md)
 
-```
-意圖澄清 → 架構決策 → Backlog → Spec 設計 → TDD 開發
-/spec-it    /adr      /plan-sprint  /spec-it    /tdd-cycle
-
-驗證 → 文件同步 → Commit → 部署 → Retro
-/verify  /sync-it    /commit-msg  (deploy.md)  /retro
-```
+一句話順序：**意圖（spec-it / adr / plan-sprint）→ 設計（spec-it L2+L3）→ 實作（tdd-cycle / verify / sync-it）→ 上線（commit-msg / 部署 / retro）**。
 
 ### 2.3 Sprint 1 完整 walkthrough（範例：英文新聞摘要工具）
 
@@ -246,18 +237,9 @@ AI 依 4Ls（Liked / Learned / Lacked / Longed for）逐項問你，補上客觀
 | **一天**（8h） | `/spec-it` + `/adr` 1h → `/plan-sprint` 30 min → `/tdd-cycle` 5h → `/verify` + `/sync-it` 30 min → `/commit-msg` + 部署 30 min → `/retro` 30 min |
 | **三天**（24h） | Day 1：意圖 + 架構 + Backlog（3h）+ TDD（5h）/ Day 2：TDD 持續（8h）/ Day 3：剩餘 TDD（4h）+ `/verify` + `/sync-it`（1h）+ `/commit-msg` + 部署（1h）+ `/retro`（1h）|
 
-### 2.5 八個 skill 觸發時機速查
+### 2.5 八個 skill 觸發時機
 
-| Skill | 何時打 | 不要打 |
-|---|---|---|
-| `/spec-it` | 新功能動工前 / 既有功能要重新對齊 | 純樣式調整 / 修 typo |
-| `/adr` | 重大技術選型（DB / 框架 / auth） | 局部小決定（用哪個 lib function） |
-| `/plan-sprint` | Sprint 開始 / 重整 backlog | Sprint 進行中（會打亂節奏） |
-| `/tdd-cycle` | 寫每個功能 / 修 bug（先寫重現測試） | 純 refactor / 純樣式 |
-| `/verify` | Commit 前 / sprint 結尾 / 上線前 | 還在 RED-GREEN 過程中 |
-| `/sync-it` | Commit 前 / 改完 API 或 schema | 純樣式或註解修改 |
-| `/commit-msg` | 全綠 + 無 drift 後、commit 前 | 還有紅燈時 |
-| `/retro` | Sprint 結束 | Sprint 還在進行中 |
+每個 skill 的「何時打 / 不要打」、Pre/Post 條件、與其他 skill 的依賴 → [`.agents/SKILL-MAP.md` §1 §2 §11](./.agents/SKILL-MAP.md)（單一 SoT，本檔不重述）。
 
 ---
 
@@ -431,5 +413,5 @@ A：兩個方法 ——
 ## 7. 三句口訣
 
 1. **新手選 A**、**進階選 B**、**不確定先 A 再升 B**
-2. **A 模式三不要**：不自己改 code、不一次給太多需求、不刪 `.agents/`
+2. **A 模式三不要**：見 [§1.6](#16-mode-a-三不要)（單一 SoT）
 3. **B 模式三要**：先 spec、後測試、文件跟著 code 走

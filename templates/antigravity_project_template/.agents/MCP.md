@@ -229,7 +229,7 @@ MCP 是**讓 AI 多一個權限通道**，不是「裝飾」。每打開一個�
 
 ### Q：從 Gemini CLI 搬過來，MCP 設定要重設嗎？
 
-不用。`agy plugin import gemini` 會把你原本 `~/.gemini/settings.json` 的 `mcpServers` 一對一搬遷到新位置，`command` / `args` / `env` 完全保留。
+不用。`agy plugin import gemini` 會把舊有 `mcpServers` 一對一搬遷（`command` / `args` / `env` 完全保留）。完整搬遷步驟見 [`README.md` §我以前用 Gemini CLI](../README.md#-我以前用-gemini-cli怎麼搬過來)。
 
 ### Q：可以同時跑多種 transport 嗎？
 

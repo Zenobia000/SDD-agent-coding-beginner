@@ -87,43 +87,11 @@ Spec 不是一坨大文件，是分層描述：
 
 ---
 
-## 兩個輔助路徑（Legacy Skill 在 SDD 流程中的位置）
+## 輔助路徑與 Skill 連動
 
-10 站是主線。另外兩個 legacy skill 是**輔助路徑**，可以在任何 SDD 階段插入：
+10 站是主線；另外兩個 legacy skill（`/explain-code` 卡關 + `/check-key` 部署前）是**輔助路徑**，可在任何階段插入。
 
-### Path D：學員卡關（任何階段都可插入）
-
-```
-[正在跑某 SDD skill] → 卡住「為什麼這樣寫」「看不懂這段 code」
-                    ↓
-                   /explain-code（架構師視角 + 紅綠燈 + 導師教學）
-                    ↓
-                   懂了 → 回到原本的 SDD skill 繼續
-```
-
-**何時觸發**：使用者在 `/tdd-cycle` 過程問「為什麼這樣寫」「我看不懂」「這在做什麼」。
-**特性**：中斷工具，不影響主線流程。
-
-### Path F：部署 / push 前（在站 9 部署之前）
-
-```
-站 8 /commit-msg ─→ 站 9 部署
-                       ↑
-                       └─ 先跑 /check-key（部署前 secret 雙保險）
-```
-
-**何時觸發**：使用者說「我要部署」「push 到 GitHub」「上 Vercel」。
-**與 `/verify §5 Security` 的分工**：
-- `/verify §5` = commit 前每次跑（基本掃描）
-- `/check-key` = 部署前最後一道（涵蓋更廣的 secret pattern + .gitignore 覆蓋 + 環境變數 + git history）
-
-### Skill 連動完整圖
-
-完整 10 個 skill 的相依與互動關係見 [`SKILL-MAP.md`](./SKILL-MAP.md)：
-- 10 個 skill 的 Pre/Post 矩陣
-- 6 種典型路徑（A 完整 / B 修 bug / C 重大調整 / D 卡關 / E refactor / F 部署）
-- 識別的 10 個邏輯斷層與修補狀態
-- 觸發優先序與雙向關係
+**輔助路徑、Pre/Post 矩陣、`/check-key` vs `/verify §5` 的分工、6 種典型路徑（A 完整 / B 修 bug / C 重大調整 / D 卡關 / E refactor / F 部署）、10 個斷層分析** → 全部在 [`SKILL-MAP.md`](./SKILL-MAP.md)（單一 SoT，本檔不重述）。
 
 ---
 

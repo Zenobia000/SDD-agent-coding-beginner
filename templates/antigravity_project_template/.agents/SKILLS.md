@@ -17,21 +17,11 @@ Antigravity 把舊版 Gemini CLI 的 `commands/.toml` 與 `skills/SKILL.md` **�
 
 ---
 
-## Skill vs MCP 對照
+## Skill 在三大原語裡的定位
 
-| 維度 | MCP | Skill |
-|---|---|---|
-| **角色** | 外部能力通道 | 知識封裝 + slash command |
-| **觸發** | AI 判斷該不該叫 | AI 看 description 自動匹配 / 使用者打 `/<name>` 手動觸發 |
-| **檔案** | `settings.json` 內設定 + npx 啟動 server | `.agents/skills/<name>.md` 或 `.agents/skills/<name>/SKILL.md` |
-| **適合** | 連網路 / 開瀏覽器 / 操作 GitHub | 多步驟流程、審查 checklist、固定 prompt |
-| **比喻** | 烤箱（硬體） | 食譜本（知識） |
+Skill / MCP / Subagent 是 Antigravity 的三大擴充原語。**完整對照表與判斷練習見 [`SUBAGENTS.md` §三大擴充原語對照](./SUBAGENTS.md#三大擴充原語對照mcp--skill--subagent)**。
 
-**判斷練習**：
-
-- 「我想要 AI 能截圖驗證頁面」→ **MCP**（playwright）
-- 「我想要 AI 寫完 code 自動審查」→ **Skill**（pre-commit-review）
-- 「我想要打一句 `/test` 自動跑測試」→ **Skill**（test.md，手動觸發版）
+一句話定位：**Skill = 程序知識封裝 + slash command**（食譜本 + hot key）；MCP 是外部能力通道（烤箱、瀏覽器）；Subagent 是平行任務分派（派出去的工人）。
 
 ---
 
@@ -232,38 +222,14 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 
 ---
 
-## 本模板內建的 SDD Sprint Skills（10 個）
+## 本模板內建的 Skill
 
-本模板已內建一套**完整 Solo Sprint 工作流 skill**，覆蓋從意圖澄清到 sprint retro 的 10 站。完整流程圖見 [`WORKFLOW.md`](./WORKFLOW.md)。
+本模板內建 **10 個 skill**（2 個 Vibe Coding 基礎 + 8 個 SDD Sprint 工作流）。為避免重複，完整列表、分類、觸發時機、對標大廠規範與工作流順序統一在以下兩份文件，本檔不重述：
 
-### Vibe Coding 基礎 skill（2 個）
-
-| Skill | 觸發 | 用途 |
-|---|---|---|
-| `/explain-code` | 「這段 code 在幹嘛」 | 架構師視角分段講解 |
-| `/check-key` | 「部署前檢查」 | 掃 hardcoded API key / secret |
-
-### SDD Sprint 工作流 skill（8 個，依工作流順序）
-
-| Skill | 觸發時機 | 對標大廠規範 |
-|---|---|---|
-| `/spec-it` | 新功能動工前 | Atlassian PRD + Bill Wake INVEST + Gherkin |
-| `/adr` | 重大技術選型 | MADR v3.0 |
-| `/plan-sprint` | sprint 開始拆任務 | Linear backlog / INVEST 拆解 |
-| `/tdd-cycle` | 寫每個功能 | Kent Beck Red-Green-Refactor + AAA pattern |
-| `/verify` | commit 前全跑 | Google Test Pyramid + OWASP |
-| `/sync-it` | code 與文件對齊 | Doc-as-Code（Stripe / Twilio） |
-| `/commit-msg` | 生 commit | Conventional Commits 1.0 |
-| `/retro` | sprint 結束 | 4Ls Retrospective |
-
-### 工作流串接
-
-```
- /spec-it ──→ /adr ──→ /plan-sprint ──→ /tdd-cycle ──→ /verify ──→ /sync-it ──→ /commit-msg ──→ /retro
-   PRD         決策      backlog        紅綠燈        全驗證      文件同步     commit       回顧
-```
-
-詳細工作流見 [`WORKFLOW.md`](./WORKFLOW.md)。Spec 範本見 [`../docs/templates/`](../docs/templates/)。
+- **完整清單（10 個 skill 一覽 + 何時用）** → [`SKILL-MAP.md` §1](./SKILL-MAP.md)
+- **使用者說 X → 該打哪個 skill** → [`SKILL-MAP.md` §11 快速速查](./SKILL-MAP.md)
+- **10 站 Sprint 工作流順序（站 → skill 對應）** → [`WORKFLOW.md`](./WORKFLOW.md)
+- **Spec 範本（PRD / ADR / API / DB / BDD / test-cases）** → [`../docs/templates/`](../docs/templates/)
 
 ---
 
