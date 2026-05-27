@@ -3,7 +3,7 @@
 > **這份 runbook 教的不是「做這個 App」，是「用 AI 蓋 App 的方法」。**
 > SmartTrip FX 只是示範案例。學完後你會懂兩件事：
 > 1. **Meta-prompt 迭代法**：不寫完美 prompt，而是讓 AI 幫你寫
-> 2. **工具分工**：AI Studio 是 **prompt 工廠**，agy 是 **建造現場**
+> 2. **工具分工**：AI Studio 是 **no-code 構想 / 原型驗證場**（對話聊規格、Build 模式可直接出 React+Tailwind 原型），agy 是 **工程建造場**（PRD / ADR / git / sprint / 紀律）
 
 ---
 
@@ -24,14 +24,15 @@
 ```
                   AI Studio                     agy
                 ┌──────────┐                ┌──────────┐
-我的痛點 ──────▶│ prompt   │──prompt 草稿──▶│ 建造現場 │──▶ 可跑的 app
-                │ 工廠     │                │          │
+我的痛點 ──────▶│ 構想場   │──規格級 spec──▶│ 建造場   │──▶ 可維護 app
+                │ 原型驗證 │                │ 工程紀律 │
                 └──────────┘                └──────────┘
-                 探索 / 對話                 落地 / 版控
-                 迭代 / 失敗                 結構 / 紀律
+                 No-code playground          PRD / ADR / git / test
+                 對話 / 原型 / 一次性         Sprint / Skill / Retro
 ```
 
-**不要混用**。AI Studio 不裝專案、agy 不適合探索 prompt。錯用會痛苦。
+**不要混用**。AI Studio 適合「我還沒想清楚」階段、可一鍵 build prototype 驗證點子；agy 適合「我要正規工程化、可維護」階段。
+錯用會痛苦：用 AI Studio 長期維護專案會崩（沒 git、沒 spec、無法擴充）；用 agy 從零探索點子會慢（每次都要先寫 PRD）。
 
 ---
 
@@ -387,18 +388,18 @@ Task: 請幫我開發名為 "SmartTrip FX" 的 Web App 全套代碼。
 ## 為什麼要換手
 
 > **Linus 註解**：
-> AI Studio 強在「**對話式探索**」 — 你來回問 10 次都不會收費、不會建檔。
-> 但 AI Studio **不會**幫你：
-> - 建立專案資料夾結構
-> - 跟 git 整合
-> - 維護跨對話的記憶（每次都從 0 開始）
-> - 跑測試、驗證、commit
+> AI Studio 強在「**對話式構想 + 一鍵原型**」 — 你來回聊 10 次都免費，Build 模式還能直接生 React+Tailwind 跑給你看，**零 setup 成本**。
+> 但 AI Studio 的產出是「**一次性 prototype**」：
+> - 沒有 git 版控（每次重生就蓋掉）
+> - 沒有跨對話記憶（每個 session 從 0 開始）
+> - 沒有 spec / ADR / 測試（無法演化、無法 review）
+> - 多人協作幾乎不可能
 >
-> agy 強在「**結構化建造**」 — `.agents/` 規則、`docs/PRD.md` 持久化、
-> 跨對話的 `/memory`、skill 自動化、checkpoint 回滾。
+> agy 強在「**工程化建造**」 — `.agents/` 規則、`docs/PRD.md` 持久化、
+> 跨對話的 `/memory`、skill 自動化、checkpoint 回滾、git workflow 完整。
 >
-> **混用會痛苦**。AI Studio 階段拼 prompt，agy 階段建專案。
-> 切換的訊號：你拿到「規格級 prompt」之後（= Phase 4 結尾）。
+> **混用會痛苦**。AI Studio 階段驗證點子，agy 階段做正規工程。
+> 切換的訊號：你拿到「**規格級 spec**」之後（= Phase 4 結尾）。
 
 ## 換手清單
 
@@ -495,14 +496,14 @@ agy
 
 > **Linus 註解**：
 > 新手最常見的錯：把 Phase 4 的 dev prompt 直接貼給 agy → agy 跳過 spec 直接寫 code。
-> 結果是：**沒 PRD、沒 ADR、沒測試 — 跟 AI Studio 寫出來的爛 code 沒兩樣**，
-> 還浪費了 template 的 SDD 紀律。
+> 結果是：**沒 PRD、沒 ADR、沒測試 — 等於跳過 SDD 紀律，跟 AI Studio Build 模式生的 one-shot prototype 沒兩樣**（能跑但難演化），
+> 還浪費了 template 的工程化骨架。
 >
 > **正確做法**：用 `/spec-it` 把 Phase 4 的內容**轉成結構化 spec**
 > （PRD + API contract + BDD scenarios + 測試骨架）。**spec 在前，code 在後**。
 > 這叫 **Spec-Driven Development**（SDD）。
 >
-> 沒有 spec，agy 寫的 code 跟一般 AI Studio 寫的沒差。
+> 沒有 spec，agy 寫的 code 等於把 AI Studio Build 模式的 one-shot prototype 包進 git，浪費 agy 的工程能力。
 
 ## 操作
 
@@ -816,7 +817,7 @@ Sprint 1 (2026-06-12 ~ 2026-07-10) Retrospective
 
 📚 Learned（學到什麼？）：
 - Meta-prompt 套路：求 prompt 比求答案有效
-- AI Studio → agy 換手時機：拿到「規格級」spec 之後
+- AI Studio → agy 換手時機：拿到「規格級 spec」、確認雛形方向對了之後
 
 🚧 Lacked（缺什麼？）：
 - 還沒接真實匯率 API（用 mock）
@@ -998,14 +999,16 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 | 維度 | AI Studio | agy CLI | Claude Code | Gemini CLI (舊) |
 |------|-----------|---------|-------------|----------------|
 | 對話探索 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
-| 專案建立 | ❌ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| 一次性原型（no-code Build） | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ❌ |
+| 長期可維護專案 | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
 | Skill / Slash | ❌ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
 | Subagent 平行 | ❌ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ❌ |
 | Spec-Driven | ❌ | ⭐⭐⭐⭐⭐ (本 template) | 需自己配 | 需自己配 |
 | 學員門檻 | ⭐⭐⭐⭐⭐（最低） | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
 | 商業選擇 | 免費 | 免費（個人） | 付費 | 免費，但 2026-06-18 EOL |
 
-**結論**：AI Studio 做 prompt 探索 → agy 做專案建造，是 2026 教學現場最務實的組合。
+**結論**：AI Studio 做點子構想 + 原型驗證 → agy 做工程化可維護專案，是 2026 教學現場最務實的組合。
+（如果你只要做 demo 不要 maintain，AI Studio Build 模式可以一條龍解決；但本 runbook 教的是「做正規軟體工程」的路徑。）
 
 > 個人版 Gemini CLI 在 2026-06-18 退場，不要再學了。
 
@@ -1017,7 +1020,7 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 |----------|------|------|
 | Phase 1 直接問「幫我做 app」 | AI 給 generic boilerplate | 改用 meta-prompt：「請告訴我專業的 prompt 怎麼寫」 |
 | 跳過 Phase 0 種子簡報 | 之後 PRD 寫不下去（不知道使用者是誰） | 回去寫 5 段 |
-| 把 Phase 4 prompt 整段貼給 agy | agy 跳過 spec 直接寫 code，跟 AI Studio 沒兩樣 | 改用 `/spec-it` 開頭，把 Phase 4 prompt 當作「技術期望」輸入 |
+| 把 Phase 4 prompt 整段貼給 agy | agy 跳過 spec 直接寫 code，等於把 AI Studio Build 模式的 one-shot prototype 包進 git | 改用 `/spec-it` 開頭，把 Phase 4 prompt 當作「技術期望」輸入 |
 | `/spec-it` 5 個澄清題只答 1 句敷衍 | PRD 寫得空洞，後續 `/tdd-cycle` 不知道測什麼 | 老老實實答，每題至少 1-2 句具體 |
 | 沒設 `GEMINI_API_KEY` 就跑 | agy `/spec-it` 不影響，但 `/tdd-cycle` 寫的 code 跑不起來 | `export GEMINI_API_KEY=...` + 寫進 `.env.example` |
 | 把 `.env` 提交到 git | API key 洩漏，被盜刷 | `/check-key` 部署前必跑 + `.env` 加進 `.gitignore` |
@@ -1030,14 +1033,14 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 
 # 三句口訣
 
-> **AI Studio 問 prompt**
+> **AI Studio 聊出規格**
 > **agy 寫 spec 才寫 code**
 > **每個 sprint 都 retro**
 
 延伸版（5 句完整版）：
 
 > **痛點先結構化**（Phase 0）
-> **AI Studio 用 meta-prompt 迭代**（Phase 1-4）
+> **AI Studio 用對話迭代到「規格級 spec」**（Phase 1-4）
 > **拿到規格級 spec 換手到 agy**（換手點）
 > **/spec-it 在前，/tdd-cycle 在後**（SDD 鐵律）
 > **/verify 全綠才 commit，/retro 收尾**（每個 sprint）
