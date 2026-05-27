@@ -76,9 +76,9 @@ Spec 不是一坨大文件，是分層描述：
 
 | Layer | 名稱 | 寫什麼 | 大廠範本 |
 |---|---|---|---|
-| **L1 意圖層** | PRD / User Story | 解什麼問題、誰用、成功長什麼樣 | `docs/templates/PRD-template.md`、`user-story-template.md` |
-| **L2 介面層** | API contract / DB schema | 系統邊界的合約 | `docs/templates/api-contract-template.md`、`db-schema-template.md` |
-| **L3 行為層** | BDD scenario / 測試案例 | 行為對不對的判定條件 | `docs/templates/bdd-scenarios-template.md`、`test-cases-template.md` |
+| **L1 意圖層** | PRD / User Story | 解什麼問題、誰用、成功長什麼樣 | `.agents/skills/spec-it/templates/PRD-template.md`、`user-story-template.md` |
+| **L2 介面層** | API contract / DB schema | 系統邊界的合約 | `.agents/skills/spec-it/templates/api-contract-template.md`、`db-schema-template.md` |
+| **L3 行為層** | BDD scenario / 測試案例 | 行為對不對的判定條件 | `.agents/skills/spec-it/templates/bdd-scenarios-template.md`、`test-cases-template.md` |
 
 **鐵律**：
 - L1 永遠要寫（不寫等於沒方向）

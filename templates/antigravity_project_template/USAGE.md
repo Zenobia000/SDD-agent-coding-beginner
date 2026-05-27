@@ -406,7 +406,7 @@ A：兩個方法 ——
 | 已填完 PRD、第一次跑 | 貼 `.agents/prompts/start-project.md` → 跑 Mode A 五步 |
 | Mode A 跑完一輪、想升級 | 跑 `/spec-it` 補完整 PRD → 進入 Mode B |
 | 直接想用 Mode B | 跑 `/spec-it` 開新功能 → 看 `.agents/WORKFLOW.md` |
-| 想精讀大廠規範 | 逐份讀 `docs/templates/` 7 份範本（內附對標來源） |
+| 想精讀大廠規範 | 逐份讀 `.agents/skills/spec-it/templates/`（6 份）+ `.agents/skills/adr/templates/adr-template.md` — 共 7 份範本內附對標來源 |
 
 ---
 

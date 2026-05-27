@@ -69,12 +69,12 @@ description: 從一句話需求生成 SDD 三層 spec（PRD / API contract / BDD
 
 ### Step 2：生 Layer 1 — PRD + User Stories
 
-依 `docs/templates/PRD-template.md` 結構，寫入 `docs/PRD.md`（若已存在則 append 新 section）：
+依 `./templates/PRD-template.md` 結構，寫入 `docs/PRD.md`（若已存在則 append 新 section）：
 
 - §1 Problem Statement（從 Q1 答案展開）
 - §2 Goals / Non-Goals（從 Q2 + Q3）
 - §3 Target User
-- §4 User Stories — **依 `docs/templates/user-story-template.md` 寫，至少 3 個 story，每個有 AC**
+- §4 User Stories — **依 `./templates/user-story-template.md` 寫，至少 3 個 story，每個有 AC**
 - §5 Success Metrics（量化）
 - §6 Out of Scope
 - §7 Open Questions
@@ -83,19 +83,19 @@ description: 從一句話需求生成 SDD 三層 spec（PRD / API contract / BDD
 ### Step 3：生 Layer 2 — API / DB Schema（如需要）
 
 若功能涉及：
-- API → 依 `docs/templates/api-contract-template.md` 寫入 `docs/api-contract.md`
-- DB → 依 `docs/templates/db-schema-template.md` 寫入 `docs/db-schema.md`
+- API → 依 `./templates/api-contract-template.md` 寫入 `docs/api-contract.md`
+- DB → 依 `./templates/db-schema-template.md` 寫入 `docs/db-schema.md`
 - 純前端 / 純本地工具 → 跳過 Step 3
 
 ### Step 4：生 Layer 3 — BDD Scenarios + Test Cases
 
 針對 Step 2 寫的每個 user story：
 
-- **BDD scenarios**：寫到 `tests/features/<feature>.feature`（依 `docs/templates/bdd-scenarios-template.md` 的 Gherkin 格式）
+- **BDD scenarios**：寫到 `tests/features/<feature>.feature`（依 `./templates/bdd-scenarios-template.md` 的 Gherkin 格式）
   - 主流程 1 個
   - 邊界 case 至少 2 個（短輸入 / 長輸入 / 異常）
   - 失敗 case 至少 1 個（API 失敗 / 網路斷）
-- **Test case 骨架**：寫到 `tests/unit/test_<module>.py`（依 `docs/templates/test-cases-template.md` 的 AAA pattern）
+- **Test case 骨架**：寫到 `tests/unit/test_<module>.py`（依 `./templates/test-cases-template.md` 的 AAA pattern）
   - 只寫 `def test_xxx(): pass` 骨架 + docstring，**不寫實作**（留給 /tdd-cycle）
 
 ### Step 5：更新 backlog
@@ -145,7 +145,7 @@ description: 從一句話需求生成 SDD 三層 spec（PRD / API contract / BDD
 2. **PRD 一定要寫，API/DB 看需要寫，BDD/Test 一定要寫**
 3. **User story 一定要有 AC**（Given-When-Then 三段）
 4. **Non-Goals 至少寫 2 條**（防後續 AI 加功能）
-5. **產出格式對齊 `docs/templates/` 範本**
+5. **產出格式對齊 `./templates/` 範本**
 
 ---
 

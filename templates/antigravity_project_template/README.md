@@ -155,7 +155,7 @@ agy
 | 想包「AI 自動觸發的流程」或自訂指令 | `.agents/SKILLS.md` |
 | 大型任務跑很久 / 想平行加速 | `.agents/SUBAGENTS.md`（Antigravity 2026 殺手特性） |
 | 想跑 SDD 完整 Sprint（spec + TDD + 文件同步） | `.agents/WORKFLOW.md` + 8 個 SDD skill |
-| 不知道 spec 怎麼寫 | `docs/templates/`（7 份大廠對標範本） |
+| 不知道 spec 怎麼寫 | `.agents/skills/spec-it/templates/` (6 份) + `.agents/skills/adr/templates/` (ADR) — 共 7 份大廠對標範本，與 skill 共置 |
 | 不知道任務怎麼拆 | 打 `/plan-sprint` |
 | 想 commit 但不知道訊息怎麼寫 | 打 `/commit-msg` |
 | Sprint 結束想回顧 | 打 `/retro` |

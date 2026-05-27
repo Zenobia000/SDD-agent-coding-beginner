@@ -194,7 +194,7 @@ description: 引導 sprint 回顧（4Ls format），歸檔到 tasks/retros/。**
 
 ## Action Items（下個 sprint 要做的事）
 
-1. [ ] 在 PRD-template.md 加入「failure & retry policy」必填欄
+1. [ ] 在 `.agents/skills/spec-it/templates/PRD-template.md` 加入「failure & retry policy」必填欄
 2. [ ] 評估寫一個 `/risk-check` skill（先看下個 sprint 是否再次遇到同類問題）
 3. [ ] Sprint 中段（第 1.5 天）安排一次 mini-retro
 

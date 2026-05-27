@@ -84,7 +84,7 @@
 
 ## Action Items（下個 sprint 要做的事）
 
-1. [ ] 在 `docs/templates/PRD-template.md` 加入「Failure & Retry Policy」必填欄
+1. [ ] 在 `.agents/skills/spec-it/templates/PRD-template.md` 加入「Failure & Retry Policy」必填欄
 2. [ ] 評估寫一個 `/risk-check` skill（先看下個 sprint 是否再次遇到同類問題）
 3. [ ] Sprint 中段（第 1.5 天）安排一次 mini-retro
 4. [ ] 寫 ADR-0004-api-retry-policy（決定全專案的 retry 策略）

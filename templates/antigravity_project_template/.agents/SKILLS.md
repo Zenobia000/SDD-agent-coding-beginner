@@ -229,7 +229,9 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 - **完整清單（10 個 skill 一覽 + 何時用）** → [`SKILL-MAP.md` §1](./SKILL-MAP.md)
 - **使用者說 X → 該打哪個 skill** → [`SKILL-MAP.md` §11 快速速查](./SKILL-MAP.md)
 - **10 站 Sprint 工作流順序（站 → skill 對應）** → [`WORKFLOW.md`](./WORKFLOW.md)
-- **Spec 範本（PRD / ADR / API / DB / BDD / test-cases）** → [`../docs/templates/`](../docs/templates/)
+- **Spec 範本（與 skill 共置）**：
+  - PRD / user-story / api-contract / db-schema / bdd / test-cases → [`./skills/spec-it/templates/`](./skills/spec-it/templates/)
+  - ADR → [`./skills/adr/templates/adr-template.md`](./skills/adr/templates/adr-template.md)
 
 ---
 

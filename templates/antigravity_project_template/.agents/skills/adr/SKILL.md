@@ -77,7 +77,7 @@ description: 產生 MADR v3.0 格式的 Architecture Decision Record。**主動�
 ## 大廠對標
 
 採 **MADR v3.0**（Markdown ADR，ThoughtWorks Tech Radar 採用 / GitHub 上最廣泛格式）。
-範本見 `docs/templates/adr-template.md`。
+範本見 `./templates/adr-template.md`。
 
 ---
 
@@ -107,7 +107,7 @@ ls adr/ADR-*.md | sort -r | head -1
 
 ### Step 3：產生 ADR 草稿
 
-依 `docs/templates/adr-template.md` 結構填寫：
+依 `./templates/adr-template.md` 結構填寫：
 
 ```markdown
 # ADR-NNNN: <動詞開頭的標題>
