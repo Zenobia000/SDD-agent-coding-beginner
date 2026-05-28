@@ -55,7 +55,7 @@ repo-root/
 | 文件                            | 主要對象               | 用途                              |
 | ----------------------------- | ------------------ | ------------------------------- |
 | `README.md`                   | 人類新人               | 安裝、介紹、Quick Start               |
-| `USAGE.md`                    | 人類學員              | 選擇 Mode A / Mode B 走哪條路徑       |
+| `USAGE.md`                    | 人類學員              | SDD Sprint 完整使用說明 + walkthrough + FAQ |
 | `AGENTS.md`                   | Antigravity Agent  | 站立規則、跨對話一致的專案總綱                 |
 | `.agents/settings.json`       | Antigravity CLI    | model / checkpoint / MCP 等執行設定 |
 | `.agents/WORKFLOW.md`         | Antigravity Agent  | 工作流封裝（Sprint 10 站 + 3 層 Spec）  |
@@ -171,7 +171,7 @@ Antigravity 把「擴充能力」分成三個原語，分別放在 `.agents/` �
 - **3 層 Spec 強迫設計先行**：L1 PRD（意圖）→ L2 API/DB（介面）→ L3 BDD（行為），缺一層 AI 就會自由發揮
 - **每站對應一個 skill**：AI 看 WORKFLOW.md 就知道現在該觸發哪個 `/<command>`、要產出什麼
 
-> **與 USAGE.md 的關係**：USAGE.md 教使用者「選 A / B 哪條路」；WORKFLOW.md 是 B 路徑（SDD Sprint）的詳細站別。A 路徑（Vibe Coding 五步）寫在 `AGENTS.md §3.1`。
+> **與 USAGE.md 的關係**：USAGE.md 是給人看的 SDD Sprint 使用說明（walkthrough + 陷阱 + FAQ）；WORKFLOW.md 是給 AI 看的十站流程定義（每站產出 + skill 對應）。
 
 ---
 
@@ -446,7 +446,7 @@ adr/
 ### 快速路徑（推薦）
 
 1. **整包複製 `templates/antigravity_project_template/`** 到你的 repo 根目錄
-2. **打開 `USAGE.md`** 選 Mode A（Vibe Coding 五步）或 Mode B（SDD Sprint 十站）
+2. **打開 `USAGE.md`** 看 SDD Sprint 十站怎麼跑（含完整 walkthrough）
 3. **填 `docs/PRD.md`** 第 1-3 節（不會填 → 用 `/spec-it` 讓 AI 問你）
 4. **用 `agy` 開啟資料夾**，跑 `/memory show` 確認 `AGENTS.md` 有被讀到
 5. **開始用 Antigravity 改 code**

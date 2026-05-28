@@ -6,59 +6,51 @@
 
 ## 命名
 
-- 變數、函式：用**英文小駝峰**，但**有意義的全名**
+- 變數、函式：用**英文小駝峰**（或語言慣例），但**有意義的全名**
   - ✅ `newsContent`、`summarizeNews()`
   - ❌ `nc`、`fn1`、`data`、`temp`
 - 常數：全大寫加底線
-  - ✅ `const API_KEY = "..."`、`const MAX_LENGTH = 2000`
+  - ✅ `const MAX_LENGTH = 2000`
+- **命名對齊 spec 的領域語言**：PRD 叫 "summary"，code 就別叫 "result"
 
 ## 註解
 
-- **每個函式上方一行中文註解**說明它在做什麼
-- 複雜邏輯（超過 5 行）前面寫一句中文說明
+- 註解說明**「為什麼」**不是「做什麼」（code 本身已說明 what）
+- 複雜邏輯 / 非顯而易見的決策前，寫一句說明背後取捨
+- **對齊 spec**：關鍵實作標出對應哪個 user story / AC（例：`// 實作 US-001 AC-2：空輸入回傳友善錯誤`）
 - 不要寫廢話註解（`// 設定變數` 之類的）
-
-範例：
-```javascript
-// 把使用者貼的新聞傳給 Gemini，回傳三點摘要
-async function summarizeNews(content) {
-  // ...
-}
-```
 
 ## 結構
 
-- HTML / CSS / JS 全寫在 `index.html` 裡（用 `<style>` 和 `<script>` 標籤）
-- JS 區塊順序：常數 → 工具函式 → 主邏輯 → 事件綁定
-- 同類功能放一起，不要散落
+- **依專案結構分層、單一職責**：不要把所有東西塞進一個檔
+- 模組邊界對齊 spec 的領域劃分（`db-schema` / `api-contract` 怎麼切，code 就怎麼切）
+- import 順序：標準庫 → 第三方 → 專案內部
 
 ## 錯誤處理
 
-- **每個 `fetch` 都要有 `try/catch`**
-- 錯誤訊息**用繁體中文**顯示在畫面上（不要只 `console.log`）
-- API Key 沒填時要明確提示「請先在 code 開頭填入你的 API Key」
+- 每個 I/O（fetch / DB / 檔案讀寫）都要處理失敗路徑
+- **不要靜默吞錯**：log 或拋出有意義的錯誤，不要空 `catch {}`
+- 錯誤路徑要能對應到測試——TDD 的失敗案例（empty input / timeout / 403）就是錯誤處理的 spec
 
 範例：
 ```javascript
 try {
-  const result = await fetch(...);
-  // ...
+  const result = await fetchSummary(content);
+  return result;
 } catch (err) {
-  resultArea.textContent = "出錯了：" + err.message + "（請檢查網路或 API Key）";
+  // 對應 test_summarize_with_api_error：失敗時拋出帶 context 的錯誤
+  throw new SummarizeError(`摘要失敗：${err.message}`, { cause: err });
 }
 ```
 
-## API Key 處理
+## Secret 處理（硬約束，違反 = 任務失敗）
 
-- 一定放在檔案最上方：
-  ```javascript
-  // ⚠️ 把下面的字串換成你自己的 Gemini API Key
-  // 申請網址：https://aistudio.google.com/apikey
-  const API_KEY = "請貼上你的金鑰";
-  ```
-- 如果 `API_KEY === "請貼上你的金鑰"`，按按鈕時要 `alert("請先在 code 開頭填入 API Key")`
+- ❌ **絕不**把 API Key / token / 密碼寫死在 code
+- ✅ 一律從環境變數讀（`process.env.X` / `os.environ["X"]`），`.env` 進 `.gitignore`
+- ✅ 前端需要呼叫 LLM / 第三方 API → **走後端 proxy**，金鑰只存後端，不進前端 bundle
+- ✅ commit 前必跑 `/check-key` 掃描（見 `skills/check-key.md`）
 
-## 給使用者的訊息
+## 面向使用者的文案
 
-- 所有 `alert()`、畫面上的文字、按鈕標籤 → **繁體中文**
-- 不要用「Submit」、「Loading...」這種英文，用「送出」、「處理中…」
+- 如專案有 UI：使用者看得到的文字（按鈕、提示、錯誤訊息）用**繁體中文**
+- 程式內部（log、變數名、commit message type、測試名）用**英文慣例**

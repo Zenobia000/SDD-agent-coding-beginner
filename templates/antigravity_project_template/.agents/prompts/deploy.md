@@ -9,8 +9,8 @@
 ### 模板（複製這段）
 
 ```
-我的專案已經在本機可以跑（index.html 雙擊能打開）。
-現在我想把它放到網路上，讓我朋友用網址就能打開。
+我的專案已經通過 /verify、本機可以跑。
+現在我想把它部署上線，讓人用網址就能打開。
 
 請幫我用「Cloudflare Pages」部署，因為它免費、快、不用信用卡。
 
@@ -22,10 +22,10 @@
 4. 之後我改了 code，要怎麼更新線上版本
 
 注意：
-- 我沒寫過程式，不熟 git
+- API Key / secret 一律走環境變數，**不要**進前端 bundle 或 commit
 - 我不要用需要信用卡的服務
-- 我希望步驟越少越好（5 步以內最佳）
-- 如果有任何步驟需要打指令，請完整寫出指令並解釋它在做什麼
+- 如果有後端，請一併說明後端怎麼部署、環境變數怎麼設
+- 每個 git / CLI 指令請完整寫出並解釋它在做什麼
 
 請開始。
 ```
@@ -34,23 +34,26 @@
 
 ## 部署前自我檢查
 
-- [ ] 本機打開 index.html 真的能跑、能用、沒紅字
-- [ ] API Key **不要** commit 上去（如果要公開，先改成讓使用者自己貼 Key 的版本）
-- [ ] 換手機 / 別台電腦打開也能跑（不是「只在我電腦能跑」）
+- [ ] `/verify` 全綠（format / lint / type / test+coverage / security）
+- [ ] `/check-key` 通過——無 secret 寫死、無 placeholder、`.gitignore` 覆蓋 `.env`
+- [ ] `/sync-it` 無 drift——部署的 code 與 PRD / api-contract 一致
 
 ---
 
-## ⚠️ API Key 安全警告
+## ⚠️ API Key 安全（SDD 正解）
 
-如果你的 index.html 裡寫了 `const API_KEY = "你的真 Key"`，**直接上線等於把 Key 公開**，會被別人偷用、扣到你的額度。
+**絕不把 API Key 寫進前端 code 上線**——公開 = 被盜刷。正解依架構：
 
-**安全做法**：上線前改成：
-```javascript
-const API_KEY = prompt("請輸入你自己的 Gemini API Key（不會被儲存）");
-```
-這樣每個使用者用自己的 Key，你不會被偷扣。
+**有後端**（SDD 專案多數情況）：
+- API Key 放部署平台的 **Environment Variables**（Cloudflare/Vercel 後台設定）
+- 前端呼叫自己的後端 `/api/...`，後端代呼叫 LLM，金鑰不出後端
+
+**純靜態無後端**（小工具）：
+- 用 serverless function（Cloudflare Workers / Pages Functions）當 proxy
+- 金鑰放 Workers 的 environment variables，前端只打自己的 function endpoint
 
 **要 AI 幫你改？貼這句**：
 ```
-我要上線了，請幫我把 API Key 改成「使用者自己貼進來」的方式，避免我的 Key 被公開。
+我要上線了，請幫我把 API Key 改成走後端 / serverless proxy（環境變數讀取），
+不要讓金鑰出現在前端 bundle。改完跑 /check-key 確認。
 ```

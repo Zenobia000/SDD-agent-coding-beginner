@@ -174,69 +174,47 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 
 ---
 
-## 4. Vibe Coding 五步流程怎麼跟 CLI 接軌
+## 4. SDD Sprint 怎麼跟 CLI 接軌
 
-`AGENTS.md` 規定了「Vibe Coding 五步流程」（重述需求 → 列計畫 → 寫 code → 帶測試 → 等回報）。在 CLI 裡，每一步都有對應的工具讓你跑得更順：
+`AGENTS.md` 規定的 SDD 十站，在 CLI 裡每一站都有對應的工具 / 技巧讓你跑得更順：
 
-### 第 1 步：重述需求 → 用 `@` 引用 PRD
+### spec-it 階段：用 `@` 引用 PRD 對齊
 
-不要自己用嘴巴重講需求，直接打：
-
-```
-@docs/PRD.md 請用 5 行內告訴我你理解的需求是什麼
-```
-
-`@檔案路徑` 會把整份檔案塞進 prompt。AI 重述完你看不對，就改 PRD，不是改 prompt。
-
-### 第 2 步：列計畫 → 直接講話即可
-
-過去工作流會把這步包成 `/vibe:plan` skill，**但 SOTA 模型（Claude Opus 4.7 / Gemini 3）已能本能遵守 AGENTS.md 的 Vibe Coding 五步流程**，包成 skill 反而是治理劇場。
-
-直接跟 AI 講：
+跑 `/spec-it` 生出 spec 後，要 review 對不對，直接打：
 
 ```
-先列計畫，等我確認 OK 才動手寫 code
+@docs/PRD.md 這份 spec 你理解的範圍是什麼？有沒有缺的 AC？
 ```
 
-它會：
+`@檔案路徑` 把整份檔案塞進 prompt。spec 不對就改 PRD，不是改 prompt。
 
-- 列出要新增 / 修改 / 刪除的檔案
-- 每個檔案說一句為什麼
-- 列出風險
-- **停下來等你說 OK 才動手**
+### plan-sprint 階段：用 `tasks/` 追進度
 
-要保險的話，可參考 `.agents/prompts/start-project.md` 的全文模板。
+`/plan-sprint` 把 backlog 拆進 `tasks/sprint-current.md`（Now / Next / Later）。過程中想加 task 直接編輯 markdown，下次 `/retro` 會一起更新。
 
-### 第 3 步：寫 code → checkpointing 保命
+### tdd-cycle 階段：checkpointing 保命
 
-確認 `.agents/settings.json` 內 `checkpointing.enabled: true`。AI 改錯了你只要打：
+確認 `.agents/settings.json` 內 `checkpointing.enabled: true`。TDD 的 REFACTOR 步驟改壞了，打 `/restore` 選快照回滾——比 `git reset` 安全（不動 git 歷史），測試還在就能立刻重跑確認。
 
-```
-/restore
-```
+### verify 階段：Playwright MCP 驗 UI 行為
 
-選快照編號回滾。比 `git reset` 安全（不會動到 git 歷史）。
-
-### 第 4 步：帶你測試 → Playwright MCP 截圖驗證
-
-Vibe Coding 的測試標準是「打開瀏覽器看到東西」。Playwright MCP 讓 AI 自己開瀏覽器跑你的 `index.html`：
+有前端的話，`/verify` 之外可用 Playwright MCP 讓 AI 自己開瀏覽器跑 BDD scenario：
 
 ```
-你：把 index.html 用 playwright 打開，截圖給我看畫面長怎樣
-AI：（呼叫 playwright MCP 啟動 chromium → 開啟檔案 → 截圖 → 把畫面回傳）
+用 playwright 打開 index.html，跑一次 summarize.feature 的情境，截圖給我看
 ```
 
 詳見 [`.agents/MCP.md`](../.agents/MCP.md) 的 playwright 段落。
 
-### 第 5 步：等回報 → `/memory add` 累積偏好
+### 跨 sprint：`/memory add` 累積專案慣例
 
-使用者說「我習慣用 pnpm 不是 npm」時，AI 不該只記在這次對話。打：
+團隊 / 專案慣例（用 pnpm 不是 npm、CI 跑在 GitHub Actions、coverage 門檻 80%）打：
 
 ```
-/memory add 我習慣用 pnpm 不是 npm
+/memory add 這個專案 coverage 門檻是 80%，低於就不准 commit
 ```
 
-這條會寫到全域記憶，下次重開 CLI、開新專案也會帶著。
+這條會寫到全域記憶，下個 sprint、新 session 也會帶著。
 
 ---
 
@@ -369,7 +347,7 @@ agy plugin import gemini
 - [ ] 接受「畫面上沒有按鈕，所有事都靠打字 + 規則檔」
 - [ ] 把 `AGENTS.md` 當「給 AI 的合約」而不是文件——它每次都會讀
 - [ ] 不要每次重講偏好，**用 `/memory add` 寫進長期記憶**
-- [ ] 不要每次手動列計畫，**信任 AGENTS.md 第 3 章五步流程**（SOTA 模型會自動遵守）
+- [ ] 不要每次手動列計畫，**用 `/plan-sprint` 拆 backlog**（tasks/ 自動追進度）
 - [ ] 不要憑記憶改檔，**用 `@file` 引用 + checkpointing 保命**
 - [ ] 不要裝一堆 MCP「以防萬一」，**用一個關一個，token 是你的成本**
 - [ ] 不要把所有規則塞進 `AGENTS.md`，**拆到 `rules/` 用 `@import` 引用**

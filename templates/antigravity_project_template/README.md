@@ -59,18 +59,22 @@ my-project/
 
 ---
 
-## 🎯 兩種使用模式
+## 🎯 這套模板怎麼用：SDD Sprint
 
-| 模式 | 適合 | 怎麼用 |
+本模板走 **Spec-Driven Development（SDD）** 單一工作流：spec 先於 code、測試先於實作、文件與 code 同步。
+
+| 階段 | skill | 產出 |
 |---|---|---|
-| **A. Vibe Coding 五步**（輕量） | 純新手 / hackathon / 探索期 | `AGENTS.md §3.1` — 重述 → 計畫 → 寫 → 測 → 等回報 |
-| **B. SDD Sprint 十站**（完整） | 有程式基礎 / 要做正規專案 | `.agents/WORKFLOW.md` — 10 站工作流 + 8 個 SDD skill |
+| 意圖 | `/spec-it` `/adr` `/plan-sprint` | PRD + ADR + backlog |
+| 設計 | `/spec-it`（L2+L3） | API contract + BDD + 測試骨架 |
+| 實作 | `/tdd-cycle` `/verify` `/sync-it` | 紅綠燈循環 + 五維驗證 + 文件對齊 |
+| 上線 | `/commit-msg` 部署 `/retro` | Conventional Commits + 部署 + 回顧 |
 
-**判斷怎麼選：**
-- 第一個專案、純嘗試 → 用 A
-- 想學「業界怎麼用 AI 做專案」、想練習 spec / TDD / git workflow → 用 B
+**適合**：有基本程式概念（知道 function / API / 測試）、要做正規可維護專案。
+**純新手** → 先看 `class_plan/` 工作坊教案學 Vibe Coding 基礎，能力上來再回來。
 
 📖 **完整使用說明、Sprint walkthrough、FAQ → 看 [`USAGE.md`](./USAGE.md)**
+📊 **十站流程總圖 → 看 [`.agents/WORKFLOW.md`](./.agents/WORKFLOW.md)**
 
 ---
 
@@ -131,7 +135,7 @@ agy
 | 叫 AI 記住某件事        | 打 `/memory add 我習慣用 pnpm 不是 npm`          |
 | 清空對話重新開始          | 打 `/clear`                                |
 | 看內建 slash 指令       | 打 `/help`                                 |
-| 觸發自訂 skill        | 打 `/check-key`、`/explain-code`（本模板附 2 個；更多範例見 `.agents/SKILLS.md`） |
+| 觸發 SDD skill        | `/spec-it` `/adr` `/plan-sprint` `/tdd-cycle` `/verify` `/sync-it` `/commit-msg` `/retro` + `/check-key` `/explain-code`（連動見 `.agents/SKILL-MAP.md`） |
 | 從 Gemini CLI 搬過來    | 打 `agy plugin import gemini`（一次性遷移） |
 
 ---
@@ -143,7 +147,7 @@ agy
 | 想從桌面版轉到 CLI、看整套協作環境 | **`docs/HANDBOOK.md`** ← 推薦先讀 |
 | 不知道怎麼開始       | `.agents/prompts/start-project.md`      |
 | 想加新功能         | `.agents/prompts/add-feature.md`（手動複製貼全文模板） |
-| 想要 AI 動手前先列計畫 | 直接跟 AI 講「先列計畫等我確認」（AGENTS.md 第 3 章五步流程已要求；SOTA 模型自動會做） |
+| 想要 AI 動手前先列計畫 | 跑 `/plan-sprint` 拆 backlog；小調整也可直接講「先列計畫等我確認」 |
 | 跑起來有錯 / bug   | `.agents/prompts/fix-bug.md`            |
 | AI 一直亂寫 / 越改越糟 | `.agents/rules/03-when-stuck.md`        |
 | AI 改錯一堆檔案、想回到改之前 | 打 `/restore` 選快照回滾（比 git reset 安全） |
@@ -162,11 +166,14 @@ agy
 
 ---
 
-## ⚠️ 三個不要（Mode A 鐵律）
+## ⚠️ SDD 四鐵則
 
-詳細解釋與例子 → [`USAGE.md` §1.6 Mode A 三不要](./USAGE.md#16-mode-a-三不要)（單一 SoT）
+1. **沒 PRD 不開工** — 新需求先 `/spec-it`（`rules/04-spec-first.md`）
+2. **沒測試不算完成** — 實作走 `/tdd-cycle` 紅綠燈（`rules/05-tdd-required.md`）
+3. **沒 `/verify` 不 commit** — 過五維度驗證才 commit
+4. **沒 `/sync-it` 不收工** — 文件跟著 code 走，不容許 drift（`rules/06-doc-as-code.md`）
 
-一句話版：**不自己改 code、不一次給太多需求、不刪 `.agents/`**。
+詳細 → [`USAGE.md` §1.2 四條鐵則](./USAGE.md)。
 
 ---
 
