@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVP 填空 Prompt 模板 — 小白急救版</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --bg-card: #ffffff;
+    --bg-code: #1e1e2e;
+    --bg-code-soft: #f4f4f1;
+    --text: #1a1a2e;
+    --text-soft: #4a4a5e;
+    --text-mute: #8a8aa0;
+    --accent: #ff6b35;
+    --accent-soft: #fff1ea;
+    --primary: #2d4a7c;
+    --primary-soft: #e8eef7;
+    --success: #2d8659;
+    --success-soft: #e6f3ed;
+    --warn: #b88a00;
+    --warn-soft: #fff8e1;
+    --border: #e4e4e0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  code, pre, .mono { font-family: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace; }
+
+  /* Layout */
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 280px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .main { flex: 1; min-width: 0; padding: 40px 56px 120px; max-width: 980px; }
+
+  /* Sidebar */
+  .sidebar h1 { font-size: 18px; margin-bottom: 4px; color: var(--primary); }
+  .sidebar .subtitle { font-size: 12px; color: var(--text-mute); margin-bottom: 24px; }
+  .progress-bar { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-bottom: 20px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 0%; transition: width 0.4s ease; }
+  .progress-text { font-size: 12px; color: var(--text-mute); text-align: center; margin-bottom: 16px; }
+  .nav-list { list-style: none; }
+  .nav-list li { margin-bottom: 2px; }
+  .nav-list a {
+    display: block; padding: 8px 12px; border-radius: 6px;
+    color: var(--text-soft); text-decoration: none; font-size: 14px;
+    transition: all 0.15s;
+  }
+  .nav-list a:hover { background: var(--primary-soft); color: var(--primary); }
+  .nav-list a.active { background: var(--primary); color: white; font-weight: 500; }
+  .nav-list .done::before { content: "✓ "; color: var(--success); font-weight: 700; }
+  .nav-group-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-mute); margin: 16px 0 6px 12px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #2d4a7c 0%, #1a2f5a 100%);
+    color: white;
+    padding: 48px 40px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .hero h1 { font-size: 32px; margin-bottom: 12px; line-height: 1.3; }
+  .hero .tagline { font-size: 18px; opacity: 0.9; margin-bottom: 24px; }
+  .hero .lessons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .hero .lesson {
+    background: rgba(255,255,255,0.1);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .hero .lesson b { display: block; color: var(--accent); margin-bottom: 4px; font-size: 13px; letter-spacing: 0.5px; }
+
+  /* Flow diagram */
+  .flow-diagram {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .flow-diagram h3 { font-size: 18px; margin-bottom: 24px; color: var(--primary); }
+  .flow-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .flow-box {
+    background: var(--primary-soft);
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .flow-box.studio { background: #fff1ea; border-color: var(--accent); }
+  .flow-box.agy { background: var(--success-soft); border-color: var(--success); }
+  .flow-box h4 { font-size: 14px; margin-bottom: 6px; }
+  .flow-box small { font-size: 12px; color: var(--text-mute); display: block; }
+  .flow-arrow { font-size: 24px; color: var(--text-mute); }
+  .flow-warn {
+    margin-top: 20px;
+    background: var(--warn-soft);
+    border-left: 4px solid var(--warn);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  /* Phase card */
+  .phase {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    scroll-margin-top: 20px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase-num {
+    background: var(--primary);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .phase-title-block { flex: 1; }
+  .phase-title-block h2 { font-size: 24px; margin-bottom: 4px; }
+  .phase-summary { color: var(--text-soft); font-size: 14px; }
+
+  .phase h3 { font-size: 18px; margin: 28px 0 12px; color: var(--primary); }
+  .phase h4 { font-size: 16px; margin: 20px 0 10px; color: var(--text); }
+  .phase p { margin-bottom: 14px; color: var(--text-soft); }
+  .phase ul, .phase ol { margin: 12px 0 16px 24px; color: var(--text-soft); }
+  .phase li { margin-bottom: 6px; }
+
+  /* White-paper translation (the "human-readable" intro) */
+  .plain {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+  }
+  .plain b { color: var(--accent); }
+
+  /* Linus note */
+  .linus {
+    background: var(--bg-code-soft);
+    border-left: 4px solid var(--text);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .linus::before {
+    content: "💭 Linus 註解";
+    display: block;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .linus em { font-style: normal; color: var(--accent); font-weight: 600; }
+
+  /* Code block */
+  .code-wrap {
+    position: relative;
+    margin: 12px 0 18px;
+  }
+  pre {
+    background: var(--bg-code);
+    color: #d4d4d8;
+    padding: 18px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  pre.text-block { white-space: pre-wrap; word-break: break-word; }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,255,255,0.1);
+    color: #d4d4d8;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: all 0.15s;
+  }
+  .code-wrap:hover .copy-btn { opacity: 1; }
+  .copy-btn:hover { background: rgba(255,255,255,0.2); }
+  .copy-btn.copied { background: var(--success); border-color: var(--success); color: white; opacity: 1; }
+  code.inline {
+    background: var(--bg-code-soft);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    color: var(--accent);
+  }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg); color: var(--text); font-weight: 600; font-size: 13px; }
+  td { color: var(--text-soft); }
+  tr:hover td { background: var(--bg); }
+
+  /* Accordion (卡關處理) */
+  details.faq {
+    background: var(--bg);
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  details.faq summary {
+    padding: 12px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+    user-select: none;
+    list-style: none;
+  }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::before { content: "▸ "; color: var(--accent); margin-right: 4px; transition: transform 0.2s; display: inline-block; }
+  details.faq[open] summary::before { transform: rotate(90deg); }
+  details.faq .faq-body { padding: 0 18px 14px; font-size: 14px; color: var(--text-soft); }
+
+  /* Checklist */
+  .checklist {
+    background: var(--success-soft);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-left: 4px solid var(--success);
+  }
+  .checklist h4 { color: var(--success); margin-bottom: 10px; font-size: 14px; letter-spacing: 0.5px; }
+  .checklist ul { list-style: none; margin: 0; padding: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+  .checklist input[type="checkbox"] {
+    margin-top: 5px;
+    cursor: pointer;
+    accent-color: var(--success);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .checklist label { cursor: pointer; flex: 1; font-size: 14px; color: var(--text); }
+  .checklist input:checked + label { text-decoration: line-through; color: var(--text-mute); }
+
+  /* Step list */
+  .steps { counter-reset: step; list-style: none; margin-left: 0 !important; }
+  .steps > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 44px;
+    margin-bottom: 20px;
+  }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .steps > li b { display: block; margin-bottom: 6px; color: var(--text); }
+
+  /* Handoff banner */
+  .handoff {
+    background: linear-gradient(135deg, var(--accent) 0%, #d63d00 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 12px;
+    margin: 32px 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .handoff h2 { font-size: 24px; margin-bottom: 8px; }
+  .handoff p { color: rgba(255,255,255,0.95); margin-bottom: 16px; }
+  .handoff .arrow { font-size: 32px; margin: 12px 0; }
+
+  /* Mantras */
+  .mantra-card {
+    background: linear-gradient(135deg, #1a2f5a 0%, #2d4a7c 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    margin: 32px 0;
+    text-align: center;
+  }
+  .mantra-card h3 { color: var(--accent); margin-bottom: 24px; font-size: 14px; letter-spacing: 2px; }
+  .mantra-card .verse { font-size: 22px; line-height: 1.8; font-weight: 600; }
+  .mantra-card .verse div { padding: 4px 0; }
+
+  /* Quote / callout */
+  blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 16px;
+    margin: 16px 0;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; border-right: 0; border-bottom: 1px solid var(--border); }
+    .main { padding: 24px 20px 80px; }
+    .hero { padding: 32px 24px; }
+    .hero h1 { font-size: 24px; }
+    .hero .lessons { grid-template-columns: 1fr; }
+    .flow-row { grid-template-columns: 1fr; }
+    .flow-arrow { transform: rotate(90deg); margin: 0 auto; }
+    .phase { padding: 24px 20px; }
+    .phase-header { flex-direction: column; }
+  }
+
+  /* Highlights */
+  mark { background: #fff3a3; padding: 1px 4px; border-radius: 3px; }
+
+  /* Print */
+  @media print {
+    .sidebar, .copy-btn { display: none; }
+    .main { max-width: none; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <h1>MVP 填空模板</h1>
+    <div class="subtitle">小白急救版 · 先求有再求好</div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">0 / 0 完成</div>
+
+    <div class="nav-group-title">起手式</div>
+    <ul class="nav-list">
+      <li><a href="#intro">📍 怎麼用這份模板</a></li>
+    </ul>
+
+    <div class="nav-group-title">開始動手</div>
+    <ul class="nav-list">
+      <li><a href="#step-0">第 0 步 · 一句話寫專案</a></li>
+      <li><a href="#step-1">第 1 步 · 貼進 AI Studio</a></li>
+    </ul>
+
+    <div class="nav-group-title">拿到結果之後</div>
+    <ul class="nav-list">
+      <li><a href="#step-2">第 2 步 · 做這 4 件事</a></li>
+      <li><a href="#step-3">第 3 步 · 卡關用保底題目</a></li>
+    </ul>
+
+    <div class="nav-group-title">參考</div>
+    <ul class="nav-list">
+      <li><a href="#structure">📁 預期專案結構</a></li>
+      <li><a href="#cheat">🔍 為什麼會成功</a></li>
+      <li><a href="#mantra">🎯 一句口訣</a></li>
+    </ul>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero" id="intro">
+      <h1>MVP 填空 Prompt 模板</h1>
+      <div class="tagline">直接複製到 Google AI Studio，把 <code class="inline" style="color:#ffd9c7">___</code> 填上你的內容，按送出就拿到一份可運行的小專案。</div>
+      <div class="lessons">
+        <div class="lesson">
+          <b>核心觀念 1</b>
+          只用 STRIKE 的急救組合 T+K+I（任務＋驗收＋輸入），三格填好品質就有八成可用
+        </div>
+        <div class="lesson">
+          <b>核心觀念 2</b>
+          不確定填什麼？每一格底下都有「不會填？抄這個」範例，直接抄
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="flow-diagram">
+      <h3>🗺️ 整體流程一張圖</h3>
+      <div class="flow-row">
+        <div class="flow-box">
+          <h4>💡 一句話想法</h4>
+          <small>還在腦中的模糊點子</small>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box studio">
+          <h4>🎨 填模板 → AI Studio</h4>
+          <small><b>把 ___ 填好</b><br>整段貼上、按 Run</small>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box agy">
+          <h4>📦 可運行專案</h4>
+          <small><b>一次拿齊</b><br>前端 + 後端 + README + .env</small>
+        </div>
+      </div>
+      <div class="flow-warn">
+        ⚠️ <b>先求有再求好</b>：第一個專案先求「能跑起來」，不要一開始就追求完美。等熟了再補 STRIKE 的 S / R / E。
+      </div>
+    </section>
+
+    <!-- 適用對象 -->
+    <section class="phase">
+      <h3>👤 這份模板適合誰？</h3>
+      <ul>
+        <li>✅ 進度比較慢、不知道怎麼開口跟 AI 講需求的學員</li>
+        <li>✅ 想要「填空就好」、不想從零想 prompt 的人</li>
+        <li>✅ 想先做出第一個能跑的小專案，建立信心的人</li>
+      </ul>
+
+      <h3>📖 怎麼用這份模板？</h3>
+      <ul>
+        <li><b>三格優先</b> — 只要把 <code class="inline">T 任務</code>、<code class="inline">K 驗收</code>、<code class="inline">I 輸入</code> 填好，就能送出</li>
+        <li><b>卡住就抄</b> — 每格下面有範例，連第 0 步都填不出來就直接跳第 3 步保底題目</li>
+        <li><b>邊讀邊做</b> — 每個程式碼框右上角可一鍵複製，貼出去就用</li>
+      </ul>
+      <p style="margin-top:14px; color: var(--text-mute); font-size: 13px;">💡 提示：左側 sidebar 會記住你勾選的進度，下次打開還在。</p>
+    </section>
+
+    <!-- ===================== STEP 0 ===================== -->
+    <section class="phase" id="step-0">
+      <div class="phase-header">
+        <div class="phase-num">0</div>
+        <div class="phase-title-block">
+          <h2>先用一句話寫出你的專案</h2>
+          <div class="phase-summary">30 秒，把下面這句話補完，這就是你今天要做的東西。</div>
+        </div>
+      </div>
+
+      <blockquote>
+        我要做一個 <b>___（什麼東西，例如：新聞摘要小網頁）___</b>，<br>
+        給 <b>___（誰用，例如：每天早上趕著看新聞的我自己）___</b> 用，<br>
+        解決 <b>___（什麼煩惱，例如：每天花 30 分鐘讀新聞還是記不住重點）___</b> 的問題。
+      </blockquote>
+
+      <div class="plain">
+        <b>不會填？抄這個 👉</b><br>
+        我要做一個「貼新聞內文或網址就出三點摘要」的小網頁，給每天通勤前要快速看新聞的自己用，解決新聞太多、來不及讀完的問題。
+      </div>
+
+      <div class="checklist" data-phase="0">
+        <h4>✅ 完成檢查</h4>
+        <ul>
+          <li><input type="checkbox" id="s0-1"><label for="s0-1">我已經把這句話補完了</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== STEP 1 ===================== -->
+    <section class="phase" id="step-1">
+      <div class="phase-header">
+        <div class="phase-num">1</div>
+        <div class="phase-title-block">
+          <h2>把下面整段複製到 Google AI Studio</h2>
+          <div class="phase-summary">把所有 <code class="inline">___</code> 替換成你的內容，整段貼到 <a href="https://aistudio.google.com" target="_blank" rel="noopener">aistudio.google.com</a> 的 Prompt 區，按 <b>Run</b>。</div>
+        </div>
+      </div>
+
+      <div class="code-wrap">
+<pre class="text-block">你是一位資深的全端工程師兼產品經理，專門幫初學者把模糊的點子做成「結構清楚、能直接擴充」的小型專案。產出要兼顧「初學者讀得懂」與「未來可以加功能」，不要為了極簡而壓成一個檔案。
+
+# 我的需求
+
+【T 任務】
+請幫我設計並寫出一個「___（一句話描述你的小工具，例如：貼新聞網址或全文都能出三點摘要的網頁）___」。
+最終產出必須包含以下「全部」內容，缺一不可：
+
+1. 一份「給工程師看的 PRD」
+   - 功能清單、操作流程、輸入 / 輸出規格、非功能需求
+
+2. 一份「專案資料夾結構說明」（用樹狀圖列出檔案）
+
+3. 一份「完整可直接執行」的多檔案專案 code（每個檔案完整貼出，不要省略）：
+   - 前端：`index.html` / `style.css` / `script.js` 三個檔案分開
+   - 後端：`server/app.py`（用 Python Flask）或 `server/server.js`（用 Node Express），二選一
+     · 後端唯一職責：代收前端請求 → 轉呼叫 Gemini API → 回傳結果（避免 API Key 寫在前端外洩）
+   - 環境設定：`.env.example`（列出需要的環境變數，例如 `GEMINI_API_KEY=`）
+   - 依賴清單：Python 用 `requirements.txt`、Node 用 `package.json`
+   - `README.md`：包含「申請 Key → 安裝 → 啟動 → 怎麼用」四段，每段給可複製的指令
+
+4. 一份「下一步擴充建議」：列 3 個未來可加的功能與大致實作方向（不要動手做，只是告訴我）
+
+【I 輸入】
+使用者會在網頁上輸入：___（描述使用者要貼進去 / 點選 / 上傳什麼東西，例如：一段新聞全文文字，或一個新聞網址 URL；後端需自動判斷是 URL 還是純文字，是 URL 就用網路抓網頁 → 抽正文 → 餵給 Gemini）___
+範例輸入：
+___（貼一個你預期使用者會輸入的真實範例，至少 3-5 行；若支援 URL，附一個範例 URL）___
+
+【K 驗收標準】
+必須符合以下條件，否則重做：
+- 架構：前後端分離（前端純靜態 + 後端 API），但後端極簡（單檔 &lt; 100 行）
+- 介面：簡潔白底、最大寬度 720px、置中、系統字體、繁體中文
+- UI 三件套：「輸入區 + 主要按鈕 + 結果顯示區」是核心，可額外加「重置」「複製結果」「載入中提示」
+- 技術選擇：
+  · 前端：原生 HTML/CSS/JavaScript，不要 React / Vue / 任何前端框架
+  · 後端：Flask（Python 3.10+）或 Express（Node 18+），二選一並說明為什麼
+  · AI：Google Gemini API（`gemini-2.0-flash`），endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`
+  · 網頁抓取（若需求支援 URL 輸入）：
+    - Python：`requests` + `beautifulsoup4` 抓 HTML 並抽 &lt;article&gt; / &lt;main&gt; / 全 &lt;p&gt; 純文字
+    - Node：`fetch` + `cheerio` 同上
+    - 抓失敗（404 / 超時 / 防爬蟲擋）→ 回友善錯誤訊息，不要崩潰
+- 安全：API Key **只能放後端**，從 `.env` 讀取（用 python-dotenv 或 dotenv 套件）；前端只呼叫自己的後端 `/api/...`，絕不直接打 Gemini
+- URL 抓取的安全：只接 `http://` / `https://` 開頭、限制 timeout（≤ 10 秒）、限制回傳大小（≤ 1 MB）避免被惡意大檔拖垮
+- CORS：後端要設好 CORS，前端從本機 file:// 或 http://localhost 都能呼叫
+- 錯誤處理：
+  · 前端：使用者沒輸入就按按鈕 → 友善提示
+  · 後端：API 失敗 → 回 JSON `{ "error": "可讀的中文訊息" }`
+  · 前端收到 error → 顯示在結果區（不要當機、不要只 console.log）
+- 註解：每個函式上方一行中文註解說明用途
+- 期望輸出格式：___（描述你想看到什麼樣的結果，例如：三點條列摘要，每點不超過 40 字）___
+
+# 你要做的事（依序）
+
+1. 先用 5-8 行重述你理解的需求，讓我確認沒誤會
+2. 出 PRD（功能清單、操作流程、輸入輸出規格）
+3. 出資料夾結構樹狀圖
+4. 完整貼出每個檔案內容（用 markdown code block，每個檔案標清楚檔名）
+5. 最後給我：
+   - 申請 Gemini API Key 的網址
+   - 「3 行指令把專案跑起來」的 quickstart（裝依賴 → 設 env → 啟動）
+   - 我把這份規格貼進 Antigravity 時，要怎麼開頭講才能讓它接續做下去
+   - 3 個下一步擴充建議
+
+請開始第 1 步（重述需求），等我回「OK」再繼續第 2 步。</pre>
+        <button class="copy-btn">複製</button>
+      </div>
+
+      <div class="linus">
+        <em>三格優先：</em>就算其他都看不懂，只要把 <em>T 任務</em>、<em>I 輸入</em>、<em>K 驗收</em> 三處的 <code class="inline">___</code> 填好，AI 給的東西就有八成可用。
+      </div>
+
+      <div class="checklist" data-phase="1">
+        <h4>✅ 完成檢查</h4>
+        <ul>
+          <li><input type="checkbox" id="s1-1"><label for="s1-1">所有 ___ 都替換成我的內容了</label></li>
+          <li><input type="checkbox" id="s1-2"><label for="s1-2">整段貼進 AI Studio 並按了 Run</label></li>
+          <li><input type="checkbox" id="s1-3"><label for="s1-3">AI 重述需求後，我回了「OK」讓它繼續</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== STEP 2 ===================== -->
+    <section class="phase" id="step-2">
+      <div class="phase-header">
+        <div class="phase-num">2</div>
+        <div class="phase-title-block">
+          <h2>拿到結果後做這 4 件事</h2>
+          <div class="phase-summary">把 AI 給的東西變成你電腦上真的會跑的專案。</div>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <b>建立專案資料夾</b>
+          依照 AI 給的樹狀圖，照著建立資料夾與檔案，把每個 code block 內容貼進對應檔案。
+        </li>
+        <li>
+          <b>照 README 的 quickstart 跑起來</b>
+          <ul>
+            <li>Python 後端：<code class="inline">pip install -r requirements.txt</code> → 複製 <code class="inline">.env.example</code> 為 <code class="inline">.env</code> → 填 API Key → <code class="inline">python server/app.py</code></li>
+            <li>Node 後端：<code class="inline">npm install</code> → 複製 <code class="inline">.env.example</code> 為 <code class="inline">.env</code> → 填 API Key → <code class="inline">node server/server.js</code></li>
+            <li>然後瀏覽器打開 <code class="inline">index.html</code>（或後端說的網址）</li>
+          </ul>
+        </li>
+        <li>
+          <b>如果有 bug 或不滿意</b>
+          不要自己改 code，回到 AI Studio 直接把下面這段填好貼上：
+          <div class="code-wrap">
+<pre class="text-block">剛剛的專案我跑起來後遇到問題：
+
+【我做了什麼】
+___（步驟 1）___ → ___（步驟 2）___ → ___（按了什麼）___
+
+【預期】___（你以為會發生什麼）___
+【實際】___（真的發生什麼）___
+【錯誤訊息】（瀏覽器 Console 或 terminal 的紅字）
+___（貼錯誤訊息）___
+
+請告訴我可能原因（A/B/C 選項），我選一個你再動手改，並把要改的「完整檔案」重新給我（不要只給片段 diff）。</pre>
+            <button class="copy-btn">複製</button>
+          </div>
+        </li>
+        <li>
+          <b>要把專案搬去 Antigravity 繼續做</b>
+          直接複製 AI Studio 給你的 PRD + 資料夾結構貼進 Antigravity，第一句話打：
+          <div class="code-wrap">
+<pre class="text-block">請依照下面這份 PRD 與資料夾結構幫我建立專案，先確認你理解的需求，再列出你打算建立的檔案，等我說 OK 才開始寫 code。
+[貼上 PRD + 資料夾結構]</pre>
+            <button class="copy-btn">複製</button>
+          </div>
+        </li>
+      </ol>
+
+      <div class="checklist" data-phase="2">
+        <h4>✅ 完成檢查</h4>
+        <ul>
+          <li><input type="checkbox" id="s2-1"><label for="s2-1">資料夾與檔案都建好了</label></li>
+          <li><input type="checkbox" id="s2-2"><label for="s2-2">依 README 把專案跑起來了</label></li>
+          <li><input type="checkbox" id="s2-3"><label for="s2-3">遇到 bug 會回 AI Studio 問，而不是自己硬改</label></li>
+          <li><input type="checkbox" id="s2-4"><label for="s2-4">（選做）已把 PRD 搬進 Antigravity 繼續擴充</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== STEP 3 ===================== -->
+    <section class="phase" id="step-3">
+      <div class="phase-header">
+        <div class="phase-num">3</div>
+        <div class="phase-title-block">
+          <h2>完全卡關？用保底題目直接套</h2>
+          <div class="phase-summary">連第 0 步都填不出來，把下面任一題目（已幫你填好）整段貼進第 1 步的模板，保證能跑出東西。</div>
+        </div>
+      </div>
+
+      <details class="faq" open>
+        <summary>保底題目 A：新聞三點摘要器</summary>
+        <div class="faq-body">
+          <ul>
+            <li><b>一句話描述</b>：貼新聞全文或網址都能變成三點摘要 + 一句關注角度的網頁</li>
+            <li><b>使用者輸入</b>：二選一——一段新聞全文（純文字，500-2000 字）<b>或</b>一個新聞 URL（後端自動抓取 → 抽正文 → 餵給 Gemini）</li>
+            <li><b>範例輸入</b>：文字＝去 Google 新聞隨便複製一篇貼上；網址＝<code class="inline">https://www.cna.com.tw/news/aipl/...</code> 等任一新聞網址</li>
+            <li><b>期望輸出格式</b>：三點條列重點（每點 ≤ 40 字）+ 一句「值得關注的角度」</li>
+            <li><b>技術備註</b>：後端要會「判斷輸入是 URL 還是純文字」（regex 看開頭 <code class="inline">http</code>），URL 就先 fetch + 抽 HTML 正文，失敗給友善錯誤訊息</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>保底題目 B：會議逐字稿轉待辦清單</summary>
+        <div class="faq-body">
+          <ul>
+            <li><b>一句話描述</b>：把會議逐字稿變成待辦清單 + 負責人 + 截止日的網頁</li>
+            <li><b>使用者輸入</b>：會議逐字稿（多人對話，含人名）</li>
+            <li><b>範例輸入</b>：「Alice：下週前要把報價單寄給客戶。Bob：我負責整理競品分析，週五交。Carol：我跟設計確認 logo 顏色…」</li>
+            <li><b>期望輸出格式</b>：Markdown 表格，欄位為「待辦事項｜負責人｜截止日」</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>保底題目 C：英文句子翻譯＋文法解釋</summary>
+        <div class="faq-body">
+          <ul>
+            <li><b>一句話描述</b>：貼英文句子，輸出中文翻譯 + 文法重點 + 一個替換用法的網頁</li>
+            <li><b>使用者輸入</b>：一句到一段英文</li>
+            <li><b>範例輸入</b>：「Despite the heavy rain, the team decided to proceed with the outdoor event.」</li>
+            <li><b>期望輸出格式</b>：① 中文翻譯 ② 文法結構解析（2-3 點） ③ 同義替換寫法 1 句</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- ===================== 預期結構 ===================== -->
+    <section class="phase" id="structure">
+      <h3>📁 預期會拿到的專案結構（讓你心裡有底）</h3>
+      <p>AI 跑完後，你應該會看到類似這樣的結構（以 Python 後端為例）：</p>
+      <div class="code-wrap">
+<pre>my-project/
+├── README.md                # 怎麼跑、怎麼用、怎麼申請 Key
+├── .env.example             # 環境變數範本（含 GEMINI_API_KEY=）
+├── requirements.txt         # Python 依賴清單
+├── index.html               # 前端頁面（純 HTML 結構）
+├── style.css                # 前端樣式
+├── script.js                # 前端互動邏輯（呼叫後端 /api/...）
+└── server/
+    └── app.py               # Flask 後端（單檔 &lt; 100 行，代理 Gemini API）</pre>
+        <button class="copy-btn">複製</button>
+      </div>
+
+      <p>或 Node 後端版本：</p>
+      <div class="code-wrap">
+<pre>my-project/
+├── README.md
+├── .env.example
+├── package.json
+├── index.html
+├── style.css
+├── script.js
+└── server/
+    └── server.js            # Express 後端</pre>
+        <button class="copy-btn">複製</button>
+      </div>
+
+      <h4>為什麼這樣分？</h4>
+      <ul>
+        <li>前後端拆開 → API Key 不外洩、未來想換 AI 模型只改後端</li>
+        <li>多檔案而非單檔 → Antigravity 接手時更容易擴充（每次只改一個檔）</li>
+        <li>有 README + .env.example → 你寄給朋友他能自己跑起來</li>
+      </ul>
+    </section>
+
+    <!-- ===================== 速查表 ===================== -->
+    <section class="phase" id="cheat">
+      <h3>🔍 速查：為什麼這個模板會成功？</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>你做了什麼</th><th>對應 STRIKE</th><th>為什麼有用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>寫一句話描述</td><td>T 任務</td><td>讓 AI 知道做什麼、產出物是什麼</td></tr>
+            <tr><td>給範例輸入</td><td>I 輸入</td><td>不讓 AI 瞎猜資料長相</td></tr>
+            <tr><td>寫驗收條件</td><td>K 驗收</td><td>把「夠好」量化，避免 AI 過度發揮</td></tr>
+            <tr><td>（省略 S/R/E）</td><td>—</td><td>初學者第一個專案先求能跑，等熟了再補</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== 口訣 ===================== -->
+    <section class="mantra-card" id="mantra">
+      <h3>🎯 一句口訣</h3>
+      <div class="verse">
+        <div>T 任務 + K 驗收 + I 輸入</div>
+        <div>= 八成可用</div>
+        <div>先求有，再求好</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section style="text-align: center; color: var(--text-mute); font-size: 13px; padding: 32px 0;">
+      <p><b>對應 template</b>：antigravity_project_template</p>
+      <p style="margin-top: 8px;">原始 markdown：<a href="./MVP_RUNBOOK.md">MVP_RUNBOOK.md</a> · 想做完整工程化看 <a href="./VIBE_ENGINEERING_RUNBOOK.html">VIBE_ENGINEERING_RUNBOOK.html</a></p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ========== 進度追蹤 ==========
+  const STORAGE_KEY = 'mvp-runbook-progress';
+  const savedProgress = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+  // 還原 checkbox 狀態
+  document.querySelectorAll('.checklist input[type="checkbox"]').forEach(cb => {
+    if (savedProgress[cb.id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      savedProgress[cb.id] = cb.checked;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(savedProgress));
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.checklist input[type="checkbox"]');
+    const done = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+    const pct = all.length ? (done.length / all.length * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `${done.length} / ${all.length} 完成`;
+
+    // 標記 nav 為已完成
+    document.querySelectorAll('.checklist').forEach(cl => {
+      const phaseNum = cl.dataset.phase;
+      const items = cl.querySelectorAll('input[type="checkbox"]');
+      const checked = cl.querySelectorAll('input[type="checkbox"]:checked');
+      const link = document.querySelector(`.nav-list a[href="#step-${phaseNum}"]`);
+      if (link) {
+        if (items.length > 0 && checked.length === items.length) link.classList.add('done');
+        else link.classList.remove('done');
+      }
+    });
+  }
+  updateProgress();
+
+  // ========== 複製按鈕 ==========
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const pre = btn.previousElementSibling;
+      const text = pre.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        const orig = btn.textContent;
+        btn.textContent = '已複製!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 1500);
+      } catch (e) {
+        btn.textContent = '失敗';
+      }
+    });
+  });
+
+  // ========== Sidebar 滾動高亮 ==========
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-list a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
