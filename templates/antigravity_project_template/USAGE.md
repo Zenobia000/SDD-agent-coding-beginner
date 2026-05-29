@@ -1,6 +1,7 @@
 # USAGE.md — 本模板完整使用說明
 
-> 本模板用 **Spec-Driven Development（SDD）** 工作流：spec 先於 code、測試先於實作、文件與 code 同步。
+> 本模板走 **Vibe Engineering** 工作流：**用工程紀律放大 AI coding**——不是供奉一份規格文件，而是靠自動化測試、事前規劃（含 spec）、版本控制、CI 品質閘、文件與 code 同步。
+> 落到鐵則就三句：spec 先於 code、測試先於實作、文件與 code 同步。規格是「事前規劃」這根支柱的產物，不是被執行的聖經——code 跑出來的真實行為才是最終真相。
 > 適合**有基本程式概念**（知道 function / API / 測試是什麼）、要做正規可維護專案的開發者。
 
 ---
@@ -11,11 +12,11 @@
 - 想用「業界做法」做專案：有 spec、有測試、有文件、有 git 紀律
 - 專案會持續迭代（不是一次性 demo）
 
-> 純新手 / 只想快速做個 demo？這套 SDD 流程對你會太重。先去 `class_plan/` 的工作坊教案學 Vibe Coding 基礎，能力上來再回來用這個模板。
+> 純新手 / 只想快速做個 demo？這套 Vibe Engineering 流程對你會太重。先去 `class_plan/` 的工作坊教案學 Vibe Coding 基礎，能力上來再回來用這個模板。
 
 ---
 
-## 1. SDD Sprint 十站
+## 1. Vibe Engineering Sprint 十站
 
 ### 1.1 十站流程總圖
 
@@ -179,7 +180,7 @@ AI 依 4Ls（Liked / Learned / Lacked / Longed for）逐項問你，補上客觀
 
 **對策**：強制 `/spec-it` → `/tdd-cycle` 順序。沒 spec 不寫 code（見 `rules/04-spec-first.md`）。
 
-### 陷阱 2：覺得 SDD 太繁瑣想偷工
+### 陷阱 2：覺得 Vibe Engineering 太繁瑣想偷工
 
 **症狀**：「我只是改個小東西，要寫 PRD + ADR + BDD 太累」
 
@@ -212,8 +213,8 @@ AI 依 4Ls（Liked / Learned / Lacked / Longed for）逐項問你，補上客觀
 **Q：我打 `/spec-it` 但 AI 沒進入「問 5 個問題」模式？**
 A：1) 看 `.agents/skills/spec-it/SKILL.md` 是否在那邊；2) 打 `/memory show` 看 skills 有沒有載入；3) 打 `/memory refresh`；4) 重啟 `agy`。
 
-**Q：小調整也要跑全套 SDD 嗎？**
-A：不用。判斷標準：**行為改變 → 走 SDD（至少 `/spec-it` 精簡 + `/tdd-cycle`）；純樣式 / 註解 / typo → 直接改**。SDD 是為了「會持續迭代、要維護」的東西，不是綁住每個 typo。
+**Q：小調整也要跑全套 Vibe Engineering 嗎？**
+A：不用。判斷標準：**行為改變 → 走 Vibe Engineering（至少 `/spec-it` 精簡 + `/tdd-cycle`）；純樣式 / 註解 / typo → 直接改**。Vibe Engineering 是為了「會持續迭代、要維護」的東西，不是綁住每個 typo。
 
 **Q：我沒寫過 git，要直接學 Conventional Commits 嗎？**
 A：不需要硬背。`/commit-msg` 會幫你生 message。你只要 `git add .` 然後打 `/commit-msg`，AI 寫好 message 你確認後它幫你 commit。
@@ -230,7 +231,7 @@ A：有。**ADR 的價值在「未來 AI 進新 session 自動讀到」**，不�
 **Q：我每個 sprint 都跑 retro 但永遠寫一樣的東西？**
 A：表示你的工作模式沒在演化。Action Items 沒被執行 → 下個 sprint 重貼。建議**強制每個 retro 至少完成 1 個 Action Item**才能跑下個 sprint。
 
-**Q：模板裡的 8 個 SDD skill 我能砍掉幾個嗎？**
+**Q：模板裡的 8 個 Vibe Engineering skill 我能砍掉幾個嗎？**
 A：可以。**Solo dev 不必全用**。最小集：`/spec-it` + `/tdd-cycle` + `/commit-msg`。其餘是「該專案需要時再啟用」。例：個人小工具不需要 `/adr`、單檔專案不需要 `/sync-it`。
 
 **Q：我發現某個 skill 寫得不適合我的領域，能改嗎？**
@@ -247,8 +248,8 @@ A：**你不需要判斷**。本模板的 `rules/07-proactive-skill-trigger.md` 
 
 **Q：`prompts/` 和 `skills/` 有什麼差別？**
 A：
-- **`skills/`** 是「可觸發的程序工具」— 可手動 `/xxx` 或 AI 自動建議。例：`/spec-it` 有 step-by-step 執行流程、會產出多個檔案。SDD 主力。
-- **`prompts/`** 是「對話開場白模板」— 複製貼上就行。部署 / 安裝 / 開場等場景用。例：`prompts/start-project.md` 是「我要開新專案，請帶我跑 SDD 第一站」的固定話術。
+- **`skills/`** 是「可觸發的程序工具」— 可手動 `/xxx` 或 AI 自動建議。例：`/spec-it` 有 step-by-step 執行流程、會產出多個檔案。Vibe Engineering 主力。
+- **`prompts/`** 是「對話開場白模板」— 複製貼上就行。部署 / 安裝 / 開場等場景用。例：`prompts/start-project.md` 是「我要開新專案，請帶我跑 Vibe Engineering 第一站」的固定話術。
 
 完整連動關係見 `.agents/SKILL-MAP.md`。
 
@@ -276,8 +277,8 @@ A：兩個方法 ——
 | 你現在的狀態 | 下一步 |
 |---|---|
 | 還沒有 PRD | 跑 `/spec-it`，AI 問你 5 題幫你結構化成 PRD |
-| 已填完 PRD、第一次跑 | 貼 `.agents/prompts/start-project.md` → 進入 SDD 第一站 |
-| 有現成 code、想補上 SDD 紀律 | 跑 `/spec-it` 補 PRD → `/tdd-cycle` 為現有 code 補測試 → `/adr` 補關鍵決策 |
+| 已填完 PRD、第一次跑 | 貼 `.agents/prompts/start-project.md` → 進入 Vibe Engineering 第一站 |
+| 有現成 code、想補上 Vibe Engineering 紀律 | 跑 `/spec-it` 補 PRD → `/tdd-cycle` 為現有 code 補測試 → `/adr` 補關鍵決策 |
 | 想精讀大廠規範 | 逐份讀 `.agents/skills/spec-it/templates/`（6 份）+ `.agents/skills/adr/templates/adr-template.md` — 共 7 份範本內附對標來源 |
 
 ---

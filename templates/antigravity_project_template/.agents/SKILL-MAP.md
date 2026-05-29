@@ -12,14 +12,14 @@
 |---|---|---|---|---|
 | 1 | `/explain-code` | Legacy | 架構師視角解釋既有 code（紅綠燈 + 導師教學） | 任何時候卡關 / 不懂 |
 | 2 | `/check-key` | Legacy | 部署前掃 hardcoded secret / .gitignore 覆蓋 | 部署 / push 前 |
-| 3 | `/spec-it` | SDD | 生 PRD + API contract + BDD scenarios | 新功能動工前 |
-| 4 | `/adr` | SDD | 寫 Architecture Decision Record（MADR v3.0） | 重大技術選型時 |
-| 5 | `/plan-sprint` | SDD | 把 PRD 拆 sprint backlog | Sprint 開始 |
-| 6 | `/tdd-cycle` | SDD | Red-Green-Refactor TDD 循環 | 寫每個功能 |
-| 7 | `/verify` | SDD | 5 維度品質驗證（Format/Lint/Type/Test/Security） | Commit 前 |
-| 8 | `/sync-it` | SDD | Code↔docs drift 偵測 | Commit 前 / 改完 contract |
-| 9 | `/commit-msg` | SDD | Conventional Commits 生成 | Commit 時 |
-| 10 | `/retro` | SDD | Sprint 4Ls 回顧 | Sprint 結束 |
+| 3 | `/spec-it` | 工程 | 生 PRD + API contract + BDD scenarios | 新功能動工前 |
+| 4 | `/adr` | 工程 | 寫 Architecture Decision Record（MADR v3.0） | 重大技術選型時 |
+| 5 | `/plan-sprint` | 工程 | 把 PRD 拆 sprint backlog | Sprint 開始 |
+| 6 | `/tdd-cycle` | 工程 | Red-Green-Refactor TDD 循環 | 寫每個功能 |
+| 7 | `/verify` | 工程 | 5 維度品質驗證（Format/Lint/Type/Test/Security） | Commit 前 |
+| 8 | `/sync-it` | 工程 | Code↔docs drift 偵測 | Commit 前 / 改完 contract |
+| 9 | `/commit-msg` | 工程 | Conventional Commits 生成 | Commit 時 |
+| 10 | `/retro` | 工程 | Sprint 4Ls 回顧 | Sprint 結束 |
 
 ---
 
@@ -75,11 +75,11 @@ flowchart TB
 
     PlanSprint -.讀.-> KnownIssues
 
-    classDef sdd fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000
+    classDef vibeeng fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000
     classDef legacy fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
     classDef artifact fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:#000
 
-    class SpecIt,ADR,PlanSprint,TddCycle,Verify,SyncIt,CommitMsg,Retro sdd
+    class SpecIt,ADR,PlanSprint,TddCycle,Verify,SyncIt,CommitMsg,Retro vibeeng
     class ExplainCode,CheckKey legacy
     class KnownIssues artifact
 ```
@@ -162,14 +162,14 @@ flowchart TB
 | # | 斷層 | 影響 | 狀態 | 修法 |
 |---|---|---|---|---|
 | a | `/check-key` 與 `/verify §5 Security` 重疊掃 hardcoded key | 學員不知道何時用哪個 | ✅ 已修 | `/check-key` 定位為 deploy 前雙保險；`/verify §5` 引導「部署再跑 `/check-key`」 |
-| b | `/explain-code` 從未被任何 SDD skill 引用（孤兒） | 學員卡關時不知該打 `/explain-code` | ✅ 已修 | `/tdd-cycle` 加「使用者問『為什麼這樣寫』時建議 `/explain-code`」 |
+| b | `/explain-code` 從未被任何 Vibe Engineering skill 引用（孤兒） | 學員卡關時不知該打 `/explain-code` | ✅ 已修 | `/tdd-cycle` 加「使用者問『為什麼這樣寫』時建議 `/explain-code`」 |
 | c | `/sync-it` 發現 ADR drift 但沒明確說「打 `/adr` 寫 superseded」 | 學員不知道怎麼處理 ADR drift | ✅ 已修 | `/sync-it` Step 5 加「ADR drift → 觸發 `/adr` 寫新 ADR」 |
 | d | `/commit-msg` 後沒「下一步」指引 | 學員 commit 完不知道該幹嘛 | ✅ 已修 | `/commit-msg` 加「下一步建議」段（下個 task / sprint 結尾 / 部署） |
 | e | `/retro` 結束後沒明確過渡到下個 `/plan-sprint` | sprint 之間斷掉、Action Items 容易遺忘 | ✅ 已修 | `/retro` Step 6 加「自動建議跑 `/plan-sprint`」 |
 | f | `/spec-it` 沒檢查「PRD 有未決技術選型」就結束 | 學員寫完 PRD 沒人提醒寫 ADR | ✅ 已修 | `/spec-it` Step 6 加「掃 PRD 未決技術 → 建議 `/adr`」 |
 | g | `/plan-sprint` 沒 review `tasks/known-issues.md` | 上個 sprint 延後的 issue 永遠不被排程 | ✅ 已修 | `/plan-sprint` Step 1 加「先讀 known-issues、列待排候選」 |
 | h | `prompts/` 與 `skills/` 的取捨沒明說 | 學員混用、不知 Mode A 用 prompts 還是 skills | ✅ 已修 | `USAGE.md` FAQ 補一題說明 |
-| i | `WORKFLOW.md` 沒納入 `/explain-code` 與 `/check-key` | Legacy skill 在 SDD 流程中位置不明 | ✅ 已修 | `WORKFLOW.md` 加「Path D 卡關」+「Path F 部署前」兩條輔助路徑 |
+| i | `WORKFLOW.md` 沒納入 `/explain-code` 與 `/check-key` | Legacy skill 在 Vibe Engineering 流程中位置不明 | ✅ 已修 | `WORKFLOW.md` 加「Path D 卡關」+「Path F 部署前」兩條輔助路徑 |
 | j | `tasks/known-issues.md` 寫得進去但沒有 skill 定期 review | issue 累積但永遠不被處理 | ✅ 已修 | `/plan-sprint` 與 `/retro` 都加 review 步驟 |
 
 ---
@@ -182,7 +182,7 @@ flowchart TB
 |---|---|---|
 | 何時觸發 | 只有使用者主動打 `/explain-code` | + `/tdd-cycle` 過程使用者問「為什麼」時自動建議 |
 | 在 WORKFLOW.md 的位置 | 完全沒提到 | Path D「卡關情境」明確列出 |
-| 與 SDD skill 的關係 | 完全脫節 | 與 `/tdd-cycle` 雙向：卡關 → 暫停 → `/explain-code` → 繼續 |
+| 與 Vibe Engineering skill 的關係 | 完全脫節 | 與 `/tdd-cycle` 雙向：卡關 → 暫停 → `/explain-code` → 繼續 |
 
 ### `/check-key`
 

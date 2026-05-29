@@ -224,7 +224,7 @@ Skill 最強的地方是**把重複出現的審查 / 設計流程包起來**。�
 
 ## 本模板內建的 Skill
 
-本模板內建 **10 個 skill**（2 個 Vibe Coding 基礎 + 8 個 SDD Sprint 工作流）。為避免重複，完整列表、分類、觸發時機、對標大廠規範與工作流順序統一在以下兩份文件，本檔不重述：
+本模板內建 **10 個 skill**（2 個 Vibe Coding 基礎 + 8 個 Vibe Engineering Sprint 工作流）。為避免重複，完整列表、分類、觸發時機、對標大廠規範與工作流順序統一在以下兩份文件，本檔不重述：
 
 - **完整清單（10 個 skill 一覽 + 何時用）** → [`SKILL-MAP.md` §1](./SKILL-MAP.md)
 - **使用者說 X → 該打哪個 skill** → [`SKILL-MAP.md` §11 快速速查](./SKILL-MAP.md)

@@ -174,9 +174,9 @@ Antigravity 桌面版 / AI Studio 是「點選式」工具，畫面長什麼樣 
 
 ---
 
-## 4. SDD Sprint 怎麼跟 CLI 接軌
+## 4. Vibe Engineering Sprint 怎麼跟 CLI 接軌
 
-`AGENTS.md` 規定的 SDD 十站，在 CLI 裡每一站都有對應的工具 / 技巧讓你跑得更順：
+`AGENTS.md` 規定的 Vibe Engineering 十站，在 CLI 裡每一站都有對應的工具 / 技巧讓你跑得更順：
 
 ### spec-it 階段：用 `@` 引用 PRD 對齊
 

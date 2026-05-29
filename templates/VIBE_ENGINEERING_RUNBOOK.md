@@ -11,7 +11,7 @@
 
 **適用對象**：
 - 跑過一次 [`MVP_RUNBOOK.md`](./MVP_RUNBOOK.md) 的學員（如果完全沒跑過，先去那邊）
-- 想做完整 SDD Sprint（Mode B）的人
+- 想做完整 Vibe Engineering Sprint（Mode B）的人
 - 已經會跟 AI 對話，但每次「做完原型不知道下一步」的人
 
 **閱讀方式**：
@@ -496,12 +496,12 @@ agy
 
 > **Linus 註解**：
 > 新手最常見的錯：把 Phase 4 的 dev prompt 直接貼給 agy → agy 跳過 spec 直接寫 code。
-> 結果是：**沒 PRD、沒 ADR、沒測試 — 等於跳過 SDD 紀律，跟 AI Studio Build 模式生的 one-shot prototype 沒兩樣**（能跑但難演化），
+> 結果是：**沒 PRD、沒 ADR、沒測試 — 等於跳過 Vibe Engineering 紀律，跟 AI Studio Build 模式生的 one-shot prototype 沒兩樣**（能跑但難演化），
 > 還浪費了 template 的工程化骨架。
 >
 > **正確做法**：用 `/spec-it` 把 Phase 4 的內容**轉成結構化 spec**
 > （PRD + API contract + BDD scenarios + 測試骨架）。**spec 在前，code 在後**。
-> 這叫 **Spec-Driven Development**（SDD）。
+> 這叫 **Vibe Engineering**（Vibe Engineering）。
 >
 > 沒有 spec，agy 寫的 code 等於把 AI Studio Build 模式的 one-shot prototype 包進 git，浪費 agy 的工程能力。
 
@@ -586,7 +586,7 @@ agy（回應，會問類似這樣的 5 題）：
 
 ---
 
-# Phase 7：跑 SDD Sprint 10 站
+# Phase 7：跑 Vibe Engineering Sprint 10 站
 
 ## 你會做什麼
 
@@ -1003,7 +1003,7 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 | 長期可維護專案 | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
 | Skill / Slash | ❌ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
 | Subagent 平行 | ❌ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ❌ |
-| Spec-Driven | ❌ | ⭐⭐⭐⭐⭐ (本 template) | 需自己配 | 需自己配 |
+| Vibe Engineering | ❌ | ⭐⭐⭐⭐⭐ (本 template) | 需自己配 | 需自己配 |
 | 學員門檻 | ⭐⭐⭐⭐⭐（最低） | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
 | 商業選擇 | 免費 | 免費（個人） | 付費 | 免費，但 2026-06-18 EOL |
 
@@ -1042,7 +1042,7 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 > **痛點先結構化**（Phase 0）
 > **AI Studio 用對話迭代到「規格級 spec」**（Phase 1-4）
 > **拿到規格級 spec 換手到 agy**（換手點）
-> **/spec-it 在前，/tdd-cycle 在後**（SDD 鐵律）
+> **/spec-it 在前，/tdd-cycle 在後**（Vibe Engineering 鐵律）
 > **/verify 全綠才 commit，/retro 收尾**（每個 sprint）
 
 ---

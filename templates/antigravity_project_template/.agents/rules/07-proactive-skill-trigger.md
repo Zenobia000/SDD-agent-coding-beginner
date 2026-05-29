@@ -1,13 +1,13 @@
 # Rule 07 — Proactive Skill Trigger
 
 > **新手沒有判斷力。所以 AI 要主動偵測情境、主動建議該觸發哪個 skill。**
-> 沒有這條 rule，整套 SDD skill 對新手就是裝飾品。
+> 沒有這條 rule，整套 Vibe Engineering skill 對新手就是裝飾品。
 
 ---
 
 ## 鐵律
 
-1. **AI 持續監測對話**，比對 8 個 SDD skill 的「🚨 自動觸發訊號」段
+1. **AI 持續監測對話**，比對 8 個 Vibe Engineering skill 的「🚨 自動觸發訊號」段
 2. **偵測到訊號 → 主動建議**，不要等使用者自己想到
 3. **不要直接執行** — 永遠先說「要不要跑 /xxx？」等使用者確認
 4. **第一次觸發某個 skill 時，附 30 字內白話介紹**：「這個 skill 會幫你 ___」

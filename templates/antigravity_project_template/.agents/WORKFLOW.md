@@ -1,6 +1,6 @@
-# Solo SDD Sprint Workflow
+# Solo Vibe Engineering Sprint Workflow
 
-> 給一個人 + AI 的「精簡版 Scrum + Spec-Driven Development」工作流。
+> 給一個人 + AI 的「精簡版 Scrum + Vibe Engineering」工作流。
 > 適合：有基礎程式概念、想用 AI 認真做專案的學員。
 > 心法：**Spec 先寫、TDD 紅綠燈、Doc 跟著 code 走**。
 
@@ -70,7 +70,7 @@ flowchart LR
 
 ---
 
-## SDD 的 3 層 Spec
+## Vibe Engineering 的 3 層 Spec
 
 Spec 不是一坨大文件，是分層描述：
 

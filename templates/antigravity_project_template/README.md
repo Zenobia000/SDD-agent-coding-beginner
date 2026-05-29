@@ -22,7 +22,7 @@ my-project/
 │   ├── known-issues.md                (已知但暫不修的問題)
 │   └── retros/                        (sprint retrospective 歸檔)
 └── .agents/
-    ├── WORKFLOW.md                ← ⭐ Solo SDD Sprint 工作流總圖（10 站 + 對應 skill）
+    ├── WORKFLOW.md                ← ⭐ Solo Vibe Engineering Sprint 工作流總圖（10 站 + 對應 skill）
     ├── SKILL-MAP.md               ← ⭐ 10 個 skill 完整連動地圖（Pre/Post / 依賴 / 6 種路徑 / 斷層分析）
     ├── settings.json              ← Antigravity CLI 設定（model / checkpoint / MCP）
     ├── MCP.md                     ← 三大擴充原語 ①：MCP 外掛工具
@@ -59,9 +59,9 @@ my-project/
 
 ---
 
-## 🎯 這套模板怎麼用：SDD Sprint
+## 🎯 這套模板怎麼用：Vibe Engineering Sprint
 
-本模板走 **Spec-Driven Development（SDD）** 單一工作流：spec 先於 code、測試先於實作、文件與 code 同步。
+本模板走 **Vibe Engineering** 單一工作流：**用工程紀律放大 AI coding**（自動化測試 / 事前規劃 / 版本控制 / CI 品質閘 / 文件同步），而非靠一份規格文件驅動。落到鐵則就三句：spec 先於 code、測試先於實作、文件與 code 同步。
 
 | 階段 | skill | 產出 |
 |---|---|---|
@@ -135,7 +135,7 @@ agy
 | 叫 AI 記住某件事        | 打 `/memory add 我習慣用 pnpm 不是 npm`          |
 | 清空對話重新開始          | 打 `/clear`                                |
 | 看內建 slash 指令       | 打 `/help`                                 |
-| 觸發 SDD skill        | `/spec-it` `/adr` `/plan-sprint` `/tdd-cycle` `/verify` `/sync-it` `/commit-msg` `/retro` + `/check-key` `/explain-code`（連動見 `.agents/SKILL-MAP.md`） |
+| 觸發 Vibe Engineering skill        | `/spec-it` `/adr` `/plan-sprint` `/tdd-cycle` `/verify` `/sync-it` `/commit-msg` `/retro` + `/check-key` `/explain-code`（連動見 `.agents/SKILL-MAP.md`） |
 | 從 Gemini CLI 搬過來    | 打 `agy plugin import gemini`（一次性遷移） |
 
 ---
@@ -156,9 +156,9 @@ agy
 | 想讓 AI 多會新技能（外部能力） | `.agents/MCP.md`（github、fetch、playwright…） |
 | 想包「AI 自動觸發的流程」或自訂指令 | `.agents/SKILLS.md` |
 | 大型任務跑很久 / 想平行加速 | `.agents/SUBAGENTS.md`（Antigravity 2026 殺手特性） |
-| 想跑 SDD 完整 Sprint（spec + TDD + 文件同步） | `.agents/WORKFLOW.md` + 8 個 SDD skill |
+| 想跑 Vibe Engineering 完整 Sprint（spec + TDD + 文件同步） | `.agents/WORKFLOW.md` + 8 個 Vibe Engineering skill |
 | 不知道 spec 怎麼寫 | `.agents/skills/spec-it/templates/` (6 份) + `.agents/skills/adr/templates/` (ADR) — 共 7 份大廠對標範本，與 skill 共置 |
-| 想看「從一句痛點到可跑 app」完整流程 | [`../SDD_RUNBOOK.md`](../SDD_RUNBOOK.md) — SmartTrip FX 端到端 walkthrough（AI Studio meta-prompt → agy SDD Sprint） |
+| 想看「從一句痛點到可跑 app」完整流程 | [`../VIBE_ENGINEERING_RUNBOOK.md`](../VIBE_ENGINEERING_RUNBOOK.md) — SmartTrip FX 端到端 walkthrough（AI Studio meta-prompt → agy Vibe Engineering Sprint） |
 | 進度比較慢、要 MVP 填空版 | [`../MVP_RUNBOOK.md`](../MVP_RUNBOOK.md) — STRIKE 三格急救組合 |
 | 不知道任務怎麼拆 | 打 `/plan-sprint` |
 | 想 commit 但不知道訊息怎麼寫 | 打 `/commit-msg` |
@@ -166,7 +166,7 @@ agy
 
 ---
 
-## ⚠️ SDD 四鐵則
+## ⚠️ Vibe Engineering 四鐵則
 
 1. **沒 PRD 不開工** — 新需求先 `/spec-it`（`rules/04-spec-first.md`）
 2. **沒測試不算完成** — 實作走 `/tdd-cycle` 紅綠燈（`rules/05-tdd-required.md`）

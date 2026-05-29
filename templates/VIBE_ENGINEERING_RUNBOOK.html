@@ -416,7 +416,7 @@
     <ul class="nav-list">
       <li><a href="#phase-5">Phase 5 · 開 agy 工作站</a></li>
       <li><a href="#phase-6">Phase 6 · 餵 prompt 給 agy</a></li>
-      <li><a href="#phase-7">Phase 7 · 跑 SDD Sprint</a></li>
+      <li><a href="#phase-7">Phase 7 · 跑 Vibe Engineering Sprint</a></li>
       <li><a href="#phase-8">Phase 8 · 收尾與部署</a></li>
     </ul>
 
@@ -477,7 +477,7 @@
       <h3>👤 這份指南適合誰？</h3>
       <ul>
         <li>✅ 跑過一次 <code class="inline">MVP_RUNBOOK.md</code> 的學員（沒跑過？先去那邊）</li>
-        <li>✅ 想做完整 SDD Sprint 的人</li>
+        <li>✅ 想做完整 Vibe Engineering Sprint 的人</li>
         <li>✅ 已經會跟 AI 對話，但每次做完原型不知道下一步的人</li>
       </ul>
 
@@ -1041,8 +1041,8 @@ source ~/.zshrc</pre>
 
       <div class="linus">
         新手最常見的錯：把 Phase 4 的 dev prompt 直接貼給 agy → agy 跳過 spec 直接寫 code。<br>
-        結果是：<em>沒 PRD、沒 ADR、沒測試</em> — 等於跳過 SDD 紀律。<br><br>
-        正確做法：用 <code class="inline" style="color: var(--accent);">/spec-it</code> 把 Phase 4 的內容轉成結構化 spec（PRD + API contract + BDD scenarios + 測試骨架）。<em>spec 在前，code 在後</em>。這叫 Spec-Driven Development（SDD）。
+        結果是：<em>沒 PRD、沒 ADR、沒測試</em> — 等於跳過 Vibe Engineering 紀律。<br><br>
+        正確做法：用 <code class="inline" style="color: var(--accent);">/spec-it</code> 把 Phase 4 的內容轉成結構化 spec（PRD + API contract + BDD scenarios + 測試骨架）。<em>spec 在前，code 在後</em>。這叫 Vibe Engineering。
       </div>
 
       <h3>🎯 操作步驟</h3>
@@ -1128,7 +1128,7 @@ source ~/.zshrc</pre>
       <div class="phase-header">
         <div class="phase-num">7</div>
         <div class="phase-title-block">
-          <h2>跑 SDD Sprint 10 站</h2>
+          <h2>跑 Vibe Engineering Sprint 10 站</h2>
           <div class="phase-summary">照 <code class="inline">.agents/WORKFLOW.md</code> 的 10 站順序，把 spec 變成可跑的 app。</div>
         </div>
       </div>
@@ -1508,7 +1508,7 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
             <tr><td>長期可維護</td><td>⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
             <tr><td>Skill / Slash</td><td>❌</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
             <tr><td>Subagent 平行</td><td>❌</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>❌</td></tr>
-            <tr><td>Spec-Driven</td><td>❌</td><td>⭐⭐⭐⭐⭐</td><td>需自己配</td><td>需自己配</td></tr>
+            <tr><td>Vibe Engineering</td><td>❌</td><td>⭐⭐⭐⭐⭐</td><td>需自己配</td><td>需自己配</td></tr>
             <tr><td>學員門檻</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
             <tr><td>商業選擇</td><td>免費</td><td>免費（個人）</td><td>付費</td><td>2026-06-18 EOL</td></tr>
           </tbody>
@@ -1616,7 +1616,7 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
     <!-- Footer -->
     <section style="text-align: center; color: var(--text-mute); font-size: 13px; padding: 32px 0;">
       <p><b>版本</b>：2026-05-27 v1 · <b>對應 template</b>：antigravity_project_template</p>
-      <p style="margin-top: 8px;">原始 markdown：<a href="./SDD_RUNBOOK.md">SDD_RUNBOOK.md</a> · 完整書評可看 <a href="./MVP_RUNBOOK.md">MVP_RUNBOOK.md</a></p>
+      <p style="margin-top: 8px;">原始 markdown：<a href="./VIBE_ENGINEERING_RUNBOOK.md">VIBE_ENGINEERING_RUNBOOK.md</a> · 完整書評可看 <a href="./MVP_RUNBOOK.md">MVP_RUNBOOK.md</a></p>
     </section>
 
   </main>
@@ -1624,7 +1624,7 @@ Task: 請幫我開發名為 "[產品名]" 的 [產品形態] 全套代碼。
 
 <script>
   // ========== 進度追蹤 ==========
-  const STORAGE_KEY = 'sdd-runbook-progress';
+  const STORAGE_KEY = 'vibe-engineering-runbook-progress';
   const savedProgress = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
   // 還原 checkbox 狀態

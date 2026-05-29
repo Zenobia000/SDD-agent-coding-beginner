@@ -1,9 +1,9 @@
 ---
 name: spec-it
-description: 從一句話需求生成 SDD 三層 spec（PRD / API contract / BDD scenarios）。**主動觸發時機**：使用者說「我想做」「加 ___ 功能」「新增 ___」「重做 ___」「應該長怎樣」「再做一個 ___」，或對話進入新功能討論但沒有對應 PRD / spec。
+description: 從一句話需求生成 Vibe Engineering 三層 spec（PRD / API contract / BDD scenarios）。**主動觸發時機**：使用者說「我想做」「加 ___ 功能」「新增 ___」「重做 ___」「應該長怎樣」「再做一個 ___」，或對話進入新功能討論但沒有對應 PRD / spec。
 ---
 
-# /spec-it — Spec-Driven Development 三層生成器
+# /spec-it — Vibe Engineering 三層生成器
 
 ## 🚨 自動觸發訊號（AI 主動偵測）
 

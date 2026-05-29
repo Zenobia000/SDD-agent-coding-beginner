@@ -40,11 +40,11 @@
 
 ---
 
-## ⚠️ API Key 安全（SDD 正解）
+## ⚠️ API Key 安全（Vibe Engineering 正解）
 
 **絕不把 API Key 寫進前端 code 上線**——公開 = 被盜刷。正解依架構：
 
-**有後端**（SDD 專案多數情況）：
+**有後端**（Vibe Engineering 專案多數情況）：
 - API Key 放部署平台的 **Environment Variables**（Cloudflare/Vercel 後台設定）
 - 前端呼叫自己的後端 `/api/...`，後端代呼叫 LLM，金鑰不出後端
 

@@ -30,7 +30,7 @@
 
 ---
 
-## KISS 與 SDD 不衝突（關鍵）
+## KISS 與 Vibe Engineering 不衝突（關鍵）
 
 很多人誤以為「簡單」跟「先寫 spec、先寫測試」對立。實際相反：
 

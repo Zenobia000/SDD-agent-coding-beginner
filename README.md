@@ -114,7 +114,7 @@ cd my-first-vibe-project
 ./start              # macOS / Linux / WSL
 start.bat            # Windows（雙擊即可）
 
-# 4. 看 USAGE.md 選模式（A: 新手五步 / B: SDD 十站）→ 貼 .agents/prompts/start-project.md 給 AI
+# 4. 看 USAGE.md 選模式（A: 新手五步 / B: Vibe Engineering 十站）→ 貼 .agents/prompts/start-project.md 給 AI
 ```
 
 > **不想用工作站？** 直接 `cd` 進去打 `agy` 也可以。`start` 是給「不想每次手動切視窗」的人。
@@ -166,7 +166,7 @@ start.bat            # Windows（雙擊即可）
 | 行業客製版（如行銷） | 改 M1 痛點範例 + M2 STRIKE 範例 + M3 範例專案，骨架不動 |
 | 公司內訓 | 把 M5 行動卡改成「下週四前產出 X」對齊 OKR |
 
-**模板層也可改造**：[`templates/antigravity_project_template/`](./templates/antigravity_project_template/) 是一套完整的 AI-ready repo 骨架（含 SDD Sprint 工作流 + 10 個 slash command），不只給工作坊用，**任何想用 Antigravity / Claude Code / Codex 跑 Spec-Driven Development 的人**都能直接拿去用。
+**模板層也可改造**：[`templates/antigravity_project_template/`](./templates/antigravity_project_template/) 是一套完整的 AI-ready repo 骨架（含 Vibe Engineering Sprint 工作流 + 10 個 slash command），不只給工作坊用，**任何想用 Antigravity / Claude Code / Codex 跑 Vibe Engineering 的人**都能直接拿去用。
 
 ---
 
@@ -191,9 +191,9 @@ ai-vibe-coding-beginner/
 │   │   ├── terminal_configuration.md         終端機環境設定（RUN/WATCH/CHECK 哲學）
 │   │   ├── docs/                             PRD + HANDBOOK
 │   │   ├── tasks/                            Sprint backlog 系統
-│   │   └── .agents/                          10 個 SDD skill（含 spec-it/templates/ + adr/templates/ 共 7 份大廠對標範本） + MCP/Skills/Subagents 教學
+│   │   └── .agents/                          10 個 Vibe Engineering skill（含 spec-it/templates/ + adr/templates/ 共 7 份大廠對標範本） + MCP/Skills/Subagents 教學
 │   ├── MVP_RUNBOOK.md                    ⭐ MVP 填空版（STRIKE 三格急救）
-│   └── SDD_RUNBOOK.md                    ⭐ SDD 完整版（AI Studio → agy 端到端 walkthrough）
+│   └── VIBE_ENGINEERING_RUNBOOK.md                    ⭐ Vibe Engineering 完整版（AI Studio → agy 端到端 walkthrough）
 │
 └── LICENSE                           ← MIT
 ```
@@ -230,7 +230,7 @@ A：誠實答：不能。**這堂課是入門**——讓你「能做出第一個
 A：三點：(1) **三工具串接而非並列**，學完不用自己拼；(2) **STRIKE 戰法跨工具通用**，工具會更迭、方法會留下；(3) **64% 動手時間**，不是看講師 demo。
 
 **Q：我是工程師也適合來嗎？**
-A：適合，但不是 sweet spot。建議直接讀 [`templates/antigravity_project_template/`](./templates/antigravity_project_template/) 跑 Mode B（SDD Sprint 十站），更符合你的程度。
+A：適合，但不是 sweet spot。建議直接讀 [`templates/antigravity_project_template/`](./templates/antigravity_project_template/) 跑 Mode B（Vibe Engineering Sprint 十站），更符合你的程度。
 
 **Q：可以把這份教材拿去開自己的課嗎？**
 A：可以。MIT 授權，可商用、可改編，請保留作者標示。歡迎開 issue 讓我知道你開了什麼課——會列在 README 的「使用案例」段落。
