@@ -429,6 +429,20 @@ cp -r /path/to/ai-vibe-coding-beginner/templates/antigravity_project_template \
 cd ~/projects/smarttrip-fx
 ```
 
+### 1.5 啟用安全 git hook（一次性，30 秒）
+
+複製出來的專案還不是 git repo，先初始化並開啟內建的 secret 守門：
+
+```bash
+git init
+git config core.hooksPath .githooks   # 啟用 .githooks/ 內的 pre-commit / pre-push
+chmod +x .githooks/*                    # macOS / Linux / WSL
+cp .env.example .env                    # 金鑰填這裡（.env 已被 .gitignore 排除）
+```
+
+> **為什麼**：模板附了 `.githooks/pre-commit`（擋寫死的 API key / 誤加的 `.env`）與 `pre-push`（擋對 main 的 force-push）。
+> 這是機械層守門——不靠 AI 自律（研究說只有 ~70% 順從率）。細節見 `.githooks/README.md`。
+
 ### 2. 把 Phase 0 的種子簡報塞進專案
 
 ```bash
@@ -479,6 +493,7 @@ agy
 ## ✅ 完成檢核
 
 - [ ] 專案資料夾改名了（不是 `antigravity_project_template`）
+- [ ] `git config core.hooksPath .githooks` 跑過了（hook 已啟用）
 - [ ] `docs/seed-brief.md` 存在且內容正確
 - [ ] `agy` 跑起來沒報錯
 - [ ] `/memory show` 看得到 `AGENTS.md`

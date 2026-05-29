@@ -142,6 +142,10 @@
 - ❌ **沒 spec 不寫 code** — 新功能先 `/spec-it`，沒 PRD / AC 對應就不動手（`rules/04`）
 - ❌ **沒測試不算完成** — 跳過 `/tdd-cycle` 直接寫實作 = 違規（`rules/05`）
 - ❌ **不要建立超過 spec 範圍的功能**（「順便幫你加上 ___」絕對不要）
-- ❌ **不要把 API Key / secret 寫死在 code 裡 commit** — 用環境變數，commit 前必跑 `/check-key`
+- ❌ **不要把 API Key / secret 寫死在 code 裡 commit** — 用環境變數；部署前跑 `/check-key`。
+  這條由 **`.githooks/pre-commit` 機械強制**（寫死的 key / 誤加的 `.env` 直接擋下 commit）——文件靠 ~70% 順從率，hook 是 100%。見 [`.githooks/README.md`](./.githooks/README.md)。
 - ❌ **不要讓文件腐爛** — code 改了就跑 `/sync-it`，不容許 PRD / api-contract 與 code drift（`rules/06`）
-- ❌ **不要在 git 上做不可逆操作**（`reset --hard`、`push --force`）除非使用者明確同意
+- ❌ **不要在 git 上做不可逆操作**（`reset --hard`、`push --force`）除非使用者明確同意。
+  對 `main` 的 force-push 由 **`.githooks/pre-push` 擋下**（非快轉一律拒絕）。
+
+> **為什麼這兩條另外用 git hook**：研究實證「寫進 AGENTS.md 的規則只有 ~70% 順從率」，真正不可逆的安全威脅不能賭那 30%。git hook 對人和 agent 一律生效、跨工具通用，是正確的機械層。方法論見 [`.agents/AGENTS-GUIDE.md`](./.agents/AGENTS-GUIDE.md)。

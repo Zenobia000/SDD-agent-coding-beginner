@@ -57,6 +57,7 @@ repo-root/
 | `README.md`                   | 人類新人               | 安裝、介紹、Quick Start               |
 | `USAGE.md`                    | 人類學員              | Vibe Engineering Sprint 完整使用說明 + walkthrough + FAQ |
 | `AGENTS.md`                   | Antigravity Agent  | 站立規則、跨對話一致的專案總綱                 |
+| `.agents/AGENTS-GUIDE.md`     | 人類開發者              | 怎麼寫好 AGENTS.md 的方法論（研究實證 + 反模式 + 自評） |
 | `.agents/settings.json`       | Antigravity CLI    | model / checkpoint / MCP 等執行設定 |
 | `.agents/WORKFLOW.md`         | Antigravity Agent  | 工作流封裝（Sprint 10 站 + 3 層 Spec）  |
 | `.agents/rules/*.md`          | Antigravity Agent  | 撰寫 code 時的硬約束（細分主題）             |
@@ -67,6 +68,9 @@ repo-root/
 | `docs/HANDBOOK.md`            | 人類學員              | CLI / harness engineering 學習指引 |
 | `tasks/*.md`                  | 人類 + Agent         | Sprint backlog / 已知問題 / retros |
 | `adr/*.md`                    | 人類 + Agent         | 技術決策歷史（template 不預設此目錄，自行建立）  |
+| `.githooks/*`                 | git（機械層）          | secret / force-push 硬擋（不靠 AI 自律），跨工具生效 |
+| `.gitignore`                  | git + Agent          | 排除 secret / 產物；agent 也讀不到被忽略的檔     |
+| `.env.example`                | 人類                 | 金鑰填寫範本（複製成 `.env`，`.env` 已被忽略）   |
 
 關鍵心法：
 
