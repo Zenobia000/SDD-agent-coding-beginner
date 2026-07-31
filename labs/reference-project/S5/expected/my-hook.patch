@@ -1,0 +1,90 @@
+# S5 老師加的 hook 規則
+
+> 對照重點：**你的 hook 真的會動嗎**，不是內容一不一樣。
+
+---
+
+## 我重複講第 3 次的話
+
+> 「不要直接改 `data/rates.db`，用 migration」
+
+專案裡有一個 SQLite 檔，AI 好幾次想直接 `sqlite3 data/rates.db "ALTER TABLE..."`。
+每次我都要說一遍。**第三次的時候就該包成 hook 了。**
+
+---
+
+## 加在 `.claude/hooks/block-dangerous-bash.sh`
+
+在原本的 ④ 後面插入：
+
+```bash
+# ⑤ 直接動生產資料庫（專案自訂規則）
+if printf '%s' "$CMD" | grep -Eq 'sqlite3[^|;&]*data/rates\.db|rm[^|;&]*data/rates\.db'; then
+  deny "不要直接動 data/rates.db。schema 變更請寫 migration 到 migrations/，資料修正請寫一次性 script 並保留紀錄。"
+fi
+```
+
+---
+
+## 實測（**這步不能跳**）
+
+```bash
+$ echo '{"tool_input":{"command":"sqlite3 data/rates.db \"ALTER TABLE rates ADD COLUMN x\""}}' \
+    | bash .claude/hooks/block-dangerous-bash.sh
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "deny",
+    "permissionDecisionReason": "不要直接動 data/rates.db。schema 變更請寫 migration 到 migrations/，資料修正請寫一次性 script 並保留紀錄。"
+  }
+}
+```
+
+**放行的案例也要測**（避免正則太寬）：
+
+```bash
+$ echo '{"tool_input":{"command":"sqlite3 test/fixtures/sample.db .schema"}}' \
+    | bash .claude/hooks/block-dangerous-bash.sh
+$ echo $?
+0                                        # ✅ 正確放行
+```
+
+---
+
+## 在對話中真的觸發
+
+重開 `claude` 後：
+
+```
+> 幫我加一個 source 欄位到 rates 表
+
+我想直接跑 sqlite3 data/rates.db "ALTER TABLE rates ADD COLUMN source TEXT"，
+但被 hook 擋下了：
+
+  不要直接動 data/rates.db。schema 變更請寫 migration...
+
+改成寫 migrations/003_add_source.sql，可以嗎？
+```
+
+**這就是機械層的體感。** 它不是「AI 記得要遵守」，是「AI 沒得選」。
+
+---
+
+## 三個踩到的坑
+
+| 坑 | 症狀 | 修法 |
+|---|---|---|
+| 忘記重開 | 改完沒反應 | hook 在 session 啟動時載入 |
+| 正則太寬 | 連讀取的 `.schema` 都擋 | 加上 `ALTER\|DROP\|DELETE\|UPDATE` 限定 |
+| 沒測放行案例 | 上線後才發現誤殺 | **每次都要測一個該放行的** |
+
+---
+
+## 自我檢查
+
+| 問題 | ✅ / ❌ |
+|---|---|
+| 有加自己的規則？ | ✅ |
+| 用 `echo '{...}' \| bash` 測過 deny？ | ✅ |
+| **測過放行案例？** | ✅（這條最常被跳過） |
+| 在對話中真的被擋過？ | ✅ |
