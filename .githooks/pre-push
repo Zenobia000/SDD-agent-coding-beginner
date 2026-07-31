@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# 擋下對 main / master 的 force-push（改寫歷史）。git 從 stdin 餵 ref 清單進來，
+# 任何「遠端 commit 不是本地 commit 祖先」= 非快轉 = force/改寫 → 擋。
+# 不可逆操作不能只靠文字提醒，因此在 Git 層機械強制。
+set -euo pipefail
+
+protected="refs/heads/main refs/heads/master"
+zero="0000000000000000000000000000000000000000"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case " $protected " in
+    *" $remote_ref "*)
+      # 全 0 = 新分支或刪除，跳過。否則要求快轉：remote 必須是 local 的祖先。
+      if [ "$remote_sha" != "$zero" ] && [ -n "$remote_sha" ]; then
+        if ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
+          branch="${remote_ref#refs/heads/}"
+          echo "🔴 擋下：這是對 $branch 的 force-push / 改寫歷史（不可逆）。"
+          echo "   不要用 --no-verify 繞過檢查；請改用新分支與一般 PR 流程。"
+          exit 1
+        fi
+      fi
+      ;;
+  esac
+done
