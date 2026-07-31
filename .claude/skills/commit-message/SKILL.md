@@ -1,31 +1,31 @@
 ---
 name: commit-message
-description: Draft or validate a Git commit message from the staged diff and repository history. Use when preparing a commit, splitting mixed changes, checking Conventional Commit style, or explaining why a change belongs in one atomic commit.
+description: 從 staged diff 與 repository history 草稿或驗證 Git commit message。當準備 commit、拆分混合變更、檢查 Conventional Commit 風格，或解釋為何改動屬於同一 atomic commit 時使用。
 ---
 
 # Commit Message
 
-Describe the staged change truthfully. Do not use the conversation as the source of truth when the index says something different.
+如實描述 staged change。當 index 顯示不同內容時，不用對話作為唯一真相源。
 
-## Workflow
+## 工作流
 
-1. Read `git status --short`, `git diff --cached --stat`, and `git diff --cached`. If nothing is staged, stop or clearly label the result as a draft for unstaged changes.
-2. Inspect recent commit subjects and any contributing guide to learn the repository's established language, capitalization, scopes, issue references, and body style.
-3. Check atomicity. If the staged diff contains independent intents, recommend a split before drafting; one message must not hide multiple unrelated changes.
-4. Use the repository's style. With no clear precedent, fall back to:
+1. 讀 `git status --short`、`git diff --cached --stat` 與 `git diff --cached`。若沒有 staged 內容，停止或清楚標示結果為未 staged 變更的草稿。
+2. 檢查最近 commit subjects 與任何貢獻指南，學習 repository 既定的語言、大寫、scopes、issue references 與 body 風格。
+3. 檢查原子性。若 staged diff 包含獨立意圖，在草稿前建議拆分；一個 message 不能隱藏多個不相關的變更。
+4. 使用 repository 風格。無明確先例時，降級到：
 
    ```text
    <type>(<optional-scope>)<!>: <imperative outcome>
    ```
 
-5. Choose the type from intent: `feat`, `fix`, `refactor`, `perf`, `test`, `docs`, `build`, `ci`, `chore`, or `revert`.
-6. Keep the subject specific, imperative, and normally at most 72 characters. Say what observable outcome changed; do not write “updates” or list filenames.
-7. Add a body only when it preserves useful context: motivation, non-obvious trade-off, migration/compatibility impact, or why an obvious alternative was rejected. Do not narrate the diff.
-8. Add issue references and `BREAKING CHANGE:` footers only when supported by evidence.
+5. 從意圖選 type：`feat`、`fix`、`refactor`、`perf`、`test`、`docs`、`build`、`ci`、`chore` 或 `revert`。
+6. subject 保持具體、祈使句，通常不超過 72 字元。說明什麼可觀察的結果改變了；不寫「updates」或列檔名。
+7. 只在保留有用脈絡時加 body：動機、非顯而易見的取捨、migration/相容性影響或為何明顯替代方案被拒。不敘述 diff。
+8. 只在有證據支持時加 issue references 與 `BREAKING CHANGE:` footers。
 
-Return the proposed subject and optional body separately. Never stage files, commit, amend, or push unless the user explicitly requests that action.
+分別回報提議的 subject 與可選的 body。除非使用者明確要求，否則絕不 stage 檔案、commit、amend 或 push。
 
-## Examples
+## 範例
 
 ```text
 fix(auth): reject expired refresh tokens

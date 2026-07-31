@@ -1,30 +1,30 @@
 ---
 name: branch-name
-description: Create or rename a Git branch using the repository's established naming convention, with a safe conventional fallback. Use when starting isolated work, naming a feature/fix branch, or preparing a branch for a pull request or worktree.
+description: 用 repository 既定的命名慣例建立或重新命名 Git branch，搭配安全的 conventional 降級。當開始隔離工作、命名 feature/fix branch，或準備 pull request 或 worktree 用的分支時使用。
 ---
 
 # Branch Name
 
-Derive the name from the work, not from an organization-specific tracker.
+從工作推導名稱，不從組織特定 tracker。
 
-## Workflow
+## 工作流
 
-1. Inspect `git status`, the current branch, the remote default branch, and recent branch names if available.
-2. Preserve a documented repository convention. If none exists, use:
+1. 檢查 `git status`、目前分支、remote default branch 與最近的分支名稱（如有）。
+2. 保留已文件化的 repository 慣例。若無，使用：
 
    ```text
    <type>/<optional-issue-id>-<short-outcome>
    ```
 
-3. Choose `feat`, `fix`, `refactor`, `docs`, `test`, `perf`, `build`, `ci`, or `chore` based on the user-visible intent.
-4. Include an issue identifier only when the user or repository provides one. Never invent it.
-5. Write a 2–6 word lowercase kebab-case outcome. Describe what changes, not the implementation technique.
-6. Check that the branch does not already exist locally or remotely.
-7. Create it only when the user asked to create/rename a branch; otherwise return the proposed name.
+3. 根據使用者可見的意圖選 `feat`、`fix`、`refactor`、`docs`、`test`、`perf`、`build`、`ci` 或 `chore`。
+4. 只在使用者或 repository 提供時加 issue identifier。絕不自行發明。
+5. 寫 2–6 字小寫 kebab-case 結果。描述什麼改變，不是實作技巧。
+6. 檢查分支在本地或遠端都不存在。
+7. 只在使用者要求建立/重新命名分支時才建立；否則回報提議的名稱。
 
-Prefer `git switch -c <name> <base>` for creation. Do not switch away from uncommitted work until confirming that the changes belong on the new branch.
+建立時優先使用 `git switch -c <name> <base>`。在確認變更屬於新分支前，不切換離開未提交的工作。
 
-## Examples
+## 範例
 
 ```text
 feat/add-export-filters

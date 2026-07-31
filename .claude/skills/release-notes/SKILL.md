@@ -1,29 +1,29 @@
 ---
 name: release-notes
-description: Generate repository-agnostic release notes from a tag range, branch comparison, milestone, or release PR. Use when drafting changelogs or publishing release notes while filtering mechanical commits and preserving only user-relevant changes.
+description: 從 tag range、branch comparison、milestone 或 release PR 產生 repository-agnostic release notes。當草稿 changelogs 或發布 release notes 時過濾機械 commits 並只保留使用者相關變更時使用。
 ---
 
 # Release Notes
 
-Draft from primary repository evidence. Publish only when explicitly requested.
+從主要 repository 證據草稿。只在明確要求時發布。
 
-## 1. Resolve the range
+## 1. 解決 range
 
-Determine the target version and comparison range from the user's reference, tags, release branch, PR, or repository convention. Never assume semantic versioning, date versioning, branch names, or hosting provider.
+從使用者參考、tags、release branch、PR 或 repository 慣例決定目標版本與比較 range。絕不假設 semantic versioning、date versioning、branch names 或 hosting provider。
 
-Capture:
+擷取：
 
-- commits and merge commits in the range;
-- linked PRs/issues when available;
-- the prior release's format and tone;
-- migration, security, deprecation, and breaking-change evidence;
-- contributor names if the repository includes acknowledgements.
+- 範圍內的 commits 與 merge commits；
+- 可用時的 linked PRs/issues；
+- 前一個 release 的格式與語氣；
+- migration、security、deprecation 與 breaking-change 證據；
+- 若 repository 包含致謝時的貢獻者名字。
 
-## 2. Filter and classify
+## 2. 過濾與分類
 
-Exclude merge noise, conflict-resolution commits, sync-only commits, release bookkeeping, reverts immediately reapplied, and internal churn with no observable impact.
+排除 merge noise、conflict-resolution commits、sync-only commits、release bookkeeping、立即重新應用的 reverts 與無可觀察影響的內部 churn。
 
-Use the repository's categories. With no precedent, use only non-empty sections from:
+使用 repository 的類別。無先例時，只用非空 sections 來自：
 
 - Highlights
 - Features
@@ -34,18 +34,18 @@ Use the repository's categories. With no precedent, use only non-empty sections 
 - Deprecations
 - Upgrade notes
 
-Conventional Commit types are signals, not truth. Read the diff/PR when a subject is ambiguous. A `refactor` can be user-visible; a `feat` can be internal infrastructure.
+Conventional Commit types 是訊號，不是真理。subject 模糊時讀 diff/PR。`refactor` 可以是使用者可見；`feat` 可以是內部基礎設施。
 
-## 3. Write for the audience
+## 3. 為受眾寫作
 
-- Describe observable outcome and why it matters; do not copy commit subjects verbatim.
-- Remove internal ticket IDs from public notes unless repository precedent keeps them.
-- Link advisories for security items without exposing exploit details beyond the project's disclosure policy.
-- Put required actions, compatibility limits, and irreversible migrations in Upgrade notes or Breaking changes.
-- Mark uncertain claims and identify the artifact needed to verify them.
+- 描述可觀察結果與為何重要；不逐字複製 commit subjects。
+- 從公開筆記移除內部 ticket IDs，除非 repository 先例保留它們。
+- 為安全項目連結 advisories，不暴露超過 project 披露政策的 exploit 細節。
+- 把必要動作、相容性限制與不可逆 migrations 放進 Upgrade notes 或 Breaking changes。
+- 標記不確定 claims 並識別驗證它們需要的 artifact。
 
-Compare the draft with the actual range one final time so every bullet maps to evidence and every major user-facing change is represented.
+最後一次對比草稿與實際 range，確認每個 bullet 都對應證據且每個主要使用者可見變更都被代表。
 
-## 4. Publish safely
+## 4. 安全發布
 
-Preview the final Markdown and destination first. When publishing, use a temporary body file or the hosting provider's structured API to avoid shell interpolation. Return the release/PR URL and list any intentionally omitted or unverified items.
+先預覽最終 Markdown 與目的地。發布時，使用暫時 body 檔案或 hosting provider 的結構化 API 以避免 shell 插值。回報 release/PR URL 與列出任何刻意省略或未驗證的項目。
