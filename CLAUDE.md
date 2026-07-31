@@ -14,7 +14,8 @@
 - 核心產品不接 live LLM、即時匯率 API、資料庫、登入、Web UI 或部署。
 - 不建立 `labs/`、reference answer 或預建成品；範例、問答與檢查直接放在對應手冊。
 - `.claude/` 是可觀察的實戰 harness，不要求為了教學湊齊 MCP、Plugin 或 Agent team。
-- `M0-M9_懶人包.md` 保留原課程理論，但不插入照貼照跑主線。
+- `docs/M0-M9_懶人包.md` 保留原課程理論，但不插入照貼照跑主線。
+- 根目錄只放兩冊主線、`CLAUDE.md` 與授權/設定檔。課外參考放 `docs/`，衍生檔放 `docs/exports/`。
 
 修改第一冊時先核對 Anthropic 最新官方文件。社群文章可以改善教法，但不能覆蓋官方元件名稱、路徑、scope、命令或穩定性標示。修改第二冊時不得刪除 project contract、需求訪談、spec、tickets、TDD、review、security review 與 commit 的完整學習迴圈。
 

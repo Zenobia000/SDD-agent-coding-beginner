@@ -54,6 +54,7 @@ project contract → 需求訪談 → spec → tickets
 |---|---|
 | [`.claude/`](./.claude/) | 可直接觀察與移植的工程 harness；[`架構說明`](./.claude/README.md) 是課後參考 |
 | [`curriculum/README.md`](./curriculum/README.md) | 兩冊課程的講師節奏、巡場問題與維護規則 |
-| [`M0-M9_懶人包.md`](./M0-M9_懶人包.md) | 原課程理論重點；不插入照貼照跑主線 |
+| [`docs/M0-M9_懶人包.md`](./docs/M0-M9_懶人包.md) | 原課程理論重點；不插入照貼照跑主線 |
+| [`docs/exports/`](./docs/exports/) | 第二冊的 PDF 與 DOCX 離線版；由 Markdown 產生，更新後需重新匯出 |
 
 Claude Code 行為以 [官方文件](https://code.claude.com/docs/en/overview) 為事實來源；社群文章只用來改善教法。文件最後核對日期：2026-07-31。

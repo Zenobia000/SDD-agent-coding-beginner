@@ -16,3 +16,6 @@
 *.gif binary
 *.ico binary
 *.exe binary
+*.pdf binary
+*.docx binary
+*.pptx binary
