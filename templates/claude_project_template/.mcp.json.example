@@ -1,0 +1,22 @@
+{
+  "_comment_1": "複製成 .mcp.json 再用。.mcp.json 已被 .gitignore 擋，不會進版控。",
+  "_comment_2": "用法、安全警告、各工具用在哪一站 → .claude/MCP.md",
+  "_comment_3": "維持最小工具集。用不到的整段刪掉，不要留著佔 context。",
+
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+
+    "figma": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    }
+  }
+}
