@@ -1,11 +1,20 @@
+# ⚠️ 本 repo 的 .claude/ 是教材主體，必須進版控。
+#    只忽略「個人的」「執行期產生的」，不要加裸 `.claude/`。
+
 # MCP 設定（含 API keys，不可提交）
 .mcp.json
+!.mcp.json.example
 !.mcp.json.*.example
 
-# Claude Code 個人設定
+# Claude Code 個人設定 / 執行期產物
 .claude/settings.local.json
 .claude/taskmaster-data/
 .claude/sessions/
+.claude/.station          # inject-station.sh 的狀態檔，屬個人進度
+
+# 大型簡報原檔（根目錄的 -M0-M9.pptx 有 330 MB，絕不進 git）
+# curriculum/slides/ 下的產出簡報（<5 MB）仍然進版控
+/*.pptx
 
 # Node
 node_modules/
@@ -30,7 +39,7 @@ tmp/
 *.tmp
 *.bak
 
+# 學員實作產物（不要污染教材 repo）
 news-summarizer/
-
-.claude/
+my-*/
 VibeCoding_Workflow_Templates/
