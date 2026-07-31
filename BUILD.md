@@ -1,286 +1,529 @@
-# 動手做：SmartTrip FX
+# SmartTrip FX：從一句需求到可測試 CLI
 
-一份可以直接上場的架構，用一個真實的題目走完。
+這是學生唯一要照著走的文件。全書固定同一題、同一技術路線、同一組驗收條件；你只需要複製、貼上、執行、核對。
 
-**你要做的事**：把下面每一格的東西貼進 `claude`，看它回什麼，然後照「看這幾件事」檢查。
-不用照抄——**這些是提問的範例，不是劇本**。它問你問題，你回你自己的答案。
+## 完成品
+
+```text
+AI 或人產生行程 JSON
+          ↓
+   schema 與輸入驗證
+          ↓
+程式計算現金 + 匯率燈號
+          ↓
+     terminal 輸出結果
+```
+
+AI 負責「哪些行程可能需要現金」這類判斷；程式負責加總、比例、門檻與錯誤處理。這條邊界是全書唯一核心。
+
+## 本書怎麼用
+
+每章固定五格：
+
+1. **貼給 Claude**：整段複製到 Claude Code。
+2. **範例問答**：Claude 若追問，直接貼建議答案。
+3. **你應看到**：輸出形狀，不要求逐字相同。
+4. **通過**：執行命令，通過才能往下。
+5. **卡住就貼**：不用自己猜下一步。
+
+本書支援 macOS、Linux 與 Windows WSL。終端機指令都在 repo 根目錄執行。
 
 ---
 
-## 這個題目
+# 第 0 章｜讓 Claude 讀對規則
 
-**SmartTrip FX** —— 出國前算「該換多少現金」。
+目標：確認環境可用，而且 Claude 知道哪些是建議、哪些是機械強制。
 
-```
-使用者輸入：目的地、日期、預算
-        ↓
-產出：一份行程 + 一個數字「建議換匯 ¥XXXXX」+ 現在換划不划算
-```
-
-**為什麼選這個題目教**：它天然切成兩半，而那條切線就是這套方法的核心。
-
-```
-┌─────────────────────────────────────────────────┐
-│  AI 判斷的部分（不可驗證 → 需要 schema + 考卷）      │
-│    · 排出一份合理的行程                            │
-│    · 每個花費標成「只收現金」或「可刷卡」            │
-└─────────────────────────────────────────────────┘
-                      ↓ 交界處是一份 schema
-┌─────────────────────────────────────────────────┐
-│  程式算的部分（可驗證 → 寫測試就好，不需要 AI）      │
-│    · 把 cash_only 加總 × 1.1（預備金）             │
-│    · 今日匯率 vs 30 日均線 → 換匯燈號               │
-│    · 幣別換算、四捨五入、預算超支檢查                │
-└─────────────────────────────────────────────────┘
-```
-
-**AI 只做它非做不可的那一件事，其餘全部交給程式。**
-這是「可控系統」的樣子——也是這份文件真正要教的東西。
-
-> 想換題目做？看最後一節[換成你自己的題目](#換成你自己的題目)。
-> 骨架完全一樣，只有「哪部分交給 AI」的那條線要重新畫。
-
----
-
-## 0. 開始之前
+## 終端機
 
 ```bash
-cp .mcp.json.example .mcp.json     # 用不到的整段刪掉
-claude
+python3 --version
+git --version
+claude --version
+git status --short
 ```
 
-第一句先讓它看懂這個 repo：
+前三個命令都要有版本輸出；剛 clone 的 repo，最後一個命令應沒有輸出。
 
-> 先讀 CLAUDE.md 和 .claude/skills/next/SKILL.md，然後用一句話告訴我
-> 這個專案的規則裡，哪些是建議、哪些是你沒得選的。
+## 貼給 Claude
 
-**看這幾件事**：它應該分得出來——skills 是建議，`.claude/hooks/` 擋的五件事是強制。
-分不出來的話，它沒讀進去，叫它重讀。
+```text
+先讀 CLAUDE.md、.claude/rules/engineering-workflow.md、
+.claude/skills/workflow/SKILL.md 與 .claude/settings.json。
 
----
+這是教材實作，固定題目是 SmartTrip FX，固定使用 Python 3.11+
+standard library CLI。先不要寫 code，也不要 commit。
 
-## 1. 框題目
-
-**不要跳過這步。** 十分鐘的對話，省下的是三小時的「再改改」。
-
-> 我想做一個東西：出國前算該換多少現金。
-> 用 frame 帶我把這個題目問清楚，一次問一題。
-
-**你會拿到**：五到八個來回的對話，最後是一頁決策卡。
-
-**看這幾件事**：
-
-- 它有沒有**一次只問一題**？一次丟五題就打斷它：「一次問一題」
-- 有沒有追到**三個數字**（誰做、一次多久、多久一次）？「很煩」不是數字
-- 「怎麼判斷做對了」那題，你有沒有含糊帶過？**這題最重要**
-- 「不做什麼」有沒有至少兩條？
-
-**參考答案**：[`labs/reference-project/01-decision-card.md`](./labs/reference-project/01-decision-card.md)
-——比對的是**欄位的具體程度**，不是內容。
-
-> **這題的判準長這樣**：「建議換匯金額，與使用者回國後實際現金花費的誤差 < 15%」。
-> 它可以量、可以事後驗證、而且直接決定這個產品有沒有價值。
-> 如果你的題目講不出這種句子，繼續問。
-
----
-
-## 2. 寫 PRD
-
-> 依剛才的決策卡跑 spec，產出 PRD。
-> 技術選型先不要決定，我要先確認需求。
-
-**你會拿到**：七個欄位的 PRD。
-
-**看這幾件事**：
-
-- **Constraints 裡有沒有「請仔細檢查」這類句子？有就叫它刪掉。**
-  那是你怕它出錯而加的叮嚀，不是業務要求，而且它會變成模型必須服從的雜訊
-- Success criteria 能不能直接拿去當考卷？不能的話回去改
-- 有沒有把「法規」寫進去？（換匯建議需要「非投資理財建議」免責聲明）
-
-**參考答案**：[`labs/reference-project/02-PRD.md`](./labs/reference-project/02-PRD.md)
-
----
-
-## 3. 畫那條線 ⭐
-
-**這步是整份文件的重點。**
-
-> 現在幫我把這個系統切成兩半：哪些事只有 AI 做得到，哪些事程式就能算。
-> 對每一項，回答：寫不寫得出 check()？做錯的代價多大？
-> 用 decide 的任務分流表。
-
-**你會拿到**：一張表，每個功能落在四格之一。
-
-**看這幾件事**：
-
-- 「加總現金花費」應該落在**程式**那格——它是算術，不需要 AI
-- 「判斷這家店收不收現金」應該落在 **AI + 考卷**——它需要常識，但可以抽樣驗證
-- 「換匯燈號」應該落在**程式**——今日匯率 vs MA30 是死規則
-- 有沒有東西被錯放進 AI 那格？**每多一項交給 AI，你就多一個不可驗證的地方**
-
-**這步做對了，後面全部變簡單**：程式的部分寫測試就好，AI 的部分才需要考卷。
-
-> **常見錯誤**：把「產生行程」和「算換匯金額」都丟給 AI 一次做完。
-> 那你會得到一個算術偶爾出錯、而且錯了你也不知道的系統。
-> **算術的事交給算術。**
-
-**參考答案**：[`labs/reference-project/03-split.md`](./labs/reference-project/03-split.md)
-
----
-
-## 4. 定交界處的契約
-
-兩半之間要有一份 schema，否則下游接不住上游。
-
-> 幫我定 AI 產出行程的 schema。要求：
-> - 每個行程項目要有：名稱、預估金額、幣別、payment: "cash_only" | "card_ok"
-> - 金額用整數存最小單位，不要用浮點數
-> - 用 structured output 約束，不要在 prompt 裡拜託它回 JSON
-> 參考 .claude/references/data.md
-
-**看這幾件事**：
-
-- 金額是不是**整數**？（`0.1 + 0.2 != 0.3`，錢不能用浮點數）
-- `payment` 是不是**列舉**而不是自由字串？自由字串你會拿到「現金」「cash」「Cash Only」三種寫法
-- 有沒有處理「AI 不確定這家收不收現金」的情況？（多一個 `unknown` 值，比它瞎猜好）
-
-> **為什麼用 schema 而不是在 prompt 裡拜託**：
-> prompt 是事後檢查——它生完了你才發現漏欄位，只能重來。
-> schema 是事前約束——它每生一個字都被限制只能走向合法結構，**根本錯不了**。
-
----
-
-## 5. 建考卷
-
-只有 AI 那半需要考卷。程式那半寫測試就好。
-
-> 用 evals 幫我建考卷，驗「行程分類」這件事。
-> 至少 10 筆，其中 3 筆是邊界。
-
-**看這幾件事**：
-
-- 有沒有**基線**？（現在還沒實作，分數會很低——那正常，重點是有起點）
-- 邊界有沒有涵蓋：空行程、超長行程（30 天）、目的地打錯字
-- 有沒有一題是**刻意會 fail 的**？沒有的話你不知道判準有沒有在工作
-
-**這個題目的判準大概長這樣**：
-
-```
-· 每個項目的 payment 都在允許的三個值之內
-· cash_only 的項目裡，沒有「百貨公司」「連鎖飯店」這類必定收卡的
-· card_ok 的項目裡，沒有「神社門票」「路邊攤」這類多半只收現金的
-· 總金額在使用者預算的 ±20% 內
+只用四行回答：
+1. 這個 repo 要我完成什麼。
+2. 哪些規則是建議。
+3. 哪些操作由 hook 強制。
+4. 我現在唯一的下一步。
 ```
 
-**參考答案**：[`labs/reference-project/04-evals.md`](./labs/reference-project/04-evals.md)
+## 你應看到
+
+```text
+目標：完成可測試的 SmartTrip FX CLI。
+建議：依需求選用 Skills，以 vertical slice 和 TDD 前進。
+強制：敏感檔案、credential 與破壞性操作會被 hook 攔截。
+下一步：建立 project contract。
+```
+
+## 通過
+
+- [ ] Claude 沒有開始寫 code。
+- [ ] 它沒有提到 `frame`、`spec`、`evals`、`next` 或 `ship` 等不存在的舊 Skill。
+- [ ] 下一步只有一個。
+
+## 卡住就貼
+
+```text
+你引用了目前不存在的流程。請只根據剛讀到的實際檔案重新回答，
+並用 rg 驗證你提到的 Skill 目錄真的存在。
+```
 
 ---
 
-## 6. 先做程式那半
+# 第 1 章｜建立 project contract
 
-**可驗證的先做。** 它便宜、快、而且做完你就有一個穩固的地基。
+目標：把測試命令、文件位置與安全邊界寫成後續 Skills 都讀得到的專案契約。**Project contract** 就是每個 agent 開工前共同讀取的專案說明書。
 
-> 用 tdd 實作換匯計算模組。先寫測試。
-> 三個函式：加總 cash_only、算預備金、匯率燈號（今日 vs MA30）。
+## 貼給 Claude
 
-**看這幾件事**：
+```text
+/setup-project
 
-- 它有沒有**先寫會失敗的測試**？直接跳去寫實作就叫它重來
-- 邊界有沒有測到：空清單、單一項目、金額為 0、匯率資料不足 30 天
-- 「無條件捨去」還是「四捨五入」？**這種細節錯了很難發現**，測試要釘住
+使用以下課程固定值，不要讓我選技術棧：
+- Runtime：Python 3.11+，只用 standard library。
+- Focused test：python3 -m unittest <test_module> -v
+- Full test：python3 -m unittest discover -s tests -v
+- Build check：python3 -m compileall -q smarttrip_fx
+- Typecheck、lint、format：未設定，不要假裝已驗證。
+- Issue tracker：local markdown，放 .scratch/smarttrip-fx/issues/。
+- Specs：docs/specs/。
+- Git：目前分支；commit message 使用 Conventional Commits。
+- Risk boundary：刪資料、force push、真實 API 呼叫、部署與外部寫入都要再次確認。
 
-這半做完，你有一個**完全不需要 AI 也跑得動**的計算核心。
+先探索 repo，分清楚「從檔案驗證的事實」和「課程固定決策」。
+先預覽 docs/agents/project.md，等我確認後再寫入。不要改產品 code。
+```
 
----
+## 範例問答
 
-## 7. 再做 AI 那半
+Claude 預覽後，貼：
 
-> 實作行程生成。用第 4 步的 schema 約束輸出，
-> 跑完用第 5 步的考卷評分，告訴我通過率。
+```text
+採用這份預覽。請寫入 docs/agents/project.md，然後只回報檔案路徑與下一步。
+```
 
-**看這幾件事**：
+## 你應看到
 
-- 通過率**有沒有比基線高**？沒有的話別急著往下
-- 它有沒有把**真的 API key 寫進檔案**？（`.claude/hooks/block-secret-write.sh` 會擋，但你也要有意識）
-- 外部 API 掛掉時會怎樣？——**這裡要有 fallback，不是讓整個 app 掛掉**
+`docs/agents/project.md` 至少有：Quality commands、Issue tracker、Git workflow、Domain docs、Risk boundary、Verified on。
 
-分數不夠時：
+## 通過
 
-> 通過率 6/10。幫我做失敗模式聚類，然後只改最便宜的那層。
-> 改完跑同一份考卷。
+```bash
+test -f docs/agents/project.md
+rg -n "Full test|python3 -m unittest|Risk boundary" docs/agents/project.md
+```
 
-**先便宜後昂貴**：措辭 → 範例 → 結構 → 換模型。**一次只改一件事**，同時改兩件你分不清哪件有效。
+兩個命令都必須 exit 0。
 
----
+## 卡住就貼
 
-## 8. 接起來
-
-> 把兩半接起來。交界處要有驗證——AI 的輸出不通過 schema 就不進計算，
-> 保留上一次的結果並告訴使用者。
-
-**看這幾件事**：
-
-- 那個 `if` 在不在？**「不通過就不進下一步」這一行，是可信系統和垃圾產生器的唯一差別**
-- 匯率 API 掛掉時，是回「暫時無法提供建議」還是回一個錯的數字？
-- 三個外部依賴（LLM、匯率、地圖）各自掛掉時，**其餘功能還活著嗎**？
-
----
-
-## 9. 交付
-
-> 用 ship 帶我走交付前的檢查。
-
-**看這幾件事**：
-
-- 它有沒有**掃 git 歷史**？只掃工作區是假的安全感
-- 免責聲明在不在？（換匯建議的法規要求）
-- 維運卡的「不可回滾操作」那格填了嗎？
+```text
+只修正 docs/agents/project.md。缺少的命令用「未設定」標記，
+不要安裝套件，也不要把課程指定值冒充成 repo 已驗證事實。
+```
 
 ---
 
-## 卡住的時候
+# 第 2 章｜把需求問到沒有歧義
 
-| 症狀 | 通常是 | 做什麼 |
+目標：固定產品邊界。這章不寫 code。
+
+## 貼給 Claude
+
+```text
+/grill-with-docs SmartTrip FX
+
+請用一次一題的方式確認以下固定需求；能從內容直接得到答案就不要重問：
+
+產品：SmartTrip FX，給準備去日本關西旅行的人估算要換多少日圓現金。
+輸入：一個 UTF-8 JSON 檔，包含 destination、items 與 fx。
+items 每筆只有 name、amount_jpy、payment。
+payment 只能是 cash_only、card_ok、unknown。
+fx 包含 today_twd_per_jpy 與 ma30_twd_per_jpy，使用十進位字串。
+
+規則：
+1. 現金小計 = cash_only + unknown；card_ok 不計入。
+2. 加 10% 預備金後，向上取整到下一個 1000 JPY。
+3. today 比 ma30 低至少 2% 為 GOOD；高至少 2% 為 WAIT；其餘 NEUTRAL。
+4. 不合法 JSON、缺欄位、負金額或未知 payment 必須清楚報錯並以非 0 結束。
+
+固定實作範圍：Python standard library CLI。
+Out of scope：live LLM、即時匯率 API、Web UI、database、登入、部署。
+成功：固定範例輸出 ¥9,000 與 GOOD；所有 tests 通過；完全不連網。
+
+先檢查是否仍有真正會改變行為的歧義。沒有就整理已決定、out of scope
+與可驗收結果，推薦下一個 Skill。不要寫 code。
+```
+
+## 範例問答
+
+若 Claude 仍追問，依題意貼其中一個答案：
+
+```text
+金額規則採推薦值：unknown 保守計入現金，最後結果向上取整到 1000 JPY。
+```
+
+```text
+匯率門檻採推薦值：差異剛好等於 -2% 算 GOOD，剛好等於 +2% 算 WAIT。
+```
+
+```text
+錯誤輸出採推薦值：人類可讀訊息寫到 stderr，process exit code 使用 2。
+```
+
+最後貼：
+
+```text
+以上決策正確，需求已收斂。請停止訪談並推薦下一個 Skill。
+```
+
+## 你應看到
+
+Claude 應推薦 `/to-spec`，而不是開始實作。它可以建立 domain glossary，但不能建立產品程式碼。
+
+## 通過
+
+- [ ] `payment` 只有三個合法值。
+- [ ] 金額公式與 2% 匯率門檻沒有模糊詞。
+- [ ] live API 與 Web UI 明確在 out of scope。
+- [ ] 每個成功條件可以回答 pass 或 fail。
+
+## 卡住就貼
+
+```text
+現在只找「會讓兩個工程師寫出不同行為」的未知資訊。
+若沒有這種未知，停止提問並用已確認需求收斂。
+```
+
+---
+
+# 第 3 章｜把對話變成可驗收 spec
+
+目標：讓需求離開聊天紀錄，變成下一個 session 也能正確實作的文件。**Spec** 是描述可觀察結果與驗收條件的實作契約，不是程式碼步驟清單。
+
+## 貼給 Claude
+
+```text
+/to-spec SmartTrip FX
+
+用剛才已確認的需求產生 spec，目標路徑是 docs/specs/smarttrip-fx.md。
+Implementation decisions 固定為：
+- package：smarttrip_fx/
+- public seams：recommend_cash(items)、fx_signal(today, ma30)、load_trip(path)
+- CLI：python3 -m smarttrip_fx examples/kansai-3-days.json
+- 只用 decimal、json、dataclasses、pathlib、argparse、unittest 等 standard library
+- 範例必須輸出：現金項目 ¥5,500、不確定項目 ¥1,800、建議換匯 ¥9,000、匯率燈號 GOOD
+
+每條 acceptance criterion 都寫成 Given / When / Then 且可 pass/fail。
+先預覽 Problem、Outcome、seams、Out of scope 與 Open questions；我確認後才寫檔。
+```
+
+## 範例問答
+
+預覽正確時貼：
+
+```text
+確認。Open questions 應為 None，請寫入 docs/specs/smarttrip-fx.md。
+```
+
+## 你應看到
+
+```markdown
+# SmartTrip FX
+
+## Problem
+## Outcome
+## User stories
+## Acceptance criteria
+## Implementation decisions
+## Testing decisions
+## Out of scope
+## Open questions
+None
+```
+
+## 通過
+
+```bash
+test -f docs/specs/smarttrip-fx.md
+rg -n "Acceptance criteria|recommend_cash|fx_signal|Out of scope|Open questions" docs/specs/smarttrip-fx.md
+```
+
+## 卡住就貼
+
+```text
+不要新增新需求。只根據已確認對話補齊可驗收 spec；任何無證據內容放進 Open questions，
+但課程固定值不得重新變成問題。
+```
+
+---
+
+# 第 4 章｜把 spec 切成三張小票
+
+目標：每次只讓 Claude 完成一個可驗證行為，避免一口氣生成整個專案。**Ticket** 是一個乾淨 session 能獨立完成並驗證的工作單位。
+
+## 貼給 Claude
+
+```text
+/to-tickets docs/specs/smarttrip-fx.md
+
+使用 local tracker，固定輸出三張票：
+1. .scratch/smarttrip-fx/issues/01-cash-recommendation.md
+   完成 recommend_cash 與 tests。
+2. .scratch/smarttrip-fx/issues/02-fx-signal.md
+   完成 fx_signal 與 tests。
+3. .scratch/smarttrip-fx/issues/03-cli-integration.md
+   完成 load_trip、CLI、固定 example 與端到端 tests；blocked by 01、02。
+
+每張票都要有 What to build、Acceptance criteria、Testing seam、Blocked by、Out of scope。
+課程固定依 01 → 02 → 03 序列執行，不建立 worktree、不平行實作。
+先預覽三張票，確認後才寫檔。
+```
+
+## 範例問答
+
+```text
+切分正確。請依指定檔名寫入三張 tickets，不要開始實作。
+```
+
+## 你應看到
+
+```text
+.scratch/smarttrip-fx/issues/
+├── 01-cash-recommendation.md
+├── 02-fx-signal.md
+└── 03-cli-integration.md
+```
+
+## 通過
+
+```bash
+find .scratch/smarttrip-fx/issues -maxdepth 1 -type f -name '*.md' | sort
+```
+
+輸出必須剛好三個檔案，且第 03 張明確被 01、02 阻擋。
+
+## 卡住就貼
+
+```text
+不要按 model、service、tests 做水平切分。回到使用者可觀察行為，
+並嚴格使用教材指定的三個檔名與 dependency。
+```
+
+---
+
+# 第 5 章｜一張票一次完成
+
+目標：實際跑三次 red → green → review，而不是一次生成所有檔案。**TDD** 是先用失敗測試證明缺少行為，再寫最小實作讓它通過。
+
+## 5.1 現金計算
+
+### 貼給 Claude
+
+```text
+/implement .scratch/smarttrip-fx/issues/01-cash-recommendation.md
+
+只完成 ticket 01。先固定 scope、acceptance criteria、testing seam 與 HEAD fixed point，
+再用 unittest 跑一個 test → RED → 最小實作 → GREEN → refactor。
+不要順手做 fx、JSON parser 或 CLI。不要 commit。
+```
+
+### 你應看到
+
+至少有 `smarttrip_fx/` 的計算模組與 `tests/test_cash_recommendation.py`，而且回報中包含實際 RED 與 GREEN 命令。
+
+### 通過
+
+```bash
+python3 -m unittest tests.test_cash_recommendation -v
+```
+
+## 5.2 匯率燈號
+
+### 貼給 Claude
+
+```text
+/implement .scratch/smarttrip-fx/issues/02-fx-signal.md
+
+只完成 ticket 02。用 Decimal 比較 today 與 ma30，明確測試 -2%、+2% 與中間值邊界。
+沿用 ticket 01 的 package 形狀，不改現金計算行為。不要 commit。
+```
+
+### 通過
+
+```bash
+python3 -m unittest tests.test_fx_signal -v
+```
+
+## 5.3 JSON 與 CLI 串接
+
+### 貼給 Claude
+
+```text
+/implement .scratch/smarttrip-fx/issues/03-cli-integration.md
+
+只完成 ticket 03。建立 examples/kansai-3-days.json，固定資料為：
+- Airport bus：2300 JPY，cash_only
+- Fushimi souvenir：1800 JPY，unknown
+- Hotel：24000 JPY，card_ok
+- Nishiki market：3200 JPY，cash_only
+- today_twd_per_jpy：0.2120
+- ma30_twd_per_jpy：0.2180
+
+CLI 成功輸出必須包含：
+目的地 Kansai、現金項目 ¥5,500、不確定項目 ¥1,800、
+建議換匯 ¥9,000、匯率燈號 GOOD。
+
+為 invalid JSON、缺欄位、負金額與未知 payment 寫公開行為 tests。
+不要接網路、不要新增第三方 dependency、不要 commit。
+```
+
+### 你應看到
+
+```text
+smarttrip_fx/
+tests/
+examples/kansai-3-days.json
+```
+
+檔案可以比這些多，但不能出現 Web framework、database 或 live API client。
+
+### 通過
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 -m compileall -q smarttrip_fx
+python3 -m smarttrip_fx examples/kansai-3-days.json
+```
+
+最後一個命令應包含：
+
+```text
+目的地: Kansai
+現金項目: ¥5,500
+不確定項目: ¥1,800
+建議換匯: ¥9,000
+匯率燈號: GOOD
+```
+
+## 卡住就貼
+
+```text
+先停止加功能。只比對目前 ticket、docs/specs/smarttrip-fx.md 與失敗測試，
+指出一個主要假設、最小可推翻檢查與下一個動作。同一路徑不要嘗試第四次。
+```
+
+---
+
+# 第 6 章｜用證據收尾
+
+目標：review 完整 working tree、修阻擋問題、再產生 commit。**Working tree** 是目前尚未全部 commit 的檔案狀態；雙軸 review 會分開檢查工程品質與 spec 符合度。
+
+## 貼給 Claude：雙軸 review
+
+```text
+/code-review HEAD
+
+Spec source：docs/specs/smarttrip-fx.md。
+請審查 HEAD 之後的完整 working tree，包含 staged、unstaged 與 untracked files。
+Standards 軸檢查正確性、錯誤路徑與測試品質；Spec 軸檢查漏做、做錯與 scope creep。
+只列有具體失敗情境的 findings，不要修改檔案。
+```
+
+若有 blocking finding，貼：
+
+```text
+依 review 證據只修 blocking findings。每次修一個，重跑最窄測試；
+完成後再跑 full test 與同一個 review。不要擴大 scope。
+```
+
+## 貼給 Claude：安全檢查
+
+```text
+/security-review
+
+Scope 是目前 SmartTrip FX working tree。重點檢查外部 JSON、檔案路徑、錯誤訊息、
+資源耗用與是否意外讀取敏感檔案。只回報可由 code 證明的攻擊路徑，不要修改檔案。
+```
+
+## 通過
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 -m compileall -q smarttrip_fx
+git diff --check
+git status --short
+```
+
+tests 必須全綠、compile 與 diff check 必須 exit 0。`git status` 此時有檔案是正常的，因為還沒 commit。
+
+## 建立本地 commit
+
+```bash
+git add -A
+```
+
+貼給 Claude：
+
+```text
+用 commit-message 根據 staged diff 檢查原子性，給我一個 Conventional Commit subject。
+不要 commit、不要 push。
+```
+
+若 staged diff 只有本書產物，可直接執行：
+
+```bash
+git commit -m "feat(smarttrip): build deterministic cash recommendation CLI"
+git status --short
+```
+
+最後一個命令應沒有輸出。到這裡，你已經完成一個有 spec、tickets、tests、review 與可執行入口的專案。
+
+## 卡住就貼
+
+```text
+不要用「看起來沒問題」結案。請列出實際跑過的命令、exit code、未驗證事項，
+以及目前唯一阻止 commit 的問題。
+```
+
+---
+
+# 第 7 章｜把方法帶去下一個專案
+
+你剛才不是背七個步驟，而是反覆做同一件事：
+
+```text
+固定邊界 → 產生一小片 → 用同一個判準驗證 → 人決定是否繼續
+```
+
+| 需要 | 使用的 Skill | 產出 |
 |---|---|---|
-| 改了幾輪還在原地 | 沒有判準，你在憑感覺 | 回第 5 步建考卷 |
-| AI 產的東西「差不多但不對」 | 契約不夠明確 | 回第 4 步收緊 schema |
-| 越做越大做不完 | 邊界沒劃 | 回第 1 步看「不做什麼」那欄 |
-| 算出來的數字偶爾很怪 | 算術被丟給 AI 做了 | 回第 3 步重畫那條線 |
-| 不知道現在該幹嘛 | —— | 打 `/next` |
+| 不知道該走哪條路 | `/workflow` | 一條建議路徑 |
+| 需求仍有歧義 | `/grill-with-docs` | 已確認決策 |
+| 對話要變成契約 | `/to-spec` | 可驗收 spec |
+| 工作超過一個 session | `/to-tickets` | 有 dependency 的 tickets |
+| 完成一個行為 | `/implement` | tested vertical slice |
+| 準備交付 | `code-review`、`security-review` | 證據與 findings |
 
-**同一個問題改三輪還沒好就停下來。** 通常是一開始的假設就錯了，繼續改只會越陷越深。
+下一個專案只先貼這一句：
 
----
+```text
+/workflow 我想完成 <一句話目標>。先讀 repo 現況，只推薦一條路並說明翻盤條件。
+```
 
-## 這份文件教的四件事
-
-做完之後，你帶走的不是一個換匯 app，是這四個判斷：
-
-**哪些事該交給 AI。** 寫得出 `check()` 的交給程式；寫不出的才交給 AI，而且要配考卷。
-
-**契約放在交界處。** 兩個系統之間一定要有 schema，而且要用型別約束而不是用嘴巴拜託。
-
-**先做可驗證的那半。** 它便宜、快、而且做完你有一個穩固的地基去接不確定的那半。
-
-**「不通過就不往下」那一行。** 這行決定你的系統是可信的還是只是看起來會動。
-
----
-
-## 換成你自己的題目
-
-骨架完全一樣。只有**第 3 步那條線**要重新畫。
-
-拿你自己的題目，從第 1 步開始，把每一格的 prompt 裡的「換匯」換成你的東西。
-
-第 3 步時特別小心這個陷阱：**你會想把太多事交給 AI**，因為那樣看起來比較快。
-每多交一項，你就多一個不可驗證的地方——而不可驗證的東西，你永遠不知道它什麼時候壞了。
-
-> **一句話判斷**：寫不出 `check()` 的任務，先別丟給模型。
-> 拆到寫得出來為止，剩下真正主觀的那塊再交給它。
-
----
-
-## 下一步
-
-打開 `claude`，貼第 0 步那句話。
+先把同一條路再走一次，再考慮 live LLM adapter、Web UI 或即時匯率 API。一次只新增一種複雜度。

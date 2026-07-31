@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
-# 機械層 secret 閘門 — 偵測到寫死的金鑰 / 未填 placeholder / 誤 commit 的 .env 就擋下提交。
-# 這是 AGENTS-GUIDE 講的「hook 強制」：不依賴 agent 70% 的順從率，對人和 AI 一律生效。
-# 對應 /check-key、/verify §5 的掃描 pattern，但這裡是 git 層硬擋（不可被忽略）。
+# 機械層 secret 閘門：誤提交真實 .env 或明顯 API key 時中止 commit。
+# 文件規則只能提醒；Git hook 同時約束人與任何 agent。
 set -euo pipefail
 
 fail=0
 staged=$(git diff --cached --name-only --diff-filter=ACM || true)
 
-# 1. 擋下誤加的真 .env（只允許 .env.example）
+# 1. 擋下誤加的真 .env，只允許明確的範例檔。
 for f in $staged; do
   case "$f" in
     .env|.env.*)
-      [ "$f" = ".env.example" ] || { echo "🔴 擋下：不要 commit $f（secret 會外洩）。只 commit .env.example。"; fail=1; }
+      case "$f" in
+        *.example|*.sample|*.template) ;;
+        *) echo "🔴 擋下：不要 commit $f（secret 會外洩）。只提交明確的 example/sample/template。"; fail=1 ;;
+      esac
       ;;
   esac
 done
@@ -23,8 +25,7 @@ if git diff --cached -U0 | grep -nE '^\+.*AIza[0-9A-Za-z_-]{35}' >/dev/null 2>&1
   fail=1
 fi
 
-# 註：忘了填 placeholder（「請貼上你的金鑰」）不在這擋 — 那是功能 bug、不是 secret 洩漏，
-# 交給 /check-key（agent 有判斷力，不會誤擋 .env.example / 文件本身）。本 hook 只守「不可逆的洩漏」。
+# Placeholder 是功能問題，不是秘密外洩；這裡只擋不可逆的 credential commit。
 
 if [ "$fail" -ne 0 ]; then
   echo ""

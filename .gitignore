@@ -1,62 +1,46 @@
-# ⚠️ 本 repo 的 .claude/ 是教材主體，必須進版控。
-#    只忽略「個人的」「執行期產生的」，不要加裸 `.claude/`。
-
-# MCP 設定（含 API keys，不可提交）
-.mcp.json
-!.mcp.json.example
-!.mcp.json.*.example
-
-# Claude Code 個人設定 / 執行期產物
+# `.claude/` 是專案核心，必須進版控。只忽略個人與執行期狀態。
 .claude/settings.local.json
 .claude/taskmaster-data/
 .claude/sessions/
-.claude/.station          # inject-station.sh 的狀態檔，屬個人進度
 
-# 大型簡報原檔（根目錄的 -M0-M9.pptx 有 330 MB，絕不進 git）
-# curriculum/slides/ 下的產出簡報（<5 MB）仍然進版控
-/*.pptx
-
-# Node
-node_modules/
+# 本機秘密
+.env
+.env.*
+!.env.example
+!.env.*.example
+.mcp.json
+secrets/
+*.key
+*.pem
+*.p12
 
 # Python
 __pycache__/
 *.py[cod]
-venv/
 .venv/
-.env
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# 暫存
-tmp/
-*.tmp
-*.bak
-
-# 學員實作產物（不要污染教材 repo）
-news-summarizer/
-my-*/
-VibeCoding_Workflow_Templates/
-
-# === 專案執行產物（原模板 .gitignore）===
-.env.*
-!.env.example
-*.key
-*.pem
-*.p12
-dist/
-build/
-.next/
-*.pyc
+venv/
 .pytest_cache/
 .coverage
 htmlcov/
-.claude/.station
-.claude/.verify-reminded-*
+
+# Node / build
+node_modules/
+dist/
+build/
+.next/
+
+# Claude workflow 暫存；正式 spec 放 docs/specs/，產品 code 不放這裡。
+.scratch/
+
+# 編輯器、作業系統與暫存檔
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+tmp/
+*.tmp
+*.bak
 *.log
+
+# 本機大型簡報原檔
+/*.pptx

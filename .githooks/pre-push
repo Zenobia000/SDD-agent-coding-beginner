@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 擋下對 main / master 的 force-push（改寫歷史）。git 從 stdin 餵 ref 清單進來，
 # 任何「遠端 commit 不是本地 commit 祖先」= 非快轉 = force/改寫 → 擋。
-# 不可逆操作（push --force）是 AGENTS.md §7 的硬約束，這裡是機械層落實。
+# 不可逆操作不能只靠文字提醒，因此在 Git 層機械強制。
 set -euo pipefail
 
 protected="refs/heads/main refs/heads/master"
