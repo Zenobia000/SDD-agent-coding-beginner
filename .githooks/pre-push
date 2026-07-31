@@ -15,7 +15,7 @@ while read -r local_ref local_sha remote_ref remote_sha; do
         if ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
           branch="${remote_ref#refs/heads/}"
           echo "🔴 擋下：這是對 $branch 的 force-push / 改寫歷史（不可逆）。"
-          echo "   真的要做：先跟協作者確認，再 git push --no-verify。"
+          echo "   不要用 --no-verify 繞過檢查；請改用新分支與一般 PR 流程。"
           exit 1
         fi
       fi

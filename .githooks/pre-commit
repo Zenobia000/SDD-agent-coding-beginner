@@ -30,6 +30,6 @@ fi
 if [ "$fail" -ne 0 ]; then
   echo ""
   echo "提交已中止。修好上面問題後再 commit。"
-  echo "（真的確認無誤要略過：git commit --no-verify — 但你要為外洩負責。）"
+  echo "不要用 --no-verify 繞過檢查；請移除敏感內容，改用環境變數與假值範例檔。"
   exit 1
 fi
