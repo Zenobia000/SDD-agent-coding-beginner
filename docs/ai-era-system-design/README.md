@@ -14,7 +14,7 @@
 |------|------|------|
 | 為什麼 | 本文件集 | 系統定義的歷史脈絡與 AI 治理原則 |
 | 怎麼做（完整版） | [`../../labs/reference-project/`](../../labs/reference-project/) | 8 階段從痛點到可運行 App |
-| 怎麼做（快速版） | [`../../curriculum/S3-prototype.md`](../../curriculum/S3-prototype.md) | 填空式 MVP 模板 |
+| 怎麼做（快速版） | [`../../BUILD.md`](../../BUILD.md) | 填空式 MVP 模板 |
 | 自動化執行 | [`../../.claude/`](../../.claude/) | Agent 規則與 skills |
 
 本文件講「原則與脈絡」，Runbook 講「實際操作」。讀本文件理解**為什麼**，讀 Runbook 知道**怎麼做**。

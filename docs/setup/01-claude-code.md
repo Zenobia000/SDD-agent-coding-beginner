@@ -8,7 +8,7 @@
 | **要多久** | 5–20 分鐘（看你有沒有裝過 Node） |
 | **有訂閱嗎** | 有 → 這篇就夠。沒有 → 讀完這篇再去 [`02-free-routes.md`](./02-free-routes.md) |
 | **驗收** | `claude --version` 有輸出，且能送出一句話得到回覆 |
-| **下一步** | 回 [`../../curriculum/S0-boot.md`](../../curriculum/S0-boot.md) |
+| **下一步** | 回 [`../../BUILD.md`](../../BUILD.md) |
 
 ---
 
@@ -148,4 +148,4 @@ claude doctor
 
 ## 下一步
 
-回 [`../../curriculum/S0-boot.md`](../../curriculum/S0-boot.md) 的動手第 2 步。
+回 [`../../BUILD.md`](../../BUILD.md) 的動手第 2 步。

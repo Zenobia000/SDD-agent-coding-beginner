@@ -117,7 +117,7 @@
 
 ```bash
 # 掃單一檔案
-claude -p "用 lesson-check 檢查 curriculum/S1-frame.md"
+claude -p "用 lesson-check 檢查 BUILD.md"
 
 # 掃全部
 claude -p "用 lesson-check 檢查 curriculum/ 下所有 S*.md"

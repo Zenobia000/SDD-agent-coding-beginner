@@ -1,6 +1,6 @@
 # 循環工程
 
-一套可以直接開工的 Claude Code 設定，加上教它怎麼來的課程。
+一套可以直接開工的 Claude Code 設定，加上一份帶你用它做出東西的文件。
 
 ```bash
 git clone <this-repo> my-project && cd my-project
@@ -8,17 +8,42 @@ cp .mcp.json.example .mcp.json     # 用不到的整段刪掉
 claude
 ```
 
-進去打 `/next`，它會看你的專案現況給一個建議。**然後就可以開始做東西了。**
+**接著打開 [`BUILD.md`](./BUILD.md)**，把上面的東西一格一格貼進去。
+
+---
+
+## 一份文件，一個真實的題目
+
+[`BUILD.md`](./BUILD.md) 用 **SmartTrip FX**（出國前算該換多少現金）走完整條線：
+框題目 → 寫 PRD → 畫架構 → 定契約 → 建考卷 → 實作 → 交付。
+
+裡面不是劇本，是**提問的範例**。題目、PRD、架構全部在 CLI 裡討論出來——
+你貼的是問題，長出來的是你自己的答案。
+
+**核心是第 3 步**：把系統切成「AI 判斷的部分」和「程式算的部分」。
+
+```
+AI 判斷（不可驗證 → schema + 考卷）
+    排行程、標每一項是現金還是刷卡
+────────── 交界處：schema + 一個 if ──────────
+程式計算（可驗證 → 單元測試）
+    加總 × 預備金、匯率燈號、幣別換算
+```
+
+**算術的事交給算術。** 多數人會想把整件事丟給 AI 一次做完——
+那會得到一個偶爾算錯、而且錯了也不知道的系統。
+
+老師的產出物在 [`labs/reference-project/`](./labs/reference-project/)（四份，比對結構不要抄）。
 
 ---
 
 ## 這裡沒有必經的關卡
 
-`.claude/skills/` 裡有八個技能。它們是**參考書，不是流程圖**——任何順序取用，也可以完全不用。
+`.claude/skills/` 有八個技能，是**參考書不是流程圖**——任何順序取用，也可以完全不用。
 
 | Skill | 什麼時候翻它 |
 |---|---|
-| `frame` | 題目還很模糊，想先問清楚再動手 |
+| `frame` | 題目還很模糊 |
 | `spec` | 要定介面、資料結構、或別人要接的東西 |
 | `evals` | 改了幾輪還在原地，或講不出「怎樣算變好」 |
 | `tdd` | 要寫新功能或修 bug |
@@ -27,56 +52,45 @@ claude
 | `decide` | 卡在選擇，或找不到根因 |
 | `next` | 不知道現在該做什麼 |
 
-領域知識放在 `.claude/references/`（資料層、介面、安全、維運、架構），**需要時再讀**。
+領域知識在 `.claude/references/`（資料層、介面、安全、維運、架構），需要時再讀。
 
 ---
 
 ## 唯一「你沒得選」的部分
 
-五個 hook 擋的是不可逆的事：遞迴刪除、force push、`reset --hard`、在保護分支 commit、把 secret 寫進檔案。
+四個 hook 擋的是不可逆的事：遞迴刪除、force push、`reset --hard`、
+在保護分支 commit、把 secret 寫進檔案。
 
-寫進文件的規則大約有七成順從率。不可逆的操作不能賭剩下那三成——所以它們在 `.claude/hooks/`，不在建議裡。
+寫進文件的規則大約有七成順從率。不可逆的操作不能賭剩下那三成。
 
 **其餘全部是建議。**
-
----
-
-## 課程
-
-同一個 repo 也是一份 8 小時的課，教這套設定背後的判斷。
-
-八站 `S0`–`S7`，主軸是**循環工程四拍**：劃邊界 → 放它跑 → 打分數 → 收判斷。
-第一拍就是那三個問題（動哪些檔案、什麼算變好、幾輪後停），一天對六個不同對象各跑一次。
-
-| | |
-|---|---|
-| 學員入口 | [`START-HERE.md`](./START-HERE.md) |
-| 講師入口 | [`curriculum/instructor/prep.md`](./curriculum/instructor/prep.md) |
-| 老師的完整成品 | [`labs/reference-project/`](./labs/reference-project/) |
-| 可複製的積木 | [`labs/blocks/`](./labs/blocks/)（5 塊，47 個測試） |
-
-**不上課也能用這套設定。** 課程只是解釋它為什麼長這樣。
-
----
-
-## 想自己寫這些東西
-
-`docs/authoring/` 有六種資產的撰寫指南：CLAUDE.md、rule、skill、command、hook、subagent，
-外加一份[決策樹](./docs/authoring/07-choose-which.md)告訴你同一個需求該做成哪一種。
-
-**會用是使用者，會寫才是工程師。**
 
 ---
 
 ## 結構
 
 ```
+BUILD.md            ⭐ 從這裡開始
 .claude/            skills / references / hooks / agents / rules / output-styles
-docs/               setup（安裝與免費路線）· authoring（怎麼寫）· concepts（讀本）
-curriculum/         八站課程 + 講師手冊 + 教具
-labs/               參照專案 + 可複製積木
+labs/
+  reference-project/  老師的四份產出（判斷的產物，不是實作的產物）
+  blocks/             可複製的積木：db / etl / api / auth / frontend（47 個測試）
+docs/
+  setup/              安裝與免費路線
+  authoring/          怎麼自己寫 skill / hook / rule / subagent / command
+  concepts/           心法與 M0–M9 進階讀本
+curriculum/         開課用的講師手冊
 tasks/              backlog / 當前工作 / 已知問題
 ```
+
+---
+
+## 想自己寫這些東西
+
+[`docs/authoring/`](./docs/authoring/) 有六種資產的撰寫指南，
+外加一份[決策樹](./docs/authoring/07-choose-which.md)：同一個需求該做成 skill、command、hook 還是 rule。
+
+**會用是使用者，會寫才是工程師。**
 
 ---
 
