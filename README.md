@@ -1,44 +1,59 @@
-# 循環工程：照著做完第一個 AI 協作專案
+# Claude Code：從官方元件到完整專案實戰
 
-這是一份可以直接操作的 Claude Code 教科書。你不需要選題、選框架或先讀理論；全班都做同一題 **SmartTrip FX**，照順序貼上教材中的 prompt，就能做出可測試的 Python CLI。
+這是一門給初學者的 Claude Code 課程，固定分成兩冊、照同一條路走：
+
+1. [`CLAUDE-CODE.md`](./CLAUDE-CODE.md)：約 2.5–3 小時，依 Anthropic 官方元件理解 Claude Code。
+2. [`BUILD.md`](./BUILD.md)：約 4–5 小時，把元件用進本課專屬的 **SmartTrip FX** 專案。
+
+第一冊回答「每個元件負責什麼」；第二冊完成 project contract、需求訪談、spec、tickets、TDD、review 與 commit。官方速成不取代專案實戰，專案實戰也不要求學生靠猜理解 `.claude/`。
 
 ## 三分鐘開始
 
-支援環境：macOS、Linux 或 Windows WSL，並已安裝 Git、Python 3.11+、Claude Code。
+先準備 Git、Python 3.11+ 與最新版 Claude Code；安裝方式以 [Anthropic 官方安裝文件](https://code.claude.com/docs/en/setup) 為準。
 
 ```bash
 git clone https://github.com/Zenobia000/ai-vibe-coding-beginner.git
 cd ai-vibe-coding-beginner
-git switch -c workshop/smarttrip-fx
+git switch -c workshop/claude-code-smarttrip
 git config core.hooksPath .githooks
 claude
 ```
 
-進入 Claude Code 後，打開 [`BUILD.md`](./BUILD.md)，從「第 0 章」開始複製。
+進入 Claude Code 後先打開 [`CLAUDE-CODE.md`](./CLAUDE-CODE.md)，完成最後的元件選型，再接著做 [`BUILD.md`](./BUILD.md)。
 
-## 你會做出什麼
+## 第一冊會學到的官方元件
 
-SmartTrip FX 讀取一份 AI 產生的行程 JSON，完成兩件必須由程式決定的事：
+| 問題 | Claude Code 元件 | 本 repo 的實例 |
+|---|---|---|
+| 每次 session 都要知道什麼？ | `CLAUDE.md`、Rules、Auto memory | `CLAUDE.md`、`.claude/rules/` |
+| 哪些工具可以直接用或必須確認？ | Settings、Permissions | `.claude/settings.json` |
+| 重複流程怎麼變成可呼叫能力？ | Skills | `.claude/skills/` |
+| 大量探索怎麼隔離 context？ | Subagents | `.claude/agents/` |
+| 哪些規則不能只靠模型記得？ | Hooks | `.claude/hooks/` |
+| Claude 如何連接外部工具與資料？ | MCP | 核心課只辨識，不新增 server |
+| 如何把整套元件發給其他專案？ | Plugins | 進階章辨識封裝邊界 |
+| 何時需要多個獨立 Claude session？ | Agent teams | 實驗性功能，只做選型比較 |
+| 大型 typed codebase 怎麼精準導覽？ | Code intelligence / LSP | 進階章辨識，不強迫安裝 |
+| Session 輸出怎麼視覺化分享？ | Artifacts | 進階章辨識，不在核心課發布 |
 
-- 算出現金項目、未知項目與 10% 預備金，向上取整成建議換匯金額。
-- 比較今日匯率與 30 日均線，輸出 `GOOD`、`NEUTRAL` 或 `WAIT`。
+## 第二冊會完成什麼
 
-核心課程不連外、不需要 API key，也不會把答案藏在另一個目錄。每章都有可貼 prompt、範例問答、預期輸出、通過條件與修正句。
+SmartTrip FX 讀取行程 JSON，驗證輸入、計算旅費現金與匯率燈號。學生會照貼 prompt，完成：
 
-## 你真正會學到什麼
+```text
+project contract → 需求訪談 → spec → tickets
+                 → 三個 TDD vertical slices
+                 → code / security review → commit
+```
 
-1. 先固定 scope、成功訊號與停止點，再讓 AI 動手。
-2. 把 AI 判斷與 deterministic code 分開，用 schema 當交界。
-3. 把需求變成 pass/fail acceptance criteria。
-4. 用 spec → tickets → TDD vertical slices 完成實作。
-5. 只用實際測試與 review 證據宣稱完成。
+核心產品只用 Python standard library，不接 live LLM、即時匯率 API、資料庫、登入、Web UI 或部署，讓學生專注在 Claude Code 的工程迴圈。
 
-## 只有三個入口
+## 其他入口
 
 | 路徑 | 用途 |
 |---|---|
-| [`.claude/`](./.claude/) | 可直接用於實戰專案的工程設定與 Skills |
-| [`BUILD.md`](./BUILD.md) | 學生唯一主線，從空 repo 做到可執行程式 |
-| [`curriculum/README.md`](./curriculum/README.md) | 講師節奏、巡場檢查與教材維護規則 |
+| [`.claude/`](./.claude/) | 可直接觀察與移植的工程 harness；[`架構說明`](./.claude/README.md) 是課後參考 |
+| [`curriculum/README.md`](./curriculum/README.md) | 兩冊課程的講師節奏、巡場問題與維護規則 |
+| [`M0-M9_懶人包.md`](./M0-M9_懶人包.md) | 原課程理論重點；不插入照貼照跑主線 |
 
-其他主題等完成本書後，再從 `.claude/skills/workflow` 選一條適合的新路徑；第一次不要同時學框架、API 與多代理協作。
+Claude Code 行為以 [官方文件](https://code.claude.com/docs/en/overview) 為事實來源；社群文章只用來改善教法。文件最後核對日期：2026-07-31。

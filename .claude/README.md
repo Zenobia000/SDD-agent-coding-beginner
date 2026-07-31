@@ -1,9 +1,13 @@
 # `.claude/` 架構說明
 
-這個資料夾是一套**可移植的工程 harness**：把「怎麼做工程」寫成 Claude Code 能載入的檔案。它與 SmartTrip FX 教材無關，可以整包複製到任何 repo。
+這個資料夾是一套**可移植的工程 harness**：把「怎麼做工程」寫成 Claude Code 能載入的檔案。它與 SmartTrip FX 產品實作無關，可以整包複製到其他 repo。
+
+> 這份文件解釋「本 repo 如何實作」，不是 Claude Code 官方功能的完整清單。第一次學習請先走 [`../CLAUDE-CODE.md`](../CLAUDE-CODE.md)，再用 [`../BUILD.md`](../BUILD.md) 完成 SmartTrip FX；官方另有 MCP、Plugins、Agent teams、Auto memory 等元件，本 repo 沒有為了展示而全部啟用。
 
 ```text
 .claude/
+├── README.md              # 本 repo 的 harness 架構參考
+├── CLAUDE.template.md     # 搬到其他 repo 時使用的通用專案指令模板
 ├── settings.json          # 硬邊界：權限白/黑名單 + hook 註冊
 ├── hooks/                 # 機械閘門：工具呼叫前攔截（Python，非模型判斷）
 │   ├── guard-bash.py
@@ -23,14 +27,14 @@
 
 ## 1. 四層的分工
 
-四個目錄不是平行的分類，而是**四種不同的強制力**：
+四個目錄不是平行的分類，而是**四種不同的執行責任**：
 
-| 層 | 目錄 | 誰執行 | 能不能被繞過 | 何時生效 |
+| 層 | 目錄 | 誰執行 | 控制性質 | 何時生效 |
 |---|---|---|---|---|
-| 硬邊界 | `settings.json` + `hooks/` | Claude Code runtime（Python） | 不能 | 每次工具呼叫前 |
-| 恆常紀律 | `rules/` | 模型 | 可以（靠指令優先序約束） | 每個 session 全程 |
-| 程序知識 | `skills/` | 模型 | 可以（按需載入） | 觸發時才載入 |
-| 隔離工人 | `agents/` | 獨立 subagent | — | 被 skill 呼叫時 |
+| 工具閘門 | `settings.json` + `hooks/` | Claude Code runtime + Python | 在目前設定中做 deterministic 決策 | permission 判斷或工具呼叫前 |
+| 恆常紀律 | `rules/` | 模型 | instruction，不是安全強制 | 本規則未設 `paths`，每個 session 載入 |
+| 程序知識 | `skills/` | 模型 | 按需載入的 instruction | 被呼叫或符合情境時 |
+| 隔離工人 | `agents/` | 獨立 subagent | 隔離 context 與工具範圍 | 被使用者或流程委派時 |
 
 關鍵設計：**不可逆的風險放在 hooks，可判斷的品質放在 skills**。文字規則只能提醒，Python hook 才能真的擋下 `rm -rf ~`。
 
@@ -230,7 +234,7 @@ SKILL.md              red → green → refactor 的執行順序與 seam 選擇 
 
 ## 6. `agents/`：把 context 汙染隔離出去
 
-4 個 agent 全部是 `tools: Read, Glob, Grep, Bash` + `disallowedTools: Write, Edit, NotebookEdit` + `permissionMode: plan`——**一律唯讀**。
+本 repo 的 4 個 agent 全部是 `tools: Read, Glob, Grep, Bash` + `disallowedTools: Write, Edit, NotebookEdit` + `permissionMode: plan`——**依目前設定一律唯讀**。
 
 | Agent | 被誰呼叫 | 職責 | 輸出上限 |
 |---|---|---|---|

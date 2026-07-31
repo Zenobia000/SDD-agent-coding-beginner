@@ -2,6 +2,7 @@
 .claude/settings.local.json
 .claude/taskmaster-data/
 .claude/sessions/
+.claude/worktrees/
 
 # 本機秘密
 .env
