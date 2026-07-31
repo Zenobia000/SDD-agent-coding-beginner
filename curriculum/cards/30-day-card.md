@@ -21,7 +21,7 @@ cp -r ~/my-first-loop/.claude ~/next-project/
 ### Week 1 — 把今天的東西再推一輪
 ```
 目標：考卷通過率再拉高 1 級
-做法：/loop，範圍只准動一個檔案
+做法：/next，範圍只准動一個檔案
 ```
 **為什麼**：把「課堂手感」變成「家裡手感」。
 
@@ -30,7 +30,7 @@ cp -r ~/my-first-loop/.claude ~/next-project/
 ### Week 2 — 把剩下三塊積木裝完
 ```
 目標：labs/blocks/ 剩下的三塊，一次一塊
-做法：/blocks → 跑對應 skill → 裝 → /verify
+做法：/next → 跑對應 skill → 裝 → /review
 ```
 **為什麼**：接點才是全端難的地方，多練幾次。
 
@@ -82,7 +82,7 @@ cp -r ~/my-first-loop/.claude ~/next-project/
 
 - 教材有問題 → 開 issue，說**卡在第幾站第幾步**
 - 想看老師的做法 → `labs/reference-project/`
-- 忘記某個 skill 怎麼用 → `.claude/SKILL-MAP.md`
+- 忘記某個 skill 怎麼用 → `.claude/skills/next/SKILL.md`
 
 ---
 

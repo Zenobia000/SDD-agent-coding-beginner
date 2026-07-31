@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| **做什麼** | 把 `claude` 裝起來、複製專案骨架、確認 hook 真的會動 |
+| **做什麼** | 把 `claude` 裝起來、確認 skill 載入了、確認 hook 真的會擋 |
 | **為什麼** | 環境沒好，後面七站全部卡住 |
-| **產出** | 能跑的 `claude` + `my-first-loop/` 目錄 |
+| **產出** | 能跑的 `claude`，且 hook 確實會擋東西 |
 | **下一步** | 跑 `/gate` 確認 S0 過關 |
 
 **這一站是暖身，不跑四拍。**
@@ -36,9 +36,9 @@
    ```
    沒有這個指令 → 先跑 [`../docs/setup/01-claude-code.md`](../docs/setup/01-claude-code.md)
 
-2. 複製骨架成你自己的專案
+2. 確認你在專案根目錄（這個 repo 本身就是骨架）
    ```bash
-   cp -r templates/claude_project_template ~/my-first-loop && cd ~/my-first-loop
+   pwd     # 確認你在 clone 下來的目錄裡
    ```
 
 3. 設定 MCP（用不到的整段刪掉）
@@ -50,7 +50,7 @@
    ```bash
    claude
    ```
-   進去後打 `/blocks` —— 應該看到 16 塊 skill 的清單。
+   進去後打 `/next` —— 它會列出八個 skill 並依你的現況給一個建議。
 
 5. 測一下 hook 真的會擋（**這步不要跳，這是全天第一個「機械層」的體感**）
    ```
@@ -63,8 +63,8 @@
 ## 閘門
 
 - [ ] `claude --version` 有輸出
-- [ ] `~/my-first-loop/` 存在且裡面有 `.claude/` 目錄
-- [ ] 在專案內打 `/blocks` 列得出 skill 清單
+- [ ] `.claude/` 目錄存在，且有 skills / references / hooks 等子目錄
+- [ ] 在專案內打 `/next` 列得出 skill 清單
 - [ ] 要求跑 `rm -rf` 時被 hook 擋下
 - [ ] `.mcp.json` 存在（內容可以只留一個 server）
 
@@ -75,10 +75,10 @@
 對照 [`../labs/reference-project/S0/expected/`](../labs/reference-project/S0/expected/)：
 
 - `tree-output.txt` —— 你的目錄結構應該和它一致（檔案數可以差，`.claude/` 下的子目錄必須都在）
-- `blocks-output.md` —— `/blocks` 應該列出同樣的 16 個 skill
+- `next-output.md` —— `/next` 應該列出同樣的八個 skill
 
 差異在「少了某個目錄」→ 重跑動手第 2 步。
-差異在「`/blocks` 沒反應」→ 檢查你是不是在 `my-first-loop/` 裡面開的 `claude`。
+差異在「`/next` 沒反應」→ 檢查你是不是在 repo 根目錄開的 `claude`。
 
 ---
 

@@ -96,7 +96,7 @@ npx -y @playwright/mcp@latest --version   # 預先觸發下載
 
 **本機版需要 Figma 桌面應用開著**，server 跑在 `127.0.0.1:3845`。
 
-沒有 Figma 帳號也沒關係 —— S6 的 `/ui-spec` 沒有設計稿也能跑，
+沒有 Figma 帳號也沒關係 —— S6 的 `/spec` 沒有設計稿也能跑，
 改用文字描述介面需求即可。
 
 ---

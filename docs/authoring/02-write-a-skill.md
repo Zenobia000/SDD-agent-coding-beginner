@@ -64,7 +64,7 @@ description: 檢查專案的每日健康狀態 —— 測試、依賴漏洞、�
 ## 目錄形式（要帶附件時）
 
 ```
-.claude/skills/spec-it/
+.claude/skills/spec/
 ├── SKILL.md
 └── templates/
     ├── PRD-template.md
@@ -78,7 +78,7 @@ description: 檢查專案的每日健康狀態 —— 測試、依賴漏洞、�
 用 `${CLAUDE_SKILL_DIR}/templates/PRD-template.md` 當範本。
 ```
 
-**目錄名 = 指令名。** `skills/spec-it/` → `/spec-it`。
+**目錄名 = 指令名。** `skills/spec/` → `/spec`。
 
 ---
 
@@ -268,7 +268,7 @@ Skill 會被當 system instruction 執行，且**跟著 git 走**：
 
 ---
 
-## 本專案的 16 個 skill 可以直接讀
+## 本專案的八個 skill 可以直接讀
 
 想看範例的話，這三個各代表一種型態：
 

@@ -1,24 +1,41 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+
   "permissions": {
     "allow": [
       "Bash(git status)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git branch:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(pytest:*)",
+      "Bash(ruff:*)",
       "Bash(rg:*)",
-      "Bash(ls:*)",
-      "Bash(wc:*)",
-      "Read(//home/**)"
+      "Bash(ls:*)"
     ],
     "deny": [
-      "Read(./**/.env)",
-      "Read(./**/.env.*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
       "Read(./**/*.pem)",
-      "Read(./**/id_rsa*)"
+      "Read(./**/id_rsa*)",
+      "Read(./secrets/**)"
     ]
   },
+
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/inject-station.sh"],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -31,6 +48,18 @@
             "statusMessage": "檢查危險指令"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/block-secret-write.sh"],
+            "timeout": 10,
+            "statusMessage": "檢查秘密外洩"
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -40,9 +69,21 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/check-doc-contract.sh"],
-            "timeout": 15,
-            "statusMessage": "核對教材寫作規約"
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/autoformat.sh"],
+            "timeout": 60,
+            "statusMessage": "自動格式化"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/remind-verify.sh"],
+            "timeout": 10
           }
         ]
       }

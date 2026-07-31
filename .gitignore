@@ -43,3 +43,20 @@ tmp/
 news-summarizer/
 my-*/
 VibeCoding_Workflow_Templates/
+
+# === 專案執行產物（原模板 .gitignore）===
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+dist/
+build/
+.next/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.claude/.station
+.claude/.verify-reminded-*
+*.log

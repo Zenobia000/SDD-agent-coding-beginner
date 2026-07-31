@@ -199,7 +199,7 @@ git mv .claude/commands/my-command.md .claude/skills/my-command/SKILL.md
 
 ---
 
-## 本專案的四個 command 可以直接讀
+## 本專案只剩一個 command
 
 | Command | 學什麼 |
 |---|---|
@@ -208,7 +208,7 @@ git mv .claude/commands/my-command.md .claude/skills/my-command/SKILL.md
 | `ship` | 怎麼寫「依序執行、紅燈就停」的編排 |
 | `blocks` | 怎麼寫「先看現況再給建議」 |
 
-路徑：`templates/claude_project_template/.claude/commands/`
+路徑：`.claude/commands/`
 
 ---
 

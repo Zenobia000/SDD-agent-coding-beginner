@@ -31,7 +31,7 @@ reviewer: SA
 
 ## 2. ADR Schema（架構決策）
 
-對接本 repo 的 [`.agents/skills/adr`](../../../templates/antigravity_project_template/.agents/skills/adr/)（MADR 風格）：
+對接本 repo 的 [`.agents/skills/adr`](../../../.claude/skills/spec/)（MADR 風格）：
 
 ```yaml
 adr_id: ADR-0001

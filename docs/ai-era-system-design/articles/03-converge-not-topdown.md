@@ -76,7 +76,7 @@ Frontend → Backend API → Database
 - Architecture / Data Model → **L2 API contract + 資料模型**
 - 例外情境 / 測試案例 → **L3 BDD scenarios**
 
-`/spec-it` skill（[`.agents/skills/spec-it`](../../../templates/antigravity_project_template/.agents/skills/spec-it/)）就是把這個收斂過程一次產出三層。
+`/spec-it` skill（[`.agents/skills/spec-it`](../../../.claude/skills/spec/)）就是把這個收斂過程一次產出三層。
 
 ---
 

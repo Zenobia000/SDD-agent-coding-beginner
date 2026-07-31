@@ -51,7 +51,7 @@
 
 | 站 | 檔案 | 對照重點 |
 |---|---|---|
-| S0 | [`S0/expected/`](./S0/expected/) | 目錄結構、`/blocks` 輸出 |
+| S0 | [`S0/expected/`](./S0/expected/) | 目錄結構、`/next` 輸出 |
 | S1 | [`S1/expected/`](./S1/expected/) | 決策卡的具體程度 |
 | S2 | [`S2/expected/`](./S2/expected/) | 七欄位結構、考卷的邊界 case |
 | S3 | [`S3/expected/`](./S3/expected/) | v0 抽測後「發現哪裡不夠」 |

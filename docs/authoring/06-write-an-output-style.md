@@ -226,7 +226,7 @@ skill         = 遇到特定情境才載入的完整協議（決策的方法）
 | 永久 | `output-styles/adhd.md` | 結論先行、清單 ≤5、一個下一步 |
 | 永久 | `output-styles/dev-decision.md` | 三種問題三種格式 + 證據分級 |
 | 按需 | `skills/decide/SKILL.md` | 遇到選型 / debug 時的完整決策協議 |
-| 說明 | `rules/09-evidence-labels.md` | **為什麼**要標級（style 只說怎麼做） |
+| 說明 | `rules/evidence.md` | **為什麼**要標級（style 只說怎麼做） |
 
 **style 管形狀，rule 管理由，skill 管流程。**
 
@@ -240,7 +240,7 @@ skill         = 遇到特定情境才載入的完整協議（決策的方法）
 | `dev-decision` | 怎麼依問題類型換格式 + 三級證據標記 |
 | `teaching` | 怎麼寫「教學」而不是「完成任務」的風格 |
 
-路徑：`templates/claude_project_template/.claude/output-styles/`
+路徑：`.claude/output-styles/`
 
 ---
 

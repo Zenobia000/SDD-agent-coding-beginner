@@ -8,7 +8,7 @@
 | **怎麼用** | 挑你缺的那塊，複製過去改成你的 |
 | **一次挑幾塊** | S6 課堂挑**兩塊**。接點比單塊難，兩塊剛好練到接點 |
 | **測試狀態** | db 8 ✅ ／ etl 14 ✅ ／ api 11 ✅ ／ auth 14 ✅ ／ frontend 手動 demo |
-| **下一步** | 打 `/blocks` 讓 AI 看你的專案缺什麼 |
+| **下一步** | 打 `/next` 讓 AI 看你的專案缺什麼 |
 
 ---
 
@@ -16,18 +16,18 @@
 
 | 積木 | 給你什麼 | 對應 skill | 測試 |
 |---|---|---|---|
-| [`db/`](./db/) | SQLite schema + migration + 冪等 upsert | `/data-pipe` | 8 |
-| [`etl/`](./etl/) | Extract → Transform → **Validate** → Load | `/data-pipe` | 14 |
-| [`api/`](./api/) | 輸入驗證 + 錯誤形狀 + IDOR 防護 | `/spec-it`・`/sec-scan` | 11 |
-| [`auth/`](./auth/) | 密碼雜湊 + session + 帳號列舉防護 | `/sec-scan` | 14 |
-| [`frontend/`](./frontend/) | 六種狀態全處理的資料元件 | `/ui-spec` | demo.html |
+| [`db/`](./db/) | SQLite schema + migration + 冪等 upsert | `/spec` | 8 |
+| [`etl/`](./etl/) | Extract → Transform → **Validate** → Load | `/spec` | 14 |
+| [`api/`](./api/) | 輸入驗證 + 錯誤形狀 + IDOR 防護 | `/spec`・`/ship` | 11 |
+| [`auth/`](./auth/) | 密碼雜湊 + session + 帳號列舉防護 | `/ship` | 14 |
+| [`frontend/`](./frontend/) | 六種狀態全處理的資料元件 | `/spec` | demo.html |
 
 ---
 
 ## 跑測試
 
 ```bash
-cd labs/blocks
+cd labs/next
 python3 -m pytest db/tests etl/tests api/tests auth/tests -q
 ```
 
@@ -91,11 +91,11 @@ Forbidden
 ## 怎麼裝（正確順序）
 
 ```
-① /blocks           看你缺什麼
+① /next           看你缺什麼
 ② 跑對應的 skill     定契約（不要直接複製 code）
 ③ 複製積木          cp -r labs/blocks/<名>/* ./
 ④ 改成你的          schema、欄位、驗證規則
-⑤ /verify + 跑考卷   確認沒退步
+⑤ /review + 跑考卷   確認沒退步
 ```
 
 **第 ② 步不能跳。** 直接複製 code 你只是搬東西，沒有理解契約——
@@ -132,4 +132,4 @@ Forbidden
 
 ## 下一步
 
-打 `/blocks`，讓它看你的專案現況並建議下一塊。
+打 `/next`，讓它看你的專案現況並建議下一塊。

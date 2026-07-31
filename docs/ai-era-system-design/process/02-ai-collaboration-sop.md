@@ -76,4 +76,4 @@ _discarded/            # 已丟棄
 
 ## 對應 repo 的 sprint
 
-這五輪是 [`.agents/WORKFLOW.md`](../../../templates/antigravity_project_template/.agents/WORKFLOW.md) 十站式 sprint 的決策視角：sprint 講「站點順序」，本流程講「每站誰發散、誰收斂、誰拍板」。
+這五輪是 [`.agents/WORKFLOW.md`](../../../.claude/skills/next/SKILL.md) 十站式 sprint 的決策視角：sprint 講「站點順序」，本流程講「每站誰發散、誰收斂、誰拍板」。

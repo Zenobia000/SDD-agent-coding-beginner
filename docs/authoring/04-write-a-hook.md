@@ -271,7 +271,7 @@ bash -x .claude/hooks/my-hook.sh <<< '{"tool_input":{"command":"test"}}'
 | `autoformat.sh` | 自動化 | 靜默執行、工具沒裝就跳過 |
 | `remind-verify.sh` | 收尾 | 用旗標檔避免重複提醒 |
 
-路徑：`templates/claude_project_template/.claude/hooks/`
+路徑：`.claude/hooks/`
 
 ---
 

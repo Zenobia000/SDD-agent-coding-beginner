@@ -21,11 +21,11 @@
 
 | 情境 | 用 skill | 用 subagent |
 |---|---|---|
-| 理解一段 code | `/explain-code` | — |
+| 理解一段 code | `/next` | — |
 | 在 200 個檔案裡找東西 | — | ✅ |
-| 為新功能寫測試 | `/tdd-cycle` | — |
+| 為新功能寫測試 | `/tdd` | — |
 | 為既有 code 補一批測試 | — | ✅ |
-| 例行品質檢查 | `/verify` | — |
+| 例行品質檢查 | `/review` | — |
 | 重要決策要第二意見 | — | ✅ |
 
 ---
@@ -221,7 +221,7 @@ claude          # 重開
 | `test-writer` | 唯一會改檔案的那個，看它怎麼限制範圍 |
 | `security-auditor` | 怎麼寫「從攻擊者視角走一遍」的方法論 |
 
-路徑：`templates/claude_project_template/.claude/agents/`
+路徑：`.claude/agents/`
 
 ---
 

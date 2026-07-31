@@ -21,7 +21,7 @@
 
 ## 與三層 Spec 的對應
 
-本 repo 的 `/spec-it` skill（[`.agents/skills/spec-it`](../../../templates/antigravity_project_template/.agents/skills/spec-it/)）一次產出三層，正好覆蓋這 7 份的多數：
+本 repo 的 `/spec-it` skill（[`.agents/skills/spec-it`](../../../.claude/skills/spec/)）一次產出三層，正好覆蓋這 7 份的多數：
 
 ```
 L1 PRD          → #1 Problem Statement + #2 Flow + #3 Scope

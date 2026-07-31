@@ -90,7 +90,7 @@ API Spec、DB Schema、測試案例、架構比較、部署腳本。
 維運       ├ AI 協助 Log 分析 / Incident Summary  └ SRE 做根因決策
 ```
 
-這正是本 repo [`.agents/WORKFLOW.md`](../../../templates/antigravity_project_template/.agents/WORKFLOW.md) 十站式 sprint 的精神：AI 加速每一站，人類守每一道 Gate。
+這正是本 repo [`.agents/WORKFLOW.md`](../../../.claude/skills/next/SKILL.md) 十站式 sprint 的精神：AI 加速每一站，人類守每一道 Gate。
 
 ---
 

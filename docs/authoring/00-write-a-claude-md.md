@@ -84,8 +84,8 @@
 | 順序 | 檔案 | 什麼時候讀 |
 |---|---|---|
 | 1 | `docs/PRD.md` | 每次開工 |
-| 2 | `.claude/rules/08-loop-first.md` | **開跑前** |
-| 3 | `.claude/rules/09-evidence-labels.md` | **報告結論前** |
+| 2 | `.claude/CLAUDE.md 的「一件貫穿的事」` | **開跑前** |
+| 3 | `.claude/rules/evidence.md` | **報告結論前** |
 ```
 
 ❌ 不要只列清單說「都要讀」—— AI 會全部讀進 context，把預算吃光。
@@ -111,7 +111,7 @@
 - ❌ **不把 secret 寫進 code** —— 用環境變數。
   這條由 `.githooks/pre-commit` 與 `hooks/block-secret-write.sh`
   **雙層機械強制**
-- ❌ **沒 spec 不寫 code** —— 這條靠自律（`rules/04`）
+- ❌ **沒 spec 不寫 code** —— 這條靠自律（`skills/spec`）
 ```
 
 讓讀的人知道哪些是「請你遵守」、哪些是「你沒得選」。
@@ -202,7 +202,7 @@ CLAUDE.md 150 行 + 9 條 rule
    2. 寫最少實作
    ...（又把 rules/05 抄一遍）
 
-✅ - **沒測試不算完成** —— 實作走 `/tdd-cycle`（`rules/05`）
+✅ - **沒測試不算完成** —— 實作走 `/tdd`（`skills/tdd`）
 ```
 
 **每個事實只有一個真相源。** 重述 = 未來的矛盾。
@@ -256,7 +256,7 @@ CLAUDE.md 150 行 + 9 條 rule
 | 檔案 | 治理什麼 | 特色 |
 |---|---|---|
 | `.claude/CLAUDE.md`（repo 根） | 寫課程這件事 | 產出物是教材，不是 feature |
-| `templates/claude_project_template/CLAUDE.md` | 學員寫專案 | 完整八節骨架 |
+| `./CLAUDE.md` | 學員寫專案 | 完整八節骨架 |
 
 **兩者規則不同，刻意不互相複製** —— 這本身就是「單一真相源」的示範。
 
@@ -264,5 +264,5 @@ CLAUDE.md 150 行 + 9 條 rule
 
 ## 下一步
 
-打開 `templates/claude_project_template/CLAUDE.md`，照第 8 節「絕對禁止」的寫法，
+打開 `./CLAUDE.md`，照第 8 節「絕對禁止」的寫法，
 把你專案裡最不可逆的那件事寫下來，並想清楚它該由 hook 還是自律來強制。

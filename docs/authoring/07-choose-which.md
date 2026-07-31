@@ -23,7 +23,7 @@
    │   需要附件嗎（範本、腳本、檢核表）？
    │   │
    │   ├─ 是 ──────────────────────────────► skill（目錄形式）
-   │   │   例：/spec-it 帶 6 份範本
+   │   │   例：/spec 帶 6 份範本
    │   │
    │   └─ 否 ──────────────────────────────► command（單檔）
    │       例：/gate 就是照 RUBRIC 檢查一遍
@@ -188,7 +188,7 @@ command
     ↓
 output style（+ 一條 rule 說明為什麼）
 ```
-本模板的 `output-styles/dev-decision.md` + `rules/09-evidence-labels.md`
+本模板的 `output-styles/dev-decision.md` + `rules/evidence.md`
 就是這個組合：**style 管形狀，rule 管理由。**
 
 ---

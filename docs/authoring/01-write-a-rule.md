@@ -215,7 +215,7 @@ grep -n "rules/" CLAUDE.md
 
 ---
 
-## 本專案的九條 rule 可以直接讀
+## 本專案只剩兩條 rule
 
 | Rule | 學什麼 |
 |---|---|
@@ -225,7 +225,7 @@ grep -n "rules/" CLAUDE.md
 | `08-loop-first` | 怎麼寫一條凌駕其他規則的元規則 |
 | `09-evidence-labels` | 怎麼寫「違反的後果」時間線 |
 
-路徑：`templates/claude_project_template/.claude/rules/`
+路徑：`.claude/rules/`
 
 ---
 

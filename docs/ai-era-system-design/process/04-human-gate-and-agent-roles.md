@@ -38,7 +38,7 @@
 | Dev Assistant | 產程式骨架 | Code Skeleton、Unit Test |
 | Documentation Curator | 整理正式文件 | Summary、Diff、Traceability |
 
-這對應本 repo 的 [`.agents/SUBAGENTS.md`](../../../templates/antigravity_project_template/.agents/SUBAGENTS.md)：把工作拆給專職 subagent，比一個 agent 全包更可控。
+這對應本 repo 的 [`.agents/SUBAGENTS.md`](../../../.claude/agents/)：把工作拆給專職 subagent，比一個 agent 全包更可控。
 
 ---
 
@@ -71,8 +71,8 @@ AI Draft → Review Queue → Human Review → Approved Artifact
 
 | 本文件概念 | repo 對應 |
 |------------|-----------|
-| 六道 Gate | [`.agents/WORKFLOW.md`](../../../templates/antigravity_project_template/.agents/WORKFLOW.md) 十站 sprint 的檢查點 |
-| Agent 分工 | [`.agents/SUBAGENTS.md`](../../../templates/antigravity_project_template/.agents/SUBAGENTS.md) |
+| 六道 Gate | [`.agents/WORKFLOW.md`](../../../.claude/skills/next/SKILL.md) 十站 sprint 的檢查點 |
+| Agent 分工 | [`.agents/SUBAGENTS.md`](../../../.claude/agents/) |
 | 草稿 / 正式分區 | [process/02](02-ai-collaboration-sop.md) 的目錄約定 |
 | status 欄位 | [process/01](01-minimum-viable-documentation.md) 的文件狀態約定 |
 

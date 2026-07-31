@@ -65,7 +65,7 @@
 | 2020/03/12 | 訂單取消需主管審核 | 避免業務誤刪 | 新增 `approval_status` |
 | 2020/03/18 | 報表先支援 Excel 不支援 PDF | MVP 時程限制 | PDF 放 Phase 2 |
 
-Decision Log 比一份完美文件更實用，因為它記錄「為什麼這樣決定」。在 AI 時代，這個角色由 ADR 承接（見 [process/03](../process/03-schemas-and-traceability.md) 與 [`.agents/skills/adr`](../../../templates/antigravity_project_template/.agents/skills/adr/)）。
+Decision Log 比一份完美文件更實用，因為它記錄「為什麼這樣決定」。在 AI 時代，這個角色由 ADR 承接（見 [process/03](../process/03-schemas-and-traceability.md) 與 [`.agents/skills/adr`](../../../.claude/skills/spec/)）。
 
 ---
 
