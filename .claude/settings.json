@@ -1,21 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeGitInstructions": false,
   "permissions": {
     "allow": [
       "Bash(git status)",
+      "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
-      "Bash(git branch:*)",
-      "Bash(npm test:*)",
-      "Bash(npm run lint:*)",
-      "Bash(pytest:*)",
-      "Bash(ruff:*)",
-      "Bash(rg:*)",
-      "Bash(ls:*)"
+      "Bash(git show:*)",
+      "Bash(git branch --show-current)",
+      "Bash(git rev-parse:*)",
+      "Bash(git merge-base:*)",
+      "Bash(rg:*)"
     ],
     "deny": [
       "Read(./.env)",
-      "Read(./.env.*)",
+      "Read(./**/.env)",
       "Read(./**/*.pem)",
       "Read(./**/id_rsa*)",
       "Read(./secrets/**)"
@@ -28,56 +28,20 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash",
-            "args": [
-              "${CLAUDE_PROJECT_DIR}/.claude/hooks/block-dangerous-bash.sh"
-            ],
-            "timeout": 10,
-            "statusMessage": "檢查危險指令"
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-bash.py\"",
+            "timeout": 5,
+            "statusMessage": "檢查不可逆指令"
           }
         ]
       },
       {
-        "matcher": "Write|Edit",
+        "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "bash",
-            "args": [
-              "${CLAUDE_PROJECT_DIR}/.claude/hooks/block-secret-write.sh"
-            ],
-            "timeout": 10,
-            "statusMessage": "檢查秘密外洩"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash",
-            "args": [
-              "${CLAUDE_PROJECT_DIR}/.claude/hooks/autoformat.sh"
-            ],
-            "timeout": 60,
-            "statusMessage": "自動格式化"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash",
-            "args": [
-              "${CLAUDE_PROJECT_DIR}/.claude/hooks/remind-verify.sh"
-            ],
-            "timeout": 10
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-write.py\"",
+            "timeout": 5,
+            "statusMessage": "檢查敏感資料"
           }
         ]
       }
