@@ -16,6 +16,9 @@
 │   └── engineering-workflow.md
 ├── skills/                # 程序知識：29 個「怎麼做某件事」的流程
 │   └── <name>/SKILL.md [+ 附檔]
+├── commands/              # skills 的單檔變體：2 個零判斷的機械 shortcut
+│   ├── test.md
+│   └── build-check.md
 └── agents/                # 隔離工人：4 個獨立 context 的唯讀 subagent
     ├── code-explorer.md
     ├── security-reviewer.md
@@ -56,18 +59,22 @@
 | Hook | 攔截點 | `deny`（直接擋） | `ask`（要求確認） |
 |---|---|---|---|
 | `guard-bash.py` | Bash | 用 shell 繞道讀 `.env` / `*.pem` / `id_rsa*` / `secrets/`；`rm -rf` 打到 `/`、`~`、`.`、`$CLAUDE_PROJECT_DIR` | 任何 `rm -rf`、`git reset --hard`、`git clean -f`、`git restore`、force push、`branch -D`、`stash drop`、`DROP TABLE`、`TRUNCATE` |
-| `guard-write.py` | Edit / Write | 寫入真實 `.env`；內容含 `sk-`、`sk-ant-`、`ghp_`、`AIza`、`AKIA`、PRIVATE KEY | — |
+| `guard-write.py` | Edit / Write | 寫入真實 `.env` / `*.pem` / `id_rsa*` / `secrets/`；內容含 `sk-`、`sk-ant-`、`ghp_`、`AIza`、`AKIA`、PRIVATE KEY | — |
 
 `deny` 的訊息一律指向替代做法（例：改寫 `.env.example`），不是單純拒絕。
 `.env.example` / `.sample` / `.template` 白名單放行。
 
 倉庫根目錄的 `.githooks/` 是同一道防線的另一半：`.claude/hooks/` 管 Claude 的工具呼叫，`.githooks/` 管**人與任何 agent** 的 git 操作（pre-commit 擋 secret、pre-push 擋 main 的非快轉 push）。
 
+### commands/：`skills/` 的單檔變體，不是第五層
+
+官方文件已把 Custom commands 併入 skill 機制：`.claude/commands/<name>.md` 與 `.claude/skills/<name>/SKILL.md` 建立的是同一個 `/<name>`，差別只在單檔 vs 目錄（見 [`../CLAUDE-CODE.md`](../CLAUDE-CODE.md) 第 5 章「Commands 與 Output styles」）。本 repo 只在**零判斷、零副作用、不需要附檔**的情境才用單檔形式，目前是 `test`、`build-check` 兩個 Quality command 的直接 shortcut。凡是需要判斷（何時該用哪個 skill、要不要拆單）一律留在 `skills/`，不要把流程複製一份到 `commands/`。
+
 ---
 
 ## 2. 所有 skill 的共同介面：專案契約
 
-這是整套設計的樞紐。29 個 skill 沒有一個硬編碼「測試指令是 `pytest`」，它們一律去讀同一份**專案契約**：Quality commands（focused/full test、typecheck、lint、format、build）、Issue tracker、Git workflow、Domain docs 位置、Risk boundary。
+這是整套設計的樞紐。29 個 skill、加上 `commands/` 的 2 個單檔 command，沒有一個硬編碼「測試指令是 `pytest`」，它們一律去讀同一份**專案契約**：Quality commands（focused/full test、typecheck、lint、format、build）、Issue tracker、Git workflow、Domain docs 位置、Risk boundary。
 
 契約是一組**欄位**，不是一個固定檔案。落點有三個，依優先序：
 
@@ -275,7 +282,7 @@ session 啟動
 ## 8. 移植到其他 repo
 
 ```bash
-cp -r .claude/{settings.json,hooks,rules,skills,agents} <target-repo>/.claude/
+cp -r .claude/{settings.json,hooks,rules,skills,commands,agents} <target-repo>/.claude/
 cp .claude/CLAUDE.template.md <target-repo>/CLAUDE.md
 cd <target-repo> && claude
 ```
