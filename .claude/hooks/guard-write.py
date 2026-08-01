@@ -37,10 +37,19 @@ body = "\n".join(
     if value is not None
 )
 
-name = PurePath(file_path).name.lower() if file_path else ""
+path = PurePath(file_path)
+name = path.name.lower() if file_path else ""
 safe_env_suffixes = (".example", ".sample", ".template")
-if (name == ".env" or name.startswith(".env.")) and not name.endswith(safe_env_suffixes):
+safe_env = name.endswith(safe_env_suffixes)
+if (name == ".env" or name.startswith(".env.")) and not safe_env:
     deny(f"已擋下寫入 {file_path}。請改寫明確使用假值的 .env.example，真實值由使用者在本機注入。")
+    raise SystemExit(0)
+
+# 與 guard-bash.py 同一組判斷：讀不到的路徑也不該寫得進去。
+is_private_key = name.endswith(".pem") or name.startswith("id_rsa")
+is_secret_dir = "secrets" in {part.lower() for part in path.parts}
+if is_private_key or is_secret_dir:
+    deny(f"已擋下寫入敏感路徑 {file_path}。私鑰與 secrets/ 不進版控；請改用明確假值的範例檔，真實金鑰由使用者在本機注入。")
     raise SystemExit(0)
 
 secret_patterns = (

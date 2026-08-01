@@ -19,6 +19,14 @@ git config core.hooksPath .githooks
 claude
 ```
 
+`core.hooksPath` 是每個 clone 各自的設定，沒設就等於 `.githooks/` 完全沒作用。開始前先確認它真的生效：
+
+```bash
+git config core.hooksPath
+```
+
+必須印出 `.githooks`。印不出任何東西就代表上面那行沒跑到，回去補跑一次。
+
 進入 Claude Code 後先打開 [`CLAUDE-CODE.md`](./CLAUDE-CODE.md)，完成最後的元件選型，再接著做 [`BUILD.md`](./BUILD.md)。
 
 ## 第一冊會學到的官方元件

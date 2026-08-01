@@ -6,22 +6,29 @@ set -euo pipefail
 fail=0
 staged=$(git diff --cached --name-only --diff-filter=ACM || true)
 
-# 1. 擋下誤加的真 .env，只允許明確的範例檔。
-for f in $staged; do
+# 1. 擋下誤加的真 .env / 私鑰 / secrets 目錄，只允許明確的範例檔。
+#    用 while read 而非 for，含空白的檔名才不會被拆開。
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
   case "$f" in
-    .env|.env.*)
-      case "$f" in
-        *.example|*.sample|*.template) ;;
-        *) echo "🔴 擋下：不要 commit $f（secret 會外洩）。只提交明確的 example/sample/template。"; fail=1 ;;
-      esac
-      ;;
+    *.example|*.sample|*.template) continue ;;
   esac
-done
+  case "$f" in
+    .env|.env.*|*/.env|*/.env.*)
+      echo "🔴 擋下：不要 commit $f（secret 會外洩）。只提交明確的 example/sample/template。"; fail=1 ;;
+    *.pem|id_rsa*|*/id_rsa*|secrets/*|*/secrets/*)
+      echo "🔴 擋下：不要 commit $f（私鑰或 secrets 內容）。真實金鑰只留在本機。"; fail=1 ;;
+  esac
+done <<EOF
+$staged
+EOF
 
-# 2. 掃 staged 內容有沒有寫死的 Google API key（AIza 開頭 + 35 字）
-if git diff --cached -U0 | grep -nE '^\+.*AIza[0-9A-Za-z_-]{35}' >/dev/null 2>&1; then
-  echo "🔴 擋下：偵測到疑似寫死的 Google API key。改用環境變數讀取。"
-  git diff --cached -U0 | grep -nE '^\+.*AIza[0-9A-Za-z_-]{35}' | head -3
+# 2. 掃 staged 內容有沒有寫死的憑證。這六條與 .claude/hooks/guard-write.py 同一組，
+#    兩層防線必須看同樣的東西，否則 Claude 擋得住的，人手動 commit 就漏掉。
+secret_re='^\+.*(sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9]{30,}|AIza[A-Za-z0-9_-]{30,}|AKIA[A-Z0-9]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----)'
+if git diff --cached -U0 | grep -nE "$secret_re" >/dev/null 2>&1; then
+  echo "🔴 擋下：偵測到疑似寫死的憑證或私鑰。改用環境變數讀取。"
+  git diff --cached -U0 | grep -nE "$secret_re" | head -3
   fail=1
 fi
 
