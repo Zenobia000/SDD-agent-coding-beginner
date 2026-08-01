@@ -25,6 +25,41 @@ def decision(kind: str, reason: str) -> None:
     )
 
 
+# 這些直譯器會把 heredoc 內容當指令執行，內容照樣要掃。
+SHELL_INTERPRETERS = {"bash", "sh", "zsh", "ksh", "dash", "eval", "source"}
+
+
+def strip_heredoc_bodies(text: str) -> str:
+    """移除 heredoc 內容。那是餵給程式的資料，不是這條指令要碰的路徑。
+
+    沒有這一步，`git commit -F - <<'MSG'` 的訊息裡只要提到敏感檔名，
+    整條指令就會被誤判成存取。
+    """
+    lines = text.split("\n")
+    kept: list[str] = []
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        kept.append(line)
+        index += 1
+
+        marker = re.search(r"<<-?\s*(['\"]?)(?P<tag>[A-Za-z_][A-Za-z0-9_]*)\1", line)
+        if not marker:
+            continue
+        try:
+            leading = shlex.split(line)[0] if line.strip() else ""
+        except ValueError:
+            leading = line.split()[0] if line.split() else ""
+        if PurePath(leading).name in SHELL_INTERPRETERS:
+            continue
+
+        tag = marker.group("tag")
+        while index < len(lines) and lines[index].strip() != tag:
+            index += 1
+        index += 1  # 跳過結束標記
+    return "\n".join(kept)
+
+
 try:
     payload = json.load(sys.stdin)
 except (json.JSONDecodeError, OSError):
@@ -34,12 +69,26 @@ command = str(payload.get("tool_input", {}).get("command", ""))
 if not command:
     raise SystemExit(0)
 
+scannable = strip_heredoc_bodies(command)
 try:
-    command_tokens = shlex.split(re.sub(r"(?:&&|\|\||[;|&])", " ", command))
+    command_tokens = shlex.split(re.sub(r"(?:&&|\|\||[;|&])", " ", scannable))
 except ValueError:
-    command_tokens = command.split()
+    command_tokens = scannable.split()
+
+# git 的訊息參數是文字不是路徑：commit message 提到 .env 或私鑰不算存取。
+# 只在 git 的訊息型子指令生效，才不會放過 `grep -m`、`sort -m` 之類的檔案參數。
+writes_message = re.search(
+    r"\bgit\s+(?:commit|tag|merge|revert|cherry-pick|stash\s+push)\b", command
+)
+skip_next = False
 
 for token in command_tokens:
+    if skip_next:
+        skip_next = False
+        continue
+    if writes_message and (token == "--message" or re.fullmatch(r"-[A-Za-z]*m", token)):
+        skip_next = True
+        continue
     candidate = token.strip("'\",:()[]{}")
     if not candidate or candidate.startswith("-"):
         continue

@@ -64,6 +64,8 @@
 `deny` 的訊息一律指向替代做法（例：改寫 `.env.example`），不是單純拒絕。
 `.env.example` / `.sample` / `.template` 白名單放行。
 
+`guard-bash.py` 掃的是**路徑操作數**，不是整條指令的每個字：`git commit` 等訊息型子指令的 `-m` 內容、以及 heredoc 內容都視為文字，commit message 提到 `.env` 或私鑰不會被誤擋。例外是餵給 `bash`／`sh` 的 heredoc——那份內容會被當指令執行，照樣要掃。
+
 倉庫根目錄的 `.githooks/` 是同一道防線的另一半：`.claude/hooks/` 管 Claude 的工具呼叫，`.githooks/` 管**人與任何 agent** 的 git 操作（pre-commit 擋 secret、pre-push 擋 main 的非快轉 push）。
 
 ### commands/：`skills/` 的單檔變體，不是第五層
