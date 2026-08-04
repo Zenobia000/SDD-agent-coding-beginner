@@ -51,7 +51,9 @@
 **Domain docs**
 
 - Glossary、ADRs: 尚未建立，第一個內容確定時才產生，不預先 scaffold
-- Specs: `docs/specs/`（目前不存在）
+- Specs: `.scratch/<feature>/spec.md`（不進版控）。
+  **`docs/specs/` 是學生領地**——`BUILD.md` 第 3 章要學生把 SmartTrip FX 規格寫進 `docs/specs/smarttrip-fx.md`。
+  harness 自身的工程規格不得放進去，否則學生 clone 後會在自己的工作目錄看到無關文件。
 
 **Risk boundary**
 
