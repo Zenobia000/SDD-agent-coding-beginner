@@ -19,6 +19,49 @@
 
 修改第一冊時先核對 Anthropic 最新官方文件。社群文章可以改善教法，但不能覆蓋官方元件名稱、路徑、scope、命令或穩定性標示。修改第二冊時不得刪除 project contract、需求訪談、spec、tickets、TDD、review、security review 與 commit 的完整學習迴圈。
 
+## 專案契約
+
+> 這是**教材 repo 本身**的契約，對應 `.claude/CLAUDE.template.md` 三落點機制的第②落點。
+> 學生的 SmartTrip FX 契約由 `BUILD.md` 第 1 章產出到 `docs/agents/project.md`；
+> 兩者是不同專案的契約，不共用檔案。**不要在本 repo 預先建立 `docs/agents/project.md`**，
+> 那會讓第 1 章的 `test -f` 驗收直接通過，練習失效。
+
+**Quality commands**
+
+- Focused test: `unknown` — 本 repo 產出物是 Markdown 與 harness 設定，無測試框架
+- Full test: `unknown`
+- Typecheck / Lint / Format check: `unknown` — 未設定，不要假裝已驗證
+- Harness check（實際可跑，改動 `.claude/` 或 `.githooks/` 後執行）:
+  - `python3 -m py_compile .claude/hooks/guard-bash.py .claude/hooks/guard-write.py`
+  - `python3 -c "import json; json.load(open('.claude/settings.json'))"`
+  - `bash -n .githooks/pre-commit .githooks/pre-push`
+
+**Issue tracker**
+
+- Type: `local`
+- Location: `.scratch/<feature>/issues/`（`.gitignore` 已忽略 `.scratch/`，不進版控）
+
+**Git workflow**
+
+- Default branch: `main`
+- Branch style: `<type>/<short-description>`
+- Commit style: Conventional Commits，body 分 WHY / WHAT / IMPACT
+- PR template: 無
+
+**Domain docs**
+
+- Glossary、ADRs: 尚未建立，第一個內容確定時才產生，不預先 scaffold
+- Specs: `docs/specs/`（目前不存在）
+
+**Risk boundary**
+
+- 需再次確認: 刪除資料、force push、部署、寫入外部系統、註冊 MCP server
+- 永不自動化: 繞過 `.claude/hooks/` 或 `.githooks/`
+
+**Verified on**
+
+`2026-08-04` — 以上只列出從檔案或命令輸出驗證過的事實；標 `unknown` 者為真的不存在。
+
 ## 元件責任不能混用
 
 - `CLAUDE.md` 與 Rules：長期 context；不是安全強制。
