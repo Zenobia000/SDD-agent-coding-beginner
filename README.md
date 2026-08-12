@@ -24,12 +24,16 @@ irm https://antigravity.google/cli/install.ps1 | iex
 裝完先確認 `agy --version` 印得出版本，再照下面四行進入本課：
 
 ```bash
-git clone https://github.com/Zenobia000/ai-vibe-coding-beginner.git
-cd ai-vibe-coding-beginner
+git clone https://github.com/Zenobia000/SDD-agent-coding-beginner.git
+cd SDD-agent-coding-beginner
+git switch antigravity
 git switch -c workshop/antigravity-smarttrip
 git config core.hooksPath .githooks
 agy
 ```
+
+**第三行不能省。** `main` 只是導覽頁，沒有任何教材；教材在 `antigravity` 分支上。
+直接從 `main` 開 workshop 分支會拿到一個空的工作區。
 
 `core.hooksPath` 是每個 clone 各自的設定，沒設就等於 `.githooks/` 完全沒作用。開始前先確認它真的生效：
 
