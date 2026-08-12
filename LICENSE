@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 Claude Code Universal Template
+Copyright (c) 2026 Zenobia000
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,15 +22,12 @@ SOFTWARE.
 
 ## Attribution
 
-This template incorporates the following components:
+This repository incorporates the following components:
 
-### VibeCoding Workflow Templates
-The VibeCoding_Workflow_Templates/ directory contains workflow templates
-for enterprise-grade development lifecycle management.
-
-### Claude Code Subagent System
-The .claude/ directory contains a comprehensive Subagent collaboration
-system designed for Claude Code integration.
+### Antigravity Customization Harness
+The .agents/ directory contains skills, subagents, rules, hooks and MCP
+configuration for Google Antigravity, used as both the working harness of
+this repository and the live teaching material of the first volume.
 
 ### Linus Development Philosophy
 The development principles and technical debt prevention strategies
