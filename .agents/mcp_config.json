@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "example-stdio-server": {
+      "command": "python3",
+      "args": ["-m", "your_mcp_server"],
+      "env": {
+        "EXAMPLE_READ_ONLY": "true"
+      },
+      "disabled": true
+    },
+    "example-remote-server": {
+      "serverUrl": "https://mcp.example.invalid/sse",
+      "disabled": true,
+      "disabledTools": []
+    }
+  }
+}

@@ -1,8 +1,9 @@
-# `.claude/` 是專案核心，必須進版控。只忽略個人與執行期狀態。
-.claude/settings.local.json
-.claude/taskmaster-data/
-.claude/sessions/
-.claude/worktrees/
+# `.agents/` 是專案核心，必須進版控。只忽略個人與執行期狀態。
+.agents/sessions/
+.agents/worktrees/
+
+# Antigravity CLI 的本機狀態；正常在 ~/.gemini/，這條是防止誤放進 repo。
+.gemini/
 
 # 本機秘密
 .env
@@ -30,7 +31,7 @@ dist/
 build/
 .next/
 
-# Claude workflow 暫存；正式 spec 放 docs/specs/，產品 code 不放這裡。
+# Agent workflow 暫存；正式 spec 放 docs/specs/，產品 code 不放這裡。
 .scratch/
 
 # 編輯器、作業系統與暫存檔
@@ -45,3 +46,7 @@ tmp/
 
 # 本機大型簡報原檔
 /*.pptx
+
+# 轉換期暫留：本分支已不使用 .claude/，只剩一份不進版控的本機設定。
+# 該目錄清空後即可刪除這一段。
+.claude/

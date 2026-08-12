@@ -1,0 +1,27 @@
+{
+  "smarttrip-guard": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command|shell_exec|send_command_input",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ./hooks/guard.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "file_change|write_blob|edit_notebook|delete_directory",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ./hooks/guard.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

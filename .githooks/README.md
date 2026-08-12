@@ -1,6 +1,6 @@
 # Git 安全閘門
 
-`.claude/hooks/` 保護 Claude 的工具呼叫；這裡的 Git hooks 同時保護人與任何 agent 的 Git 操作。
+`.agents/hooks/` 保護 agent 的工具呼叫；這裡的 Git hooks 同時保護人與任何 agent 的 Git 操作。
 
 | Hook | 阻擋 |
 |---|---|

@@ -23,8 +23,8 @@ done <<EOF
 $staged
 EOF
 
-# 2. 掃 staged 內容有沒有寫死的憑證。這六條與 .claude/hooks/guard-write.py 同一組，
-#    兩層防線必須看同樣的東西，否則 Claude 擋得住的，人手動 commit 就漏掉。
+# 2. 掃 staged 內容有沒有寫死的憑證。這六條與 .agents/hooks/guard_core.py 同一組，
+#    兩層防線必須看同樣的東西，否則 agent 擋得住的，人手動 commit 就漏掉。
 secret_re='^\+.*(sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9]{30,}|AIza[A-Za-z0-9_-]{30,}|AKIA[A-Z0-9]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----)'
 if git diff --cached -U0 | grep -nE "$secret_re" >/dev/null 2>&1; then
   echo "🔴 擋下：偵測到疑似寫死的憑證或私鑰。改用環境變數讀取。"
