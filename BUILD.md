@@ -1,6 +1,6 @@
-# SmartTrip FX：跟著 Claude Code 做出一支能算旅費、有測試保護的小程式
+# SmartTrip FX：跟著 Google Antigravity 做出一支能算旅費、有測試保護的小程式
 
-這是本課第二冊，也是 SmartTrip FX 專案實戰唯一要照著走的文件。請先完成 [`CLAUDE-CODE.md`](./CLAUDE-CODE.md) 的官方元件速成，再回到這裡。你不需要先會寫程式，也不用自己決定題目或技術——本書只做同一題、走同一路、用同一組驗收標準。你要做的事很單純：**複製、貼上、執行、跟答案核對**。
+這是本課第二冊，也是 SmartTrip FX 專案實戰唯一要照著走的文件。請先完成 [`ANTIGRAVITY.md`](./ANTIGRAVITY.md) 的官方元件速成，再回到這裡。你不需要先會寫程式，也不用自己決定題目或技術——本書只做同一題、走同一路、用同一組驗收標準。你要做的事很單純：**複製、貼上、執行、跟答案核對**。
 
 看不懂某個英文詞沒關係，這份文件會在第一次出現時，用括號附上白話說明；只要看得懂括號裡的話，就能繼續往下做。
 
@@ -18,11 +18,12 @@ AI 或人產生行程 JSON
 
 你可以把它想成兩個角色分工：**AI 是那個很懂行程、幫你猜「這一攤大概要付現金」的朋友**；**程式是六親不認、只認數字的會計**，負責把朋友的猜測換算成明確的金額和燈號。AI 負責「哪些行程可能需要現金」這種判斷；程式負責加總、比例、門檻跟錯誤處理。這條分工邊界，是全書唯一要記住的核心規則。
 
-## 在開始之前：三個你會一直看到的詞
+## 在開始之前：四個你會一直看到的詞
 
 - **終端機（Terminal）**：一個只能打字、電腦馬上照做的視窗，跟平常用滑鼠點資料夾不一樣。這本書所有指令都在這裡打。
 - **執行一個命令**：把一行文字打進終端機、按 Enter，電腦就會照那行字做事，然後把結果印給你看。
 - **JSON**：一種電腦看得懂的清單寫法，用 `{ }` 包資料、用 `,` 分隔欄位。第 5 章會看到實際範例，看過一次就懂。
+- **Antigravity 與 `agy`**：Antigravity 是 Google 的 AI coding agent。它有兩種用法——桌面版 IDE，跟終端機版的 `agy`。兩種都能走完本書；示範命令以 `agy` 為主，因為它在哪台機器都跑得起來。
 
 不用先背起來，走到會用到的地方，這裡都會再提醒一次。
 
@@ -30,19 +31,33 @@ AI 或人產生行程 JSON
 
 每章固定五格：
 
-1. **貼給 Claude**：把整段文字複製起來，貼進你已經打開 `claude` 的那個終端機視窗，按 Enter 送出。
-2. **範例問答**：如果 Claude 反問你問題，不用自己想答案，直接把這裡附的建議答案複製貼上就好。
-3. **你應看到**：Claude 做完之後畫面大概會長怎樣，重點是「形狀對不對」，不用一字不差。
+1. **貼給 Antigravity**：把整段文字複製起來，貼進你已經打開 `agy` 的那個終端機視窗（或 IDE 的 Agent 對話框），按 Enter 送出。
+2. **範例問答**：如果它反問你問題，不用自己想答案，直接把這裡附的建議答案複製貼上就好。
+3. **你應看到**：它做完之後畫面大概會長怎樣，重點是「形狀對不對」，不用一字不差。
 4. **通過**：貼一段命令去檢查有沒有做對；看到通過的樣子才能往下走，卡住就先別往前。
-5. **卡住就貼**：不用自己想怎麼描述問題，直接把這段話貼給 Claude。
+5. **卡住就貼**：不用自己想怎麼描述問題，直接把這段話貼回去。
 
-本書支援 macOS、Linux 與 Windows WSL。終端機指令都在 repo 根目錄執行。
+### 兩個一定要先知道的 Antigravity 行為
+
+**一、它每做一件有後果的事，都會停下來等你批准。**
+要跑命令、要改檔案之前，畫面會出現一個待批准的項目。`Ctrl+K` 批准目前這一項，`Ctrl+J` 跳到還在等批准的地方。**看不懂它要做什麼，就不要批准**——先問它「你為什麼要跑這個？」再決定。
+
+**二、Skill 有可能它自己啟動，不是只有你叫得動。**
+Antigravity 平常只會看到每個 Skill 的名稱與描述；當它覺得某個 Skill 符合你的要求，就可能自己把整份內容讀進來執行。**這裡沒有「只准人呼叫」的開關**。本 repo 有 11 個會改變工作階段的 Skill（`workflow`、`setup-project`、`wayfinder`、`grill-with-docs`、`to-spec`、`to-tickets`、`implement`、`triage`、`improve-codebase-architecture`、`create-pull-request`、`handoff`）在正文第一句寫了「只在使用者明確要求時執行」，但那是寫給模型看的文字約束，不是系統強制。其餘 20 個是紀律型 Skill（`tdd`、`code-review` 這類），本來就允許模型自行啟動。
+
+所以整本書只要看到它自己跑起你沒點名的流程，就貼這句：
+
+```text
+停。我沒有要求啟動這個 skill。請回到我上一則訊息指定的工作，先不要做別的。
+```
+
+`agy` 本身支援原生 Windows（有官方的 `install.ps1`），但**本書的驗收命令是 Unix shell**，所以 Windows 請在 WSL 裡執行。macOS 與 Linux 直接用系統終端機即可。所有終端機指令都在 repo 根目錄跑。
 
 ---
 
-# 第 0 章｜讓 Claude 讀對規則
+# 第 0 章｜讓 Antigravity 讀對規則
 
-目標：先確認你電腦上該裝的工具都裝好了，再讓 Claude 弄懂這個專案的規則——哪些只是建議、哪些是系統會自動擋下來的強制規定。
+目標：先確認你電腦上該裝的工具都裝好了，再讓 Antigravity 弄懂這個專案的規則——哪些只是建議、哪些是系統會自動擋下來的強制規定。
 
 ## 終端機
 
@@ -51,17 +66,41 @@ AI 或人產生行程 JSON
 ```bash
 python3 --version
 git --version
-claude --version
+agy --version
 git status --short
 ```
 
-這四行分別在問電腦：有沒有裝 Python（第幾版）、有沒有裝 Git（幫你保存改動記錄的工具）、有沒有裝 Claude Code、這個資料夾裡有沒有還沒存檔的改動。前三個命令都要回你一行版本號才算成功；如果你是剛下載這個 repo，第四個命令通常什麼都不會印出來，那才是正常的。
+這四行分別在問電腦：有沒有裝 Python（第幾版）、有沒有裝 Git（幫你保存改動記錄的工具）、有沒有裝 Antigravity CLI、這個資料夾裡有沒有還沒存檔的改動。前三個命令都要回你一行版本號才算成功（`agy --version` 會印出像 `1.1.12` 這樣一行純數字）；如果你是剛下載這個 repo，第四個命令通常什麼都不會印出來，那才是正常的。
 
-## 貼給 Claude
+沒印出 `agy` 版本號的話，先回 [`docs/INSTALL.md`](./docs/INSTALL.md) 把安裝與登入做完，再回來。
+
+確認都過了，在 repo 根目錄啟動它：
+
+```bash
+agy
+```
+
+## Antigravity 會自己讀到什麼（先看懂再貼）
+
+這個 repo 已經幫你準備好一組設定。它們不是同一種東西，被讀到的時機也不一樣：
+
+| 檔案 | 什麼時候被讀進去 |
+|---|---|
+| `AGENTS.md`（根目錄） | **每次都讀**。放在 repo 根目錄的 `AGENTS.md`，對整個 repo 永遠生效，沒有開關。 |
+| `.agents/rules/*.md` | 檔案開頭寫 `trigger: always_on` 的每次都讀；寫 `model_decision` 的由它自己判斷要不要讀。 |
+| `.agents/skills/<名稱>/SKILL.md` | 平常**只載入名稱與描述**；被你點名、或它自己決定要用時，才把整份內容讀進來。 |
+| `.agents/hooks.json` | **這份不是給模型看的**。它是系統設定，把 `.agents/hooks/guard.py` 掛在「工具真的執行之前」，該擋的直接擋掉。 |
+| `.agents/agents/<名稱>/agent.md` | subagent（幫忙分工的獨立助手）定義。⚠️ workspace subagent 的官方檔案格式目前未載明，本 repo 的版本有可能載不進去，載不進去不影響本書流程。 |
+
+先在 `agy` 裡打 `/skills` 按 Enter，確認清單裡看得到這幾個名字：`workflow`、`setup-project`、`grill-with-docs`、`to-spec`、`to-tickets`、`implement`、`code-review`、`security-review`、`commit-message`。
+
+一個都看不到，代表 Antigravity 沒讀到 `.agents/`——多半是你不在 repo 根目錄啟動的。先 `exit` 離開，`cd` 回根目錄再開一次。
+
+## 貼給 Antigravity
 
 ```text
-先讀 CLAUDE.md、.claude/rules/engineering-workflow.md、
-.claude/skills/workflow/SKILL.md 與 .claude/settings.json。
+先讀 AGENTS.md、.agents/rules/engineering-workflow.md、
+.agents/skills/workflow/SKILL.md 與 .agents/hooks.json。
 
 現在進入教材第二冊，固定題目是 SmartTrip FX，固定用 Python 3.11+ 的
 standard library 寫一支終端機程式（CLI）。先不要寫程式，也先不要 commit（把改動存進 Git 記錄）。
@@ -78,23 +117,25 @@ standard library 寫一支終端機程式（CLI）。先不要寫程式，也先
 ```text
 目標：完成可測試的 SmartTrip FX CLI。
 建議：依需求選用 Skills，以 vertical slice 和 TDD 前進。
-強制：敏感檔案、credential 與破壞性操作會被 hook 攔截。
+強制：敏感檔案、疑似 credential 與破壞性操作，會被 .agents/hooks.json 掛的 guard 擋下或退回確認。
 下一步：建立 project contract。
 ```
 
-（vertical slice 指「一次只做一小片可以獨立驗證的功能」；TDD 指「先寫一個測試證明還沒做到，再寫最少的程式讓測試通過」，第 5 章會實際做一次，現在看不懂沒關係。）
+（vertical slice 指「一次只做一小片可以獨立驗證的功能」；TDD 指「先寫一個測試證明還沒做到，再寫最少的程式讓測試通過」，第 5 章會實際做一次，現在看不懂沒關係。credential 指帳號密碼、API 金鑰這類不該進版控的秘密。）
 
 ## 通過
 
-- [ ] Claude 沒有開始寫 code。
-- [ ] 它沒有提到 `frame`、`spec`、`evals`、`next` 或 `ship` 這幾個現在已經不存在的舊 Skill 名字。
+- [ ] 它沒有開始寫 code。
+- [ ] 它提到的每個 Skill 名字，都在剛剛 `/skills` 的清單裡找得到（不能出現 `frame`、`spec`、`evals`、`next`、`ship` 這幾個根本不存在的名字）。
+- [ ] 它講「強制」時，指得出是 `.agents/hooks.json` 或 `.agents/hooks/` 在做這件事，不是憑印象講。
 - [ ] 它給的下一步只有一個，不是一堆選項。
 
 ## 卡住就貼
 
 ```text
-你引用了目前不存在的流程。請只根據剛讀到的實際檔案重新回答，
-並用 rg 驗證你提到的 Skill 目錄真的存在。
+停。你剛剛引用了不存在的流程或檔案。
+請先實際跑 ls .agents/skills 與 ls .agents/rules，
+只根據列出來的東西重新回答那四行。列不出來的就說「沒有這個檔案」，不要靠印象補。
 ```
 
 ---
@@ -103,7 +144,23 @@ standard library 寫一支終端機程式（CLI）。先不要寫程式，也先
 
 目標：幫這個專案寫一份「說明書」，把測試怎麼跑、文件放在哪裡、安全底線都寫清楚。之後不管哪個 Skill 接手，都會先讀這份說明書，不用你每次重新解釋一遍。這份說明書的正式名稱叫 **project contract**。
 
-## 貼給 Claude
+## 先看懂：怎麼叫得動一個 Skill
+
+**兩種寫法都可以，選你的畫面吃得下去的那一種。**
+
+**寫法 A（斜線）**：在 `agy` 的輸入框打 `/setup-project` 按 Enter，就是點名要它跑那個 Skill。斜線後面還可以接文字，那段文字會一起送進去當輸入——本書後面幾章都用這種寫法。
+（`agy --help` 裡有一個 `--disable-slash-commands` 旗標，說明寫的是 `Disable slash command and skill expansion in print mode`——「skill 展開」被跟「斜線指令」寫在一起，所以斜線叫 skill 是可行的。但**每個版本、每種介面的實際行為可能不同**，官方文件沒有逐一列出 workspace skill 的斜線名稱。）
+
+**寫法 B（純文字，永遠有效）**：斜線沒跳出補完清單、或送出去沒反應，就改成這樣，效果一樣：
+
+```text
+請使用 setup-project skill。
+（下面接原本要貼的內容）
+```
+
+（⚠️ IDE 版的呼叫介面可能長得不太一樣；以你自己畫面上 `/skills` 列出來的名稱為準。本書每章的貼文都是寫法 A，看到不動的時候直接換成寫法 B 就好。）
+
+## 貼給 Antigravity
 
 ```text
 /setup-project
@@ -126,11 +183,13 @@ standard library 寫一支終端機程式（CLI）。先不要寫程式，也先
 
 ## 範例問答
 
-Claude 預覽後，貼：
+它給完預覽後，貼：
 
 ```text
 這份預覽可以用。幫我存成 docs/agents/project.md，之後只要跟我說檔案路徑跟你建議的下一步就好。
 ```
+
+寫檔案是有後果的動作，畫面會出現待批准項目。確認路徑真的是 `docs/agents/project.md` 之後，按 `Ctrl+K` 批准。
 
 ## 你應看到
 
@@ -140,7 +199,7 @@ Claude 預覽後，貼：
 
 ```bash
 test -f docs/agents/project.md
-rg -n "Full test|python3 -m unittest|Risk boundary" docs/agents/project.md
+grep -nE "Full test|python3 -m unittest|Risk boundary" docs/agents/project.md
 ```
 
 兩個命令都必須 exit 0——意思是「這個命令做完了、沒有出錯」。你只要看終端機有沒有跳出紅色錯誤訊息就好，沒有錯誤訊息通常就是過關。
@@ -158,7 +217,7 @@ rg -n "Full test|python3 -m unittest|Risk boundary" docs/agents/project.md
 
 目標：這一章只負責「把規則問到清楚」，先不要碰任何程式碼。「歧義」的意思是：同一句話，兩個工程師可能會理解成不同做法。這一章要把這種模糊全部問掉。
 
-## 貼給 Claude
+## 貼給 Antigravity
 
 ```text
 /grill-with-docs SmartTrip FX
@@ -187,12 +246,14 @@ fx 裡有 today_twd_per_jpy（今天的匯率）跟 ma30_twd_per_jpy（30 天平
 
 先檢查看看還有沒有「會讓兩個工程師寫出不同做法」的模糊地帶。如果沒有了，
 就幫我整理已經決定的事、不做的部分，跟怎樣算過關，然後推薦我下一步要用哪個 Skill。
-先不要寫程式。
+先不要寫程式，也不要直接接著跑下一個 Skill。
 ```
+
+最後那句要留著。Antigravity 可能會覺得「都問完了不如順手把 spec 也寫了」，就自己接著啟動 `to-spec`；這一章要的是先停在需求層。
 
 ## 範例問答
 
-若 Claude 仍追問，依題意貼其中一個答案：
+若它仍追問，依題意貼其中一個答案：
 
 ```text
 金額規則就用推薦的做法：不確定（unknown）的金額保守算進現金裡，最後的結果無條件進位到 1000 日圓。
@@ -214,7 +275,7 @@ fx 裡有 today_twd_per_jpy（今天的匯率）跟 ma30_twd_per_jpy（30 天平
 
 ## 你應看到
 
-Claude 應推薦 `/to-spec`，而不是開始實作。它可以先幫忙整理名詞用法（domain glossary），但還不能動手寫產品程式碼。
+它應該**推薦**你下一步用 `/to-spec`，而不是自己開始實作、也不是自己接著把 spec 寫掉。它可以先幫忙整理名詞用法（domain glossary），但還不能動手寫產品程式碼。
 
 ## 通過
 
@@ -222,12 +283,13 @@ Claude 應推薦 `/to-spec`，而不是開始實作。它可以先幫忙整理�
 - [ ] 金額公式跟 2% 門檻講法清楚，沒有「大概」「可能」這種模糊字。
 - [ ] live API 跟網頁介面（Web UI），清楚寫在不做的範圍裡。
 - [ ] 每一條成功條件，都能直接回答「有做到」或「沒做到」。
+- [ ] 這一章結束時，`docs/specs/` 底下還沒有任何新檔案——寫 spec 是下一章的事。
 
 ## 卡住就貼
 
 ```text
 現在只找「會讓兩個工程師寫出不同行為」的未知資訊。
-若沒有這種未知，停止提問並用已確認需求收斂。
+若沒有這種未知，停止提問並用已確認需求收斂。不要啟動其他 skill。
 ```
 
 ---
@@ -236,7 +298,7 @@ Claude 應推薦 `/to-spec`，而不是開始實作。它可以先幫忙整理�
 
 目標：讓需求離開聊天紀錄，變成下一次開新對話、別人也看得懂的文件。**Spec** 是一份寫清楚「結果要長怎樣、怎樣算過關」的文件，不是一步一步教你怎麼寫程式的教學。
 
-## 貼給 Claude
+## 貼給 Antigravity
 
 ```text
 /to-spec SmartTrip FX
@@ -266,6 +328,8 @@ Claude 應推薦 `/to-spec`，而不是開始實作。它可以先幫忙整理�
 確認。Open questions 應為 None，請寫入 docs/specs/smarttrip-fx.md。
 ```
 
+寫檔案的待批准項目出現時，先看它要寫的路徑對不對，再按 `Ctrl+K`。
+
 ## 你應看到
 
 ```markdown
@@ -288,7 +352,7 @@ None
 
 ```bash
 test -f docs/specs/smarttrip-fx.md
-rg -n "Acceptance criteria|recommend_cash|fx_signal|Out of scope|Open questions" docs/specs/smarttrip-fx.md
+grep -nE "Acceptance criteria|recommend_cash|fx_signal|Out of scope|Open questions" docs/specs/smarttrip-fx.md
 ```
 
 ## 卡住就貼
@@ -302,9 +366,9 @@ rg -n "Acceptance criteria|recommend_cash|fx_signal|Out of scope|Open questions"
 
 # 第 4 章｜把 spec 切成三張小票（拆成三個一次做得完的小任務）
 
-目標：每次只讓 Claude 完成一個可驗證的行為，避免一口氣生出整個專案。**Ticket** 只是一份 markdown 檔案，不是要你去哪個平台開真的工單。它的重點是：一次開一個乾淨的新對話，也能獨立做完、獨立驗證。
+目標：每次只讓 Antigravity 完成一個可驗證的行為，避免一口氣生出整個專案。**Ticket** 只是一份 markdown 檔案，不是要你去哪個平台開真的工單。它的重點是：一次開一個乾淨的新對話，也能獨立做完、獨立驗證。
 
-## 貼給 Claude
+## 貼給 Antigravity
 
 ```text
 /to-tickets docs/specs/smarttrip-fx.md
@@ -320,7 +384,8 @@ rg -n "Acceptance criteria|recommend_cash|fx_signal|Out of scope|Open questions"
 
 每張票都要寫：What to build（要做什麼）、Acceptance criteria（怎樣算過關）、
 Testing seam（要測哪個功能點）、Blocked by（要等哪張票先做完）、Out of scope（不做什麼）。
-這門課固定照 01 → 02 → 03 的順序做，不要開 worktree，也不要平行做。
+這門課固定照 01 → 02 → 03 的順序做，不要開 worktree，也不要平行做，
+也不要切完票就自己接著開始實作。
 先給我看三張票的內容，我確認後你再真的寫進檔案。
 ```
 
@@ -345,13 +410,13 @@ Testing seam（要測哪個功能點）、Blocked by（要等哪張票先做完�
 find .scratch/smarttrip-fx/issues -maxdepth 1 -type f -name '*.md' | sort
 ```
 
-跑出來的結果一定要剛好三個檔案，而且第 03 張要清楚寫著被 01、02 擋住（blocked by）。
+跑出來的結果一定要剛好三個檔案，而且第 03 張要清楚寫著被 01、02 擋住（blocked by）。此時 `smarttrip_fx/` 應該還不存在——這一章不寫任何程式。
 
 ## 卡住就貼
 
 ```text
 不要按 model、service、tests 做水平切分。回到使用者可觀察行為，
-並嚴格使用教材指定的三個檔名與 dependency。
+並嚴格使用教材指定的三個檔名與 dependency。切完就停，不要接著實作。
 ```
 
 ---
@@ -360,9 +425,13 @@ find .scratch/smarttrip-fx/issues -maxdepth 1 -type f -name '*.md' | sort
 
 目標：實際跑三次 red → green → review，而不是一次生成所有檔案。**TDD** 的意思是：先寫一個一定會失敗的測試，證明「這個功能現在真的還沒做出來」（這叫紅燈 / RED），再寫剛好夠用的程式讓測試通過（這叫綠燈 / GREEN），最後把程式整理乾淨（refactor），但不能改變原本的行為。
 
+這一章 Antigravity 會頻繁要求批准：建檔案、改檔案、跑 `python3 -m unittest`。**跑測試的命令請放心批准，那是這一章的重點**；但每次它要改檔案時，先看一眼路徑有沒有跑到票的範圍外。`Ctrl+J` 跳到待批准處，`Ctrl+K` 批准當前這一項。
+
+（`agy` 有 `--mode accept-edits` 可以讓它自動套用檔案修改；本書刻意不用，因為「你看著它一步步做」正是這一章要練的東西。）
+
 ## 5.1 現金計算
 
-### 貼給 Claude
+### 貼給 Antigravity
 
 ```text
 /implement .scratch/smarttrip-fx/issues/01-cash-recommendation.md
@@ -376,7 +445,7 @@ find .scratch/smarttrip-fx/issues -maxdepth 1 -type f -name '*.md' | sort
 
 ### 你應看到
 
-至少有 `smarttrip_fx/` 的計算模組與 `tests/test_cash_recommendation.py`，而且回報中包含實際 RED 與 GREEN 命令。
+至少有 `smarttrip_fx/` 的計算模組與 `tests/test_cash_recommendation.py`，而且回報中包含實際跑過的 RED 與 GREEN 命令。**它必須真的讓你看到一次失敗的測試輸出**；只說「我先寫了測試，它會失敗」不算數。
 
 ### 通過
 
@@ -386,7 +455,7 @@ python3 -m unittest tests.test_cash_recommendation -v
 
 ## 5.2 匯率燈號
 
-### 貼給 Claude
+### 貼給 Antigravity
 
 ```text
 /implement .scratch/smarttrip-fx/issues/02-fx-signal.md
@@ -404,7 +473,7 @@ python3 -m unittest tests.test_fx_signal -v
 
 ## 5.3 JSON 與 CLI 串接
 
-### 貼給 Claude
+### 貼給 Antigravity
 
 ```text
 /implement .scratch/smarttrip-fx/issues/03-cli-integration.md
@@ -453,6 +522,8 @@ python3 -m smarttrip_fx examples/kansai-3-days.json
 匯率燈號: GOOD
 ```
 
+這幾個數字是本書唯一的最終驗收訊號。對不上就不要往下走。
+
 ## 卡住就貼
 
 ```text
@@ -466,7 +537,19 @@ python3 -m smarttrip_fx examples/kansai-3-days.json
 
 目標：review 完整 working tree、修阻擋問題、再產生 commit。**Working tree** 指你電腦裡目前「還沒存進 Git 記錄」的所有檔案改動。雙軸 review 會分開檢查工程品質（Standards）跟符不符合規格（Spec）。
 
-## 貼給 Claude：雙軸 review
+## 先自己看一眼改了什麼
+
+review 之前，先自己掃過一遍。最穩的做法是另外開一個終端機視窗跑：
+
+```bash
+git status --short
+git diff
+git diff --stat
+```
+
+（`agy` 也有 `/diff` 可以在對話裡看改動，⚠️ 這個指令列在官方 CLI 說明裡，本課未在無桌面環境實測過。看不到就用上面的 `git diff`，結果一樣。）
+
+## 貼給 Antigravity：雙軸 review
 
 ```text
 /code-review HEAD
@@ -479,6 +562,8 @@ Spec 這一軸檢查有沒有漏做、做錯，或做了規格以外的東西（
 只列出真的有具體失敗情境的問題（findings），先不要動任何檔案。
 ```
 
+（這個 skill 會試著把兩軸交給獨立的 subagent 分別看。⚠️ workspace subagent 的官方檔案格式目前未載明，載不進去時它會改成在同一個 context 裡分兩段做——結論一樣要看，只是隔離度較低。）
+
 若有 blocking finding，貼：
 
 ```text
@@ -487,7 +572,7 @@ Spec 這一軸檢查有沒有漏做、做錯，或做了規格以外的東西（
 不要順便擴大範圍去改別的東西。
 ```
 
-## 貼給 Claude：安全檢查
+## 貼給 Antigravity：安全檢查
 
 ```text
 /security-review
@@ -514,14 +599,16 @@ tests 必須全綠、compile 與 diff check 必須 exit 0。`git status` 此時�
 git add -A
 ```
 
-貼給 Claude：
+貼給 Antigravity：
 
 ```text
-用 commit-message 這個 Skill，根據 staged diff 檢查這次改動夠不夠原子（atomic），
+/commit-message
+
+根據 staged diff 檢查這次改動夠不夠原子（atomic），
 給我一個符合 Conventional Commit 格式的 subject。先不要 commit、也不要 push。
 ```
 
-若 staged diff 只有本書產物，可直接執行：
+`commit` 跟 `push` 是有後果的操作，這門課固定由你自己在終端機執行——它就算提議要幫你跑，也不要批准。若 staged diff 只有本書產物，直接自己執行：
 
 ```bash
 git commit -m "feat(smarttrip): build deterministic cash recommendation CLI"
@@ -554,7 +641,10 @@ git status --short
 | 要把對話變成白紙黑字 | `/to-spec` | 一份可以拿去驗收的 spec |
 | 工作要分好幾次做完 | `/to-tickets` | 有先後順序的任務卡 |
 | 要做完一個功能 | `/implement` | 一片測試保護過的功能 |
-| 準備要交出去 | `code-review`、`security-review` | 具體的檢查證據跟問題清單 |
+| 準備要交出去 | `/code-review`、`/security-review` | 具體的檢查證據跟問題清單 |
+| 要寫 commit message | `/commit-message` | 一句對得起 staged diff 的 subject |
+
+要把這套帶去下一個專案，只要複製兩樣東西：根目錄的 `AGENTS.md`，跟整個 `.agents/` 資料夾。Antigravity 只讀這兩處；`.agents/hooks.json` 裡的相對路徑是以 `.agents/` 為基準，整包搬過去就會繼續生效。
 
 下一個專案只先貼這一句：
 
