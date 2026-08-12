@@ -26,7 +26,7 @@ AI 能一次生出幾百行程式碼。速度不再是瓶頸，**判斷**才是�
 | | 檔案 | 時間 | 內容 |
 |---|---|---|---|
 | 第一冊 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 約 40 分鐘 | 心法。七條不變量、四個 Mode、什麼時候該固化 |
-| 第二冊 | `BUILD.md` | 待撰寫 | 實戰。CookCard 專案 |
+| 第二冊 | [`BUILD.md`](./BUILD.md) | 多次 session | 實戰。CookCard，五個關卡 |
 
 第一冊先讀完再進第二冊。它很短，而且第二冊每一關都會回頭引用它。
 
@@ -98,10 +98,13 @@ claude / antigravity          progressive-sdd
 | 項目 | 狀態 |
 |---|---|
 | `PRINCIPLES.md` 心法篇 | ✅ 完成 |
+| `BUILD.md` 實戰篇（五關） | ✅ 完成 |
 | `docs/FIXTURES.md` 素材挑選準則 | ✅ 完成 |
-| `BUILD.md` 實戰篇 | ⬜ 撰寫中 |
-| Fixture 影片實際挑選與下載 | ⬜ 未開始 |
-| 各關的驗收訊號 | ⬜ 未開始 |
+| `curriculum/README.md` 講師手冊 | ✅ 完成 |
+| **Fixture 影片實際挑選與下載** | ⬜ **開課前必做** —— 六支影片的 URL、`expected.json` 內容 |
+| 參考實作 | ⬜ 刻意不做（見 `BUILD.md` 附錄） |
+
+`BUILD.md` 的驗收訊號有幾條假設了 fixture 已就位（例如 `fixtures/baseline/`）。fixture 挑好之前，那些命令跑不起來 —— 這是已知狀態，不是 bug。
 
 ---
 
