@@ -12,12 +12,16 @@
 先準備 Git、Python 3.11+ 與最新版 Claude Code；安裝方式以 [Anthropic 官方安裝文件](https://code.claude.com/docs/en/setup) 為準。
 
 ```bash
-git clone https://github.com/Zenobia000/ai-vibe-coding-beginner.git
-cd ai-vibe-coding-beginner
+git clone https://github.com/Zenobia000/SDD-agent-coding-beginner.git
+cd SDD-agent-coding-beginner
+git switch claude
 git switch -c workshop/claude-code-smarttrip
 git config core.hooksPath .githooks
 claude
 ```
+
+**第三行不能省。** `main` 只是導覽頁，沒有任何教材；教材在 `claude` 分支上。
+直接從 `main` 開 workshop 分支會拿到一個空的工作區。
 
 `core.hooksPath` 是每個 clone 各自的設定，沒設就等於 `.githooks/` 完全沒作用。開始前先確認它真的生效：
 
