@@ -1,82 +1,108 @@
-# AI Coding Agent 工程實戰課
+# Progressive SDD：跟著 AI 做出一套真的能上線的系統
 
-這門課教的不是「怎麼跟 AI 聊天」，而是**怎麼用 AI coding agent 做出可驗證、可 review、可交付的軟體**。
+這條線和另外兩條不一樣。
 
-同一套工程紀律，兩個工具各一條線。**這個分支只負責導航，教材在下面兩條線上。**
+`claude` 與 `antigravity` 兩條線教的是**工具怎麼用** —— 照著貼、看到綠燈、往下一章。那是必要的第一步，但走完之後你會發現一件事：**你學會了操作 agent，但沒學會怎麼開發軟體。**
+
+這條線補的就是那一段。
 
 ---
 
-## 選一條線
+## 這門課要解決什麼
 
-| 分支 | 工具 | 第一冊 | 專案契約 | Harness |
-|---|---|---|---|---|
-| [`antigravity`](../../tree/antigravity) | **Google Antigravity**（`agy` CLI + IDE） | `ANTIGRAVITY.md` | `AGENTS.md` | `.agents/` |
-| [`claude`](../../tree/claude) | **Claude Code** | `CLAUDE-CODE.md` | `CLAUDE.md` | `.claude/` |
+AI 能一次生出幾百行程式碼。速度不再是瓶頸，**判斷**才是。
 
-兩條線的第二冊都是 `BUILD.md`，題目相同：**SmartTrip FX** —— 讀取行程 JSON，驗證輸入、計算旅費現金與匯率燈號，只用 Python standard library。差別只在你用哪個 agent 完成它。
+而判斷沒辦法照著腳本學。所以這門課不給你 prompt 貼，改成兩件事：
+
+1. **心法**：七條不變量 + 一套判斷「什麼時候該把東西固化下來」的規則
+2. **一個真的系統**：從一句話的想法，做到能部署、有排程、有前後端與資料庫的東西
+
+中間你會親手違反每一條不變量，然後修回來。**那個修回來的過程就是這門課。**
+
+---
+
+## 兩冊
+
+| | 檔案 | 時間 | 內容 |
+|---|---|---|---|
+| 第一冊 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 約 40 分鐘 | 心法。七條不變量、四個 Mode、什麼時候該固化 |
+| 第二冊 | `BUILD.md` | 待撰寫 | 實戰。CookCard 專案 |
+
+第一冊先讀完再進第二冊。它很短，而且第二冊每一關都會回頭引用它。
+
+---
+
+## 專案：CookCard
+
+> **把料理影片變成可以照著做的結構化食譜卡。**
+
+痛點很小白：看 YouTube 學做菜，你得一直暫停、倒帶、記份量，做到一半忘記蒜末是兩瓣還是三瓣。
+
+為什麼選這題當教材：
+
+| 這題會逼你面對 | 具體長什麼樣 |
+|---|---|
+| **需求真的有歧義** | 「一把蔥」怎麼結構化？「適量」怎麼存？影片根本沒說份量怎麼辦？沒有標準答案 |
+| **多模態是必要的，不是裝飾** | 份量常常只打在畫面字卡上，語音沒念。純語音轉文字一定做不出可用的食譜卡 |
+| **有不可逆決定** | 食譜 schema。存了 80 份之後要加欄位，你得自己面對遷移 |
+| **有真實邊界** | 任意 YouTube URL、三小時長片、字幕裡的 prompt injection |
+| **要選型** | VLM 一次到底，還是 STT + 抽幀 OCR 兩段式？要不要 vector DB？ |
+| **失敗會現形** | 抽出來的食譜照著做會不會成功 —— 你自己就能驗 |
+
+技術面會涵蓋前端、後端、資料庫、多模態模型、容器化與排程自動化。但**這些是題目自己長出來的需求，不是為了教而塞進去的**。
+
+素材全部來自網路，中文料理影片無限量。詳見 [`docs/FIXTURES.md`](./docs/FIXTURES.md)。
+
+---
+
+## 開始之前
 
 ```bash
 git clone https://github.com/Zenobia000/SDD-agent-coding-beginner.git
 cd SDD-agent-coding-beginner
-
-git switch antigravity     # 走 Antigravity 線
-# 或
-git switch claude          # 走 Claude Code 線
+git switch progressive-sdd
+git config core.hooksPath .githooks
 ```
 
-切過去之後**先讀該分支的 `README.md`**，它會告訴你安裝什麼、從哪一章開始。
+`core.hooksPath` 是每個 clone 各自的設定，沒設就等於 `.githooks/` 完全沒作用。確認一下：
+
+```bash
+git config core.hooksPath
+```
+
+必須印出 `.githooks`。
+
+**這門課不指定 coding agent。** Claude Code、Antigravity、Cursor 都可以，甚至不用 agent 純手寫也能跑完 —— 因為教的是判斷，不是操作。想先熟悉工具本身，去 [`claude`](../../tree/claude) 或 [`antigravity`](../../tree/antigravity) 分支。
+
+技術選型也不預先指定。**選型本身就是第二冊的一關**，先告訴你答案就沒得練了。
 
 ---
 
-## 怎麼選
+## 這條線和另外兩條的關係
 
-| 你的情況 | 建議 |
+```text
+claude / antigravity          progressive-sdd
+  ─────────────────           ────────────────
+  工具怎麼操作          →      軟體怎麼開發
+  照著貼，看綠燈               自己判斷，自己驗
+  SmartTrip FX（純函式）        CookCard（完整系統）
+  4–5 小時                      多次 session
+```
+
+先走完任一條工具線再來這裡，會順很多 —— 你至少要能讓 agent 跑起來。但不是硬性前置。
+
+---
+
+## 目前進度
+
+| 項目 | 狀態 |
 |---|---|
-| 已經有 Google 帳號，想留在 Google 生態系 | `antigravity` |
-| 已經在用 Claude Code，或有 Anthropic 訂閱 | `claude` |
-| 兩個都沒有，想先試一個 | `antigravity` —— CLI 是單一執行檔，不需要 Node.js 或任何套件管理器 |
-| 只有無圖形介面的 Linux 主機（SSH） | 兩條線都可以，但都只能走 CLI；Antigravity IDE 需要桌面環境 |
-
-沒有哪一條比較「進階」。元件模型不同，工程紀律相同。
-
----
-
-## 為什麼要分成兩個分支
-
-不是為了整齊，是因為**技術上無法共存**：
-
-- Antigravity 只探索 `.agents/`（`agy` 執行檔內完全沒有 `.claude` 路徑字串）
-- Claude Code 只讀 `.claude/`，且官方明文**不讀** `AGENTS.md`
-- 兩者的 hook 阻擋協定不同，skill frontmatter 的可用欄位也不同
-
-硬要塞進同一個分支，結果是兩份會各自腐爛的設定，加上一本必須不斷加註「如果你用 A 就…如果你用 B 就…」的教材。分支切開之後，每一條線的教材都能直述，不必到處分岔。
+| `PRINCIPLES.md` 心法篇 | ✅ 完成 |
+| `docs/FIXTURES.md` 素材挑選準則 | ✅ 完成 |
+| `BUILD.md` 實戰篇 | ⬜ 撰寫中 |
+| Fixture 影片實際挑選與下載 | ⬜ 未開始 |
+| 各關的驗收訊號 | ⬜ 未開始 |
 
 ---
 
-## 這個分支有什麼
-
-只有導航與共用的東西：
-
-| 路徑 | 用途 |
-|---|---|
-| `README.md` | 就是這一頁 |
-| `.githooks/` | Git 層的安全閘門（擋真實 `.env`、疑似硬編碼憑證、對保護分支的非快轉 push）。兩條線共用 |
-| `LICENSE` | MIT |
-
-教材、harness、範例全部在 `antigravity` 與 `claude` 分支上，這裡刻意不放，避免和分支內容不同步。
-
----
-
-## 貢獻
-
-改動請提到對應的線上，不要提到 `main`：
-
-- 只影響 Antigravity → 從 `antigravity` 開分支
-- 只影響 Claude Code → 從 `claude` 開分支
-- 兩條線都要改（例如 `.githooks/`、SmartTrip FX 的需求規格）→ 分別提兩個 PR，不要嘗試 cherry-pick 整個 harness
-
-`main` 只接受導航頁本身的修改。
-
----
-
-MIT License。第一冊的工具行為以各自的官方文件為事實來源；教材中每條事實都標了證據等級，未經實測的一律標明。
+MIT License。
