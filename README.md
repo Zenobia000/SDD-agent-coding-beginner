@@ -1,68 +1,82 @@
-# Claude Code：從官方元件到完整專案實戰
+# AI Coding Agent 工程實戰課
 
-這是一門給初學者的 Claude Code 課程，固定分成兩冊、照同一條路走：
+這門課教的不是「怎麼跟 AI 聊天」，而是**怎麼用 AI coding agent 做出可驗證、可 review、可交付的軟體**。
 
-1. [`CLAUDE-CODE.md`](./CLAUDE-CODE.md)：約 2.5–3 小時，依 Anthropic 官方元件理解 Claude Code。
-2. [`BUILD.md`](./BUILD.md)：約 4–5 小時，把元件用進本課專屬的 **SmartTrip FX** 專案。
+同一套工程紀律，兩個工具各一條線。**這個分支只負責導航，教材在下面兩條線上。**
 
-第一冊回答「每個元件負責什麼」；第二冊完成 project contract、需求訪談、spec、tickets、TDD、review 與 commit。官方速成不取代專案實戰，專案實戰也不要求學生靠猜理解 `.claude/`。
+---
 
-## 三分鐘開始
+## 選一條線
 
-先準備 Git、Python 3.11+ 與最新版 Claude Code；安裝方式以 [Anthropic 官方安裝文件](https://code.claude.com/docs/en/setup) 為準。
+| 分支 | 工具 | 第一冊 | 專案契約 | Harness |
+|---|---|---|---|---|
+| [`antigravity`](../../tree/antigravity) | **Google Antigravity**（`agy` CLI + IDE） | `ANTIGRAVITY.md` | `AGENTS.md` | `.agents/` |
+| [`claude`](../../tree/claude) | **Claude Code** | `CLAUDE-CODE.md` | `CLAUDE.md` | `.claude/` |
 
-```bash
-git clone https://github.com/Zenobia000/ai-vibe-coding-beginner.git
-cd ai-vibe-coding-beginner
-git switch -c workshop/claude-code-smarttrip
-git config core.hooksPath .githooks
-claude
-```
-
-`core.hooksPath` 是每個 clone 各自的設定，沒設就等於 `.githooks/` 完全沒作用。開始前先確認它真的生效：
+兩條線的第二冊都是 `BUILD.md`，題目相同：**SmartTrip FX** —— 讀取行程 JSON，驗證輸入、計算旅費現金與匯率燈號，只用 Python standard library。差別只在你用哪個 agent 完成它。
 
 ```bash
-git config core.hooksPath
+git clone https://github.com/Zenobia000/SDD-agent-coding-beginner.git
+cd SDD-agent-coding-beginner
+
+git switch antigravity     # 走 Antigravity 線
+# 或
+git switch claude          # 走 Claude Code 線
 ```
 
-必須印出 `.githooks`。印不出任何東西就代表上面那行沒跑到，回去補跑一次。
+切過去之後**先讀該分支的 `README.md`**，它會告訴你安裝什麼、從哪一章開始。
 
-進入 Claude Code 後先打開 [`CLAUDE-CODE.md`](./CLAUDE-CODE.md)，完成最後的元件選型，再接著做 [`BUILD.md`](./BUILD.md)。
+---
 
-## 第一冊會學到的官方元件
+## 怎麼選
 
-| 問題 | Claude Code 元件 | 本 repo 的實例 |
-|---|---|---|
-| 每次 session 都要知道什麼？ | `CLAUDE.md`、Rules、Auto memory | `CLAUDE.md`、`.claude/rules/` |
-| 哪些工具可以直接用或必須確認？ | Settings、Permissions | `.claude/settings.json` |
-| 重複流程怎麼變成可呼叫能力？ | Skills | `.claude/skills/` |
-| 大量探索怎麼隔離 context？ | Subagents | `.claude/agents/` |
-| 哪些規則不能只靠模型記得？ | Hooks | `.claude/hooks/` |
-| Claude 如何連接外部工具與資料？ | MCP | 核心課只辨識，不新增 server |
-| 如何把整套元件發給其他專案？ | Plugins | 進階章辨識封裝邊界 |
-| 何時需要多個獨立 Claude session？ | Agent teams | 實驗性功能，只做選型比較 |
-| 大型 typed codebase 怎麼精準導覽？ | Code intelligence / LSP | 進階章辨識，不強迫安裝 |
-| Session 輸出怎麼視覺化分享？ | Artifacts | 進階章辨識，不在核心課發布 |
+| 你的情況 | 建議 |
+|---|---|
+| 已經有 Google 帳號，想留在 Google 生態系 | `antigravity` |
+| 已經在用 Claude Code，或有 Anthropic 訂閱 | `claude` |
+| 兩個都沒有，想先試一個 | `antigravity` —— CLI 是單一執行檔，不需要 Node.js 或任何套件管理器 |
+| 只有無圖形介面的 Linux 主機（SSH） | 兩條線都可以，但都只能走 CLI；Antigravity IDE 需要桌面環境 |
 
-## 第二冊會完成什麼
+沒有哪一條比較「進階」。元件模型不同，工程紀律相同。
 
-SmartTrip FX 讀取行程 JSON，驗證輸入、計算旅費現金與匯率燈號。學生會照貼 prompt，完成：
+---
 
-```text
-project contract → 需求訪談 → spec → tickets
-                 → 三個 TDD vertical slices
-                 → code / security review → commit
-```
+## 為什麼要分成兩個分支
 
-核心產品只用 Python standard library，不接 live LLM、即時匯率 API、資料庫、登入、Web UI 或部署，讓學生專注在 Claude Code 的工程迴圈。
+不是為了整齊，是因為**技術上無法共存**：
 
-## 其他入口
+- Antigravity 只探索 `.agents/`（`agy` 執行檔內完全沒有 `.claude` 路徑字串）
+- Claude Code 只讀 `.claude/`，且官方明文**不讀** `AGENTS.md`
+- 兩者的 hook 阻擋協定不同，skill frontmatter 的可用欄位也不同
+
+硬要塞進同一個分支，結果是兩份會各自腐爛的設定，加上一本必須不斷加註「如果你用 A 就…如果你用 B 就…」的教材。分支切開之後，每一條線的教材都能直述，不必到處分岔。
+
+---
+
+## 這個分支有什麼
+
+只有導航與共用的東西：
 
 | 路徑 | 用途 |
 |---|---|
-| [`.claude/`](./.claude/) | 可直接觀察與移植的工程 harness；[`架構說明`](./.claude/README.md) 是課後參考 |
-| [`curriculum/README.md`](./curriculum/README.md) | 兩冊課程的講師節奏、巡場問題與維護規則 |
-| [`docs/M0-M9_懶人包.md`](./docs/M0-M9_懶人包.md) | 原課程理論重點；不插入照貼照跑主線 |
-| [`docs/exports/`](./docs/exports/) | 第二冊的 PDF 與 DOCX 離線版；由 Markdown 產生，更新後需重新匯出 |
+| `README.md` | 就是這一頁 |
+| `.githooks/` | Git 層的安全閘門（擋真實 `.env`、疑似硬編碼憑證、對保護分支的非快轉 push）。兩條線共用 |
+| `LICENSE` | MIT |
 
-Claude Code 行為以 [官方文件](https://code.claude.com/docs/en/overview) 為事實來源；社群文章只用來改善教法。文件最後核對日期：2026-07-31。
+教材、harness、範例全部在 `antigravity` 與 `claude` 分支上，這裡刻意不放，避免和分支內容不同步。
+
+---
+
+## 貢獻
+
+改動請提到對應的線上，不要提到 `main`：
+
+- 只影響 Antigravity → 從 `antigravity` 開分支
+- 只影響 Claude Code → 從 `claude` 開分支
+- 兩條線都要改（例如 `.githooks/`、SmartTrip FX 的需求規格）→ 分別提兩個 PR，不要嘗試 cherry-pick 整個 harness
+
+`main` 只接受導航頁本身的修改。
+
+---
+
+MIT License。第一冊的工具行為以各自的官方文件為事實來源；教材中每條事實都標了證據等級，未經實測的一律標明。
