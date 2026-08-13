@@ -21,7 +21,7 @@ git config core.hooksPath .githooks
 claude
 ```
 
-打 `/ask-luca`。看得到技能清單就成功了。
+打 `/compass`。看得到技能清單就成功了。
 
 ---
 
@@ -30,7 +30,7 @@ claude
 | | 檔案 | 時間 | 內容 |
 |---|---|---|---|
 | 第一冊 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 約 40 分鐘 | 心法。七條不變量、四個 Mode、什麼時候該固化 |
-| 第二冊 | [`BUILD.md`](./BUILD.md) | 多次 session | 實戰。CookCard，九個站點 |
+| 第二冊 | [`BUILD.md`](./BUILD.md) | 多次 session | 實戰。CookCard，七個站點 |
 
 第一冊先讀完再進第二冊。它很短，而且第二冊每一站都會回頭引用它。
 
@@ -40,7 +40,7 @@ claude
 
 ## 工具箱
 
-用 [luca-skills](https://github.com/Luca0x5755/luca-skills)：36 個給 coding agent 用的工程技能，凍結副本在 [`.claude/skills/`](./.claude/skills/)（MIT，聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)）。
+36 個給 coding agent 用的工程技能，就在 [`.claude/skills/`](./.claude/skills/)。**它們是這個專案的一部分，可以改** —— 衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT，聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)）。
 
 覆蓋的範圍：
 
@@ -51,7 +51,7 @@ claude
   → /wizard → /git-commit → /git-pr → /git-release
 ```
 
-⚠️ **這條線實質是 Claude Code / Copilot 取向。** luca-skills 用 `disable-model-invocation` 區分「只有你能叫」與「agent 也能叫」的技能，**Antigravity 與 Copilot 都不支援這個欄位** —— 在那兩邊，編排型技能會被 agent 自己啟動。落差寫在 `docs/SKILL-MAP.md`，沒有淡化。
+⚠️ **這條線實質是 Claude Code / Copilot 取向。** 技能用 `disable-model-invocation` 區分「只有你能叫」與「agent 也能叫」的技能，**Antigravity 與 Copilot 都不支援這個欄位** —— 在那兩邊，編排型技能會被 agent 自己啟動。落差寫在 `docs/SKILL-MAP.md`，沒有淡化。
 
 ---
 
@@ -113,11 +113,12 @@ claude / antigravity          progressive-sdd
 | 項目 | 狀態 |
 |---|---|
 | `PRINCIPLES.md` 心法篇 | ✅ 完成 |
-| `BUILD.md` 實戰篇（九站） | ✅ 完成 |
+| `BUILD.md` 實戰篇（七站） | ✅ 完成 |
 | `docs/SKILL-MAP.md` 技能速查 | ✅ 完成 |
 | `docs/FIXTURES.md` 素材挑選準則 | ✅ 完成 |
 | `curriculum/README.md` 講師手冊 | ✅ 完成 |
-| `.claude/skills/` 工具箱 | ✅ 已內建，fork 即用 |
+| `.claude/skills/` 工具箱（36 技能 + guard hooks） | ✅ 已內建，fork 即用 |
+| `docs/assets/route.svg` 七站路線圖 | ✅ 完成 |
 | **Fixture 影片實際挑選與下載** | ⬜ **開課前必做** —— 六支影片的 URL 與 `expected.json` |
 | 參考實作 | ⬜ 刻意不做（見 `BUILD.md` 附錄） |
 
@@ -125,4 +126,4 @@ claude / antigravity          progressive-sdd
 
 ---
 
-MIT License。`.claude/skills/` 為第三方內容，授權見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
+MIT License。`.claude/skills/` 衍生自第三方，授權見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。

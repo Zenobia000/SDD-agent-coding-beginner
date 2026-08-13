@@ -54,7 +54,7 @@ Case content in Traditional Chinese; IDs and area names in English. Per case:
 ```markdown
 ## TC-AUTH-01 — 一般會員登入後進入儀表板
 - **狀態**：active
-- **負責人**：Luca
+- **負責人**：<你的名字>
 - **來源**：PR-AUTH-01／story #42
 - **角色**：一般會員
 - **前置條件**：測試帳號 member01 已建立
@@ -63,7 +63,7 @@ Case content in Traditional Chinese; IDs and area names in English. Per case:
   2. 在 #login-email 輸入 member01@example.com，輸入密碼
   3. 點擊「登入」
 - **期望結果**：導向 /dashboard，右上角顯示會員名稱
-- **最近判定**：pass ／ 於 `luca-2026-08-09-4b17006` ／ 判定者 Luca
+- **最近判定**：pass ／ 於 `alex-2026-08-09-4b17006` ／ 判定者 <你的名字>
 ```
 
 Changed cases are edited in place under their frozen ID — version history is git's job. Retired cases keep their section, flip **狀態** to `retired`, and add a one-line reason; the section standing in the file is what makes "never reissue" checkable by grep instead of by archaeology.
@@ -72,7 +72,7 @@ Changed cases are edited in place under their frozen ID — version history is g
 
 `/browser-evidence` captures and refuses to judge — by design, so nothing automated ever declares an acceptance case passed. The judgment is a human's, and **最近判定** is where it lands: `pass` / `fail` / `未判`, the run directory it was judged against, and who judged it. A case never yet judged carries `未判`, which is a third state and not a synonym for `fail`.
 
-The verdict binds to a **run**, not to the case. That is what keeps it honest: a `pass` judged against `luca-2026-08-09-4b17006` stays true about that build forever, and the project's `docs/test-status.md` reads the run's commit to report how far the code has moved since. A verdict recorded without its run is an opinion with no expiry date. The run key names who drove; the 判定者 field names who judged — often the same person, never by assumption.
+The verdict binds to a **run**, not to the case. That is what keeps it honest: a `pass` judged against `alex-2026-08-09-4b17006` stays true about that build forever, and the project's `docs/test-status.md` reads the run's commit to report how far the code has moved since. A verdict recorded without its run is an opinion with no expiry date. The run key names who drove; the 判定者 field names who judged — often the same person, never by assumption.
 
 Registering a verdict is its own pass over the file, after the evidence exists — never derived while deriving cases, and never written from a captured exhibit the user has not read.
 

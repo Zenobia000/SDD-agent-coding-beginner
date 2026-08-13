@@ -1,8 +1,13 @@
 # Third-party notices
 
-本 repo 的 `.claude/skills/` 與 `docs/assets/`（`flow.svg`、`toolbox.svg`）取自
-[Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills)，為未修改的凍結副本（commit `1434be8ff814b51f0e7fa166bc2e767075e71d83`，2026-08-12），
-依 MIT License 使用。詳細的凍結資訊見 `.claude/skills/README.md`。
+本 repo 的 `.claude/skills/`（36 個技能與其附帶的 guard hooks）**衍生自**
+[Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills)，取自
+commit `1434be8ff814b51f0e7fa166bc2e767075e71d83`（2026-08-12），依 MIT License 使用。
+
+本專案已對其做出修改（目錄攤平、`ask-luca` 更名為 `compass`、範例人名中性化、
+`setup-skills` 的 hooks 取檔路徑改寫、流程圖改繪）。完整清單見 `.claude/skills/README.md`。
+
+依 MIT License 的要求，以下 copyright notice 與 permission notice 必須隨本專案保留。
 
 ---
 

@@ -14,12 +14,12 @@
 | 檔案 | 角色 |
 |---|---|
 | `PRINCIPLES.md` | 第一冊：心法。七條不變量與四個 Mode |
-| `BUILD.md` | 第二冊：實戰。CookCard 九個站點 |
+| `BUILD.md` | 第二冊：實戰。CookCard 七個站點 |
 | `docs/SKILL-MAP.md` | 技能速查：哪一站用哪個、什麼時候跳過 |
 | `docs/FIXTURES.md` | 素材挑選準則（講師用） |
 | `curriculum/README.md` | 講師手冊 |
-| `.claude/skills/` | luca-skills 的**凍結副本，不要改**。見該目錄的 `README.md` |
-| `THIRD-PARTY-NOTICES.md` | 上述副本的授權聲明。動 `.claude/skills/` 就要同步檢查 |
+| `.claude/skills/` | 本專案的工具鏈，36 個技能。**可以改**，見該目錄的 `README.md` |
+| `THIRD-PARTY-NOTICES.md` | 上游授權聲明。**MIT 的要求，不要移除** |
 
 學生路線固定：`README.md` → `PRINCIPLES.md` → `BUILD.md`。**不要新增替代路線。**
 
@@ -50,7 +50,7 @@ VLM vs STT、SQLite vs Postgres、cron vs queue —— 全部留給學生決定�
 
 ## 站點不是章節
 
-`BUILD.md` 的九個站點**順序可以亂，而且大部分可以跳過**。每一站都有「什麼時候跳過這一站」那一段 —— **那是全書最重要的內容**。
+`BUILD.md` 的七個站點**順序可以亂，而且大部分可以跳過**。每一站都有「什麼時候跳過這一站」那一段 —— **那是全書最重要的內容**。
 
 `.claude/skills/README.md` 有一張主流程表，看起來像一條線。**那是預設路徑，不是規定。** 教材教的是什麼時候偏離它。
 
@@ -68,17 +68,27 @@ VLM vs STT、SQLite vs Postgres、cron vs queue —— 全部留給學生決定�
 
 ## 工具鏈
 
-這門課用 [luca-skills](https://github.com/Luca0x5755/luca-skills) 當工具鏈，凍結副本在 `.claude/skills/`。
+`.claude/skills/` 的 36 個技能是**本專案自己的工具鏈**，衍生自
+[luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT，commit `1434be8`）並已修改。
 
-### 不要改 vendored 的檔案
+### 技能可以改，但有三條規矩
 
-`.claude/skills/` 是**未修改的凍結副本**。改了它，你就從使用者變成維護一份分支：上游修 bug 合不回來，而教材會同時對不上兩邊。
+1. **`docs/SKILL-MAP.md` 要同步。** 教材靠那張表指路，改了技能沒改表，學生會照著找不到的東西操作。
+2. **frontmatter 前不能有任何字元**，包括空行 —— 多一個空行整個技能會被靜默略過。
+3. **`name` 必須等於資料夾名。**
 
-要更新的話照 `.claude/skills/README.md` 的步驟整包重抓，**並且同步檢查 `docs/SKILL-MAP.md` 提到的每個技能還在不在、描述有沒有變**。
+已做過的修改列在 `.claude/skills/README.md`。要同步上游修正的話那裡也有 diff 指令 ——
+已經分岔了，不會是無痛合併。
+
+### 授權：可以改，不可以拿掉聲明
+
+MIT 要求 copyright notice 與 permission notice 保留在所有副本與實質部分中。
+所以可以改內容、改名、重組，但 **`THIRD-PARTY-NOTICES.md` 不能刪**。
+這個 repo 是公開的，拿掉聲明就是授權違規。
 
 ### 這條線實質是 Claude Code / Copilot 取向
 
-luca-skills 依賴 `disable-model-invocation` 來區分「使用者觸發」與「模型觸發」的技能。
+技能用 `disable-model-invocation` 區分「使用者觸發」與「模型觸發」。
 **Antigravity 與 Copilot 都不支援這個欄位**，編排型技能會被 agent 自行啟動。
 教材已在 `docs/SKILL-MAP.md` 標明這個落差，不要淡化它。
 

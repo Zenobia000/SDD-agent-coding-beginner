@@ -1,10 +1,10 @@
 ---
-name: ask-luca
-description: 問這個情況該用哪個技能、走哪條流程。這個 repo 的技能路由器。
+name: compass
+description: 問這個情況該用哪個技能、走哪條流程。工具箱的路由器。
 disable-model-invocation: true
 ---
 
-# Ask Luca
+# Compass
 
 You don't remember every skill, so ask.
 

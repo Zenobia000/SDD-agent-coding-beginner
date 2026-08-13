@@ -1,45 +1,36 @@
 # 技能速查
 
-> 對應 [`.claude/skills/`](../.claude/skills/) 凍結版本 `1434be8`（2026-08-12）。
-> 上游更新後這張表必須重對，見 `.claude/skills/README.md`。
+> 對應 [`.claude/skills/`](../.claude/skills/) 的 36 個技能。
+> 改了技能就要回來改這張表 —— 教材靠它指路。
 
-不確定用哪個 → **`/ask-luca`**。
+不確定用哪個 → **`/compass`**。
 
 ---
 
 ## 一張圖看完
 
-工具鏈原作者畫的全圖。每個框裡都寫了那個技能做什麼、什麼時候跑：
+七站、每站的技能、以及每站的跳過條件：
 
-[![主流程：想法 → 出貨](./assets/flow.svg)](./assets/flow.svg)
+[![路線圖：新題目 → 上線](./assets/route.svg)](./assets/route.svg)
 
-[![工具箱：元技能](./assets/toolbox.svg)](./assets/toolbox.svg)
-
-**藍 = 你打字才會動；紫 = AI 也會自己用；虛線框 = draft，試用中。**
-
-> 圖上是原作者的 5 個階段，本課切成 9 站並補了「部署上線」。對照表在
-> [`../BUILD.md`](../BUILD.md) 的站點地圖那一節。
+**藍 = 你打字才會動；紫 = AI 也會自己用。第 5 站是唯一不能跳的。**
 
 ---
 
 ## 依站點查
 
-| 站 | 技能 | 產出 | 可跳過？ |
+| 站 | 技能 | 產出 | 什麼情況跳過 |
 |---|---|---|---|
-| 0 前置 | `/setup-skills` | `docs/agents/` | ❌ 每個 repo 必跑一次 |
-| 1 拆解問題 | `/grilling`（無 codebase）<br>`/grill-with-docs`（有 codebase） | 訪談結論 | ❌ 幾乎不能跳 |
-| 1 | `/domain-modeling` | `CONTEXT.md` 術語表、ADR | 名詞不打架就不用 |
-| 1 | `/to-spec` | 發佈到追蹤器的 spec | ❌ |
-| 2 值不值得做 | `/feasibility` | ✅／⚠️／❌ 判決 | ✅ 沒有真實不確定性就跳 |
-| 3 系統骨架 | `/to-architecture` | 技術棧、資料模型、API 合約 | ✅ 一個 session 做得完、或在既有架構內就跳 |
-| 3 | `/frontend-spec` | 路由表、每頁 design brief | ✅ 沒有 UI 就跳 |
-| 3 | `/test-blueprint` | 測試層佈局、接縫清單 | ✅ |
-| 4 拆解功能 | `/to-tickets` | 曳光彈票 + 阻塞邊 | ❌ 多 session 一定要 |
-| 5 建置 | `/implement` | 程式碼（內含 `/tdd` + `/code-review`） | ❌ |
-| 6 驗收 | `/uat-cases` | 凍結編號的 TC 清單 | ✅ 沒人要看證據就跳 |
-| 6 | `/browser-evidence` | 截圖、網路紀錄、被測版本 | ✅ |
-| 7 部署上線 | `/wizard` | 互動式部署精靈 | ⚠️ **工具箱缺口，用 `/wizard` 補** |
-| 8 發佈 | `/git-commit` → `/git-pr` → `/git-release` | commit、PR、release | ❌ |
+| （開始之前） | `/setup-skills` | `docs/agents/`、guard hooks | 每個 repo 跑一次。不是站，是雜務 |
+| **1** 拆解問題 | `/grilling`（無 codebase）<br>`/grill-with-docs`（有 codebase）<br>`/domain-modeling`<br>`/to-spec` | spec、`CONTEXT.md`、ADR | 別人已經給你 spec |
+| **2** 值不值得做 | `/feasibility` | ✅／⚠️／❌ 判決 | 沒有真實不確定性 |
+| **3** 系統骨架 | `/to-architecture`<br>`/frontend-spec`<br>`/test-blueprint` | 技術棧、資料模型、API 合約、測試藍圖 | 一個 session 做得完，或在既有架構內 |
+| **4** 拆解功能 | `/to-tickets` | 曳光彈票 + 阻塞邊 | 一張票就做完了 |
+| **5** 建置 | `/implement`（內含 `/tdd`、`/code-review`） | 程式碼 | **不能跳** |
+| **6** 驗收 | `/uat-cases`<br>`/browser-evidence` | 凍結編號的 TC 清單、證據 | 沒人要看證據 |
+| **7** 上線交付 | `/wizard`<br>`/git-commit` → `/git-pr` → `/git-release` | 部署精靈、Runbook、release | 只有你自己用 |
+
+> ⚠️ 第 7 站的部署沒有專用技能，是工具箱的已知缺口，用 `/wizard` 補。
 
 ---
 
@@ -47,7 +38,7 @@
 
 | 你現在的情況 | 打這個 |
 |---|---|
-| 不知道該用哪個 | `/ask-luca` |
+| 不知道該用哪個 | `/compass` |
 | 別人回報了 bug 或需求 | `/triage` → 匯入 `/implement` |
 | 東西壞了但原因不明 | `/diagnosing-bugs` |
 | 修完發現病根在架構 | `/improve-codebase-architecture` |
@@ -66,7 +57,7 @@
 
 ## Session 邊界決策樹
 
-完整版在 `.claude/skills/ask-luca/PHASE-BOUNDARIES.md`。**由上往下，第一個 yes 就是答案。**
+完整版在 `.claude/skills/compass/PHASE-BOUNDARIES.md`。**由上往下，第一個 yes 就是答案。**
 
 | # | 問題 | yes → |
 |---|---|---|

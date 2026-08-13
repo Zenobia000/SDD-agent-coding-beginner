@@ -1,61 +1,87 @@
-# 這些技能是別人的，不要在這裡改
+# 這個專案的工具鏈
 
-這個目錄的 36 個技能是 [Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills) 的副本。
+36 個給 coding agent 用的工程技能。**fork 下來打開 Claude Code 就能用**，不需要安裝任何東西。
 
-| | |
-|---|---|
-| 來源 | `https://github.com/Luca0x5755/luca-skills.git` |
-| 凍結 commit | `1434be8ff814b51f0e7fa166bc2e767075e71d83` |
-| 凍結日期 | 2026-08-12 |
-| 抓取日期 | 2026-08-13 |
-| 授權 | MIT，見根目錄 [`THIRD-PARTY-NOTICES.md`](../../THIRD-PARTY-NOTICES.md) |
-
-## 為什麼直接放在這裡
-
-**fork 下來就能用，不用跑安裝腳本。** Claude Code 會自動載入專案的 `.claude/skills/`，GitHub Copilot 也讀同一個路徑。
-
-代價是這份副本**不會自動更新**。上游修了 bug，你不會知道。
-
-## 對原始 repo 做的唯一改動：攤平目錄
-
-上游把技能分成 `skills/core/` 與 `skills/draft/` 兩個桶，靠安裝腳本連結時攤平。這裡直接攤平放好：
+Claude Code 會自動載入專案的 `.claude/skills/`，GitHub Copilot 也讀同一個路徑。
 
 ```text
-上游  skills/core/ask-luca/SKILL.md
-      skills/draft/feasibility/SKILL.md
-              ↓ 攤平
-這裡  .claude/skills/ask-luca/SKILL.md
-      .claude/skills/feasibility/SKILL.md
+.claude/skills/<技能名>/SKILL.md
 ```
 
-**檔案內容一個字都沒改。** 只有位置變了。
+不確定該用哪個 → 打 **`/compass`**。
 
-原本的 `core` / `draft` 分類意義是「對外發佈與否」，不是「能不能用」—— 兩桶都會被安裝，所以攤平不影響行為。想知道哪些是 draft，見 [`docs/SKILL-MAP.md`](../../docs/SKILL-MAP.md)。
+---
 
-## 想改行為的話
+## 這些技能可以改
 
-不要改這裡。在**你自己的專案**建一個同名技能覆蓋它 —— 專案層級優先於個人層級。改了這裡，上游修 bug 你合不回來，而教材會同時對不上兩邊。
+**這是本專案的工具鏈，不是唯讀的外部依賴。** 發現某個技能的流程不適合這門課，就改它 —— 那正是 `/writing-for-agents` 存在的理由。
 
-## 要更新到上游最新版
+改的時候記得三件事：
+
+1. **`docs/SKILL-MAP.md` 要同步。** 教材靠那張表指路，改了技能沒改表，學生會照著找不到的東西操作。
+2. **frontmatter 前不能有任何字元**，包括空行。多一個空行，Claude Code 會靜默略過整個技能，而且不會告訴你。
+3. **`name` 必須等於資料夾名。**
+
+改完跑一次連結檢查：
 
 ```bash
-git clone --depth 1 https://github.com/Luca0x5755/luca-skills.git /tmp/luca-new
-rm -rf .claude/skills/*/
-for b in core draft; do
-  for s in /tmp/luca-new/skills/$b/*/; do cp -r "$s" ".claude/skills/$(basename "$s")"; done
-done
-# 保留這個 README，更新上面的 commit 與日期
+bash scripts/check-links.sh
 ```
 
-更新後**必須**重對 [`docs/SKILL-MAP.md`](../../docs/SKILL-MAP.md)：教材提到的每個技能還在不在、描述有沒有變、`disable-model-invocation` 有沒有增減。
+---
 
-## 一起帶進來的還有圖
+## 兩類技能，差別只有誰能叫它
 
-上游 `assets/` 的兩張流程圖放在 [`docs/assets/`](../../docs/assets/)（`flow.svg`、`toolbox.svg`），
-同樣未修改。更新技能時記得一起重抓 —— 圖上畫的技能若有增減，圖會比文字更早過期。
+| | 誰能叫 | 用途 | 例子 |
+|---|---|---|---|
+| **使用者觸發**（frontmatter 有 `disable-model-invocation: true`） | 只有你打字 | 編排流程 | `/to-spec`、`/to-tickets`、`/implement`、`/triage` |
+| **模型觸發**（沒有那個欄位） | 你和 agent 都能叫 | 可重複使用的紀律 | `/tdd`、`/code-review`、`/grilling`、`/diagnosing-bugs` |
 
-## 沒有一起帶進來的東西
+> ⚠️ **GitHub Copilot 與 Google Antigravity 都不支援 `disable-model-invocation`。**
+> 在那兩邊，編排型技能會被 agent 自行啟動。緩解的是這些技能的 `description` 本來就寫成
+> 不帶觸發語的人話摘要，但那是降低機率，不是關掉開關。
 
-上游還有 hooks（`guard-git`、`guard-secrets`、`check-on-stop`）與它自己的 `.claude/settings.json`。**刻意沒帶** —— 那是為它自己的 repo 設計的，掛進來會多出這門課不需要的變數。要用的話去上游拿。
+---
 
-本 repo 的 Git 層防護在 [`.githooks/`](../../.githooks/)，與 agent 無關，兩者不衝突。
+## 附帶的 guard hooks
+
+`setup-skills/hooks/` 有三支 shell hook，由 `/setup-skills` 複製進**你自己的專案**（不是這個教材 repo）：
+
+| Hook | 擋什麼 |
+|---|---|
+| `guard-git.sh` | `git add -A`／`git add .`、force push、越過 HEAD 的 `git reset --hard`、`--no-verify`、PR merge（merge 是你的按鈕） |
+| `guard-secrets.sh` | staged diff 裡出現憑證字面值時擋下 `git commit` |
+| `check-on-stop.sh` | 停止時的檢查 |
+
+每支都有自帶測試（`test-*.sh`），本 repo 驗過三支全 pass。
+
+**為什麼要 hook 而不是寫在 `CLAUDE.md`**：散文規則大約只有七成遵守率，這幾條紅線靠 exit code 2，不靠模型記得。這正是心法篇不變量 5「邊界是防線，不是建議」。
+
+---
+
+## 出處與授權
+
+這套技能衍生自 [Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT），取自 commit `1434be8`（2026-08-12）。
+
+**本專案做過的修改**：
+
+- 攤平目錄結構（上游分 `skills/core/` 與 `skills/draft/` 兩桶，靠安裝腳本連結時才攤平；這裡直接放好）
+- `ask-luca` 改名為 `compass`
+- 範例中的人名與執行代號改為中性佔位符
+- `setup-skills` 的 Section E 改為從技能自己的 `hooks/` 取檔（原本要從上游 repo 的 symlink target 解析路徑，在複製而非連結的情況下解不出來）
+- guard hooks 隨 `setup-skills` 一起打包
+- 流程圖改繪為本課的站點劃分
+
+完整授權聲明見 [`THIRD-PARTY-NOTICES.md`](../../THIRD-PARTY-NOTICES.md)。**那份聲明是 MIT 的要求，不要移除。**
+
+### 想同步上游的修正
+
+上游是活的，會修 bug 也會加技能。要跟進的話自己 diff：
+
+```bash
+git clone --depth 1 https://github.com/Luca0x5755/luca-skills.git /tmp/upstream
+diff -ru /tmp/upstream/skills/core .claude/skills 2>/dev/null | less
+diff -ru /tmp/upstream/skills/draft .claude/skills 2>/dev/null | less
+```
+
+已經分岔了，所以不會是無痛合併 —— 挑你要的改動手動搬過來，並更新 `docs/SKILL-MAP.md`。

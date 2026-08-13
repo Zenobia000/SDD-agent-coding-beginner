@@ -98,7 +98,7 @@
 
 | 項目 | 說明 |
 |---|---|
-| **確認 fork 即用** | 拿一台乾淨機器 fork、clone、`claude`、打 `/ask-luca`，確認技能載得到 |
+| **確認 fork 即用** | 拿一台乾淨機器 fork、clone、`claude`、打 `/compass`，確認技能載得到 |
 | **挑好六支 fixture 影片** | 依 [`docs/FIXTURES.md`](../docs/FIXTURES.md) 的特徵表，不是依菜色 |
 | **寫好 `expected.json`** | 每支的必要食材、最少數量、已知模糊項、不得出現的幻覺項 |
 | **預先下載** | audio / captions / frames 進版控，教室網路撐不住三十個人同時抓 |

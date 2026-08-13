@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1080" width="1000" height="1080" role="img" aria-labelledby="t d">
+  <title id="t">路線圖：新題目 → 上線</title>
+  <desc id="d">七站路線。每一站是一個能被獨立跳過的判斷；右欄是該站的跳過條件。藍框為使用者觸發的技能，紫框為模型也會自行啟動的技能。下方為三個交流道與 session 規則。</desc>
+  <style>
+    .bg    { fill: #ffffff; }
+    .h1    { font: 600 20px system-ui, sans-serif; fill: #1f2328; }
+    .sub   { font: 13px system-ui, sans-serif; fill: #57606a; }
+    .colh  { font: 600 12px system-ui, sans-serif; fill: #57606a; letter-spacing: .6px; }
+    .num   { font: 700 15px system-ui, sans-serif; fill: #ffffff; }
+    .name  { font: 600 16px system-ui, sans-serif; fill: #1f2328; }
+    .judge { font: 12.5px system-ui, sans-serif; fill: #57606a; }
+    .skill { font: 13px ui-monospace, SFMono-Regular, Consolas, monospace; fill: #1f2328; }
+    .skip  { font: 12.5px system-ui, sans-serif; fill: #7a4a00; }
+    .note  { font: 12px system-ui, sans-serif; fill: #57606a; }
+    .strong{ font: 600 12.5px system-ui, sans-serif; fill: #1f2328; }
+    .card  { fill: #f6f8fa; stroke: #d0d7de; stroke-width: 1.2; }
+    .user  { fill: #ddf4ff; stroke: #0969da; stroke-width: 1.2; }
+    .model { fill: #fbefff; stroke: #8250df; stroke-width: 1.2; }
+    .skipbox { fill: #fff8e6; stroke: #d4a72c; stroke-width: 1.1; stroke-dasharray: 4 3; }
+    .dot   { fill: #0969da; }
+    .dot5  { fill: #cf222e; }
+    .spine { stroke: #d0d7de; stroke-width: 2; }
+    .edge  { stroke: #6e7781; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6e7781"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1000" height="1080"/>
+
+  <text class="h1" x="32" y="40">路線圖：新題目 → 上線</text>
+  <text class="sub" x="32" y="62">七站。每一站是一個能被獨立跳過的判斷 —— 照著全走一遍是新手，知道這次哪幾站不用做才是熟手。</text>
+  <text class="sub" x="32" y="82">不確定用哪個技能，打 /compass。<tspan fill="#0969da">藍 = 你打字才會動</tspan>；<tspan fill="#8250df">紫 = AI 也會自己用</tspan>。</text>
+
+  <text class="colh" x="72"  y="118">站</text>
+  <text class="colh" x="470" y="118">技能</text>
+  <text class="colh" x="742" y="118">什麼情況跳過這一站</text>
+
+  <line class="spine" x1="52" y1="140" x2="52" y2="892"/>
+
+  <!-- 1 -->
+  <circle cx="52" cy="168" r="15" class="dot"/><text class="num" x="47" y="173">1</text>
+  <text class="name" x="86" y="163">拆解問題</text><text class="judge" x="86" y="182">要做什麼</text>
+  <rect class="model" x="300" y="146" width="112" height="26" rx="5"/><text class="skill" x="310" y="164">/grilling</text>
+  <rect class="model" x="300" y="178" width="168" height="26" rx="5"/><text class="skill" x="310" y="196">/domain-modeling</text>
+  <rect class="user"  x="480" y="162" width="104" height="26" rx="5"/><text class="skill" x="490" y="180">/to-spec</text>
+  <rect class="skipbox" x="730" y="150" width="240" height="48" rx="6"/>
+  <text class="skip" x="742" y="169">別人已經給你 spec。</text><text class="skip" x="742" y="187">那要做的是讀懂並挑戰它。</text>
+
+  <!-- 2 -->
+  <circle cx="52" cy="252" r="15" class="dot"/><text class="num" x="47" y="257">2</text>
+  <text class="name" x="86" y="247">值不值得做</text><text class="judge" x="86" y="266">要不要做</text>
+  <rect class="user" x="300" y="238" width="132" height="26" rx="5"/><text class="skill" x="310" y="256">/feasibility</text>
+  <text class="note" x="446" y="256">四問一判決 ✅／⚠️／❌</text>
+  <rect class="skipbox" x="730" y="228" width="240" height="48" rx="6"/>
+  <text class="skip" x="742" y="247">沒有真實不確定性：熟悉的技術、</text><text class="skip" x="742" y="265">無外部依賴、內部小改動。</text>
+
+  <!-- 3 -->
+  <circle cx="52" cy="336" r="15" class="dot"/><text class="num" x="47" y="341">3</text>
+  <text class="name" x="86" y="331">系統骨架</text><text class="judge" x="86" y="350">怎麼蓋</text>
+  <rect class="user" x="300" y="306" width="176" height="26" rx="5"/><text class="skill" x="310" y="324">/to-architecture</text>
+  <rect class="user" x="300" y="338" width="160" height="26" rx="5"/><text class="skill" x="310" y="356">/frontend-spec</text>
+  <rect class="user" x="300" y="370" width="164" height="26" rx="5"/><text class="skill" x="310" y="388">/test-blueprint</text>
+  <text class="note" x="490" y="324">出貨即刪，是鷹架不是真相</text>
+  <rect class="skipbox" x="730" y="312" width="240" height="48" rx="6"/>
+  <text class="skip" x="742" y="331">一個 session 做得完，或在</text><text class="skip" x="742" y="349">既有架構內改（沒得選）。</text>
+
+  <!-- 4 -->
+  <circle cx="52" cy="446" r="15" class="dot"/><text class="num" x="47" y="451">4</text>
+  <text class="name" x="86" y="441">拆解功能</text><text class="judge" x="86" y="460">切成什麼</text>
+  <rect class="user" x="300" y="432" width="130" height="26" rx="5"/><text class="skill" x="310" y="450">/to-tickets</text>
+  <text class="note" x="444" y="450">曳光彈票，第一張最薄、可以很難看</text>
+  <rect class="skipbox" x="730" y="422" width="240" height="48" rx="6"/>
+  <text class="skip" x="742" y="441">一張票就做完了。</text><text class="skip" x="742" y="459">多 session 就不能跳。</text>
+
+  <!-- 5 -->
+  <circle cx="52" cy="530" r="15" class="dot5"/><text class="num" x="47" y="535">5</text>
+  <text class="name" x="86" y="525">建置</text><text class="judge" x="86" y="544">蓋</text>
+  <rect class="user"  x="300" y="516" width="126" height="26" rx="5"/><text class="skill" x="310" y="534">/implement</text>
+  <rect class="model" x="440" y="516" width="72"  height="26" rx="5"/><text class="skill" x="450" y="534">/tdd</text>
+  <rect class="model" x="524" y="516" width="140" height="26" rx="5"/><text class="skill" x="534" y="534">/code-review</text>
+  <text class="note" x="300" y="562">一張票一個 session：/clear → /implement → 回 /clear</text>
+  <rect class="skipbox" x="730" y="506" width="240" height="48" rx="6" fill="#ffebe9" stroke="#cf222e"/>
+  <text class="skip" x="742" y="525" fill="#82071e">唯一不能跳的一站。</text><text class="skip" x="742" y="543" fill="#82071e">其餘六站都可能跳過。</text>
+
+  <!-- 6 -->
+  <circle cx="52" cy="632" r="15" class="dot"/><text class="num" x="47" y="637">6</text>
+  <text class="name" x="86" y="627">驗收</text><text class="judge" x="86" y="646">有沒有蓋對</text>
+  <rect class="user" x="300" y="602" width="132" height="26" rx="5"/><text class="skill" x="310" y="620">/uat-cases</text>
+  <rect class="user" x="300" y="634" width="188" height="26" rx="5"/><text class="skill" x="310" y="652">/browser-evidence</text>
+  <text class="note" x="446" y="620">TC 編號一發即凍結</text>
+  <text class="note" x="502" y="652">沒有新鮮證據不准說通過</text>
+  <rect class="skipbox" x="730" y="608" width="240" height="48" rx="6"/>
+  <text class="skip" x="742" y="627">沒有人要看證據 —— 但先確認</text><text class="skip" x="742" y="645">「沒有人」包不包含三個月後的你。</text>
+
+  <!-- 7 -->
+  <circle cx="52" cy="744" r="15" class="dot"/><text class="num" x="47" y="749">7</text>
+  <text class="name" x="86" y="739">上線交付</text><text class="judge" x="86" y="758">別人能不能跑</text>
+  <rect class="model" x="300" y="714" width="104" height="26" rx="5"/><text class="skill" x="310" y="732">/wizard</text>
+  <rect class="user"  x="300" y="746" width="140" height="26" rx="5"/><text class="skill" x="310" y="764">/git-commit</text>
+  <rect class="user"  x="452" y="746" width="96"  height="26" rx="5"/><text class="skill" x="462" y="764">/git-pr</text>
+  <rect class="user"  x="560" y="746" width="132" height="26" rx="5"/><text class="skill" x="570" y="764">/git-release</text>
+  <text class="note" x="418" y="732">容器化、排程、CI secrets、Runbook</text>
+  <rect class="skipbox" x="730" y="720" width="240" height="48" rx="6"/>
+  <text class="skip" x="742" y="739">只有你自己用，掛了沒人在意。</text><text class="skip" x="742" y="757">大部分專案一輩子不用走這站。</text>
+
+  <text class="strong" x="86" y="812">驗收標準不是命令，是一個人</text>
+  <text class="note"   x="86" y="832">找一個沒看過這個專案的人照 Runbook 跑一次。他卡住的每個地方，都是 Runbook 缺的一行。</text>
+  <text class="note"   x="86" y="852">你自己不能當那個閘門。</text>
+
+  <!-- 交流道 -->
+  <rect class="card" x="32" y="896" width="452" height="152" rx="8"/>
+  <text class="strong" x="48" y="920">交流道：不是每次都從第 1 站開始</text>
+  <text class="note" x="48"  y="946">真實工作裡，你大部分時間從這裡進場。</text>
+  <rect class="user" x="48" y="960" width="104" height="24" rx="5"/><text class="skill" x="58" y="977">/triage</text>
+  <text class="note" x="164" y="977">別人回報的 bug／需求 → 匯入 /implement</text>
+  <rect class="model" x="48" y="992" width="176" height="24" rx="5"/><text class="skill" x="58" y="1009">/diagnosing-bugs</text>
+  <text class="note" x="236" y="1009">難修的 bug，原因不明</text>
+  <rect class="user" x="48" y="1024" width="124" height="24" rx="5"/><text class="skill" x="58" y="1041">/wayfinder</text>
+  <text class="note" x="184" y="1041">題目大到不知從何下手 → 匯入 /to-spec</text>
+
+  <!-- session -->
+  <rect class="card" x="516" y="896" width="452" height="152" rx="8"/>
+  <text class="strong" x="532" y="920">Session 規則</text>
+  <text class="note" x="532" y="946">第 1 到 2 站同一個 session 一路做完，中間不 /clear —— </text>
+  <text class="note" x="532" y="964">規格需要訪談的原文，不是它的摘要。</text>
+  <text class="note" x="532" y="988">第 4 站之後，每張票各開一個新 session。</text>
+  <text class="note" x="532" y="1012">Session 快滿了 → /handoff，開新 session 貼路徑接著做。</text>
+  <text class="note" x="532" y="1036">完整決策樹：compass/PHASE-BOUNDARIES.md</text>
+</svg>

@@ -47,10 +47,10 @@ Propose from the remote: GitHub remote → GitHub Issues (`gh` CLI). GitLab remo
 
 Record the reasoning in `domain.md` so future sessions apply it: a document only your tooling reads has no rot-detection loop. And a private file must not become a shadow copy of team truth — a fact teammates should read gets promoted into the committed `CLAUDE.md`/`AGENTS.md` or an ADR, never fixed by committing the private file.
 
-**Section E — Guard hooks.** Two PreToolUse hooks on `Bash`, copied in from the luca-skills repo: `guard-git.sh` (blocks `git add -A`/`git add .`, force push, `git reset --hard` beyond HEAD, `--no-verify`, and PR merges — merging is the user's button) and `guard-secrets.sh` (blocks `git commit` while a credential literal sits in the staged diff). Prose rules hold roughly 70% compliance; these red lines ride on exit code 2 instead. Propose both, one nod per hook.
+**Section E — Guard hooks.** Two PreToolUse hooks on `Bash`, bundled with this skill: `guard-git.sh` (blocks `git add -A`/`git add .`, force push, `git reset --hard` beyond HEAD, `--no-verify`, and PR merges — merging is the user's button) and `guard-secrets.sh` (blocks `git commit` while a credential literal sits in the staged diff). Prose rules hold roughly 70% compliance; these red lines ride on exit code 2 instead. Propose both, one nod per hook.
 
-- **Source**: resolve the luca-skills repo from this skill folder's link target (`(Get-Item <skill-dir> -Force).Target` — the repo root is two levels up); the files are `<repo>/hooks/guard-git.sh` and `<repo>/hooks/guard-secrets.sh`. Unresolvable → ask where the repo lives.
-- **Copy byte-for-byte into `.claude/hooks/`**, never reference the repo by path: a copy that ages still runs the old guard, while a pointer to a moved repo guards nothing and says nothing. Their tests stay in luca-skills — the copy is verbatim, so a green source is a green copy.
+- **Source**: this skill folder's own `hooks/` directory — `<skill-dir>/hooks/guard-git.sh` and `<skill-dir>/hooks/guard-secrets.sh`. They travel with the skill, so there is no repo to resolve and nothing to go missing.
+- **Copy byte-for-byte into `.claude/hooks/`**, never reference the source by path: a copy that ages still runs the old guard, while a pointer to a moved file guards nothing and says nothing. Their tests sit next to them (`test-guard-git.sh`, `test-guard-secrets.sh`) — the copy is verbatim, so a green source is a green copy.
 - **Drift**: copies present but differing from source → show the diff, propose refreshing.
 - **Register** each under `PreToolUse`, matcher `Bash`, in `.claude/settings.json` as `bash .claude/hooks/<name>.sh`. Merge into whatever hooks structure exists — existing entries stay untouched.
 
