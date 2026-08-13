@@ -14,9 +14,12 @@
 | 檔案 | 角色 |
 |---|---|
 | `PRINCIPLES.md` | 第一冊：心法。七條不變量與四個 Mode |
-| `BUILD.md` | 第二冊：實戰。CookCard 五個關卡 |
+| `BUILD.md` | 第二冊：實戰。CookCard 九個站點 |
+| `docs/SKILL-MAP.md` | 技能速查：哪一站用哪個、什麼時候跳過 |
 | `docs/FIXTURES.md` | 素材挑選準則（講師用） |
 | `curriculum/README.md` | 講師手冊 |
+| `.claude/skills/` | luca-skills 的**凍結副本，不要改**。見該目錄的 `README.md` |
+| `THIRD-PARTY-NOTICES.md` | 上述副本的授權聲明。動 `.claude/skills/` 就要同步檢查 |
 
 學生路線固定：`README.md` → `PRINCIPLES.md` → `BUILD.md`。**不要新增替代路線。**
 
@@ -45,11 +48,13 @@ VLM vs STT、SQLite vs Postgres、cron vs queue —— 全部留給學生決定�
 
 ---
 
-## 關卡不是章節
+## 站點不是章節
 
-`BUILD.md` 的五個關卡**順序可以亂**。每一關的結束條件是一個**可觀測的訊號**，不是「做完幾個功能」。
+`BUILD.md` 的九個站點**順序可以亂，而且大部分可以跳過**。每一站都有「什麼時候跳過這一站」那一段 —— **那是全書最重要的內容**。
 
-改教材時如果你把某一關寫成「必須先完成前一關才能開始」，就是把它改回流水線了 —— 那正是這條線存在的理由所要避開的東西。
+`.claude/skills/README.md` 有一張主流程表，看起來像一條線。**那是預設路徑，不是規定。** 教材教的是什麼時候偏離它。
+
+改教材時如果你把某一站寫成「必須先完成前一站才能開始」，或刪掉「什麼時候跳過」那一段，就是把它改回流水線了 —— 那正是這條線存在的理由所要避開的東西。
 
 ---
 
@@ -61,13 +66,31 @@ VLM vs STT、SQLite vs Postgres、cron vs queue —— 全部留給學生決定�
 
 ---
 
-## 元件責任
+## 工具鏈
 
-這個分支**沒有 harness**（沒有 skills、subagents、hooks 設定）。刻意的。
+這門課用 [luca-skills](https://github.com/Luca0x5755/luca-skills) 當工具鏈，凍結副本在 `.claude/skills/`。
 
-理由：這門課不指定 coding agent，學生用什麼都行。綁定任一工具的 harness 會讓另外兩種工具的使用者卡住。
+### 不要改 vendored 的檔案
 
-唯一的例外是 `.githooks/`，那是 Git 層的，與 agent 無關。
+`.claude/skills/` 是**未修改的凍結副本**。改了它，你就從使用者變成維護一份分支：上游修 bug 合不回來，而教材會同時對不上兩邊。
+
+要更新的話照 `.claude/skills/README.md` 的步驟整包重抓，**並且同步檢查 `docs/SKILL-MAP.md` 提到的每個技能還在不在、描述有沒有變**。
+
+### 這條線實質是 Claude Code / Copilot 取向
+
+luca-skills 依賴 `disable-model-invocation` 來區分「使用者觸發」與「模型觸發」的技能。
+**Antigravity 與 Copilot 都不支援這個欄位**，編排型技能會被 agent 自行啟動。
+教材已在 `docs/SKILL-MAP.md` 標明這個落差，不要淡化它。
+
+### 技能放在 repo 裡，不用安裝
+
+技能直接放在 `.claude/skills/`（攤平，無 `core`/`draft` 中間層）。**fork 下來打開 Claude Code 就可用**，不需要跑上游的 `install.sh`。
+
+學生的 CookCard 蓋在 fork 的 `cookcard/` **子目錄**裡。Claude Code 的專案技能會從啟動目錄一路往上找到 repo 根，所以在子目錄啟動一樣吃得到。
+
+不要為了「乾淨」把技能搬走或改成 submodule —— 上課現場多一個下載步驟就會有人卡住，這是刻意的取捨。
+
+`.githooks/` 是 Git 層的防護，與 agent 無關，兩者不衝突。
 
 ---
 

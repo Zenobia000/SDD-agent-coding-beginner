@@ -1,23 +1,27 @@
-# Progressive SDD：跟著 AI 做出一套真的能上線的系統
+# Progressive SDD：拿到一個新題目，從零到上線
 
 這條線和另外兩條不一樣。
 
 `claude` 與 `antigravity` 兩條線教的是**工具怎麼用** —— 照著貼、看到綠燈、往下一章。那是必要的第一步，但走完之後你會發現一件事：**你學會了操作 agent，但沒學會怎麼開發軟體。**
 
-這條線補的就是那一段。
+這條線補的就是那一段：**拿到一個新題目，怎麼拆解問題、拆解功能、建構系統，一路到部署上線。**
 
 ---
 
-## 這門課要解決什麼
+## Fork 下來就能用
 
-AI 能一次生出幾百行程式碼。速度不再是瓶頸，**判斷**才是。
+工具箱已經在 repo 裡，**不用安裝任何東西**。
 
-而判斷沒辦法照著腳本學。所以這門課不給你 prompt 貼，改成兩件事：
+```bash
+# fork 這個 repo，然後
+git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
+cd SDD-agent-coding-beginner
+git switch progressive-sdd
+git config core.hooksPath .githooks
+claude
+```
 
-1. **心法**：七條不變量 + 一套判斷「什麼時候該把東西固化下來」的規則
-2. **一個真的系統**：從一句話的想法，做到能部署、有排程、有前後端與資料庫的東西
-
-中間你會親手違反每一條不變量，然後修回來。**那個修回來的過程就是這門課。**
+打 `/ask-luca`。看得到技能清單就成功了。
 
 ---
 
@@ -26,9 +30,28 @@ AI 能一次生出幾百行程式碼。速度不再是瓶頸，**判斷**才是�
 | | 檔案 | 時間 | 內容 |
 |---|---|---|---|
 | 第一冊 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 約 40 分鐘 | 心法。七條不變量、四個 Mode、什麼時候該固化 |
-| 第二冊 | [`BUILD.md`](./BUILD.md) | 多次 session | 實戰。CookCard，五個關卡 |
+| 第二冊 | [`BUILD.md`](./BUILD.md) | 多次 session | 實戰。CookCard，九個站點 |
 
-第一冊先讀完再進第二冊。它很短，而且第二冊每一關都會回頭引用它。
+第一冊先讀完再進第二冊。它很短，而且第二冊每一站都會回頭引用它。
+
+隨時可查：[`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) —— 哪一站用哪個技能、什麼時候可以跳過。
+
+---
+
+## 工具箱
+
+用 [luca-skills](https://github.com/Luca0x5755/luca-skills)：36 個給 coding agent 用的工程技能，凍結副本在 [`.claude/skills/`](./.claude/skills/)（MIT，聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)）。
+
+覆蓋的範圍：
+
+```text
+/setup-skills → /grilling → /domain-modeling → /to-spec → /feasibility
+  → /to-architecture → /frontend-spec → /test-blueprint → /to-tickets
+  → /implement（含 /tdd、/code-review）→ /uat-cases → /browser-evidence
+  → /wizard → /git-commit → /git-pr → /git-release
+```
+
+⚠️ **這條線實質是 Claude Code / Copilot 取向。** luca-skills 用 `disable-model-invocation` 區分「只有你能叫」與「agent 也能叫」的技能，**Antigravity 與 Copilot 都不支援這個欄位** —— 在那兩邊，編排型技能會被 agent 自己啟動。落差寫在 `docs/SKILL-MAP.md`，沒有淡化。
 
 ---
 
@@ -47,34 +70,26 @@ AI 能一次生出幾百行程式碼。速度不再是瓶頸，**判斷**才是�
 | **有不可逆決定** | 食譜 schema。存了 80 份之後要加欄位，你得自己面對遷移 |
 | **有真實邊界** | 任意 YouTube URL、三小時長片、字幕裡的 prompt injection |
 | **要選型** | VLM 一次到底，還是 STT + 抽幀 OCR 兩段式？要不要 vector DB？ |
+| **值不值得做是真問題** | 市面上食譜 App 一堆，還有人直接把連結丟給 ChatGPT。你得誠實比較 |
 | **失敗會現形** | 抽出來的食譜照著做會不會成功 —— 你自己就能驗 |
 
-技術面會涵蓋前端、後端、資料庫、多模態模型、容器化與排程自動化。但**這些是題目自己長出來的需求，不是為了教而塞進去的**。
+技術面會涵蓋前端、後端、資料庫、多模態模型、容器化與排程自動化。**但這些是題目自己長出來的需求，不是為了教而塞進去的。**
 
 素材全部來自網路，中文料理影片無限量。詳見 [`docs/FIXTURES.md`](./docs/FIXTURES.md)。
 
 ---
 
-## 開始之前
+## 你的專案蓋在 fork 裡面
 
-```bash
-git clone https://github.com/Zenobia000/SDD-agent-coding-beginner.git
-cd SDD-agent-coding-beginner
-git switch progressive-sdd
-git config core.hooksPath .githooks
+```text
+SDD-agent-coding-beginner/     ← 你 fork 的這個 repo
+├── PRINCIPLES.md              ← 教材，讀的
+├── BUILD.md                   ← 教材，讀的
+├── .claude/skills/            ← 工具箱，不用管
+└── cookcard/                  ← 你要蓋的東西，所有產出都在這裡
 ```
 
-`core.hooksPath` 是每個 clone 各自的設定，沒設就等於 `.githooks/` 完全沒作用。確認一下：
-
-```bash
-git config core.hooksPath
-```
-
-必須印出 `.githooks`。
-
-**這門課不指定 coding agent。** Claude Code、Antigravity、Cursor 都可以，甚至不用 agent 純手寫也能跑完 —— 因為教的是判斷，不是操作。想先熟悉工具本身，去 [`claude`](../../tree/claude) 或 [`antigravity`](../../tree/antigravity) 分支。
-
-技術選型也不預先指定。**選型本身就是第二冊的一關**，先告訴你答案就沒得練了。
+在 `cookcard/` 裡啟動 Claude Code 一樣吃得到根目錄的技能 —— 專案技能會從啟動目錄一路往上找到 repo 根。
 
 ---
 
@@ -89,7 +104,7 @@ claude / antigravity          progressive-sdd
   4–5 小時                      多次 session
 ```
 
-先走完任一條工具線再來這裡，會順很多 —— 你至少要能讓 agent 跑起來。但不是硬性前置。
+先走完任一條工具線再來這裡會順很多 —— 你至少要能讓 agent 跑起來。但不是硬性前置。
 
 ---
 
@@ -98,14 +113,16 @@ claude / antigravity          progressive-sdd
 | 項目 | 狀態 |
 |---|---|
 | `PRINCIPLES.md` 心法篇 | ✅ 完成 |
-| `BUILD.md` 實戰篇（五關） | ✅ 完成 |
+| `BUILD.md` 實戰篇（九站） | ✅ 完成 |
+| `docs/SKILL-MAP.md` 技能速查 | ✅ 完成 |
 | `docs/FIXTURES.md` 素材挑選準則 | ✅ 完成 |
 | `curriculum/README.md` 講師手冊 | ✅ 完成 |
-| **Fixture 影片實際挑選與下載** | ⬜ **開課前必做** —— 六支影片的 URL、`expected.json` 內容 |
+| `.claude/skills/` 工具箱 | ✅ 已內建，fork 即用 |
+| **Fixture 影片實際挑選與下載** | ⬜ **開課前必做** —— 六支影片的 URL 與 `expected.json` |
 | 參考實作 | ⬜ 刻意不做（見 `BUILD.md` 附錄） |
 
-`BUILD.md` 的驗收訊號有幾條假設了 fixture 已就位（例如 `fixtures/baseline/`）。fixture 挑好之前，那些命令跑不起來 —— 這是已知狀態，不是 bug。
+`BUILD.md` 有幾條通過訊號假設了 fixture 已就位（例如 `fixtures/baseline/`）。挑好之前那些命令跑不起來 —— 這是已知狀態，不是 bug。
 
 ---
 
-MIT License。
+MIT License。`.claude/skills/` 為第三方內容，授權見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
