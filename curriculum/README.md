@@ -99,7 +99,7 @@
 | 項目 | 說明 |
 |---|---|
 | **確認 fork 即用** | 拿一台乾淨機器 fork、clone、`claude`、打 `/compass`，確認技能載得到 |
-| **挑好六支 fixture 影片** | 依 [`docs/FIXTURES.md`](../docs/FIXTURES.md) 的特徵表，不是依菜色 |
+| **看過六支 fixture 影片** | 已挑好在 [`docs/FIXTURES.md`](../docs/FIXTURES.md)。你要確認的是 `caption-only` 那支的份量真的在畫面字卡上 —— 那一點沒辦法自動驗 |
 | **寫好 `expected.json`** | 每支的必要食材、最少數量、已知模糊項、不得出現的幻覺項 |
 | **預先下載** | audio / captions / frames 進版控，教室網路撐不住三十個人同時抓 |
 | **自己跑一遍第 1 站到第 5 站** | 至少確認 baseline 那支真的抽得出東西，且技能在 fork 裡叫得動 |

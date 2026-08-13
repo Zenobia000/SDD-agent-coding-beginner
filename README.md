@@ -119,7 +119,8 @@ claude / antigravity          progressive-sdd
 | `curriculum/README.md` 講師手冊 | ✅ 完成 |
 | `.claude/skills/` 工具箱（36 技能 + guard hooks） | ✅ 已內建，fork 即用 |
 | `docs/assets/route.svg` 七站路線圖 | ✅ 完成 |
-| **Fixture 影片實際挑選與下載** | ⬜ **開課前必做** —— 六支影片的 URL 與 `expected.json` |
+| Fixture 六支影片挑選 | ✅ 完成，見 [`docs/FIXTURES.md`](./docs/FIXTURES.md)（中英各三，附證據等級） |
+| **每支的 `expected.json`** | ⬜ **開課前必做** —— 需要人看過影片才能填 |
 | 參考實作 | ⬜ 刻意不做（見 `BUILD.md` 附錄） |
 
 `BUILD.md` 有幾條通過訊號假設了 fixture 已就位（例如 `fixtures/baseline/`）。挑好之前那些命令跑不起來 —— 這是已知狀態，不是 bug。
