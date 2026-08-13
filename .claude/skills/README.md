@@ -49,6 +49,11 @@ done
 
 更新後**必須**重對 [`docs/SKILL-MAP.md`](../../docs/SKILL-MAP.md)：教材提到的每個技能還在不在、描述有沒有變、`disable-model-invocation` 有沒有增減。
 
+## 一起帶進來的還有圖
+
+上游 `assets/` 的兩張流程圖放在 [`docs/assets/`](../../docs/assets/)（`flow.svg`、`toolbox.svg`），
+同樣未修改。更新技能時記得一起重抓 —— 圖上畫的技能若有增減，圖會比文字更早過期。
+
 ## 沒有一起帶進來的東西
 
 上游還有 hooks（`guard-git`、`guard-secrets`、`check-on-stop`）與它自己的 `.claude/settings.json`。**刻意沒帶** —— 那是為它自己的 repo 設計的，掛進來會多出這門課不需要的變數。要用的話去上游拿。

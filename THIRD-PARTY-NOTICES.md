@@ -1,7 +1,7 @@
 # Third-party notices
 
-本 repo 的 `.claude/skills/` 是 [Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills)
-的未修改凍結副本（commit `1434be8ff814b51f0e7fa166bc2e767075e71d83`，2026-08-12），
+本 repo 的 `.claude/skills/` 與 `docs/assets/`（`flow.svg`、`toolbox.svg`）取自
+[Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills)，為未修改的凍結副本（commit `1434be8ff814b51f0e7fa166bc2e767075e71d83`，2026-08-12），
 依 MIT License 使用。詳細的凍結資訊見 `.claude/skills/README.md`。
 
 ---
