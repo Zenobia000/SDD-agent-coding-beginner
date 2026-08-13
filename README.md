@@ -27,9 +27,11 @@
 
 | 分支 | 第一冊 | 第二冊 | 特色 |
 |---|---|---|---|
-| [`progressive-sdd`](../../tree/progressive-sdd) | `PRINCIPLES.md`（心法） | `BUILD.md`（CookCard） | **不指定工具、不給 prompt、不給答案** |
+| [`progressive-sdd`](../../tree/progressive-sdd) | `PRINCIPLES.md`（心法） | `BUILD.md`（CookCard，七站） | **工具鏈內建、fork 即用、不給答案** |
 
 **CookCard**：把料理影片變成能照著做的結構化食譜卡。會長出前端、後端、資料庫、多模態抽取、容器化與排程 —— 但這些是題目自己長出來的需求，不是為了教而塞進去的。
+
+路線分成**七站**，每一站是一個能被獨立跳過的判斷。整條線的重點不是「照這個順序做」，是**知道這次哪幾站不用做**。36 個 coding agent 工程技能已內建在 `.claude/skills/`，fork 下來就能用，不需要安裝。
 
 ---
 
@@ -43,6 +45,7 @@
 | 會操作 agent 了，但不確定自己會不會「開發軟體」 | `progressive-sdd` |
 | 覺得照著貼很順，但沒有一個決定是自己做的 | `progressive-sdd` |
 | 只有無圖形介面的 Linux 主機（SSH） | 都可以，但工具線只能走 CLI；Antigravity IDE 需要桌面環境 |
+| 想要一套現成的工程技能可以帶去自己的專案 | `progressive-sdd` —— 36 個技能就在 `.claude/skills/`，MIT |
 
 兩條工具線沒有哪一條比較進階，元件模型不同而已。`progressive-sdd` 才是難度上的下一階。
 
@@ -58,7 +61,7 @@ git switch antigravity        # 工具線：Google Antigravity
 # 或
 git switch claude             # 工具線：Claude Code
 # 或
-git switch progressive-sdd    # 工程線：不指定工具
+git switch progressive-sdd    # 工程線：工具鏈內建
 ```
 
 切過去之後**先讀該分支的 `README.md`**，它會告訴你安裝什麼、從哪一章開始。
@@ -76,6 +79,8 @@ git switch progressive-sdd    # 工程線：不指定工具
 硬要塞進同一個分支，結果是兩份會各自腐爛的設定，加上一本必須不斷加註「如果你用 A 就…如果你用 B 就…」的教材。
 
 `progressive-sdd` 分開的理由不同：**它的教法和工具線相反。** 工具線給 prompt、給預期輸出、給通過條件；工程線刻意全部不給，因為判斷沒辦法照著腳本學。混在一起會讓兩種教法互相稀釋。
+
+⚠️ 工程線的技能庫依賴 `disable-model-invocation`，**Antigravity 與 Copilot 都不支援**，所以那條線實質是 Claude Code 取向。落差寫在該分支的 `docs/SKILL-MAP.md`。
 
 ---
 
