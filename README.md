@@ -43,7 +43,7 @@
 
 ```text
 第 0 站  你在做哪一級的東西       ← 先定位，不然後面全都用力錯地方
-第 1 站  從一句抱怨到一個痛點     ← GROW 提問法，讓 AI 當你的教練
+第 1 站  從一句抱怨到一個痛點     ← 先填現況／期望表，再讓 AI 逼問你
 第 2 站  種子簡報（5 欄）         ← 第一份能被別人讀懂的東西
 第 3 站  把痛點逼到具體           ← meta-prompt：用 prompt 求 prompt
 ─────────────────────────── 以上是「想」，以下是「寫」
@@ -76,7 +76,7 @@
 
 這五題**沒有一題是技術問題**，但每一題都會改變 AI 生出來的東西。這就是重點。
 
-完整範例四份文件在 [`examples/subtrim/`](./examples/subtrim/) —— 走到哪一站卡住，就去看那一站的範例長什麼樣。
+完整範例文件在 [`examples/subtrim/`](./examples/subtrim/) —— 走到哪一站卡住，就去看那一站的範例長什麼樣。
 
 ⚠️ **範例是拿來對照的，不是拿來抄的。** 你抄 SubTrim 的 PRD 交出去，這門課對你的價值就是零 —— 因為你沒有在解你自己的痛。建議你帶一個**自己真的煩過**的題目來走。
 
@@ -113,10 +113,11 @@ git switch sdd-lite
 | 路徑 | 是什麼 |
 |---|---|
 | [`DEFINE.md`](./DEFINE.md) | **主教材。八站，從這裡開始** |
-| [`templates/`](./templates/) | 四份空白模板：種子簡報 / PRD / SRS / SAD |
-| [`examples/subtrim/`](./examples/subtrim/) | SubTrim 的完整四份文件 + 最終 build prompt |
+| [`templates/`](./templates/) | 五份空白模板：現況／期望表 / 種子簡報 / PRD / SRS / SAD |
+| [`examples/subtrim/`](./examples/subtrim/) | SubTrim 的完整五份文件 + 最終 build prompt |
 | [`docs/TIERS.md`](./docs/TIERS.md) | 四級系統與最小可行文件集 —— 你該寫多少文件 |
 | [`docs/DOC-MAP.md`](./docs/DOC-MAP.md) | PRD / SRS / SAD 的邊界：同一件事該寫在哪一份 |
+| [`docs/NOCODE-LIMITS.md`](./docs/NOCODE-LIMITS.md) | no-code MVP 通常做不完整的六類能力，第 4 站產 PRD 時 AI 用它來標記、你來決定 |
 | [`docs/PLATFORMS.md`](./docs/PLATFORMS.md) | Lovable / Bolt / Replit / AI Studio 差異對照 |
 | [`docs/PROMPTS.md`](./docs/PROMPTS.md) | 全站 prompt 速查卡，複製貼上區 |
 | [`curriculum/README.md`](./curriculum/README.md) | 講師手冊（學生不用讀） |
