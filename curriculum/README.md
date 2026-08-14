@@ -1,5 +1,9 @@
 # 講師手冊：Progressive SDD
 
+> 這一份是 **CookCard 教材**（`BUILD.md` 七站）的帶課指南。
+> 另有 [`sunny-sprint.md`](./sunny-sprint.md) —— 用這套方法論開的兩週 RAG 營，
+> 題目與形式都不同，公開的是課表與 Rubric。兩份不要混用。
+
 > 給講師。學生不需要讀這一份。
 >
 > 這門課和另外兩條線的教法**完全不同**。照著 `claude` / `antigravity` 那套帶會失敗。

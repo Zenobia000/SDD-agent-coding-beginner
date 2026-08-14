@@ -45,3 +45,7 @@ tmp/
 
 # 本機大型簡報原檔
 /*.pptx
+
+# 營運機密：含定價、成本結構、毛利與商業假設，不進公開 repo。
+# 公開版（課表 + Rubric，已去除商業內容）在 curriculum/sunny-sprint.md。
+Sunny_Sprint_*.md
