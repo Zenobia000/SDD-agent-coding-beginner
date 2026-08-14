@@ -1,114 +1,156 @@
-# AI Coding Agent 工程實戰課
+# 想清楚再生成 —— 給 no-code AI 平台的需求定義課
 
-這門課教的不是「怎麼跟 AI 聊天」，而是**怎麼用 AI coding agent 做出可驗證、可 review、可交付的軟體**。
+這條線一行 code 都不寫。
 
-**這個分支只負責導航，教材在下面的分支上。**
+它教的是**在你按下 Lovable、Bolt、Replit、AI Studio 那顆 Generate 之前，腦袋裡該先發生什麼事**。
 
 ---
 
-## 兩個層級，先選層級再選工具
+## 這條線要解決的問題
+
+你在 Lovable 打一句「幫我做一個記帳 App」，三十秒後畫面出來了，很漂亮。
+
+然後你開始改。「顏色換掉」「加一個分類」「這個按鈕移到上面」「不對，剛剛那版比較好」……改到第二十次，你發現：
+
+- 它每次都動到你沒要它動的地方
+- 你講不清楚哪裡不對，只能說「感覺怪怪的」
+- 你不知道什麼時候算做完
+- 一個禮拜後你自己都忘記當初想解決什麼
+
+**這不是平台爛，是輸入爛。** no-code 平台把「寫程式」這件事變便宜了，於是**「想清楚」變成整條鏈上唯一貴的東西** —— 而它剛好是唯一沒有人能幫你做的。
+
+這條線就是補那一段。
+
+---
+
+## 三份文件，三種問題
+
+走完之後你手上會有三份東西。它們不是作業，是你餵進 no-code 平台的輸入。
+
+| 文件 | 回答的問題 | 沒有它會怎樣 |
+|---|---|---|
+| **PRD**<br>產品需求文件 | 為誰做？解什麼痛？**不做**什麼？怎麼算成功？ | 做出一個沒人要的東西，而且永遠做不完 —— 因為沒有邊界 |
+| **SRS**<br>軟體需求規格 | 具體要滿足哪些**可驗證**的需求？ | 「做好了」變成感覺問題。你沒辦法驗收 AI 的產出 |
+| **SAD**（加碼）<br>系統架構文件 | 系統由哪些部分組成？資料長什麼樣？ | 平台替你做了所有技術決定，而你完全不知道它決定了什麼 |
+
+三份加起來俗稱 **SDD 的簡易版**。這條線走的是簡易版 —— 不是給要上線的正式系統用的，是給**一個人、一個週末、一個 no-code 平台**用的。
+
+差別寫在 [`docs/TIERS.md`](./docs/TIERS.md)：你在做哪一級的東西，決定你該寫多少文件。**把 POC 當正式系統上線，是最常見的災難。**
+
+---
+
+## 八站
 
 ```text
-第一層  學會操作工具        claude ／ antigravity        照著貼，看綠燈
-                                    ↓
-第二層  學會開發軟體        progressive-sdd              自己判斷，自己驗
+第 0 站  你在做哪一級的東西       ← 先定位，不然後面全都用力錯地方
+第 1 站  從一句抱怨到一個痛點     ← GROW 提問法，讓 AI 當你的教練
+第 2 站  種子簡報（5 欄）         ← 第一份能被別人讀懂的東西
+第 3 站  把痛點逼到具體           ← meta-prompt：用 prompt 求 prompt
+─────────────────────────── 以上是「想」，以下是「寫」
+第 4 站  PRD                      ← 產品定義
+第 5 站  SRS                      ← 可驗證的需求
+第 6 站  SAD（加碼）              ← 架構思維
+─────────────────────────── 以上是「寫」，以下是「生成」
+第 7 站  餵進平台，出原型，驗收   ← 用第 5 站的驗收條件回頭驗 AI 的產出
 ```
 
-### 第一層：工具線（入門）
+教材：[`DEFINE.md`](./DEFINE.md)。每一站都有可直接複製的 prompt、產出範例、通過訊號。
 
-兩條線內容對等，差別只在你用哪個 agent。第二冊題目相同：**SmartTrip FX** —— 讀取行程 JSON，驗證輸入、計算旅費現金與匯率燈號，只用 Python standard library。
-
-| 分支 | 工具 | 第一冊 | 專案契約 | Harness |
-|---|---|---|---|---|
-| [`antigravity`](../../tree/antigravity) | **Google Antigravity**（`agy` CLI + IDE） | `ANTIGRAVITY.md` | `AGENTS.md` | `.agents/` |
-| [`claude`](../../tree/claude) | **Claude Code** | `CLAUDE-CODE.md` | `CLAUDE.md` | `.claude/` |
-
-### 第二層：工程線（進階）
-
-| 分支 | 第一冊 | 第二冊 | 特色 |
-|---|---|---|---|
-| [`progressive-sdd`](../../tree/progressive-sdd) | `PRINCIPLES.md`（心法） | `BUILD.md`（CookCard，七站） | **工具鏈內建、fork 即用、不給答案** |
-
-**CookCard**：把料理影片變成能照著做的結構化食譜卡。會長出前端、後端、資料庫、多模態抽取、容器化與排程 —— 但這些是題目自己長出來的需求，不是為了教而塞進去的。
-
-路線分成**七站**，每一站是一個能被獨立跳過的判斷。整條線的重點不是「照這個順序做」，是**知道這次哪幾站不用做**。36 個 coding agent 工程技能已內建在 `.claude/skills/`，fork 下來就能用，不需要安裝。
+**第 0 到第 3 站是這門課的重點。** 第 4 到第 6 站的文件其實 AI 幫你寫得很快 —— 前提是前面四站你自己走過。跳過前四站直接叫 AI 寫 PRD，你會拿到一份漂亮的、跟你無關的文件。
 
 ---
 
-## 怎麼選
+## 範例題目：SubTrim（訂閱瘦身）
 
-| 你的情況 | 去哪 |
+> 每個月信用卡帳單一堆訂閱扣款，你不知道哪些還在用、哪些該砍、砍了會不會影響到什麼。
+
+選這題不是因為它最酷，是因為它**歧義夠多**：
+
+| 教材會逼你回答的問題 | 為什麼沒有標準答案 |
 |---|---|
-| 沒用過 coding agent | 先走一條工具線。`antigravity` 或 `claude` 都行 |
-| 已經有 Google 帳號，想留在 Google 生態系 | `antigravity` |
-| 已經在用 Claude Code，或有 Anthropic 訂閱 | `claude` |
-| 會操作 agent 了，但不確定自己會不會「開發軟體」 | `progressive-sdd` |
-| 覺得照著貼很順，但沒有一個決定是自己做的 | `progressive-sdd` |
-| 只有無圖形介面的 Linux 主機（SSH） | 都可以，但工具線只能走 CLI；Antigravity IDE 需要桌面環境 |
-| 想要一套現成的工程技能可以帶去自己的專案 | `progressive-sdd` —— 36 個技能就在 `.claude/skills/`，MIT |
+| 「還在用」怎麼定義？ | 平台不會給你 API。只能靠自己填 —— 那使用者憑什麼願意填？ |
+| 年繳的攤到月，怎麼算？ | 攤平看起來合理，但你實際上是一次被扣一大筆 |
+| 免費試用期算不算支出？ | 現在 0 元，下個月 390 元。要不要現在就算進去？ |
+| 跟室友合分的家庭方案怎麼記？ | 你付全額但只用三分之一 |
+| 美金訂閱什麼時候換算成台幣？ | 刷卡當天？月初？固定匯率？每個選擇都會讓總額不一樣 |
 
-兩條工具線沒有哪一條比較進階，元件模型不同而已。`progressive-sdd` 才是難度上的下一階。
+這五題**沒有一題是技術問題**，但每一題都會改變 AI 生出來的東西。這就是重點。
+
+完整範例四份文件在 [`examples/subtrim/`](./examples/subtrim/) —— 走到哪一站卡住，就去看那一站的範例長什麼樣。
+
+⚠️ **範例是拿來對照的，不是拿來抄的。** 你抄 SubTrim 的 PRD 交出去，這門課對你的價值就是零 —— 因為你沒有在解你自己的痛。建議你帶一個**自己真的煩過**的題目來走。
 
 ---
 
-## 三分鐘開始
+## 你需要什麼
+
+- 一個瀏覽器
+- 一個 no-code AI 平台帳號（Lovable / Bolt / Replit / Google AI Studio 任一個，都有免費額度）
+- 一個能打字的地方（記事本、Google Docs、Notion 都行）
+
+**不用裝任何東西，不用會 git，不用開終端機。**
+
+平台之間的差異（誰吃長 prompt、誰的 System Instructions 放哪、誰能一鍵部署）整理在 [`docs/PLATFORMS.md`](./docs/PLATFORMS.md)。教材本身**寫成工具無關**，所有 prompt 貼到哪一家都能跑。
+
+### 兩種讀法
+
+**只讀網頁**（推薦給第一次走的人）：直接在 GitHub 上讀 `DEFINE.md`，模板用複製貼上的。
+
+**把 repo 抓下來**（推薦給要開課或要留紀錄的人）：
 
 ```bash
 git clone https://github.com/Zenobia000/SDD-agent-coding-beginner.git
 cd SDD-agent-coding-beginner
-
-git switch antigravity        # 工具線：Google Antigravity
-# 或
-git switch claude             # 工具線：Claude Code
-# 或
-git switch progressive-sdd    # 工程線：工具鏈內建
+git switch sdd-lite
 ```
 
-切過去之後**先讀該分支的 `README.md`**，它會告訴你安裝什麼、從哪一章開始。
+你的產出放在 `my-project/`（自己開），跟教材分開。
 
 ---
 
-## 為什麼工具線要分成兩個分支
+## 檔案地圖
 
-不是為了整齊，是因為**技術上無法共存**：
-
-- Antigravity 只探索 `.agents/`（`agy` 執行檔內完全沒有 `.claude` 路徑字串）
-- Claude Code 只讀 `.claude/`，且官方明文**不讀** `AGENTS.md`
-- 兩者的 hook 阻擋協定不同，skill frontmatter 的可用欄位也不同
-
-硬要塞進同一個分支，結果是兩份會各自腐爛的設定，加上一本必須不斷加註「如果你用 A 就…如果你用 B 就…」的教材。
-
-`progressive-sdd` 分開的理由不同：**它的教法和工具線相反。** 工具線給 prompt、給預期輸出、給通過條件；工程線刻意全部不給，因為判斷沒辦法照著腳本學。混在一起會讓兩種教法互相稀釋。
-
-⚠️ 工程線的技能庫依賴 `disable-model-invocation`，**Antigravity 與 Copilot 都不支援**，所以那條線實質是 Claude Code 取向。落差寫在該分支的 `docs/SKILL-MAP.md`。
-
----
-
-## 這個分支有什麼
-
-只有導航與共用的東西：
-
-| 路徑 | 用途 |
+| 路徑 | 是什麼 |
 |---|---|
-| `README.md` | 就是這一頁 |
-| `.githooks/` | Git 層的安全閘門（擋真實 `.env`、疑似硬編碼憑證、對保護分支的非快轉 push）。三條線共用 |
-| `LICENSE` | MIT |
-
-教材、harness、範例全部在各自的分支上，這裡刻意不放，避免和分支內容不同步。
-
----
-
-## 貢獻
-
-改動請提到對應的線上，不要提到 `main`：
-
-- 只影響 Antigravity → 從 `antigravity` 開分支
-- 只影響 Claude Code → 從 `claude` 開分支
-- 只影響工程線 → 從 `progressive-sdd` 開分支
-- 多條線都要改（例如 `.githooks/`）→ 分別提 PR，不要嘗試 cherry-pick 整個 harness
-
-`main` 只接受導覽頁本身的修改。
+| [`DEFINE.md`](./DEFINE.md) | **主教材。八站，從這裡開始** |
+| [`templates/`](./templates/) | 四份空白模板：種子簡報 / PRD / SRS / SAD |
+| [`examples/subtrim/`](./examples/subtrim/) | SubTrim 的完整四份文件 + 最終 build prompt |
+| [`docs/TIERS.md`](./docs/TIERS.md) | 四級系統與最小可行文件集 —— 你該寫多少文件 |
+| [`docs/DOC-MAP.md`](./docs/DOC-MAP.md) | PRD / SRS / SAD 的邊界：同一件事該寫在哪一份 |
+| [`docs/PLATFORMS.md`](./docs/PLATFORMS.md) | Lovable / Bolt / Replit / AI Studio 差異對照 |
+| [`docs/PROMPTS.md`](./docs/PROMPTS.md) | 全站 prompt 速查卡，複製貼上區 |
+| [`curriculum/README.md`](./curriculum/README.md) | 講師手冊（學生不用讀） |
 
 ---
 
-MIT License。工具行為以各自的官方文件為事實來源；教材中每條事實都標了證據等級，未經實測的一律標明。
+## 這條線在整門課的位置
+
+```text
+sdd-lite            想清楚要做什麼          不寫 code，用 no-code 平台出原型
+     ↓
+claude / antigravity  學會操作 coding agent   照著貼，看綠燈
+     ↓
+progressive-sdd     學會開發軟體            自己判斷，自己驗
+```
+
+這條線是**第零層**，在所有工具線之前。
+
+它不需要任何前置知識，走完也**不會**讓你變成工程師 —— 它讓你變成一個**問題定義得夠清楚，所以 AI 幫得上忙**的人。這件事對工程師和非工程師一樣值錢。
+
+走完想往下走：去 [`claude`](../../tree/claude) 或 [`antigravity`](../../tree/antigravity)。那兩條線教你怎麼把 no-code 出不來的東西真的做出來。
+
+---
+
+## 這條線刻意不教什麼
+
+| 不教 | 為什麼 |
+|---|---|
+| 怎麼寫 code | 這條線的整個前提就是你不寫 |
+| 平台的介面操作 | 三個月就改版，教了就過期。看官方文件 |
+| 怎麼把 no-code 產物上線給真實用戶用 | 那是 Product 級的事，這條線只到 POC/MVP demo。見 `docs/TIERS.md` |
+| 商業模式、募資、市場分析 | 這是需求定義課，不是創業課 |
+| 「最好的 prompt 範本」 | 不存在。教你怎麼逼出屬於你自己題目的 prompt |
+
+---
+
+MIT License。教材內容衍生自本 repo 早期的 Vibe Engineering runbook 與 AI 時代系統定義方法論文件集（見 `archive/antigravity-workflow` 分支）。
