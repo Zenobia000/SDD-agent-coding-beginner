@@ -49,3 +49,6 @@ tmp/
 # 營運機密：含定價、成本結構、毛利與商業假設，不進公開 repo。
 # 公開版（課表 + Rubric，已去除商業內容）在 curriculum/sunny-sprint.md。
 Sunny_Sprint_*.md
+
+# 同上。course/ 放品牌 CIS、市場戰略、企業內訓報價與行銷素材，全數留在 repo 外。
+course/
