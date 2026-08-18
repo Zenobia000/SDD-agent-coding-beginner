@@ -5,6 +5,8 @@
 
 不確定用哪個 → **`/compass`**。
 
+每一站的指令與逐字可貼的提示詞 → [`curriculum/COOKBOOK.md`](../curriculum/COOKBOOK.md)（**逃生口，卡住才翻**）。
+
 ---
 
 ## 一張圖看完

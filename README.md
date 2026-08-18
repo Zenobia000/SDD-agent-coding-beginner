@@ -36,6 +36,8 @@ claude
 
 隨時可查：[`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) —— 哪一站用哪個技能、什麼時候可以跳過。
 
+卡住時的逃生口：[`curriculum/COOKBOOK.md`](./curriculum/COOKBOOK.md) —— 七站的指令與逐字可貼的提示詞。**先照第二冊自己打一次，真的卡住再翻** —— 理由與代價寫在 `BUILD.md` 附錄。
+
 ---
 
 ## 工具箱
@@ -117,6 +119,8 @@ claude / antigravity          progressive-sdd
 | `docs/SKILL-MAP.md` 技能速查 | ✅ 完成 |
 | `docs/FIXTURES.md` 素材挑選準則 | ✅ 完成 |
 | `curriculum/README.md` 講師手冊 | ✅ 完成 |
+| `curriculum/COOKBOOK.md` 學生操作手冊（指令 + 提示詞） | ✅ 完成 |
+| `curriculum/TEACHING.md` 逐站帶課對照 | ✅ 完成 |
 | `.claude/skills/` 工具箱（36 技能 + guard hooks） | ✅ 已內建，fork 即用 |
 | `docs/assets/route.svg` 七站路線圖 | ✅ 完成 |
 | Fixture 六支影片挑選 | ✅ 完成，見 [`docs/FIXTURES.md`](./docs/FIXTURES.md)（中英各三，附證據等級） |
