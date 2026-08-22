@@ -2,7 +2,7 @@
 
 > 對應 [`.claude/skills/`](../.claude/skills/) 的 36 個技能。
 > 改了技能就要回來改這張表 —— 教材靠它指路。
-> 漏改了 `bash scripts/check-skill-map.sh` 會擋下來（它同時檢查 `compass/SKILL.md`）。
+> 漏改了 `bash scripts/check.sh` 會擋下來（它同時檢查 `compass/SKILL.md`）。
 
 不確定用哪個 → **`/compass`**。
 

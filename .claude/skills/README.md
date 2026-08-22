@@ -22,14 +22,23 @@ Claude Code 會自動載入專案的 `.claude/skills/`，GitHub Copilot 也讀�
 2. **frontmatter 前不能有任何字元**，包括空行。多一個空行，Claude Code 會靜默略過整個技能，而且不會告訴你。
 3. **`name` 必須等於資料夾名。**
 
-**這三條壞掉的時候都不會噴錯**，所以三條都有腳本擋。改完跑：
+**這三條壞掉的時候都不會噴錯**，所以三條都有腳本擋。改完跑一個指令就好：
 
 ```bash
-bash scripts/check-links.sh      # 死連結
-bash scripts/check-skill-map.sh  # 漏路由、死路由、壞 frontmatter
+bash scripts/check.sh
 ```
 
-兩支都是無輸出 = 全部有效，有問題才印，並 exit 1。
+它把 `scripts/check-*.sh` 和所有 `hooks/test-*.sh` 找出來一起跑，逐項印 ✓／✗，任何一項紅了就 exit 1。新增檢查不必回頭改它。
+
+擋這三條的是 `scripts/check-skill-map.sh`。**那支腳本沒有綁死本專案** —— 複製到任何有 `.claude/skills/` 的 repo 都能跑，專案特有的位置全走環境變數：
+
+| 變數 | 預設 | 用途 |
+|---|---|---|
+| `SKILLS_DIRS` | `.claude/skills` | 技能目錄，空白分隔 |
+| `ROUTE_DOCS` | 自己找 `compass/SKILL.md`、`docs/SKILL-MAP.md`、`SKILL-MAP.md` | 路由表；一份都沒有就只驗 frontmatter，不算失敗 |
+| `BUILTINS` | Claude Code 內建指令 | 不算技能的斜線指令 |
+
+它自己的回歸規格在 `scripts/test-check-skill-map.sh`，14 個案例蓋臨時假專案來驗，包含「別的專案佈局」與「完全沒有路由表」。
 
 ---
 
