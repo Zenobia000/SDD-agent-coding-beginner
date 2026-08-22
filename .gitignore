@@ -52,3 +52,6 @@ Sunny_Sprint_*.md
 
 # 同上。course/ 放品牌 CIS、市場戰略、企業內訓報價與行銷素材，全數留在 repo 外。
 course/
+
+# Antigravity CLI 本機狀態（含絕對路徑，機器專屬）
+.antigravitycli/
