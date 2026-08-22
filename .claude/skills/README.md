@@ -18,15 +18,18 @@ Claude Code 會自動載入專案的 `.claude/skills/`，GitHub Copilot 也讀�
 
 改的時候記得三件事：
 
-1. **`docs/SKILL-MAP.md` 要同步。** 教材靠那張表指路，改了技能沒改表，學生會照著找不到的東西操作。
+1. **`docs/SKILL-MAP.md` 和 `compass/SKILL.md` 都要同步。** 教材靠那兩張表指路，改了技能沒改表，學生會照著找不到的東西操作 —— 使用者觸發的技能更嚴重，它沒有 description 在模型 context 裡，表沒提到就只剩人的記憶能觸發它。
 2. **frontmatter 前不能有任何字元**，包括空行。多一個空行，Claude Code 會靜默略過整個技能，而且不會告訴你。
 3. **`name` 必須等於資料夾名。**
 
-改完跑一次連結檢查：
+**這三條壞掉的時候都不會噴錯**，所以三條都有腳本擋。改完跑：
 
 ```bash
-bash scripts/check-links.sh
+bash scripts/check-links.sh      # 死連結
+bash scripts/check-skill-map.sh  # 漏路由、死路由、壞 frontmatter
 ```
+
+兩支都是無輸出 = 全部有效，有問題才印，並 exit 1。
 
 ---
 
