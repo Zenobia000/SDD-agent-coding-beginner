@@ -1,0 +1,696 @@
+<meta charset="utf-8">
+<title>SDD 七站技能地圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+
+<style>
+/* ── tokens ─ light is the base; both dark paths redefine tokens only ── */
+:root{
+  --bg:#F2F3F5;
+  --bloom-a:rgba(0,113,227,.20);
+  --bloom-b:rgba(122,79,191,.17);
+  --bloom-c:rgba(226,130,10,.13);
+
+  --glass:rgba(255,255,255,.66);
+  --glass-2:rgba(255,255,255,.42);
+  --glass-sunk:rgba(255,255,255,.30);
+  --glass-edge:rgba(255,255,255,.85);
+  --hairline:rgba(0,0,0,.09);
+  --hairline-soft:rgba(0,0,0,.055);
+  --shadow:0 1px 1px rgba(0,0,0,.035), 0 10px 30px -14px rgba(0,0,0,.18);
+  --shadow-lg:0 1px 1px rgba(0,0,0,.04), 0 24px 60px -26px rgba(0,0,0,.28);
+
+  --ink:#1D1D1F;
+  --ink-2:#3A3A3E;
+  --muted:#6E6E73;
+  --faint:#96969B;
+
+  --user:#0062CC;
+  --user-wash:rgba(0,113,227,.11);
+  --user-edge:rgba(0,113,227,.24);
+  --model:#7444BE;
+  --model-wash:rgba(122,79,191,.11);
+  --model-edge:rgba(122,79,191,.24);
+  --accent:#C96A06;
+  --accent-solid:#E2820A;
+  --accent-wash:rgba(226,130,10,.13);
+  --accent-edge:rgba(226,130,10,.30);
+  --on-accent:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A0A0C;
+    --bloom-a:rgba(10,132,255,.22);
+    --bloom-b:rgba(160,120,235,.18);
+    --bloom-c:rgba(255,159,10,.08);
+
+    --glass:rgba(30,30,34,.62);
+    --glass-2:rgba(30,30,34,.42);
+    --glass-sunk:rgba(255,255,255,.035);
+    --glass-edge:rgba(255,255,255,.11);
+    --hairline:rgba(255,255,255,.11);
+    --hairline-soft:rgba(255,255,255,.07);
+    --shadow:0 1px 1px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.85);
+    --shadow-lg:0 1px 1px rgba(0,0,0,.5), 0 28px 66px -28px rgba(0,0,0,.95);
+
+    --ink:#F5F5F7;
+    --ink-2:#DCDCE0;
+    --muted:#9A9AA0;
+    --faint:#79797F;
+
+    --user:#7CB6FF;
+    --user-wash:rgba(10,132,255,.16);
+    --user-edge:rgba(10,132,255,.32);
+    --model:#C4A4F2;
+    --model-wash:rgba(160,120,235,.17);
+    --model-edge:rgba(160,120,235,.34);
+    --accent:#FFB454;
+    --accent-solid:#FF9F0A;
+    --accent-wash:rgba(255,159,10,.15);
+    --accent-edge:rgba(255,159,10,.34);
+    --on-accent:#1A1200;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A0A0C;
+  --bloom-a:rgba(10,132,255,.22);
+  --bloom-b:rgba(160,120,235,.18);
+  --bloom-c:rgba(255,159,10,.08);
+
+  --glass:rgba(30,30,34,.62);
+  --glass-2:rgba(30,30,34,.42);
+  --glass-sunk:rgba(255,255,255,.035);
+  --glass-edge:rgba(255,255,255,.11);
+  --hairline:rgba(255,255,255,.11);
+  --hairline-soft:rgba(255,255,255,.07);
+  --shadow:0 1px 1px rgba(0,0,0,.5), 0 12px 34px -16px rgba(0,0,0,.85);
+  --shadow-lg:0 1px 1px rgba(0,0,0,.5), 0 28px 66px -28px rgba(0,0,0,.95);
+
+  --ink:#F5F5F7;
+  --ink-2:#DCDCE0;
+  --muted:#9A9AA0;
+  --faint:#79797F;
+
+  --user:#7CB6FF;
+  --user-wash:rgba(10,132,255,.16);
+  --user-edge:rgba(10,132,255,.32);
+  --model:#C4A4F2;
+  --model-wash:rgba(160,120,235,.17);
+  --model-edge:rgba(160,120,235,.34);
+  --accent:#FFB454;
+  --accent-solid:#FF9F0A;
+  --accent-wash:rgba(255,159,10,.15);
+  --accent-edge:rgba(255,159,10,.34);
+  --on-accent:#1A1200;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:16px;line-height:1.75;letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+}
+.ambient{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(58vw 46vw at 12% -6%,  var(--bloom-a), transparent 62%),
+    radial-gradient(52vw 44vw at 96% 22%,  var(--bloom-b), transparent 60%),
+    radial-gradient(64vw 48vw at 48% 104%, var(--bloom-c), transparent 64%);
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 110px}
+:focus-visible{outline:2px solid var(--accent-solid);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.mono{font-family:ui-monospace,"SF Mono","IBM Plex Mono",Menlo,monospace;font-size:.94em}
+
+/* ── the one glass recipe ── */
+.glass{
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+  border-radius:18px;
+}
+
+.eyebrow{
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);margin:0 0 12px;
+}
+
+/* ── sticky nav ── */
+.nav{
+  position:sticky;top:0;z-index:20;margin:0 -24px 0;padding:11px 24px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  background:var(--glass-2);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--hairline-soft);
+}
+.nav .brand{font-size:14px;font-weight:500;letter-spacing:.01em}
+.nav .keys{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-size:12.5px;color:var(--muted)}
+.key{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:22px;height:12px;border-radius:6px;border:1px solid}
+.swatch.u{background:var(--user-wash);border-color:var(--user-edge)}
+.swatch.m{background:var(--model-wash);border-color:var(--model-edge)}
+.swatch.a{background:var(--accent-solid);border-color:var(--accent-solid)}
+
+/* ── header ── */
+header{padding:76px 0 0}
+h1{
+  font-weight:700;font-size:clamp(32px,5.6vw,52px);line-height:1.14;
+  letter-spacing:-.028em;margin:0 0 18px;text-wrap:balance;
+}
+.lede{max-width:60ch;color:var(--muted);font-size:17.5px;font-weight:300;margin:0 0 10px;letter-spacing:.005em}
+.lede strong{color:var(--ink-2);font-weight:500}
+
+/* ── hero strip ── */
+.strip-scroll{overflow-x:auto;margin:40px -24px 0;padding:0 24px 10px}
+.strip{
+  display:flex;align-items:center;min-width:780px;padding:30px 30px 44px;
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow-lg), inset 0 1px 0 var(--glass-edge);
+  border-radius:22px;
+}
+.terminus{font-size:12.5px;font-weight:500;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+.rail{flex:1;height:1.5px;background:var(--hairline);min-width:14px;border-radius:2px}
+.stop{display:flex;flex-direction:column;align-items:center;position:relative;padding:0 2px}
+.stop .dot{
+  width:24px;height:24px;border-radius:50%;
+  border:1.5px solid var(--user-edge);background:var(--glass-sunk);
+  display:grid;place-items:center;
+  font-size:11.5px;font-weight:500;color:var(--user);
+  font-variant-numeric:tabular-nums;
+}
+.stop.fixed .dot{
+  background:var(--accent-solid);border-color:var(--accent-solid);color:var(--on-accent);
+  font-weight:700;box-shadow:0 4px 14px -4px var(--accent-edge);
+}
+.stop .cap{font-size:12.5px;color:var(--muted);white-space:nowrap;position:absolute;top:32px}
+.stop.fixed .cap{color:var(--accent);font-weight:500}
+.strip-note{display:flex;gap:24px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--faint)}
+
+/* ── sections ── */
+section{margin-top:82px}
+h2{font-size:25px;font-weight:600;letter-spacing:-.018em;margin:0 0 8px;text-wrap:balance}
+.sub{color:var(--muted);font-size:14.5px;font-weight:300;margin:0 0 32px;max-width:64ch}
+
+/* ── route spine ── */
+.route{position:relative}
+.route::before{content:"";position:absolute;left:19px;top:16px;bottom:38px;width:1.5px;background:var(--hairline);border-radius:2px}
+.station{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 24px;padding:0 0 22px}
+.disc{
+  width:40px;height:40px;border-radius:50%;position:relative;z-index:1;
+  display:grid;place-items:center;font-size:15px;font-weight:500;
+  font-variant-numeric:tabular-nums;color:var(--user);
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
+  backdrop-filter:saturate(180%) blur(18px);
+  border:1px solid var(--user-edge);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+}
+.station.fixed .disc{
+  background:var(--accent-solid);border-color:var(--accent-solid);
+  color:var(--on-accent);font-weight:700;
+  box-shadow:0 8px 22px -8px var(--accent-edge), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.body{
+  display:grid;grid-template-columns:minmax(0,1.24fr) minmax(0,.86fr);gap:20px 28px;
+  padding:20px 24px;border-radius:18px;
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+}
+.station.fixed .body{border-color:var(--accent-edge)}
+@media (max-width:760px){ .body{grid-template-columns:minmax(0,1fr)} }
+
+.st-name{font-size:19px;font-weight:600;letter-spacing:-.012em;margin:0;line-height:1.4}
+.st-what{color:var(--faint);font-size:13px;margin:1px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  display:inline-block;padding:5px 12px;border-radius:999px;
+  font-family:ui-monospace,"SF Mono","IBM Plex Mono",Menlo,monospace;
+  font-size:13px;font-weight:500;border:1px solid;white-space:nowrap;
+}
+.chip.u{background:var(--user-wash);border-color:var(--user-edge);color:var(--user)}
+.chip.m{background:var(--model-wash);border-color:var(--model-edge);color:var(--model)}
+.hint{font-size:13px;font-weight:300;color:var(--muted);margin:12px 0 0}
+.hint .mono{color:var(--ink-2);font-weight:400}
+
+.skip{
+  align-self:start;padding:12px 14px;border-radius:13px;
+  background:var(--glass-sunk);border:1px solid var(--hairline-soft);
+  font-size:13px;font-weight:300;color:var(--muted);line-height:1.65;
+}
+.skip b{
+  display:block;font-size:10.5px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:5px;
+}
+.station.fixed .skip{background:var(--accent-wash);border-color:var(--accent-edge);color:var(--accent)}
+.station.fixed .skip b{color:var(--accent)}
+
+/* ── ramps ── */
+.ramps{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px}
+.ramp{
+  padding:18px 20px;border-radius:18px;
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+}
+.ramp .chip{margin-bottom:11px}
+.ramp p{margin:0;font-size:13.5px;font-weight:300;color:var(--muted)}
+.ramp .merge{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--hairline-soft);font-size:12.5px;color:var(--ink-2)}
+
+/* ── panels ── */
+.panel{
+  padding:24px 26px;border-radius:18px;
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+}
+.panel h3{font-size:15.5px;font-weight:600;letter-spacing:-.008em;margin:0 0 10px}
+.panel p{margin:0 0 9px;font-size:14px;font-weight:300;color:var(--muted)}
+.panel p strong{color:var(--ink-2);font-weight:500}
+.panel p:last-child{margin-bottom:0}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.route + .panel{margin-top:14px}
+
+/* ── decision tree ── */
+.tree{
+  border-radius:18px;overflow:hidden;
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+}
+.branch{
+  display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:baseline;
+  padding:15px 22px;border-bottom:1px solid var(--hairline-soft);
+}
+.branch:last-child{border-bottom:none}
+.branch .n{font-size:12px;font-weight:500;color:var(--faint);font-variant-numeric:tabular-nums}
+.branch q{font-size:14.5px;font-weight:300;quotes:none;color:var(--ink-2)}
+.branch q strong{font-weight:500;color:var(--ink)}
+.branch .then{
+  font-family:ui-monospace,"SF Mono","IBM Plex Mono",Menlo,monospace;
+  font-size:13px;color:var(--user);white-space:nowrap;
+  background:var(--user-wash);border:1px solid var(--user-edge);
+  padding:3px 11px;border-radius:999px;
+}
+.branch.last .then{color:var(--muted);background:var(--glass-sunk);border-color:var(--hairline-soft)}
+@media (max-width:640px){
+  .branch{grid-template-columns:30px minmax(0,1fr);gap:8px 12px}
+  .branch .then{grid-column:2;justify-self:start}
+}
+
+/* ── atlas ── */
+.group{margin-bottom:40px}
+.group-head{display:flex;align-items:baseline;gap:12px;padding:0 4px 10px;margin-bottom:14px;border-bottom:1px solid var(--hairline)}
+.group-head h3{font-size:16px;font-weight:600;letter-spacing:-.01em;margin:0}
+.group-head .count{font-size:12px;font-weight:500;color:var(--faint);font-variant-numeric:tabular-nums}
+.group-head .where{margin-left:auto;font-size:12.5px;font-weight:300;color:var(--faint)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:13px}
+.card{
+  position:relative;padding:15px 17px 15px 19px;border-radius:16px;overflow:hidden;
+  background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border:1px solid var(--hairline);
+  box-shadow:var(--shadow), inset 0 1px 0 var(--glass-edge);
+}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--user-edge)}
+.card.m::before{background:var(--model-edge)}
+.card .slug{
+  font-family:ui-monospace,"SF Mono","IBM Plex Mono",Menlo,monospace;
+  font-size:13.5px;font-weight:500;color:var(--user);display:block;margin-bottom:6px;
+}
+.card.m .slug{color:var(--model)}
+.card p{margin:0;font-size:13px;font-weight:300;line-height:1.68;color:var(--muted)}
+
+/* ── footer ── */
+footer{margin-top:88px;padding-top:24px;border-top:1px solid var(--hairline);font-size:13px;font-weight:300;color:var(--faint)}
+footer .mono{color:var(--muted)}
+</style>
+
+<div class="ambient"></div>
+
+<div class="wrap">
+
+<div class="nav">
+  <span class="brand">SDD 七站技能地圖</span>
+  <span class="keys">
+    <span class="key"><span class="swatch u"></span>你打字才會動</span>
+    <span class="key"><span class="swatch m"></span>AI 也會自己用</span>
+    <span class="key"><span class="swatch a"></span>不能跳</span>
+  </span>
+</div>
+
+<header>
+  <p class="eyebrow">Skill Atlas · 36 skills</p>
+  <h1>SDD 七站技能地圖</h1>
+  <p class="lede">從新題目到上線，工具箱只有一條主線與七個站。<strong>每一站都是一個可以被獨立跳過的判斷</strong> —— 照著全走一遍是新手，知道這次哪站不用做才是熟手。</p>
+  <p class="lede">這頁把 <span class="mono">route.png</span> 的七站，和 <span class="mono">.claude/skills/</span> 底下 36 個技能，攤在同一張圖上。</p>
+
+  <div class="strip-scroll">
+    <div class="strip">
+      <span class="terminus">新題目</span>
+      <span class="rail"></span>
+      <span class="stop"><span class="dot">1</span><span class="cap">拆解問題</span></span>
+      <span class="rail"></span>
+      <span class="stop"><span class="dot">2</span><span class="cap">值不值得做</span></span>
+      <span class="rail"></span>
+      <span class="stop"><span class="dot">3</span><span class="cap">系統骨架</span></span>
+      <span class="rail"></span>
+      <span class="stop"><span class="dot">4</span><span class="cap">拆解功能</span></span>
+      <span class="rail"></span>
+      <span class="stop fixed"><span class="dot">5</span><span class="cap">建置</span></span>
+      <span class="rail"></span>
+      <span class="stop"><span class="dot">6</span><span class="cap">驗收</span></span>
+      <span class="rail"></span>
+      <span class="stop"><span class="dot">7</span><span class="cap">上線交付</span></span>
+      <span class="rail"></span>
+      <span class="terminus">上線</span>
+    </div>
+  </div>
+  <p class="strip-note"><span>空心站 = 條件對了就可以跳過</span><span>實心站 = 唯一不能跳的一站</span></p>
+
+</header>
+
+<section>
+  <h2>主線七站</h2>
+  <p class="sub">左邊是站，中間是這一站手上有哪些技能，右邊是什麼情況可以直接跳過它。開始之前，每個 repo 先跑一次 <span class="mono">/setup-skills</span> —— 那不是站，是雜務。</p>
+
+  <div class="route">
+
+    <div class="station">
+      <div class="disc">1</div>
+      <div class="body">
+        <div>
+          <p class="st-name">拆解問題</p>
+          <p class="st-what">要做什麼</p>
+          <div class="chips">
+            <span class="chip m">/grilling</span>
+            <span class="chip m">/domain-modeling</span>
+            <span class="chip u">/to-spec</span>
+          </div>
+          <p class="hint">沒有 codebase 用 <span class="mono">/grilling</span>，有 codebase 用 <span class="mono">/grill-with-docs</span>，沿路留下術語表與 ADR。</p>
+        </div>
+        <div class="skip"><b>跳過條件</b>別人已經給你 spec。那要做的是讀懂並挑戰它。</div>
+      </div>
+    </div>
+
+    <div class="station">
+      <div class="disc">2</div>
+      <div class="body">
+        <div>
+          <p class="st-name">值不值得做</p>
+          <p class="st-what">要不要做</p>
+          <div class="chips"><span class="chip u">/feasibility</span></div>
+          <p class="hint">技術風險、競品對照、成功指標、量級成本 —— 四問，收在一個明確判決上（✅／⚠️／❌），以 comment 掛回 spec issue。</p>
+        </div>
+        <div class="skip"><b>跳過條件</b>沒有真實不確定性：熟悉的技術、無外部依賴、內部小改動。</div>
+      </div>
+    </div>
+
+    <div class="station">
+      <div class="disc">3</div>
+      <div class="body">
+        <div>
+          <p class="st-name">系統骨架</p>
+          <p class="st-what">怎麼蓋</p>
+          <div class="chips">
+            <span class="chip u">/to-architecture</span>
+            <span class="chip u">/frontend-spec</span>
+            <span class="chip u">/test-blueprint</span>
+          </div>
+          <p class="hint">出貨即刪，是鷹架不是真相。有 UI 才加 <span class="mono">/frontend-spec</span>；層佈局與 CI 時段還沒定才加 <span class="mono">/test-blueprint</span>。</p>
+        </div>
+        <div class="skip"><b>跳過條件</b>一個 session 做得完，或在既有架構內改（沒得選）。</div>
+      </div>
+    </div>
+
+    <div class="station">
+      <div class="disc">4</div>
+      <div class="body">
+        <div>
+          <p class="st-name">拆解功能</p>
+          <p class="st-what">切成什麼</p>
+          <div class="chips"><span class="chip u">/to-tickets</span></div>
+          <p class="hint">曳光彈票，每張標明自己的阻塞邊。第一張最薄，可以很難看。</p>
+        </div>
+        <div class="skip"><b>跳過條件</b>一張票就做完了。多 session 就不能跳。</div>
+      </div>
+    </div>
+
+    <div class="station fixed">
+      <div class="disc">5</div>
+      <div class="body">
+        <div>
+          <p class="st-name">建置</p>
+          <p class="st-what">蓋</p>
+          <div class="chips">
+            <span class="chip u">/implement</span>
+            <span class="chip m">/tdd</span>
+            <span class="chip m">/code-review</span>
+          </div>
+          <p class="hint">一張票一個 session：<span class="mono">/clear</span> → <span class="mono">/implement</span> → 回 <span class="mono">/clear</span>。<span class="mono">/implement</span> 內部自己驅動 TDD，收尾跑一次程式碼審查。</p>
+        </div>
+        <div class="skip"><b>不能跳</b>唯一不能跳的一站。其餘六站都可能跳過。</div>
+      </div>
+    </div>
+
+    <div class="station">
+      <div class="disc">6</div>
+      <div class="body">
+        <div>
+          <p class="st-name">驗收</p>
+          <p class="st-what">有沒有蓋對</p>
+          <div class="chips">
+            <span class="chip u">/uat-cases</span>
+            <span class="chip u">/browser-evidence</span>
+          </div>
+          <p class="hint">TC 編號一發即凍結；沒有新鮮證據不准說通過。證據落在 <span class="mono">docs/uat/</span>，走 evidence 分支 PR 合回基底分支。</p>
+        </div>
+        <div class="skip"><b>跳過條件</b>沒有人要看證據 —— 但先確認「沒有人」包不包含三個月後的你。</div>
+      </div>
+    </div>
+
+    <div class="station">
+      <div class="disc">7</div>
+      <div class="body">
+        <div>
+          <p class="st-name">上線交付</p>
+          <p class="st-what">別人能不能跑</p>
+          <div class="chips">
+            <span class="chip m">/wizard</span>
+            <span class="chip u">/git-commit</span>
+            <span class="chip u">/git-pr</span>
+            <span class="chip u">/git-release</span>
+          </div>
+          <p class="hint">容器化、排程、CI secrets、Runbook 都走 <span class="mono">/wizard</span> —— 部署沒有專用技能，是工具箱的已知缺口。</p>
+        </div>
+        <div class="skip"><b>跳過條件</b>只有你自己用，掛了沒人在意。大部分專案一輩子不用走這站。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel">
+    <h3>驗收標準不是命令，是一個人</h3>
+    <p>找一個沒看過這個專案的人照 Runbook 跑一次。他卡住的每個地方，都是 Runbook 缺的一行。</p>
+    <p>你自己不能當那個閘門。</p>
+  </div>
+</section>
+
+<section>
+  <h2>交流道：不是每次都從第 1 站開始</h2>
+  <p class="sub">真實工作裡，你大部分時間從這裡進場。三條匝道各自匯入主線的不同位置 —— 匯錯位置，等於把地圖丟掉。</p>
+  <div class="ramps">
+    <div class="ramp">
+      <span class="chip u">/triage</span>
+      <p>別人回報的 bug 或需求，推過一台由分診角色組成的狀態機，直到每張票都代理可接手或關閉。</p>
+      <span class="merge">→ 匯入第 5 站 /implement</span>
+    </div>
+    <div class="ramp">
+      <span class="chip m">/diagnosing-bugs</span>
+      <p>難修的 bug、原因不明：重現、最小化、立假說、下探針、修好、補回歸測試。</p>
+      <span class="merge">→ 病根在架構時，轉 /improve-codebase-architecture</span>
+    </div>
+    <div class="ramp">
+      <span class="chip u">/wayfinder</span>
+      <p>題目大到不知從何下手，先畫成一張決策票地圖，一次解一張，直到路清晰。</p>
+      <span class="merge">→ 匯入第 1 站 /to-spec，不能直接跳 /implement</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Session 邊界決策樹</h2>
+  <p class="sub">由上往下，第一個 yes 就是答案。<span class="mono">/compact</span> 排最後不是因為它不好，是因為上面四個都更便宜或更精準。</p>
+  <div class="tree">
+    <div class="branch"><span class="n">01</span><q>下一階段需要這一階段當<strong>原始資料</strong>，或還有約 150k token 空間？</q><span class="then">繼續</span></div>
+    <div class="branch"><span class="n">02</span><q>這個 context 對接下來完全無關？</q><span class="then">/clear</span></div>
+    <div class="branch"><span class="n">03</span><q>要換 harness、換目錄、交給別人，或分岔側支線？</q><span class="then">/handoff</span></div>
+    <div class="branch"><span class="n">04</span><q>任務夠明確，可以離開鍵盤讓它跑？</q><span class="then">子代理</span></div>
+    <div class="branch last"><span class="n">05</span><q>以上皆非</q><span class="then">/compact（帶指令）</span></div>
+  </div>
+  <div class="duo" style="margin-top:20px">
+    <div class="panel">
+      <h3>Session 規則</h3>
+      <p>第 1 到 2 站同一個 session 一路做完，中間不 <span class="mono">/clear</span> —— 規格需要訪談的原文，不是它的摘要。</p>
+      <p>第 4 站之後，每張票各開一個新 session。</p>
+      <p>Session 快滿了就 <span class="mono">/handoff</span>，開新 session 貼路徑接著做。</p>
+    </div>
+    <div class="panel">
+      <h3>搞錯的代價是單向的</h3>
+      <p>清掉相關的 context，你會失去「為什麼」—— 看 diff 看不回來。</p>
+      <p>從 <span class="mono">/compact</span> 開始的失敗模式：新 session 對某個被摘要壓平的決定「很有自信地說錯」。</p>
+      <p>完整決策樹在 <span class="mono">.claude/skills/compass/PHASE-BOUNDARIES.md</span>。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>全部 36 個技能</h2>
+  <p class="sub">依功能分群。卡片上緣的顏色就是觸發權：<span style="color:var(--user)">藍 = 只有你打字才會啟動</span>（24 個，編排流程的都在這裡）、<span style="color:var(--model)">紫 = 代理判斷吻合會自己伸手</span>（12 個，裝紀律的都在這裡）。</p>
+
+  <div class="group">
+    <div class="group-head"><h3>主線七站</h3><span class="count">9</span><span class="where">idea → ship</span></div>
+    <div class="cards">
+      <div class="card"><span class="slug">/to-spec</span><p>把當前對話收斂成一份規格，並發佈到議題追蹤器。</p></div>
+      <div class="card"><span class="slug">/feasibility</span><p>規格與拆票之間補上可行性一關：技術風險、競品對照、成功指標、量級成本，收在 ✅／⚠️／❌ 判決。</p></div>
+      <div class="card"><span class="slug">/to-architecture</span><p>技術棧、資料模型、API 合約。每個取捨仍寫成獨立 ADR，架構文件只引用不重述。</p></div>
+      <div class="card"><span class="slug">/frontend-spec</span><p>有 UI 的規格產出路由表、每頁 design brief、四態畫面（Loading／Empty／Error／Success）的 .pen mockup。</p></div>
+      <div class="card"><span class="slug">/test-blueprint</span><p>提案測試藍圖 —— 層佈局、縫清單、CI 時段；核准後產出靜態層檢查腳本與 CI workflow。</p></div>
+      <div class="card"><span class="slug">/to-tickets</span><p>把計畫、規格或對話切成一張張曳光彈票，每張都標明自己的阻塞邊。</p></div>
+      <div class="card"><span class="slug">/implement</span><p>依規格或一組票建置，在議定的接縫上驅動 TDD，收尾跑一次程式碼審查。</p></div>
+      <div class="card"><span class="slug">/uat-cases</span><p>從規格與使用者故事推導 UAT 案例，發出凍結的 TC 編號，維護 docs/uat-cases.md。</p></div>
+      <div class="card"><span class="slug">/browser-evidence</span><p>把既定案例清單跑成可交付的證據 —— 截圖或原始回應、網路紀錄與被測版本 manifest。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>交流道</h3><span class="count">3</span><span class="where">不從第 1 站進場時</span></div>
+    <div class="cards">
+      <div class="card"><span class="slug">/triage</span><p>把外來議題推過一台由分診角色組成的狀態機，直到每一張都代理可接手或關閉。</p></div>
+      <div class="card m"><span class="slug">/diagnosing-bugs</span><p>對付硬 bug、間歇性失敗與效能回歸的紀律迴圈 —— 重現、最小化、立假說、下探針、修好、補回歸測試。</p></div>
+      <div class="card"><span class="slug">/wayfinder</span><p>把龐大而迷霧重重的工程畫成一張決策票地圖，一次解一張，直到通往終點的路清晰為止。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>詞彙層</h3><span class="count">3</span><span class="where">問題出在「詞」而不是流程</span></div>
+    <div class="cards">
+      <div class="card m"><span class="slug">/grilling</span><p>就一個計畫、決策或想法窮追不捨地拷問使用者 —— 壓力測試自己的思路。</p></div>
+      <div class="card"><span class="slug">/grill-with-docs</span><p>同樣的拷問，但沿路留下紙本軌跡：術語表與 ADR。有 codebase 時用這個。</p></div>
+      <div class="card m"><span class="slug">/domain-modeling</span><p>建立並磨利專案的領域語言 —— 挑戰模糊術語、拆開超載的詞、把難以回頭的決策寫成 ADR。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>建置紀律</h3><span class="count">2</span><span class="where">/implement 內部自己會叫</span></div>
+    <div class="cards">
+      <div class="card m"><span class="slug">/tdd</span><p>測試驅動開發，紅—綠—重構。要寫出能撐過重構的測試時單獨叫它。</p></div>
+      <div class="card m"><span class="slug">/code-review</span><p>沿兩條軸審查自某個定點以來的 diff：Standards（有沒有遵守 repo 規範）與 Spec（有沒有做到票要求的事）。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>Git 流程</h3><span class="count">4</span><span class="where">分支生命週期，一階段一個技能</span></div>
+    <div class="cards">
+      <div class="card"><span class="slug">/git-commit</span><p>只提交你 staged 的內容，寫英文 commit 並推上遠端；絕不代替你 stage。</p></div>
+      <div class="card"><span class="slug">/git-merge</span><p>把指定分支合併進當前分支；發生衝突時停下來分析與建議，解法是你的決定。</p></div>
+      <div class="card"><span class="slug">/git-pr</span><p>檢視分支所有 commit 開出 PR；合併後同步 main、清理本地與遠端分支。</p></div>
+      <div class="card"><span class="slug">/git-release</span><p>更新版本號，把兩版本間的 commit 彙整成繁中發布摘要，打 tag 並發佈 release 頁面。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>程式庫健康</h3><span class="count">2</span><span class="where">不在主線上</span></div>
+    <div class="cards">
+      <div class="card"><span class="slug">/improve-codebase-architecture</span><p>勘查程式庫的深化機會，排序後呈上，再對你挑中的那一個進行拷問。挑中即產生新題目，回到第 1 站。</p></div>
+      <div class="card"><span class="slug">/refactor</span><p>在不改變可觀察行為的前提下重整結構：特徵測試護網、一次一個 transform、綠燈即提交。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>Session 與導航</h3><span class="count">3</span><span class="where">context 的管理</span></div>
+    <div class="cards">
+      <div class="card"><span class="slug">/compass</span><p>問這個情況該用哪個技能、走哪條流程。工具箱的路由器。</p></div>
+      <div class="card"><span class="slug">/handoff</span><p>把當前對話壓縮成一份交接文件，讓全新的 session 能接手這份工作。</p></div>
+      <div class="card"><span class="slug">/wait-what</span><p>停 —— 剛才那段沒讓人聽懂，要求代理用專案的詞彙重新講一次。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>前置與編排</h3><span class="count">3</span><span class="where">跑在流程之外</span></div>
+    <div class="cards">
+      <div class="card"><span class="slug">/setup-skills</span><p>為 repo 設定議題追蹤器、領域文件位置與 git 護欄 hook。每個 repo 初始化跑一次。</p></div>
+      <div class="card"><span class="slug">/implement-all</span><p>從追蹤器抓出可動工的票，依阻塞邊排程，每張票派一個子代理跑 /implement。只編排不動手。</p></div>
+      <div class="card m"><span class="slug">/prototype</span><p>做一個用完即丟的原型回答一個設計問題 —— 邏輯用可執行的程式，UI 做幾個可切換的變體。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>需要人的地方</h3><span class="count">3</span><span class="where">代理做不到的那一段</span></div>
+    <div class="cards">
+      <div class="card m"><span class="slug">/wizard</span><p>生成互動式 bash 精靈，引導人類完成只有人能做的步驟：開通基礎設施、憑證、CI secrets。</p></div>
+      <div class="card"><span class="slug">/to-questionnaire</span><p>把一個你無法獨力回答的決策，做成一份問卷交給掌握答案的人填。</p></div>
+      <div class="card m"><span class="slug">/management-frameworks</span><p>問題其實是管理問題不是工程問題時：目標設定、流程改善、根本原因、決策怎麼拍板。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>畫圖</h3><span class="count">2</span><span class="where">要給人看的時候</span></div>
+    <div class="cards">
+      <div class="card m"><span class="slug">/diagram</span><p>依受眾與情境挑選最合適的圖表並繪製，缺資訊時先畫草稿再問。</p></div>
+      <div class="card m"><span class="slug">/svg-palette</span><p>SVG 繪圖的色盤與用色規則 —— 靛青階＋單一橘強調，可用公司 CI 色覆蓋。這頁就是用它畫的。</p></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>寫給代理讀的東西</h3><span class="count">2</span><span class="where">工具箱自己的維護</span></div>
+    <div class="cards">
+      <div class="card m"><span class="slug">/writing-for-agents</span><p>撰寫給代理讀的文件。要建立或編輯技能、或修改 AGENTS.md、CLAUDE.md 時用。</p></div>
+      <div class="card m"><span class="slug">/writing-hooks</span><p>判斷哪條規則該從散文降成 hook、hook 該不該說話、怎麼防它靜默腐爛。</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>兩個要記住的限制</h2>
+  <div class="duo">
+    <div class="panel">
+      <h3>「使用者觸發」不是每個平台都有</h3>
+      <p>藍色那 24 個靠 <span class="mono">disable-model-invocation: true</span> 鎖住。<strong>GitHub Copilot 與 Google Antigravity 都不支援這個欄位</strong> —— 在那裡，編排型技能會被代理自行啟動。</p>
+      <p>緩解方式是那些技能的 description 本來就寫成不帶觸發語的人話摘要，但那是降低機率，不是關掉開關。這條課程線實質是 Claude Code 取向。</p>
+    </div>
+    <div class="panel">
+      <h3>第 7 站有個洞</h3>
+      <p>部署本身沒有專用技能，是工具箱的已知缺口。用 <span class="mono">/wizard</span> 生一支互動精靈補上，把只有人能做的那幾步寫死成步驟。</p>
+      <p>改了任何技能，記得回頭改 <span class="mono">docs/SKILL-MAP.md</span> —— 漏改會被 <span class="mono">scripts/check-skill-map.sh</span> 擋下來。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>資料來源：<span class="mono">route.png</span>、<span class="mono">.claude/skills/</span>（36 個 SKILL.md frontmatter）、<span class="mono">docs/SKILL-MAP.md</span>。<br>
+  不確定用哪個 → 打 <span class="mono">/compass</span>。每一站的逐字可貼提示詞在 <span class="mono">curriculum/COOKBOOK.md</span> —— 那是逃生口，卡住才翻。</p>
+</footer>
+
+</div>
