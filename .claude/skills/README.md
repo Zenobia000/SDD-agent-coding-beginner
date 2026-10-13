@@ -65,7 +65,7 @@ bash scripts/check.sh
 | `guard-secrets.sh` | staged diff 裡出現憑證字面值時擋下 `git commit` |
 | `check-on-stop.sh` | 停止時的檢查 |
 
-每支都有自帶測試（`test-*.sh`），本 repo 驗過三支全 pass。
+每支都有內附測試（`test-*.sh`），本 repo 驗過三支全 pass。
 
 **為什麼要 hook 而不是寫在 `CLAUDE.md`**：散文規則大約只有七成遵守率，這幾條紅線靠 exit code 2，不靠模型記得。這正是心法篇不變量 5「邊界是防線，不是建議」。
 

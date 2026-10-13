@@ -117,7 +117,7 @@ AI 負責產出，人負責放行。人不放行就不通過 —— 這是唯一
 | 1 會失敗的驗收訊號 | 手動可重現的檢查 | Acceptance Criteria | Contract test | E2E + SLO |
 | 2 一次只動一個變數 | 一次驗一個假設 | 一張票一個 slice | 一次一個 module | 一次一個 release |
 | 3 證據先於宣稱 | 跑一次貼輸出 | 測試綠燈 | CI 綠燈 | 監控 + Runbook |
-| 4 可逆性決定速度 | 全部可丟 | ADR 記不可逆決定 | Contract 凍結介面 | Migration + 回滾計畫 |
+| 4 可逆性決定速度 | 全部可丟 | ADR 記不可逆決定 | Contract 凍結介面 | Migration + 回復（rollback）計畫 |
 | 5 邊界是防線 | 先不管 | 輸入驗證 | Schema + Auth | Security Spec |
 | 6 卡住就縮小範圍 | 換做法重試 | 二分找壞掉的票 | 模組隔離 | Incident 分級 |
 | 7 人是閘門 | 自己看一眼 | Review 一個 slice | 跨模組 review | Change Approval |
@@ -133,7 +133,7 @@ AI 負責產出，人負責放行。人不放行就不通過 —— 這是唯一
 - 幾分鐘 → 直接做，錯了砍掉重來（Explore）
 - 幾小時，只影響自己 → 留一條 acceptance criteria（Stabilize）
 - 幾天，會影響別的模組 → 先把介面寫成 Contract（Systemize）
-- 改不回來，或會影響到使用者的資料 → 先有 migration 與回滾計畫（Productize）
+- 改不回來，或會影響到使用者的資料 → 先有 migration 與回復（rollback）計畫（Productize）
 
 **不變量 4 就是 Mode 的選擇函數。** 同一個專案裡，不同部分可以處在不同 Mode —— 這很正常，不是混亂。
 
@@ -278,7 +278,7 @@ Explore 階段的程式碼**本來就是要丟掉的**。為它寫自動化測�
 
 ## 觀念來源
 
-本篇的階段模型參考 YC 社群在大型 Spec 上踩坑後的修正經驗（把 5,000 行巨型 Spec 改成「拆模組 → 小 Spec → TDD → 模組穩定 → Integration Spec → E2E」），以及中文社群對 SDD「Markdown 地獄」與規格漂移的批評。七條不變量與可觀測訊號是本課的整理與補強，不是引用。
+本篇的階段模型參考 YC 社群在大型 Spec 上踩雷後的修正經驗（把 5,000 行巨型 Spec 改成「拆模組 → 小 Spec → TDD → 模組穩定 → Integration Spec → E2E」），以及中文社群對 SDD「Markdown 地獄」與規格漂移的批評。七條不變量與可觀測訊號是本課的整理與補強，不是引用。
 
 - [【AI Coding】AI 如何改寫開發流程](https://www.ithome.com.tw/news/177185)
 - [Spec-Driven Development (SDD) 的美好願景與殘酷現實](https://ihower.tw/blog/13480-sdd-spec-driven-development)

@@ -1,6 +1,6 @@
 # 領域文件
 
-## 配置
+## 設定
 
 單一 context。根目錄一份 `CONTEXT.md`，ADR 放 `docs/adr/`。
 無 monorepo 訊號，不需要 `CONTEXT-MAP.md`。

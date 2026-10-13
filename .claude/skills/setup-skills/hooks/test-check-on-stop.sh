@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# check-on-stop.sh 的回歸規格。四條路徑，每條在暫存假 repo 裡搭場景：
+# check-on-stop.sh 的回歸規格。四條路徑，每條在暫存假 repo 裡搭情境：
 # hook 用 cd "$(dirname "$0")/.." 定位 repo，所以複製它進 fixture 就能完全控制
 # 表面髒淨與 check.sh 紅綠 — 不需要在生產碼上開注入點。
 # 執行：bash hooks/test-check-on-stop.sh（scripts/check.sh 會跑）

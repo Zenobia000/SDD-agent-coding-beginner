@@ -61,7 +61,7 @@ Case content in Traditional Chinese; IDs and area names in English. Per case:
 - **步驟**：
   1. 開啟 /login
   2. 在 #login-email 輸入 member01@example.com，輸入密碼
-  3. 點擊「登入」
+  3. 點選「登入」
 - **期望結果**：導向 /dashboard，右上角顯示會員名稱
 - **最近判定**：pass ／ 於 `alex-2026-08-09-4b17006` ／ 判定者 <你的名字>
 ```

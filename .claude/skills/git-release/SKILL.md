@@ -1,6 +1,6 @@
 ---
 name: git-release
-description: 更新版本檔中的版本號，彙整兩版本間的 commit 寫成繁體中文發布摘要，打 tag 推上遠端並發佈 release 頁面。
+description: 更新版本檔中的版本號，彙整兩版本間的 commit 寫成繁體中文發布摘要，打 tag 推上遠端並發布 release 頁面。
 disable-model-invocation: true
 argument-hint: 目標版本號，如 v0.8.1
 allowed-tools: Bash(git log:*), Bash(git tag:*), Bash(git push:*), Bash(git describe:*), Bash(git commit:*), Bash(git add:*), Bash(gh release:*)
@@ -46,7 +46,7 @@ Release v0.8.1 - 2026-07-28
 ## 總覽
 一小段話：這個版本的主要目的與核心價值。
 
-## 更新日誌
+## 變更紀錄
 
 ### 新功能
 

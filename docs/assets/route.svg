@@ -71,7 +71,7 @@
   <circle cx="52" cy="446" r="15" class="dot"/><text class="num" x="47" y="451">4</text>
   <text class="name" x="86" y="441">拆解功能</text><text class="judge" x="86" y="460">切成什麼</text>
   <rect class="user" x="300" y="432" width="130" height="26" rx="5"/><text class="skill" x="310" y="450">/to-tickets</text>
-  <text class="note" x="444" y="450">曳光彈票，第一張最薄、可以很難看</text>
+  <text class="note" x="444" y="450">垂直切片票，第一張最薄、可以很難看</text>
   <rect class="skipbox" x="730" y="422" width="240" height="48" rx="6"/>
   <text class="skip" x="742" y="441">一張票就做完了。</text><text class="skip" x="742" y="459">多 session 就不能跳。</text>
 
