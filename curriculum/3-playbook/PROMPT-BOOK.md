@@ -57,7 +57,7 @@
 ### 1-3 產出需求文件
 
 ```text
-用 @2-templates/1_requirements_template.md 的格式，
+用 @curriculum/2-templates/1_requirements_template.md 的格式，
 根據我們剛剛的討論產出 1_requirements.md。
 
 🔒 討論中沒有決定的事，放進「待決事項」，不要替我決定。
@@ -94,7 +94,7 @@
 ```text
 /to-architecture
 
-根據 @1_requirements.md，用 @2-templates/2_architecture_template.md 的格式
+根據 @1_requirements.md，用 @curriculum/2-templates/2_architecture_template.md 的格式
 產出 2_architecture.md。
 
 技術棧固定為 ⚙️＜FastAPI + SQLite + pytest＞。

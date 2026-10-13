@@ -66,5 +66,5 @@ luca-skills 中部分技能文字改寫自 [mattpocock/skills](https://github.co
 
 ---
 
-本 repo 自身的教材內容（`.claude/skills/` 以外的教材文件，如 `advanced/`、`instructor/`、`docs/`）
+本 repo 自身的教材內容（`.claude/skills/` 以外的教材文件，如 `curriculum/`、`docs/`）
 為原創，依根目錄 `LICENSE` 的 MIT 授權。

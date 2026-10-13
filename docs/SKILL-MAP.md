@@ -6,7 +6,7 @@
 
 不確定用哪個 → **`/compass`**。
 
-每一站的指令與逐字可貼的提示詞 → [`COOKBOOK.md`](../advanced/cookcard/COOKBOOK.md)（**逃生口，卡住才翻**）。
+每一站的指令與逐字可貼的提示詞 → [`COOKBOOK.md`](../curriculum/advanced/cookcard/COOKBOOK.md)（**逃生口，卡住才翻**）。
 
 ---
 
@@ -14,7 +14,7 @@
 
 七站、每站的技能、以及每站的跳過條件：
 
-[![路線圖：新題目 → 上線](./assets/route.svg)](./assets/route.svg)
+[![路線圖：新題目 → 上線](../curriculum/assets/route.svg)](../curriculum/assets/route.svg)
 
 **藍 = 你打字才會動；紫 = AI 也會自己用。第 5 站是唯一不能跳的。**
 

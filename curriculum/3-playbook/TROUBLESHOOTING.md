@@ -64,7 +64,7 @@ flowchart TD
 | 1 | 自己跑驗收指令，不要相信它的「完成了」 |
 | 2 | 要它跑測試並**貼出完整輸出** |
 | 3 | 經常發生 → 在 `AGENTS.md` 加上：「說完成之前，必須跑過測試並貼出結果」 |
-| 4 | 還是發生 → 裝 [`2-templates/hooks/pytest-on-stop.sh`](../2-templates/hooks/)，讓它測試沒過就不能結束 |
+| 4 | 還是發生 → 裝 [`curriculum/2-templates/hooks/pytest-on-stop.sh`](../2-templates/hooks/)，讓它測試沒過就不能結束 |
 
 ---
 

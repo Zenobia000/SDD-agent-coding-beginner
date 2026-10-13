@@ -17,7 +17,7 @@
 **1. 複製一份到你們組的專案資料夾**（不要直接改這個目錄，下一屆還要用）：
 
 ```bash
-cp -r 4-starter my-leavebot
+cp -r curriculum/4-starter my-leavebot
 cd my-leavebot
 ```
 
@@ -59,4 +59,4 @@ LLM_MODEL=                         # 留空用預設模型；想省成本可以�
 ## 專案大腦
 
 `AGENTS.md`（Codex 讀）與 `CLAUDE.md`（Claude Code 讀，只是指向 `AGENTS.md`）是起點。
-Day 2 會用 `2-templates/agent-rules/` 的範本把它改成你們自己的版本。
+Day 2 會用 `curriculum/2-templates/agent-rules/` 的範本把它改成你們自己的版本。
