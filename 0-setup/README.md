@@ -12,7 +12,7 @@
 |---|---|---|
 | GitHub 帳號 | 用來 fork 課程 repo | 能登入 github.com |
 | Claude 或 ChatGPT 付費方案 | Claude Code 需要 Claude Pro / Max 或 Anthropic API；Codex 需要 ChatGPT 付費方案或 OpenAI API。**兩個選一個就好** | 下面第 2 步能登入 |
-| LLM API key | Day 4 的 eval 要呼叫真的模型。Anthropic 或 OpenAI 擇一 | 拿到一串 key，**存在密碼管理器，不要貼在任何聊天室** |
+| LLM API key | Day 4 的 eval 要呼叫真的模型。Starter 內建 Anthropic（Claude）；用 OpenAI 的話，要在 Day 4 前讓 agent 照 `LLMClient` 介面補一個實作 | 拿到一串 key，**存在密碼管理器，不要貼在任何聊天室** |
 
 > 公司電腦常擋安裝或擋連線。**先用公司電腦試一次**，不行就改帶個人電腦，並提前和 IT 確認。
 
