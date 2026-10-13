@@ -3,6 +3,7 @@
 36 個給 coding agent 用的工程技能。**fork 下來打開 Claude Code 就能用**，不需要安裝任何東西。
 
 Claude Code 會自動載入專案的 `.claude/skills/`，GitHub Copilot 也讀同一個路徑。
+Codex 讀 `.agents/skills/`，本 repo 用 symlink 指到這裡，所以是同一份；在 Codex 裡用 `$技能名` 呼叫。
 
 ```text
 .claude/skills/<技能名>/SKILL.md
@@ -52,6 +53,9 @@ bash scripts/check.sh
 > ⚠️ **GitHub Copilot 與 Google Antigravity 都不支援 `disable-model-invocation`。**
 > 在那兩邊，編排型技能會被 agent 自行啟動。緩解的是這些技能的 `description` 本來就寫成
 > 不帶觸發語的人話摘要，但那是降低機率，不是關掉開關。
+>
+> ✅ **Codex 用 `agents/openai.yaml` 的 `policy.allow_implicit_invocation: false` 達到同樣效果。**
+> 每個使用者觸發的技能都附了這個檔。新增使用者觸發技能時要一起加，`scripts/check-codex-skills.sh` 會擋。
 
 ---
 
@@ -83,6 +87,8 @@ bash scripts/check.sh
 - `setup-skills` 的 Section E 改為從技能自己的 `hooks/` 取檔（原本要從上游 repo 的 symlink target 解析路徑，在複製而非連結的情況下解不出來）
 - guard hooks 隨 `setup-skills` 一起打包
 - 流程圖改繪為本課的站點劃分
+- 中文用詞改為台灣慣用語（如 tracer bullet 的中文說法改為「垂直切片」）
+- 使用者觸發的技能加上 `agents/openai.yaml`，讓 Codex 也只在使用者呼叫時啟動
 
 完整授權聲明見 [`THIRD-PARTY-NOTICES.md`](../../THIRD-PARTY-NOTICES.md)。**那份聲明是 MIT 的要求，不要移除。**
 

@@ -75,7 +75,9 @@ claude
 [`.claude/skills/`](./.claude/skills/) 裡有 36 個工程技能，打 `/` 加名稱就能叫出來，例如 `/grilling`、`/to-spec`、`/tdd`。
 
 - 衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT），聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
-- ⚠️ 技能是為 Claude Code 寫的。Codex、Copilot、Antigravity 對技能的支援程度不同，落差寫在 [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md)。
+- Claude Code 用 `/技能名`，Codex 用 `$技能名`，兩邊讀的是同一份技能。
+- ⚠️ Copilot、Antigravity 對技能的支援有落差，寫在 [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md)。
+- ⚠️ Windows 使用者 clone 前先跑 `git config --global core.symlinks true`（需開啟開發人員模式），否則 Codex 找不到技能。
 
 ---
 
