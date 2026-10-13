@@ -13,7 +13,7 @@ Produces:
 - `docs/agents/issue-tracker.md` — where issues live
 - `docs/agents/domain.md` — where `CONTEXT.md` and ADRs live, and the collaboration mode
 - An `## Agent skills` section in `CLAUDE.md` pointing at both
-- Copies of `guard-git.sh` and `guard-secrets.sh` in `.claude/hooks/`, registered in `.claude/settings.json`
+- Copies of `guard-git.sh` and `guard-secrets.sh` in `.claude/hooks/`, registered in `.claude/settings.json` and `.codex/hooks.json`
 - In private mode: entries in `.git/info/exclude`
 
 ## 1. Explore
@@ -25,7 +25,7 @@ Read what exists. Assume nothing.
 - `CONTEXT.md`, `docs/adr/` — is a domain layer already here?
 - `docs/agents/` — has this skill already run?
 - `.scratch/` — sign of a local-markdown issue convention
-- `.claude/settings.json` and `.claude/hooks/` — hooks already registered? Which events and matchers? Are the guard copies present, and do they still match their source (Section E)?
+- `.claude/settings.json`, `.codex/hooks.json`, and `.claude/hooks/` — hooks already registered on both tools? Which events and matchers? Are the guard copies present, and do they still match their source (Section E)?
 - Monorepo signals: `pnpm-workspace.yaml`, a `workspaces` field, populated `packages/*`
 
 ## 2. Present and ask
@@ -53,6 +53,7 @@ Record the reasoning in `domain.md` so future sessions apply it: a document only
 - **Copy byte-for-byte into `.claude/hooks/`**, never reference the source by path: a copy that ages still runs the old guard, while a pointer to a moved file guards nothing and says nothing. Their tests sit next to them (`test-guard-git.sh`, `test-guard-secrets.sh`) — the copy is verbatim, so a green source is a green copy.
 - **Drift**: copies present but differing from source → show the diff, propose refreshing.
 - **Register** each under `PreToolUse`, matcher `Bash`, in `.claude/settings.json` as `bash .claude/hooks/<name>.sh`. Merge into whatever hooks structure exists — existing entries stay untouched.
+- **Codex** does not read `.claude/settings.json`. Register the same two copies in `.codex/hooks.json`, same event and matcher, command `bash "$(git rev-parse --show-toplevel)/.claude/hooks/<name>.sh"` so a session started in a subdirectory still finds the copy. One copy, two registrations. Merge; existing entries stay.
 
 ## 3. Confirm
 

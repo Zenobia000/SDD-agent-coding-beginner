@@ -28,8 +28,9 @@
 | `curriculum/advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
 | `curriculum/instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
 | `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
-| `.claude/skills/` | 本專案的工具鏈，36 個技能。**可以改**，見該目錄的 `README.md` |
+| `.claude/skills/` | 本專案的工具鏈。36 個衍生自 luca-skills，另有 `/roast`、`/seduce`。**可以改**，見該目錄的 `README.md` |
 | `.agents/skills` | 指向 `.claude/skills` 的 symlink，給 Codex 讀 |
+| `.codex/hooks.json` | Codex 的 hook 登記。腳本仍是 `.claude/hooks/`，Codex 不讀 `settings.json` |
 | `THIRD-PARTY-NOTICES.md` | 上游授權聲明。**MIT 的要求，不要移除** |
 
 學生入口只有一個：根目錄 `README.md`，然後進 `curriculum/` 照編號往下走。
@@ -85,8 +86,9 @@ Starter 的技術棧（FastAPI + SQLite + pytest）直接決定，因為 4 天�
 
 ## 工具鏈
 
-`.claude/skills/` 的 36 個技能是**本專案自己的工具鏈**，衍生自
+`.claude/skills/` 裡 36 個技能是**本專案自己的工具鏈**，衍生自
 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT，commit `1434be8`）並已修改。
+`roast` 與 `seduce` 是本 repo 的輸出風格，跟那 36 個放在一起，Codex 才掃得到。
 
 ### 技能可以改，但有三條規矩
 
@@ -111,6 +113,9 @@ MIT 要求 copyright notice 與 permission notice 保留在所有副本與實質
   Codex 不認 `disable-model-invocation`，對應設定是每個使用者觸發技能的
   `agents/openai.yaml`（`policy.allow_implicit_invocation: false`）。
   **新增或改動使用者觸發技能時兩邊都要改**，`scripts/check-codex-skills.sh` 會擋不同步。
+  同一支 guard 腳本，Claude Code 登記在 `.claude/settings.json`，Codex 登記在 `.codex/hooks.json`。
+  Roast / Seduce 的原文在 `.claude/output-styles/`。技能在同一棵技能樹：Claude Code 打 `/roast`、`/seduce`，Codex 打 `$roast`、`$seduce`。
+  `scripts/check-codex-parity.sh` 擋這兩處接線鬆掉。
 - **Antigravity 與 Copilot**：不支援這個欄位，編排型技能會被 agent 自行啟動。
   教材已在 `docs/SKILL-MAP.md` 標明這個落差，不要淡化它。
 

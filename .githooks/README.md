@@ -2,6 +2,7 @@
 
 各分支的 agent hooks（`antigravity` 的 `.agents/hooks/`、`claude` 的 `.claude/hooks/`）保護該 agent 的
 工具呼叫；這裡的 Git hooks 同時保護人與任何 agent 的 Git 操作，兩條線共用同一份。
+這條線的 Codex 登記在 `.codex/hooks.json`，呼叫的仍是 `.claude/hooks/` 裡那兩支腳本。
 
 | Hook | 阻擋 |
 |---|---|
