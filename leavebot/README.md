@@ -14,11 +14,10 @@
 
 ## 開始
 
-**1. 複製一份到你們組的專案資料夾**（不要直接改這個目錄，下一屆還要用）：
+**1. 進到專案資料夾**（每組的 fork 就是自己的一份，直接在這裡寫）：
 
 ```bash
-cp -r curriculum/4-starter my-leavebot
-cd my-leavebot
+cd leavebot
 ```
 
 **2. 建虛擬環境並安裝**（Python 3.11 以上）：

@@ -67,6 +67,8 @@ Off the main flow entirely.
 - **`/writing-for-agents`** — the reference for writing any document an agent consumes: skills, `CLAUDE.md`/`AGENTS.md`, pointed-at docs. Load it before writing or editing one.
 - **`/writing-hooks`** — the companion judgement for the rules that should stop being prose: which ones drop down into a hook, whether the hook speaks, how it fails loudly instead of silently.
 - **`/management-frameworks`** — when the problem turns out to be a management one, not an engineering one (goal-setting, process improvement, root cause, how a decision gets made).
+- **`/roast`** — switch this session to the Roast output style. The style itself is `.claude/output-styles/roast.md`.
+- **`/seduce`** — switch this session to the Seduce output style. The style itself is `.claude/output-styles/seduce.md`.
 
 ## Vocabulary underneath
 
