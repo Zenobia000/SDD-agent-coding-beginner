@@ -87,7 +87,9 @@
 
 > ⚠️ **GitHub Copilot 不支援 `disable-model-invocation`。** 在 Copilot 上，編排型技能會被 agent 自行啟動。緩解方式是那些技能的 description 本來就寫成不帶觸發語的人話摘要，但那是降低機率，不是關掉開關。
 >
-> ⚠️ **Google Antigravity 同樣不支援。** 所以這條課程線實質是 Claude Code / Copilot 取向。
+> ⚠️ **Google Antigravity 同樣不支援。**
+>
+> ✅ **Codex 有對應機制。** 它讀 `.agents/skills/`（本 repo 已用 symlink 指向 `.claude/skills/`），呼叫方式是 `$技能名` 而不是 `/技能名`。使用者觸發的技能都附了 `agents/openai.yaml` 關掉自動觸發，效果等同 `disable-model-invocation`。
 
 ---
 

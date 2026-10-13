@@ -88,11 +88,16 @@ MIT 要求 copyright notice 與 permission notice 保留在所有副本與實質
 所以可以改內容、改名、重組，但 **`THIRD-PARTY-NOTICES.md` 不能刪**。
 這個 repo 是公開的，拿掉聲明就是授權違規。
 
-### 這條線實質是 Claude Code / Copilot 取向
+### 支援 Claude Code 與 Codex，Copilot / Antigravity 有落差
 
 技能用 `disable-model-invocation` 區分「使用者觸發」與「模型觸發」。
-**Antigravity 與 Copilot 都不支援這個欄位**，編排型技能會被 agent 自行啟動。
-教材已在 `docs/SKILL-MAP.md` 標明這個落差，不要淡化它。
+
+- **Codex**：透過 `.agents/skills → ../.claude/skills` symlink 讀同一份技能，用 `$技能名` 呼叫。
+  Codex 不認 `disable-model-invocation`，對應設定是每個使用者觸發技能的
+  `agents/openai.yaml`（`policy.allow_implicit_invocation: false`）。
+  **新增或改動使用者觸發技能時兩邊都要改**，`scripts/check-codex-skills.sh` 會擋不同步。
+- **Antigravity 與 Copilot**：不支援這個欄位，編排型技能會被 agent 自行啟動。
+  教材已在 `docs/SKILL-MAP.md` 標明這個落差，不要淡化它。
 
 ### 技能放在 repo 裡，不用安裝
 
