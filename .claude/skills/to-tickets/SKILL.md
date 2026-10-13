@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: 把計畫、規格或對話切成一張張曳光彈票，每張都標明自己的阻塞邊。
+description: 把計畫、規格或對話切成一張張垂直切片票，每張都標明自己的阻塞邊。
 disable-model-invocation: true
 ---
 

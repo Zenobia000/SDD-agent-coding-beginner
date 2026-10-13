@@ -10,12 +10,12 @@ The shape of `docs/test-blueprint.md` in the target project. Content in Traditio
 
 ## 層佈局
 
-| 層 | 測什麼 | 誰落地 | CI 時段 |
+| 層 | 測什麼 | 誰負責 | CI 時段 |
 | --- | --- | --- | --- |
 | 靜態 | lint／format／型別 | scripts/check-*.sh（本藍圖產出） | presubmit |
 | 單元 | 模組對其設計 | /tdd | presubmit |
 | 整合 | 縫清單所列邊界 | /tdd | 受影響→presubmit；全套→merge |
-| 驗收 | docs/uat-cases.md 全清單 | /uat-cases → /browser-evidence | 發佈前 |
+| 驗收 | docs/uat-cases.md 全清單 | /uat-cases → /browser-evidence | 發布前 |
 
 ## 縫清單
 
@@ -27,7 +27,7 @@ The shape of `docs/test-blueprint.md` in the target project. Content in Traditio
 
 | 承諾 | 標題 | 層 | 時段 | 測試／案例 |
 | --- | --- | --- | --- | --- |
-| PR-AUTH-01 | 會員登入 | 驗收 | 發佈前 | TC-AUTH-01 |
+| PR-AUTH-01 | 會員登入 | 驗收 | 發布前 | TC-AUTH-01 |
 
 ## 缺口清單
 
@@ -50,7 +50,7 @@ The shape of `docs/test-blueprint.md` in the target project. Content in Traditio
 - 覆蓋率：追溯覆蓋為完成定義；行覆蓋僅儀表，不設門檻
 - 未實作門：新增硬擋、存量軟報，界線為上方豁免清單
 - 現況報告：`docs/test-status.md`，CI 於 merge 後生成
-- 證據保留：<留最近 N 次＋每次發佈一份，或「暫不設限」>；單 run 超過約 50MB 或 `docs/uat/` 累計超過約 1GB 時，改上 Git LFS
+- 證據保留：<留最近 N 次＋每次發布一份，或「暫不設限」>；單 run 超過約 50MB 或 `docs/uat/` 累計超過約 1GB 時，改上 Git LFS
 - 偏離預設：<無，或逐條列偏離＋理由>
 ```
 

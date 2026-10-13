@@ -61,14 +61,14 @@ case_no_route_doc() {             # 完全沒有路由表 → 只跑 frontmatter
 case_no_route_doc_bad_fm() {      # 沒路由表，但 frontmatter 壞了 → 還是要抓
   new nodocbad; mkskill "$proj" alpha "" LEAD
 }
-case_self_registration() {        # 路由表是 router 自己的 SKILL.md，不必自我登錄
+case_self_registration() {        # 路由表是 router 自己的 SKILL.md，不必自我登記
   new selfreg; mkskill "$proj" alpha
   mkdir -p "$proj/.claude/skills/router"
   printf -- '---\nname: router\ndescription: x\n---\n\n見 `/alpha`。\n' \
     > "$proj/.claude/skills/router/SKILL.md"
   ENVS="ROUTE_DOCS=.claude/skills/router/SKILL.md"
 }
-case_self_registration_strict() { # 同上，但漏了 alpha → 免登錄只赦免自己
+case_self_registration_strict() { # 同上，但漏了 alpha → 免登記只赦免自己
   new selfregstrict; mkskill "$proj" alpha
   mkdir -p "$proj/.claude/skills/router"
   printf -- '---\nname: router\ndescription: x\n---\n\n什麼都沒提。\n' \
@@ -95,7 +95,7 @@ case_git_subdir() {               # git repo 裡從子目錄執行，要能climb
   git -C "$proj" init -q 2>/dev/null
   mkdir -p "$proj/deep/nested"
 }
-case_no_skills() {                # 根本沒有技能目錄 → 明確報錯，不要靜默放行
+case_no_skills() {                # 根本沒有技能目錄 → 明確回報錯誤，不要靜默放行
   new noskills; mkdir -p "$proj/src"
 }
 
@@ -122,13 +122,13 @@ FAIL	bad_frontmatter	frontmatter 前有空行
 FAIL	name_mismatch	name 不等於資料夾名
 PASS	no_route_doc	沒有路由表不算失敗
 FAIL	no_route_doc_bad_fm	沒路由表也要驗 frontmatter
-PASS	self_registration	技能不必在自己的 SKILL.md 裡登錄
-FAIL	self_registration_strict	免登錄只赦免自己，別人照抓
+PASS	self_registration	技能不必在自己的 SKILL.md 裡登記
+FAIL	self_registration_strict	免登記只赦免自己，別人照抓
 PASS	custom_layout	非標準目錄靠環境變數指定
 PASS	builtins_ok	內建斜線指令不算死路由
 FAIL	prefix_strict	/implement-all 不讓 /implement 蒙混
 PASS	git_subdir	git repo 從子目錄執行
-FAIL	no_skills	找不到技能要明確報錯
+FAIL	no_skills	找不到技能要明確回報錯誤
 CASES
 
 exit $fail

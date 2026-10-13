@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: 把當前對話收斂成一份規格，並發佈到議題追蹤器。
+description: 把當前對話收斂成一份規格，並發布到議題追蹤器。
 disable-model-invocation: true
 ---
 

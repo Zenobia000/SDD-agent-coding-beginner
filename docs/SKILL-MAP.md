@@ -28,7 +28,7 @@
 | **1** 拆解問題 | `/grilling`（無 codebase）<br>`/grill-with-docs`（有 codebase）<br>`/domain-modeling`<br>`/to-spec` | spec、`CONTEXT.md`、ADR | 別人已經給你 spec |
 | **2** 值不值得做 | `/feasibility` | ✅／⚠️／❌ 判決 | 沒有真實不確定性 |
 | **3** 系統骨架 | `/to-architecture`<br>`/frontend-spec`<br>`/test-blueprint` | 技術棧、資料模型、API 合約、測試藍圖 | 一個 session 做得完，或在既有架構內 |
-| **4** 拆解功能 | `/to-tickets` | 曳光彈票 + 阻塞邊 | 一張票就做完了 |
+| **4** 拆解功能 | `/to-tickets` | 垂直切片票 + 阻塞邊 | 一張票就做完了 |
 | **5** 建置 | `/implement`（內含 `/tdd`、`/code-review`） | 程式碼 | **不能跳** |
 | **6** 驗收 | `/uat-cases`<br>`/browser-evidence` | 凍結編號的 TC 清單、證據 | 沒人要看證據 |
 | **7** 上線交付 | `/wizard`<br>`/git-commit` → `/git-pr` → `/git-release` | 部署精靈、Runbook、release | 只有你自己用 |
