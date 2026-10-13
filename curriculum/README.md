@@ -10,8 +10,8 @@
 | [`1-bootcamp/`](./1-bootcamp/) | 4 天課表、LeaveBot 題目、自主期任務 | 上課期間 |
 | [`2-templates/`](./2-templates/) | 規格模板、`AGENTS.md` 範本、範本 hook | 寫規格、寫專案規則時 |
 | [`3-playbook/`](./3-playbook/) | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 | 隨時查 |
-| [`4-starter/`](./4-starter/) | LeaveBot 骨架專案與 eval 起始集 | 自主期開始時 |
-| [`5-casebook/`](./5-casebook/) | 七個企業系統的 AI 開發思考 | 結訓後 |
+| [`4-casebook/`](./4-casebook/) | 七個企業系統的 AI 開發思考 | 結訓後 |
 | [`advanced/cookcard/`](./advanced/cookcard/) | 進階選修：CookCard | 結訓後 |
 | [`instructor/`](./instructor/) | 講師手冊 | 講師用 |
+| [`../leavebot/`](../leavebot/) | LeaveBot 專案骨架（放在 repo 外層，學員直接在裡面寫） | 自主期開始時 |
 | `assets/` | 圖檔 | 被其他文件引用，不用直接打開 |

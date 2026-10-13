@@ -48,11 +48,11 @@ for t in curriculum/2-templates/hooks/test-*.sh; do
 done
 
 # --- Starter 專案的測試 -------------------------------------------------------
-# 需要先在 curriculum/4-starter/ 建好 .venv（見 curriculum/4-starter/README.md）。沒建就明講略過，不假裝綠。
-if [ -x curriculum/4-starter/.venv/bin/pytest ]; then
-  run "curriculum/4-starter pytest" bash -c 'cd curriculum/4-starter && .venv/bin/pytest -q'
+# 需要先在 leavebot/ 建好 .venv（見 leavebot/README.md）。沒建就明講略過，不假裝綠。
+if [ -x leavebot/.venv/bin/pytest ]; then
+  run "leavebot pytest" bash -c 'cd leavebot && .venv/bin/pytest -q'
 else
-  printf '! 略過 starter 測試：找不到 curriculum/4-starter/.venv（照 curriculum/4-starter/README.md 建一次）\n'
+  printf '! 略過 starter 測試：找不到 leavebot/.venv（照 leavebot/README.md 建一次）\n'
 fi
 
 # --- 檢查腳本自己的回歸規格 -------------------------------------------------

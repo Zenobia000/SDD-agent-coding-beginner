@@ -63,6 +63,7 @@ claude
 ```text
 README.md        ← 你在這裡
 curriculum/      ← 課程：從這裡開始
+leavebot/        ← 你們組的專案：自主期開始在這裡寫程式
 docs/            ← 技能速查表（開始用 /指令 之後才需要）
 scripts/         ← 檢查腳本（維護者用）
 AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
@@ -77,23 +78,10 @@ AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
 | [`1-bootcamp/`](./curriculum/1-bootcamp/) | 所有人 | 上課期間：4 天課表、題目、自主期任務 |
 | [`2-templates/`](./curriculum/2-templates/) | 所有人 | 寫規格、寫專案規則時：填空模板 |
 | [`3-playbook/`](./curriculum/3-playbook/) | 所有人 | 隨時查：Prompt 魔法書、問題排解、防呆檢核表 |
-| [`4-starter/`](./curriculum/4-starter/) | 工程軌 | 自主期開始時：複製一份當你們的專案起點 |
-| [`5-casebook/`](./curriculum/5-casebook/) | 所有人 | 結訓後：報價、請款、庫存等七個企業系統的 AI 開發思考 |
+| [`4-casebook/`](./curriculum/4-casebook/) | 所有人 | 結訓後：報價、請款、庫存等七個企業系統的 AI 開發思考 |
 | [`advanced/cookcard/`](./curriculum/advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
 | [`instructor/`](./curriculum/instructor/) | 講師 | 學員不用看 |
 
----|---|---|
-| `README.md`（這一頁） | 所有人 | 現在 |
-| [`curriculum/0-setup/`](./curriculum/0-setup/) | 所有人 | **開課前一週**：環境檢核表 |
-| [`curriculum/1-bootcamp/`](./curriculum/1-bootcamp/) | 所有人 | 上課期間：4 天課表、題目、自主期任務 |
-| [`curriculum/2-templates/`](./curriculum/2-templates/) | 所有人 | 寫規格、寫專案規則時：填空模板 |
-| [`curriculum/3-playbook/`](./curriculum/3-playbook/) | 所有人 | 隨時查：Prompt 魔法書、問題排解、防呆檢核表 |
-| [`curriculum/4-starter/`](./curriculum/4-starter/) | 工程軌 | 自主期開始時：複製一份當你們的專案起點 |
-| [`curriculum/5-casebook/`](./curriculum/5-casebook/) | 所有人 | 結訓後：報價、請款、庫存等七個企業系統的 AI 開發思考 |
-| [`curriculum/advanced/cookcard/`](./curriculum/advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
-| [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) | 開始用技能之後 | 查哪一步該用哪個 `/指令` |
-| [`curriculum/instructor/`](./curriculum/instructor/) | 講師 | 學員不用看 |
-| `.claude/`、`.codex/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
 
 ---
 

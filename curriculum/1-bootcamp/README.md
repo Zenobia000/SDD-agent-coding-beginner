@@ -95,5 +95,5 @@
 | 規格 Markdown 模板 | [`curriculum/2-templates/`](../2-templates/) | ✅ |
 | `CLAUDE.md` / `AGENTS.md` 範本（安全模式、TDD 強制模式） | [`curriculum/2-templates/agent-rules/`](../2-templates/agent-rules/) | ✅ |
 | Prompt 魔法書、問題排解檢索表、防呆檢核表、導入評估表 | [`curriculum/3-playbook/`](../3-playbook/) | ✅ |
-| Starter 專案（FastAPI + SQLite + pytest） | [`curriculum/4-starter/`](../4-starter/) | ✅ |
-| 企業常見系統的 AI 開發思考指南 | [`curriculum/5-casebook/`](../5-casebook/) | ✅ |
+| Starter 專案（FastAPI + SQLite + pytest） | [`leavebot/`](../../leavebot/) | ✅ |
+| 企業常見系統的 AI 開發思考指南 | [`curriculum/4-casebook/`](../4-casebook/) | ✅ |

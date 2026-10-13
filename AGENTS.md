@@ -12,7 +12,7 @@
 一門課的教材：**4 天規格驅動 × AI 開發實戰營**，題目是 LeaveBot（一句話請假）。
 學員來自不同職位（PM、SA、主管、初學工程師），混班分兩軌上課。
 
-> **如果你是學員專案裡的 agent**（工作目錄在 `curriculum/4-starter/` 或學員自己的專案資料夾）：
+> **如果你是學員專案裡的 agent**（工作目錄在 `leavebot/` 或學員自己的專案資料夾）：
 > 以那個目錄的 `AGENTS.md` / `CLAUDE.md` 為準，這一份是給維護教材的人看的。
 
 | 檔案 | 角色 |
@@ -23,8 +23,8 @@
 | `curriculum/1-bootcamp/` | 4 天課表、題目 `LEAVEBOT.md`、自主期任務 |
 | `curriculum/2-templates/` | 規格模板、`AGENTS.md` 範本、範本 hook |
 | `curriculum/3-playbook/` | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 |
-| `curriculum/4-starter/` | Starter 專案。只有骨架，**不准加入請假業務邏輯**。改動後 `pytest` 要全綠 |
-| `curriculum/5-casebook/` | 企業系統補充教材：七個系統，固定六段結構 |
+| `leavebot/` | Starter 專案，放在外層讓學員直接在裡面寫。只有骨架，**不准加入請假業務邏輯**。改動後 `pytest` 要全綠 |
+| `curriculum/4-casebook/` | 企業系統補充教材：七個系統，固定六段結構 |
 | `curriculum/advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
 | `curriculum/instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
 | `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
@@ -61,7 +61,7 @@ Starter 的技術棧（FastAPI + SQLite + pytest）直接決定，因為 4 天�
 
 ### 4. Starter 只給骨架，不給業務邏輯
 
-`curriculum/4-starter/` 可以有 app 骨架、資料庫連線、測試框架、假 LLM。
+`leavebot/` 可以有 app 骨架、資料庫連線、測試框架、假 LLM。
 **請假的業務邏輯（解析、規則、核准）不能出現在 Starter 裡**，那是學員要讓 AI 寫、自己驗的部分。
 
 ### 混班兩軌
@@ -123,7 +123,7 @@ MIT 要求 copyright notice 與 permission notice 保留在所有副本與實質
 
 技能直接放在 `.claude/skills/`（攤平，無 `core`/`draft` 中間層）。**fork 下來打開 Claude Code 或 Codex 就可用**，不需要跑上游的 `install.sh`。
 
-學員的專案蓋在 fork 的**子目錄**裡（LeaveBot 從 `curriculum/4-starter/` 複製，CookCard 在 `cookcard/`）。Claude Code 與 Codex 都會從啟動目錄一路往上找到 repo 根的技能，所以在子目錄啟動一樣吃得到。
+學員的專案蓋在 fork 的**子目錄**裡（LeaveBot 直接在 `leavebot/`，CookCard 在 `cookcard/`）。Claude Code 與 Codex 都會從啟動目錄一路往上找到 repo 根的技能，所以在子目錄啟動一樣吃得到。
 
 不要為了「乾淨」把技能搬走或改成 submodule —— 上課現場多一個下載步驟就會有人卡住，這是刻意的取捨。
 
@@ -154,7 +154,7 @@ bash -n .githooks/pre-commit .githooks/pre-push   # git hooks 語法，有錯才
 bash scripts/check.sh                             # 全部檢查：連結、技能、Codex 設定、hook 測試
 ```
 
-`check.sh` 會自動找出 `scripts/check-*.sh` 與所有 hook 測試，逐項印 ✓／✗。`curriculum/4-starter/` 加入後，它的 `pytest` 也要全綠。
+`check.sh` 會自動找出 `scripts/check-*.sh` 與所有 hook 測試，逐項印 ✓／✗。`leavebot/` 的 `pytest` 也包含在內，要全綠。
 
 `check-links.sh` 以**檔案所在目錄**解析相對路徑，並略過 `http*`、錨點與 GitHub 的
 `../../tree/<branch>` 分支連結 —— 那三類不是本地檔案，用一般寫法檢查會誤報。
