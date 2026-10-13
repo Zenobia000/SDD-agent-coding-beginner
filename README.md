@@ -72,13 +72,13 @@ claude
 | [`advanced/cookcard/`](./advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
 | [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) | 開始用技能之後 | 查哪一步該用哪個 `/指令` |
 | [`instructor/`](./instructor/) | 講師 | 學員不用看 |
-| `.claude/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
+| `.claude/`、`.codex/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
 
 ---
 
 ## 工具箱
 
-[`.claude/skills/`](./.claude/skills/) 裡有 36 個工程技能，打 `/` 加名稱就能叫出來，例如 `/grilling`、`/to-spec`、`/tdd`。
+[`.claude/skills/`](./.claude/skills/) 裡有 36 個工程技能，打 `/` 加名稱就能叫出來，例如 `/grilling`、`/to-spec`、`/tdd`。輸出風格是 `/roast`、`/seduce`（Codex 用 `$roast`、`$seduce`）。
 
 - 衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT），聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
 - Claude Code 用 `/技能名`，Codex 用 `$技能名`，兩邊讀的是同一份技能。

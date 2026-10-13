@@ -1,6 +1,6 @@
 # 技能速查
 
-> 對應 [`.claude/skills/`](../.claude/skills/) 的 36 個技能。
+> 對應 [`.claude/skills/`](../.claude/skills/) 的 36 個工程技能，另有輸出風格 `/roast`、`/seduce`。
 > 改了技能就要回來改這張表 —— 教材靠它指路。
 > 漏改了 `bash scripts/check.sh` 會擋下來（它同時檢查 `compass/SKILL.md`）。
 
@@ -89,7 +89,7 @@
 >
 > ⚠️ **Google Antigravity 同樣不支援。**
 >
-> ✅ **Codex 有對應機制。** 它讀 `.agents/skills/`（本 repo 已用 symlink 指向 `.claude/skills/`），呼叫方式是 `$技能名` 而不是 `/技能名`。使用者觸發的技能都附了 `agents/openai.yaml` 關掉自動觸發，效果等同 `disable-model-invocation`。
+> ✅ **Codex 有對應機制。** 它讀 `.agents/skills/`（本 repo 已用 symlink 指向 `.claude/skills/`），呼叫方式是 `$技能名` 而不是 `/技能名`。使用者觸發的技能都附了 `agents/openai.yaml` 關掉自動觸發，效果等同 `disable-model-invocation`。Bash 守衛登記在 `.codex/hooks.json`（腳本仍是 `.claude/hooks/`）。輸出風格打 `$roast`、`$seduce`。
 
 ---
 
@@ -104,4 +104,6 @@
 | `/management-frameworks` | 管理問題，不是工程問題 |
 | `/svg-palette`、`/diagram` | 要畫圖給人看 |
 | `/writing-hooks` | 要判斷某條規則該不該降成 hook |
+| `/roast` | 要把這一輪的回覆切成直球品味評分 |
+| `/seduce` | Roast 的另一面：先指出對的地方，再把缺口留給對方 |
 | `/setup-skills` 以外的 repo 設定 | — |

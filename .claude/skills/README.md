@@ -1,6 +1,6 @@
 # 這個專案的工具鏈
 
-36 個給 coding agent 用的工程技能。**fork 下來打開 Claude Code 就能用**，不需要安裝任何東西。
+36 個給 coding agent 用的工程技能，外加 `/roast`、`/seduce` 兩個輸出風格。**fork 下來打開 Claude Code 就能用**，不需要安裝任何東西。
 
 Claude Code 會自動載入專案的 `.claude/skills/`，GitHub Copilot 也讀同一個路徑。
 Codex 讀 `.agents/skills/`，本 repo 用 symlink 指到這裡，所以是同一份；在 Codex 裡用 `$技能名` 呼叫。
@@ -71,6 +71,8 @@ bash scripts/check.sh
 
 每支都有內附測試（`test-*.sh`），本 repo 驗過三支全 pass。
 
+這個教材 repo 自己裝了前兩支。Claude Code 登記在 `.claude/settings.json`，Codex 登記在 `.codex/hooks.json`，腳本同一份。輸出風格打 `/roast`、`/seduce`（Codex 用 `$roast`、`$seduce`），去讀 `.claude/output-styles/`。
+
 **為什麼要 hook 而不是寫在 `CLAUDE.md`**：散文規則大約只有七成遵守率，這幾條紅線靠 exit code 2，不靠模型記得。這正是心法篇不變量 5「邊界是防線，不是建議」。
 
 ---
@@ -89,6 +91,8 @@ bash scripts/check.sh
 - 流程圖改繪為本課的站點劃分
 - 中文用詞改為台灣慣用語（如 tracer bullet 的中文說法改為「垂直切片」）
 - 使用者觸發的技能加上 `agents/openai.yaml`，讓 Codex 也只在使用者呼叫時啟動
+- 教材 repo 的兩支 guard 同時登記到 `.codex/hooks.json`（Codex 不讀 `.claude/settings.json`）
+- 輸出風格 `roast`、`seduce` 放進技能目錄。Codex 掃 `.agents/skills/`，不掃 `.codex/skills/`
 
 完整授權聲明見 [`THIRD-PARTY-NOTICES.md`](../../THIRD-PARTY-NOTICES.md)。**那份聲明是 MIT 的要求，不要移除。**
 
