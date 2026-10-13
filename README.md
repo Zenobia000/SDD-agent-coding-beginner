@@ -50,23 +50,27 @@ claude
 
 **3. 確認工具箱載得到**
 
-在 Claude Code 裡打 `/compass`，看得到技能清單就成功了。
+在 Claude Code 裡打 `/compass`（Codex 打 `$compass`），看得到技能清單就成功了。
+
+詳細步驟與卡關排解見 [`0-setup/`](./0-setup/)。下一步打開 [`1-bootcamp/`](./1-bootcamp/)。
 
 ---
 
 ## 這個 repo 裡有什麼
 
-依你會用到的順序排列。**新手只需要看前兩列。**
+依你會用到的順序排列。**新手照著編號往下走就好。**
 
 | 位置 | 給誰 | 什麼時候打開 |
 |---|---|---|
 | `README.md`（這一頁） | 所有人 | 現在 |
-| [`advanced/cookcard/`](./advanced/cookcard/) | 想挑戰完整系統的人 | 進階選修：把料理影片轉成食譜卡，多模態加部署 |
+| [`0-setup/`](./0-setup/) | 所有人 | **開課前一週**：環境檢核表 |
+| [`1-bootcamp/`](./1-bootcamp/) | 所有人 | 上課期間：4 天課表、題目、自主期任務 |
+| [`advanced/cookcard/`](./advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
 | [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) | 開始用技能之後 | 查哪一步該用哪個 `/指令` |
 | [`instructor/`](./instructor/) | 講師 | 學員不用看 |
 | `.claude/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
 
-4 天訓練營主線（請假系統題目、規格模板、Starter 專案、Prompt 魔法書）正在建置中，完成後會依閱讀順序放在 `0-setup/` 到 `5-casebook/`。
+規格模板（`2-templates/`）、Prompt 魔法書與排解檢索表（`3-playbook/`）、Starter 專案（`4-starter/`）、企業系統補充教材（`5-casebook/`）建置中。
 
 ---
 
