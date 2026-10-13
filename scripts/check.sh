@@ -40,6 +40,13 @@ else
   printf '! 略過 hook 測試：找不到 jq\n'
 fi
 
+# --- 給學員的範本 hook（2-templates/hooks/）的回歸規格 ----------------------
+# 不需要 jq：範本 hook 刻意不依賴它，學員機器上不一定有。
+for t in 2-templates/hooks/test-*.sh; do
+  [ -f "$t" ] || continue
+  run "$t" bash "$t"
+done
+
 # --- 檢查腳本自己的回歸規格 -------------------------------------------------
 for t in scripts/test-*.sh; do
   [ -f "$t" ] || continue

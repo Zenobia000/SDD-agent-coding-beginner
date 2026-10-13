@@ -65,12 +65,14 @@ claude
 | `README.md`（這一頁） | 所有人 | 現在 |
 | [`0-setup/`](./0-setup/) | 所有人 | **開課前一週**：環境檢核表 |
 | [`1-bootcamp/`](./1-bootcamp/) | 所有人 | 上課期間：4 天課表、題目、自主期任務 |
+| [`2-templates/`](./2-templates/) | 所有人 | 寫規格、寫專案規則時：填空模板 |
+| [`3-playbook/`](./3-playbook/) | 所有人 | 隨時查：Prompt 魔法書、問題排解、防呆檢核表 |
 | [`advanced/cookcard/`](./advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
 | [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) | 開始用技能之後 | 查哪一步該用哪個 `/指令` |
 | [`instructor/`](./instructor/) | 講師 | 學員不用看 |
 | `.claude/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
 
-規格模板（`2-templates/`）、Prompt 魔法書與排解檢索表（`3-playbook/`）、Starter 專案（`4-starter/`）、企業系統補充教材（`5-casebook/`）建置中。
+Starter 專案（`4-starter/`）與企業系統補充教材（`5-casebook/`）建置中。
 
 ---
 
