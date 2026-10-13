@@ -9,54 +9,64 @@
 
 ## 這是什麼
 
-一門課的教材，**不是應用程式**。這個分支裡沒有產品原始碼，也不會有。
+一門課的教材：**4 天規格驅動 × AI 開發實戰營**，題目是 LeaveBot（一句話請假）。
+學員來自不同職位（PM、SA、主管、初學工程師），混班分兩軌上課。
+
+> **如果你是學員專案裡的 agent**（工作目錄在 `4-starter/` 或學員自己的專案資料夾）：
+> 以那個目錄的 `AGENTS.md` / `CLAUDE.md` 為準，這一份是給維護教材的人看的。
 
 | 檔案 | 角色 |
 |---|---|
 | `README.md` | **唯一入口**。適合誰、從哪裡開始 |
-| `advanced/cookcard/PRINCIPLES.md` | CookCard 第一冊：心法。七條不變量與四個 Mode |
-| `advanced/cookcard/BUILD.md` | CookCard 第二冊：實戰。七個站點 |
-| `advanced/cookcard/COOKBOOK.md` | CookCard 逃生口：指令與提示詞 |
-| `advanced/cookcard/FIXTURES.md` | 素材挑選準則（講師用） |
-| `instructor/` | 講師手冊（CookCard 版在 `instructor/cookcard/`） |
-| `docs/SKILL-MAP.md` | 技能速查：哪一站用哪個、什麼時候跳過。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
+| `0-setup/` | 課前環境檢核表 |
+| `1-bootcamp/` | 4 天課表、題目 `LEAVEBOT.md`、自主期任務 |
+| `2-templates/` `3-playbook/` `4-starter/` `5-casebook/` | 交付資產（建置中） |
+| `advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
+| `instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
+| `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
 | `.claude/skills/` | 本專案的工具鏈，36 個技能。**可以改**，見該目錄的 `README.md` |
+| `.agents/skills` | 指向 `.claude/skills` 的 symlink，給 Codex 讀 |
 | `THIRD-PARTY-NOTICES.md` | 上游授權聲明。**MIT 的要求，不要移除** |
 
-學生入口只有一個：根目錄 `README.md`。**根目錄不要再新增教材檔** —— 新手看不出該先讀哪一份，這正是這次重整要解決的問題。
+學生入口只有一個：根目錄 `README.md`，然後照資料夾編號往下走。
+**根目錄不要再新增教材檔**，新內容放進對應的編號資料夾。
 
 ---
 
-## 這門課的設計原則，改教材時必須遵守
+## 主線教材的設計原則
 
-這四條是這條線和另外兩條線的根本差別。違反其中任一條，等於把這門課退化成照貼照跑。
+主線以企業工作坊的形式為準：**給模板、給提示詞、給 Starter**。學員背景差異大，
+沒有這些，一半的人會卡在空白頁。但給了之後，每一份都要守住下面四條，
+否則課程會退化成照貼照跑。
 
-### 1. 不給可以直接貼的 prompt
+### 1. 提示詞要附「你要自己改的地方」
 
-另外兩條線給。這裡不給。判斷不能照著腳本學。
+每一段參考提示詞都要讓學員知道哪裡要換成自己的內容，並在提示詞裡示範
+「限制 AI 的範圍」與「不要替我決定」這類句子。不要給一段貼上就能完成整個單元的提示詞。
 
-### 2. 不給「你應看到」的螢幕輸出
+### 2. 每個單元都要有學員自己能跑的通過訊號
 
-只給**學生自己能跑的通過訊號**。學生要自己定義什麼叫對。
+通過訊號是**可以檢查的事**（檔案存在、指令跑得起來、測試是綠的、別人判斷得了），
+不是「你應該會看到這個畫面」。
 
-### 3. 不給選型答案
+### 3. 給選項與取捨；只有在課程需要一致性時才直接決定
 
-VLM vs STT、SQLite vs Postgres、cron vs queue —— 全部留給學生決定。
-教材只列取捨，不列建議。
+Starter 的技術棧（FastAPI + SQLite + pytest）直接決定，因為 4 天沒有時間選型。
+但「哪些交給 AI、哪些寫成規則」「準確率多少才能上線」這類判斷，**教材只列取捨，答案留給學員**。
 
-### 4. 不做參考實作
+### 4. Starter 只給骨架，不給業務邏輯
 
-有參考實作，學生就會照抄。這條寫在 `BUILD.md` 附錄，是對學生的承諾。
+`4-starter/` 可以有 app 骨架、資料庫連線、測試框架、假 LLM。
+**請假的業務邏輯（解析、規則、核准）不能出現在 Starter 裡**，那是學員要讓 AI 寫、自己驗的部分。
 
----
+### 混班兩軌
 
-## 站點不是章節
+每個單元都要同時寫「規格軌做什麼」與「工程軌做什麼」。只寫一軌，另一軌的學員就會變成旁觀者。
 
-`BUILD.md` 的七個站點**順序可以亂，而且大部分可以跳過**。每一站都有「什麼時候跳過這一站」那一段 —— **那是全書最重要的內容**。
+### 進階選修 CookCard 的教法不同
 
-`.claude/skills/README.md` 有一張主流程表，看起來像一條線。**那是預設路徑，不是規定。** 教材教的是什麼時候偏離它。
-
-改教材時如果你把某一站寫成「必須先完成前一站才能開始」，或刪掉「什麼時候跳過」那一段，就是把它改回流水線了 —— 那正是這條線存在的理由所要避開的東西。
+`advanced/cookcard/` 保留原本的教法：**不給可貼的 prompt、不給選型答案、不做參考實作**，
+站點可以跳過、順序可以亂。改那一區時沿用它自己的規矩，不要套用主線的原則。
 
 ---
 
@@ -64,7 +74,8 @@ VLM vs STT、SQLite vs Postgres、cron vs queue —— 全部留給學生決定�
 
 - 教材裡的每條事實都要能回查來源。查不到就標「⚠️ 未驗證」，**不要推測後寫成肯定句**。
 - 「跑起來會怎樣」的宣稱，只有實際跑過才能寫成已驗證。
-- fixture 尚未挑選，因此 `BUILD.md` 的部分通過訊號目前跑不起來。這是已知狀態，README 有標。
+- CookCard 的 `expected.json` 尚未完成，因此 `advanced/cookcard/BUILD.md` 的部分通過訊號目前跑不起來。這是已知狀態，`advanced/cookcard/README.md` 有標。
+- LeaveBot 的「好日子科技」規章是**課堂假設**，不是勞動法規。教材引用真實法規時要附來源。
 
 ---
 
@@ -101,9 +112,9 @@ MIT 要求 copyright notice 與 permission notice 保留在所有副本與實質
 
 ### 技能放在 repo 裡，不用安裝
 
-技能直接放在 `.claude/skills/`（攤平，無 `core`/`draft` 中間層）。**fork 下來打開 Claude Code 就可用**，不需要跑上游的 `install.sh`。
+技能直接放在 `.claude/skills/`（攤平，無 `core`/`draft` 中間層）。**fork 下來打開 Claude Code 或 Codex 就可用**，不需要跑上游的 `install.sh`。
 
-學生的 CookCard 蓋在 fork 的 `cookcard/` **子目錄**裡。Claude Code 的專案技能會從啟動目錄一路往上找到 repo 根，所以在子目錄啟動一樣吃得到。
+學員的專案蓋在 fork 的**子目錄**裡（LeaveBot 從 `4-starter/` 複製，CookCard 在 `cookcard/`）。Claude Code 與 Codex 都會從啟動目錄一路往上找到 repo 根的技能，所以在子目錄啟動一樣吃得到。
 
 不要為了「乾淨」把技能搬走或改成 submodule —— 上課現場多一個下載步驟就會有人卡住，這是刻意的取捨。
 
@@ -129,14 +140,12 @@ Conventional Commits。Body 三段：WHY（動機）／WHAT（決策與取捨，
 
 ### 品質檢查
 
-這個分支沒有程式碼，所以檢查只有兩項：
-
 ```bash
-bash -n .githooks/pre-commit .githooks/pre-push   # git hooks 語法
-bash scripts/check-links.sh                       # 相對連結目標存在
+bash -n .githooks/pre-commit .githooks/pre-push   # git hooks 語法，有錯才有輸出
+bash scripts/check.sh                             # 全部檢查：連結、技能、Codex 設定、hook 測試
 ```
 
-兩條都必須無輸出（`bash -n` 只在有錯時輸出）。
+`check.sh` 會自動找出 `scripts/check-*.sh` 與所有 hook 測試，逐項印 ✓／✗。`4-starter/` 加入後，它的 `pytest` 也要全綠。
 
 `check-links.sh` 以**檔案所在目錄**解析相對路徑，並略過 `http*`、錨點與 GitHub 的
 `../../tree/<branch>` 分支連結 —— 那三類不是本地檔案，用一般寫法檢查會誤報。
@@ -151,12 +160,13 @@ bash scripts/check-links.sh                       # 相對連結目標存在
 - 繁體中文，技術術語保留英文
 - 結論先行，只保留一條主要建議
 - 區分**已確認**、**主要假設**與**未知**，不要把推測寫成根因
-- 教材內容優先給「學生要自己決定什麼」與「通過條件」，不要給答案
+- 主線教材可以給模板與提示詞，但每份都要標出「學員要自己判斷的地方」與通過訊號
+- 用台灣慣用語（例如 tracer bullet 寫「垂直切片」，不寫「曳光彈」）
 
 ---
 
 ## 安全底線
 
 - 不硬編碼任何金鑰。fixture 的來源 URL 可以進版控，API 金鑰不行
-- 教材裡示範 prompt injection 時，用的必須是自製的測試字幕，不要指向真實影片
+- 教材裡示範 prompt injection 時，用自製的測試句子或字幕，不要指向真實影片或真實員工資料
 - 不要在教材中重新發布完整影片檔，只保留課堂教學所需的最小重現素材
