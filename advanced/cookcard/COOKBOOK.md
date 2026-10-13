@@ -1,6 +1,6 @@
 # COOKBOOK：七站的指令與提示詞
 
-> **這一份是逃生口，不是主線。主線是 [`BUILD.md`](../BUILD.md)。**
+> **這一份是逃生口，不是主線。主線是 [`BUILD.md`](./BUILD.md)。**
 
 ---
 
@@ -831,7 +831,7 @@ git clone <你的 repo> && cd cookcard
 
 | | |
 |---|---|
-| [`PRINCIPLES.md`](../PRINCIPLES.md) | 心法。七條不變量 |
-| [`BUILD.md`](../BUILD.md) | 主線。每一站在判斷什麼、什麼時候可以跳過 |
-| [`docs/SKILL-MAP.md`](../docs/SKILL-MAP.md) | 技能速查 |
-| [`curriculum/README.md`](./README.md) | 講師手冊（學生不需要讀） |
+| [`PRINCIPLES.md`](./PRINCIPLES.md) | 心法。七條不變量 |
+| [`BUILD.md`](./BUILD.md) | 主線。每一站在判斷什麼、什麼時候可以跳過 |
+| [`docs/SKILL-MAP.md`](../../docs/SKILL-MAP.md) | 技能速查 |
+| [`instructor/cookcard/README.md`](../../instructor/cookcard/README.md) | 講師手冊（學生不需要讀） |

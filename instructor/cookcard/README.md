@@ -1,7 +1,7 @@
 # 講師手冊：Progressive SDD
 
 > 這一份是 **CookCard 教材**（`BUILD.md` 七站）的帶課指南。
-> 另有 [`sunny-sprint.md`](./sunny-sprint.md) —— 用這套方法論開的兩週 RAG 營，
+> 另有 [`sunny-sprint.md`](../sunny-sprint.md) —— 用這套方法論開的兩週 RAG 營，
 > 題目與形式都不同，公開的是課表與 Rubric。兩份不要混用。
 
 > 給講師。學生不需要讀這一份。
@@ -9,7 +9,7 @@
 > 這門課和另外兩條線的教法**完全不同**。照著 `claude` / `antigravity` 那套帶會失敗。
 
 **這一份管節奏與教法**：三段式時程、開課前必做、常見帶課失誤。
-**逐站的現場對照在 [`TEACHING.md`](./TEACHING.md)**：每一站學生會打什麼、卡在哪、你該說什麼、什麼時候准他翻 [`COOKBOOK.md`](./COOKBOOK.md)。兩份都要看過。
+**逐站的現場對照在 [`TEACHING.md`](./TEACHING.md)**：每一站學生會打什麼、卡在哪、你該說什麼、什麼時候准他翻 [`COOKBOOK.md`](../../advanced/cookcard/COOKBOOK.md)。兩份都要看過。
 
 ---
 
@@ -106,7 +106,7 @@
 | 項目 | 說明 |
 |---|---|
 | **確認 fork 即用** | 拿一台乾淨機器 fork、clone、`claude`、打 `/compass`，確認技能載得到 |
-| **看過六支 fixture 影片** | 已挑好在 [`docs/FIXTURES.md`](../docs/FIXTURES.md)。你要確認的是 `caption-only` 那支的份量真的在畫面字卡上 —— 那一點沒辦法自動驗 |
+| **看過六支 fixture 影片** | 已挑好在 [`FIXTURES.md`](../../advanced/cookcard/FIXTURES.md)。你要確認的是 `caption-only` 那支的份量真的在畫面字卡上 —— 那一點沒辦法自動驗 |
 | **寫好 `expected.json`** | 每支的必要食材、最少數量、已知模糊項、不得出現的幻覺項 |
 | **預先下載** | audio / captions / frames 進版控，教室網路撐不住三十個人同時抓 |
 | **自己跑一遍第 1 站到第 5 站** | 至少確認 baseline 那支真的抽得出東西，且技能在 fork 裡叫得動 |
