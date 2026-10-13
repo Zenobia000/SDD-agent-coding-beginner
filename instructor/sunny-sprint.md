@@ -168,7 +168,7 @@
 | 題目 | SmartTrip FX（工具線）、CookCard（工程線） | RAG 問答系統 |
 | 驗收 | 自己驗 | **雙盲 Rubric 評分 + 教練回饋** |
 
-repo 的教材可以獨立走完。Sunny Sprint 加的是**外部驗收壓力** —— 也就是[心法篇](../PRINCIPLES.md)不變量 7 說的那件事：**你自己不能當那個閘門。**
+repo 的教材可以獨立走完。Sunny Sprint 加的是**外部驗收壓力** —— 也就是[心法篇](../advanced/cookcard/PRINCIPLES.md)不變量 7 說的那件事：**你自己不能當那個閘門。**
 
 ---
 

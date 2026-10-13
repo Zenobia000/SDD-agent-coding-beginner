@@ -1,19 +1,46 @@
-# Progressive SDD：拿到一個新題目，從零到上線
+# 規格驅動 × AI 開發：用 Claude Code / Codex 把需求做成系統
 
-這條線和另外兩條不一樣。
-
-`claude` 與 `antigravity` 兩條線教的是**工具怎麼用** —— 照著貼、看到綠燈、往下一章。那是必要的第一步，但走完之後你會發現一件事：**你學會了操作 agent，但沒學會怎麼開發軟體。**
-
-這條線補的就是那一段：**拿到一個新題目，怎麼拆解問題、拆解功能、建構系統，一路到部署上線。**
+> **第一次來？只讀這一頁。** 讀完你會知道自己該不該上、要先裝什麼、下一份該打開哪個檔案。
+> 其他資料夾你現在都不用管。
 
 ---
 
-## Fork 下來就能用
+## 這是什麼
 
-工具箱已經在 repo 裡，**不用安裝任何東西**。
+一套用 AI coding agent（Claude Code 或 Codex）開發軟體的訓練營教材。流程從商業需求開始，經過規格、架構、測試，最後到上線。
+
+目標不是學會「叫 AI 寫程式」，而是學會**讓 AI 寫出你能驗收的東西**。
+
+- 人負責收斂與決策
+- AI 負責發散與生成
+
+---
+
+## 適合誰
+
+不限職位。只要你**在企業裡走過流程**，或者**看得懂一張流程圖在說什麼**，就跟得上。
+
+| 你是 | 這門課給你什麼 | 需要寫程式嗎 |
+|---|---|---|
+| PM、SA、主管 | 把模糊需求寫成 AI 讀得懂、人驗得了的規格，並審查 AI 的產出 | 不用 |
+| 初學工程師 | 用 agent 把規格做成能跑、有測試的系統 | 會一點就好 |
+| QA | 從驗收條件展開測試案例，判斷 AI 窮舉的邊界值哪些有意義 | 不用 |
+
+上課時混班分組，每組都有寫規格的人和寫程式的人。真實專案就是這樣分工。
+
+**不適合**：只想學某個工具的快捷鍵，或想拿一份可以直接上線的程式碼。
+
+---
+
+## 第一次來，照這三步
+
+**1. 裝好工具**
+
+你需要 Git，以及 Claude Code 或 Codex 其中一個。
+
+**2. 把專案拿下來**
 
 ```bash
-# fork 這個 repo，然後
 git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
 cd SDD-agent-coding-beginner
 git switch progressive-sdd
@@ -21,114 +48,35 @@ git config core.hooksPath .githooks
 claude
 ```
 
-打 `/compass`。看得到技能清單就成功了。
+**3. 確認工具箱載得到**
+
+在 Claude Code 裡打 `/compass`，看得到技能清單就成功了。
 
 ---
 
-## 兩冊
+## 這個 repo 裡有什麼
 
-| | 檔案 | 時間 | 內容 |
-|---|---|---|---|
-| 第一冊 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 約 40 分鐘 | 心法。七條不變量、四個 Mode、什麼時候該固化 |
-| 第二冊 | [`BUILD.md`](./BUILD.md) | 多次 session | 實戰。CookCard，七個站點 |
+依你會用到的順序排列。**新手只需要看前兩列。**
 
-第一冊先讀完再進第二冊。它很短，而且第二冊每一站都會回頭引用它。
+| 位置 | 給誰 | 什麼時候打開 |
+|---|---|---|
+| `README.md`（這一頁） | 所有人 | 現在 |
+| [`advanced/cookcard/`](./advanced/cookcard/) | 想挑戰完整系統的人 | 進階選修：把料理影片轉成食譜卡，多模態加部署 |
+| [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) | 開始用技能之後 | 查哪一步該用哪個 `/指令` |
+| [`instructor/`](./instructor/) | 講師 | 學員不用看 |
+| `.claude/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
 
-隨時可查：[`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) —— 哪一站用哪個技能、什麼時候可以跳過。
-
-卡住時的逃生口：[`curriculum/COOKBOOK.md`](./curriculum/COOKBOOK.md) —— 七站的指令與逐字可貼的提示詞。**先照第二冊自己打一次，真的卡住再翻** —— 理由與代價寫在 `BUILD.md` 附錄。
+4 天訓練營主線（請假系統題目、規格模板、Starter 專案、Prompt 魔法書）正在建置中，完成後會依閱讀順序放在 `0-setup/` 到 `5-casebook/`。
 
 ---
 
 ## 工具箱
 
-36 個給 coding agent 用的工程技能，就在 [`.claude/skills/`](./.claude/skills/)。**它們是這個專案的一部分，可以改** —— 衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT，聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)）。
+[`.claude/skills/`](./.claude/skills/) 裡有 36 個工程技能，打 `/` 加名稱就能叫出來，例如 `/grilling`、`/to-spec`、`/tdd`。
 
-覆蓋的範圍：
-
-```text
-/setup-skills → /grilling → /domain-modeling → /to-spec → /feasibility
-  → /to-architecture → /frontend-spec → /test-blueprint → /to-tickets
-  → /implement（含 /tdd、/code-review）→ /uat-cases → /browser-evidence
-  → /wizard → /git-commit → /git-pr → /git-release
-```
-
-⚠️ **這條線實質是 Claude Code / Copilot 取向。** 技能用 `disable-model-invocation` 區分「只有你能叫」與「agent 也能叫」的技能，**Antigravity 與 Copilot 都不支援這個欄位** —— 在那兩邊，編排型技能會被 agent 自己啟動。落差寫在 `docs/SKILL-MAP.md`，沒有淡化。
+- 衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT），聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
+- ⚠️ 技能是為 Claude Code 寫的。Codex、Copilot、Antigravity 對技能的支援程度不同，落差寫在 [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md)。
 
 ---
 
-## 專案：CookCard
-
-> **把料理影片變成可以照著做的結構化食譜卡。**
-
-痛點很小白：看 YouTube 學做菜，你得一直暫停、倒帶、記份量，做到一半忘記蒜末是兩瓣還是三瓣。
-
-為什麼選這題當教材：
-
-| 這題會逼你面對 | 具體長什麼樣 |
-|---|---|
-| **需求真的有歧義** | 「一把蔥」怎麼結構化？「適量」怎麼存？影片根本沒說份量怎麼辦？沒有標準答案 |
-| **多模態是必要的，不是裝飾** | 份量常常只打在畫面字卡上，語音沒念。純語音轉文字一定做不出可用的食譜卡 |
-| **有不可逆決定** | 食譜 schema。存了 80 份之後要加欄位，你得自己面對遷移 |
-| **有真實邊界** | 任意 YouTube URL、三小時長片、字幕裡的 prompt injection |
-| **要選型** | VLM 一次到底，還是 STT + 抽幀 OCR 兩段式？要不要 vector DB？ |
-| **值不值得做是真問題** | 市面上食譜 App 一堆，還有人直接把連結丟給 ChatGPT。你得誠實比較 |
-| **失敗會現形** | 抽出來的食譜照著做會不會成功 —— 你自己就能驗 |
-
-技術面會涵蓋前端、後端、資料庫、多模態模型、容器化與排程自動化。**但這些是題目自己長出來的需求，不是為了教而塞進去的。**
-
-素材全部來自網路，中文料理影片無限量。詳見 [`docs/FIXTURES.md`](./docs/FIXTURES.md)。
-
----
-
-## 你的專案蓋在 fork 裡面
-
-```text
-SDD-agent-coding-beginner/     ← 你 fork 的這個 repo
-├── PRINCIPLES.md              ← 教材，讀的
-├── BUILD.md                   ← 教材，讀的
-├── .claude/skills/            ← 工具箱，不用管
-└── cookcard/                  ← 你要蓋的東西，所有產出都在這裡
-```
-
-在 `cookcard/` 裡啟動 Claude Code 一樣吃得到根目錄的技能 —— 專案技能會從啟動目錄一路往上找到 repo 根。
-
----
-
-## 這條線和另外兩條的關係
-
-```text
-claude / antigravity          progressive-sdd
-  ─────────────────           ────────────────
-  工具怎麼操作          →      軟體怎麼開發
-  照著貼，看綠燈               自己判斷，自己驗
-  SmartTrip FX（純函式）        CookCard（完整系統）
-  4–5 小時                      多次 session
-```
-
-先走完任一條工具線再來這裡會順很多 —— 你至少要能讓 agent 跑起來。但不是硬性前置。
-
----
-
-## 目前進度
-
-| 項目 | 狀態 |
-|---|---|
-| `PRINCIPLES.md` 心法篇 | ✅ 完成 |
-| `BUILD.md` 實戰篇（七站） | ✅ 完成 |
-| `docs/SKILL-MAP.md` 技能速查 | ✅ 完成 |
-| `docs/FIXTURES.md` 素材挑選準則 | ✅ 完成 |
-| `curriculum/README.md` 講師手冊 | ✅ 完成 |
-| `curriculum/COOKBOOK.md` 學生操作手冊（指令 + 提示詞） | ✅ 完成 |
-| `curriculum/TEACHING.md` 逐站帶課對照 | ✅ 完成 |
-| `.claude/skills/` 工具箱（36 技能 + guard hooks） | ✅ 已內建，fork 即用 |
-| `docs/assets/route.svg` 七站路線圖 | ✅ 完成 |
-| Fixture 六支影片挑選 | ✅ 完成，見 [`docs/FIXTURES.md`](./docs/FIXTURES.md)（中英各三，附證據等級） |
-| **每支的 `expected.json`** | ⬜ **開課前必做** —— 需要人看過影片才能填 |
-| 參考實作 | ⬜ 刻意不做（見 `BUILD.md` 附錄） |
-
-`BUILD.md` 有幾條通過訊號假設了 fixture 已就位（例如 `fixtures/baseline/`）。挑好之前那些命令跑不起來 —— 這是已知狀態，不是 bug。
-
----
-
-MIT License。`.claude/skills/` 衍生自第三方，授權見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
+MIT License。

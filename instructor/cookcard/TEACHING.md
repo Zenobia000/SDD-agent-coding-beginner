@@ -3,7 +3,7 @@
 > 給講師。學生不需要讀這一份。
 >
 > **分工**：[`README.md`](./README.md) 管**節奏與教法哲學**（三段式時程、常見帶課失誤、開課前準備）。
-> 這一份管**現場** —— 每一站學生會打什麼、會卡在哪、你該說什麼、什麼時候准他翻 [`COOKBOOK.md`](./COOKBOOK.md)。
+> 這一份管**現場** —— 每一站學生會打什麼、會卡在哪、你該說什麼、什麼時候准他翻 [`COOKBOOK.md`](../../advanced/cookcard/COOKBOOK.md)。
 >
 > 兩份互相引用，不重述。開課前兩份都要看過。
 
@@ -423,6 +423,6 @@
 | | |
 |---|---|
 | [`README.md`](./README.md) | 講師手冊：節奏、三段式時程、開課前必做、常見帶課失誤 |
-| [`COOKBOOK.md`](./COOKBOOK.md) | 學生操作手冊：指令與提示詞 |
-| [`../docs/FIXTURES.md`](../docs/FIXTURES.md) | 六支 fixture 的特徵與已挑選清單 |
-| [`../BUILD.md`](../BUILD.md) | 主線教材 |
+| [`COOKBOOK.md`](../../advanced/cookcard/COOKBOOK.md) | 學生操作手冊：指令與提示詞 |
+| [`FIXTURES.md`](../../advanced/cookcard/FIXTURES.md) | 六支 fixture 的特徵與已挑選清單 |
+| [`BUILD.md`](../../advanced/cookcard/BUILD.md) | 主線教材 |

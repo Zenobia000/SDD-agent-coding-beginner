@@ -13,15 +13,17 @@
 
 | 檔案 | 角色 |
 |---|---|
-| `PRINCIPLES.md` | 第一冊：心法。七條不變量與四個 Mode |
-| `BUILD.md` | 第二冊：實戰。CookCard 七個站點 |
-| `docs/SKILL-MAP.md` | 技能速查：哪一站用哪個、什麼時候跳過 |
-| `docs/FIXTURES.md` | 素材挑選準則（講師用） |
-| `curriculum/README.md` | 講師手冊 |
+| `README.md` | **唯一入口**。適合誰、從哪裡開始 |
+| `advanced/cookcard/PRINCIPLES.md` | CookCard 第一冊：心法。七條不變量與四個 Mode |
+| `advanced/cookcard/BUILD.md` | CookCard 第二冊：實戰。七個站點 |
+| `advanced/cookcard/COOKBOOK.md` | CookCard 逃生口：指令與提示詞 |
+| `advanced/cookcard/FIXTURES.md` | 素材挑選準則（講師用） |
+| `instructor/` | 講師手冊（CookCard 版在 `instructor/cookcard/`） |
+| `docs/SKILL-MAP.md` | 技能速查：哪一站用哪個、什麼時候跳過。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
 | `.claude/skills/` | 本專案的工具鏈，36 個技能。**可以改**，見該目錄的 `README.md` |
 | `THIRD-PARTY-NOTICES.md` | 上游授權聲明。**MIT 的要求，不要移除** |
 
-學生路線固定：`README.md` → `PRINCIPLES.md` → `BUILD.md`。**不要新增替代路線。**
+學生入口只有一個：根目錄 `README.md`。**根目錄不要再新增教材檔** —— 新手看不出該先讀哪一份，這正是這次重整要解決的問題。
 
 ---
 

@@ -18,7 +18,7 @@
 
 ## 路線圖
 
-[![路線圖：新題目 → 上線](./docs/assets/route.svg)](./docs/assets/route.svg)
+[![路線圖：新題目 → 上線](../../docs/assets/route.svg)](../../docs/assets/route.svg)
 
 **七站。每一站是一個能被獨立跳過的判斷。**
 
@@ -59,7 +59,7 @@
 
 **這本書不會告訴你 AI 給的答案對不對。** 你要自己驗。那是不變量 3。
 
-> **真的卡住的時候**：[`curriculum/COOKBOOK.md`](./curriculum/COOKBOOK.md) 有每一站的指令與逐字可貼的提示詞。它是逃生口不是主線 —— **先自己打一次，卡住超過 20 分鐘再翻**。代價寫在[附錄](#附錄這本書刻意沒有給你的東西)。
+> **真的卡住的時候**：[`COOKBOOK.md`](./COOKBOOK.md) 有每一站的指令與逐字可貼的提示詞。它是逃生口不是主線 —— **先自己打一次，卡住超過 20 分鐘再翻**。代價寫在[附錄](#附錄這本書刻意沒有給你的東西)。
 
 ---
 
@@ -105,8 +105,7 @@ claude
 
 ```text
 SDD-agent-coding-beginner/     ← 你 fork 的這個 repo
-├── PRINCIPLES.md              ← 教材，讀的
-├── BUILD.md                   ← 教材，讀的
+├── advanced/cookcard/         ← 教材，讀的
 ├── .claude/skills/            ← 工具箱，不用管
 └── cookcard/                  ← 你要蓋的東西，所有產出都在這裡
 ```
@@ -532,7 +531,7 @@ git clone <你的 repo> && cd cookcard
 
 這本書每一站只寫一行指令，是刻意的 —— 技能本身就是 prompt，你要學的是**選哪一個**。
 
-但「刻意留白」和「卡在原地兩小時」是兩件事，這兩件事以前被混在一起了。所以有 [`curriculum/COOKBOOK.md`](./curriculum/COOKBOOK.md) —— 七站每一站的指令、逐字可貼的提示詞、離站前的自我檢查。
+但「刻意留白」和「卡在原地兩小時」是兩件事，這兩件事以前被混在一起了。所以有 [`COOKBOOK.md`](./COOKBOOK.md) —— 七站每一站的指令、逐字可貼的提示詞、離站前的自我檢查。
 
 **它是逃生口，不是主線。** 翻之前先看你要付什麼：
 
@@ -551,4 +550,4 @@ COOKBOOK **不會**給你任何一個決定的答案。schema 怎麼設計、選
 
 ## 附錄：技能速查
 
-完整對照見 [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。
+完整對照見 [`docs/SKILL-MAP.md`](../../docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。
