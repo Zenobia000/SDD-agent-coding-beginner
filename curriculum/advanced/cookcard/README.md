@@ -30,9 +30,9 @@
 
 ```text
 SDD-agent-coding-beginner/
-├── advanced/cookcard/   ← 教材，讀的
-├── .claude/skills/      ← 工具箱，不用管
-└── cookcard/            ← 你要蓋的東西，所有產出都在這裡
+├── curriculum/advanced/cookcard/   ← 教材，讀的
+├── .claude/skills/                 ← 工具箱，不用管
+└── cookcard/                       ← 你要蓋的東西，所有產出都在這裡
 ```
 
 在 `cookcard/` 裡啟動 Claude Code 一樣吃得到根目錄的技能 —— 專案技能會從啟動目錄一路往上找到 repo 根。

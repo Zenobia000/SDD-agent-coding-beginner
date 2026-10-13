@@ -40,19 +40,19 @@ else
   printf '! 略過 hook 測試：找不到 jq\n'
 fi
 
-# --- 給學員的範本 hook（2-templates/hooks/）的回歸規格 ----------------------
+# --- 給學員的範本 hook（curriculum/2-templates/hooks/）的回歸規格 ----------------------
 # 不需要 jq：範本 hook 刻意不依賴它，學員機器上不一定有。
-for t in 2-templates/hooks/test-*.sh; do
+for t in curriculum/2-templates/hooks/test-*.sh; do
   [ -f "$t" ] || continue
   run "$t" bash "$t"
 done
 
 # --- Starter 專案的測試 -------------------------------------------------------
-# 需要先在 4-starter/ 建好 .venv（見 4-starter/README.md）。沒建就明講略過，不假裝綠。
-if [ -x 4-starter/.venv/bin/pytest ]; then
-  run "4-starter pytest" bash -c 'cd 4-starter && .venv/bin/pytest -q'
+# 需要先在 curriculum/4-starter/ 建好 .venv（見 curriculum/4-starter/README.md）。沒建就明講略過，不假裝綠。
+if [ -x curriculum/4-starter/.venv/bin/pytest ]; then
+  run "curriculum/4-starter pytest" bash -c 'cd curriculum/4-starter && .venv/bin/pytest -q'
 else
-  printf '! 略過 4-starter 測試：找不到 4-starter/.venv（照 4-starter/README.md 建一次）\n'
+  printf '! 略過 starter 測試：找不到 curriculum/4-starter/.venv（照 curriculum/4-starter/README.md 建一次）\n'
 fi
 
 # --- 檢查腳本自己的回歸規格 -------------------------------------------------

@@ -16,7 +16,7 @@ Day 1、Day 2 都是文件。如果直接進 Day 3，你會發現自己只是在
 
 ## 開工前
 
-1. 照 [`4-starter/README.md`](../4-starter/README.md) 複製一份到你們組的專案資料夾，裝好環境。
+1. 照 [`curriculum/4-starter/README.md`](../4-starter/README.md) 複製一份到你們組的專案資料夾，裝好環境。
 2. 把 Day 1、Day 2 的三份文件放進專案：`1_requirements.md`、`2_architecture.md`、`CLAUDE.md` 或 `AGENTS.md`。
 3. 確認 `pytest` 可以跑，而且是綠的。**還沒動任何東西之前，測試就要是綠的。**
 
@@ -96,6 +96,6 @@ AI 說做完了：
 | 呼叫 LLM 失敗 | 先用 Starter 裡的假 LLM 讓流程先跑起來 | 答疑時間帶著錯誤訊息來問 |
 | 規格兩份文件互相矛盾 | 停下來，找規格軌決定 | **不要讓 AI 自己選一個** |
 
-更完整的排解流程見 [`3-playbook/TROUBLESHOOTING.md`](../3-playbook/TROUBLESHOOTING.md)。
+更完整的排解流程見 [`curriculum/3-playbook/TROUBLESHOOTING.md`](../3-playbook/TROUBLESHOOTING.md)。
 
 → 下一步：[Day 3](./DAY3.md)

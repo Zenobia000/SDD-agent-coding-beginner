@@ -1,6 +1,6 @@
 # 講師手冊：4 天實戰營
 
-> 給講師。學員教材在 [`1-bootcamp/`](../1-bootcamp/)。這一份管的是**節奏、高峰時刻與帶課失誤**。
+> 給講師。學員教材在 [`curriculum/1-bootcamp/`](../1-bootcamp/)。這一份管的是**節奏、高峰時刻與帶課失誤**。
 
 ---
 
@@ -23,10 +23,10 @@
 
 | 時間 | 項目 |
 |---|---|
-| 開課前 2 週 | 寄出 [`0-setup/`](../0-setup/) 檢核表，要求學員回報第 4 步的結果 |
+| 開課前 2 週 | 寄出 [`curriculum/0-setup/`](../0-setup/) 檢核表，要求學員回報第 4 步的結果 |
 | 開課前 1 週 | 追蹤沒回報的人。**環境沒好的人，第一天上午會拖住整組** |
 | 開課前 1 週 | 自己用乾淨的機器，Claude Code 與 Codex **各**走一次 Day 1 單元 2 |
-| 開課前 3 天 | 確認 `4-starter/` 能跑、`pytest` 全綠、假 LLM 能用 |
+| 開課前 3 天 | 確認 `curriculum/4-starter/` 能跑、`pytest` 全綠、假 LLM 能用 |
 | 開課前 3 天 | 準備 eval 起始集：至少 30 句，正確答案人工確認過 |
 | 開課前 1 天 | 依報名資料分組，**確保每組至少有一位規格軌、一位工程軌** |
 | 開課當天 | 準備備用 API key 或備用帳號，以防有人的額度用完 |
@@ -94,6 +94,6 @@
 
 | 檔案 | 用途 |
 |---|---|
-| [`1-bootcamp/README.md`](../1-bootcamp/README.md) | 學員看的課表總覽 |
-| [`1-bootcamp/LEAVEBOT.md`](../1-bootcamp/LEAVEBOT.md) | 題目與公司規章 |
+| [`curriculum/1-bootcamp/README.md`](../1-bootcamp/README.md) | 學員看的課表總覽 |
+| [`curriculum/1-bootcamp/LEAVEBOT.md`](../1-bootcamp/LEAVEBOT.md) | 題目與公司規章 |
 | [`cookcard/README.md`](./cookcard/README.md) | 進階選修 CookCard 的帶課指南 |

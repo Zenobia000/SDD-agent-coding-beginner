@@ -17,7 +17,7 @@
 **規格模板**：複製到你的專案根目錄，去掉檔名的 `_template`。可以自己填，也可以讓 AI 照著格式填：
 
 ```text
-用 @2-templates/1_requirements_template.md 的格式，
+用 @curriculum/2-templates/1_requirements_template.md 的格式，
 根據我們剛剛的討論產出 1_requirements.md。
 模板裡的 💡 提示是寫給你的規則，要遵守，但不要出現在產出裡。
 沒討論到的欄位，放進「待決事項」，不要替我決定。

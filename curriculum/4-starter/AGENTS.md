@@ -1,6 +1,6 @@
 # LeaveBot —— agent 工作規則
 
-> 這是 Starter 附的**起點**。Day 2 單元 7 會用 `2-templates/agent-rules/` 的範本改寫它，
+> 這是 Starter 附的**起點**。Day 2 單元 7 會用 `curriculum/2-templates/agent-rules/` 的範本改寫它，
 > 加上你們自己的規格與紅線。Claude Code 透過 `CLAUDE.md`（只有一行 `@AGENTS.md`）讀這一份。
 
 ## 規格在哪

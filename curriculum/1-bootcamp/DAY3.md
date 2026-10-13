@@ -68,7 +68,7 @@
 ### 可以這樣問 AI
 
 ```text
-讀 @1_requirements.md 和 @1-bootcamp/LEAVEBOT.md 的公司規章。
+讀 @1_requirements.md 和 @curriculum/1-bootcamp/LEAVEBOT.md 的公司規章。
 
 針對「員工用一句話請假」這個功能，窮舉 50 個邊界情境。
 涵蓋：日期表達方式、跨月跨年、半天、假日、額度不足、撞期、
