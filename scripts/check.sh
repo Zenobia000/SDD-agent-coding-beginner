@@ -47,6 +47,14 @@ for t in 2-templates/hooks/test-*.sh; do
   run "$t" bash "$t"
 done
 
+# --- Starter 專案的測試 -------------------------------------------------------
+# 需要先在 4-starter/ 建好 .venv（見 4-starter/README.md）。沒建就明講略過，不假裝綠。
+if [ -x 4-starter/.venv/bin/pytest ]; then
+  run "4-starter pytest" bash -c 'cd 4-starter && .venv/bin/pytest -q'
+else
+  printf '! 略過 4-starter 測試：找不到 4-starter/.venv（照 4-starter/README.md 建一次）\n'
+fi
+
 # --- 檢查腳本自己的回歸規格 -------------------------------------------------
 for t in scripts/test-*.sh; do
   [ -f "$t" ] || continue
