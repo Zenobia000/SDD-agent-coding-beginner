@@ -96,4 +96,4 @@
 | `CLAUDE.md` / `AGENTS.md` 範本（安全模式、TDD 強制模式） | [`2-templates/agent-rules/`](../2-templates/agent-rules/) | ✅ |
 | Prompt 魔法書、問題排解檢索表、防呆檢核表、導入評估表 | [`3-playbook/`](../3-playbook/) | ✅ |
 | Starter 專案（FastAPI + SQLite + pytest） | [`4-starter/`](../4-starter/) | ✅ |
-| 企業常見系統的 AI 開發思考指南 | `5-casebook/` | 建置中 |
+| 企業常見系統的 AI 開發思考指南 | [`5-casebook/`](../5-casebook/) | ✅ |

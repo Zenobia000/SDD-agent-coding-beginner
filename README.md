@@ -68,12 +68,11 @@ claude
 | [`2-templates/`](./2-templates/) | 所有人 | 寫規格、寫專案規則時：填空模板 |
 | [`3-playbook/`](./3-playbook/) | 所有人 | 隨時查：Prompt 魔法書、問題排解、防呆檢核表 |
 | [`4-starter/`](./4-starter/) | 工程軌 | 自主期開始時：複製一份當你們的專案起點 |
+| [`5-casebook/`](./5-casebook/) | 所有人 | 結訓後：報價、請款、庫存等七個企業系統的 AI 開發思考 |
 | [`advanced/cookcard/`](./advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
 | [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md) | 開始用技能之後 | 查哪一步該用哪個 `/指令` |
 | [`instructor/`](./instructor/) | 講師 | 學員不用看 |
 | `.claude/`、`scripts/`、`.githooks/` | 工具鏈 | **不用管**，它們在背景運作 |
-
-企業系統補充教材（`5-casebook/`）建置中。
 
 ---
 

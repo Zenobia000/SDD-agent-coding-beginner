@@ -23,7 +23,7 @@
 | `2-templates/` | 規格模板、`AGENTS.md` 範本、範本 hook |
 | `3-playbook/` | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 |
 | `4-starter/` | Starter 專案。只有骨架，**不准加入請假業務邏輯**。改動後 `pytest` 要全綠 |
-| `5-casebook/` | 企業系統補充教材（建置中） |
+| `5-casebook/` | 企業系統補充教材：七個系統，固定六段結構 |
 | `advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
 | `instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
 | `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
