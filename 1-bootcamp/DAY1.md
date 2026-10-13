@@ -196,7 +196,7 @@
 
 ### 實作
 
-**規格軌（主導）**：用模板寫出 `1_requirements.md`，至少 5 個 Story、每個 Story 至少 2 條 Given/When/Then。模板在 `2-templates/`（建置中，今天先用講師發的版本）。
+**規格軌（主導）**：用模板寫出 `1_requirements.md`，至少 5 個 Story、每個 Story 至少 2 條 Given/When/Then。模板在 [`2-templates/1_requirements_template.md`](../2-templates/1_requirements_template.md)。
 
 **工程軌**：拿規格軌寫的驗收條件，挑 3 條問自己：「我能寫一個會失敗的測試來檢查它嗎？」不能的，退回給規格軌改。
 

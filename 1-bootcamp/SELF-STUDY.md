@@ -96,6 +96,6 @@ AI 說做完了：
 | 呼叫 LLM 失敗 | 先用 Starter 裡的假 LLM 讓流程先跑起來 | 答疑時間帶著錯誤訊息來問 |
 | 規格兩份文件互相矛盾 | 停下來，找規格軌決定 | **不要讓 AI 自己選一個** |
 
-更完整的排解流程見 `3-playbook/`（建置中）。
+更完整的排解流程見 [`3-playbook/TROUBLESHOOTING.md`](../3-playbook/TROUBLESHOOTING.md)。
 
 → 下一步：[Day 3](./DAY3.md)

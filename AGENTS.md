@@ -20,7 +20,9 @@
 | `README.md` | **唯一入口**。適合誰、從哪裡開始 |
 | `0-setup/` | 課前環境檢核表 |
 | `1-bootcamp/` | 4 天課表、題目 `LEAVEBOT.md`、自主期任務 |
-| `2-templates/` `3-playbook/` `4-starter/` `5-casebook/` | 交付資產（建置中） |
+| `2-templates/` | 規格模板、`AGENTS.md` 範本、範本 hook |
+| `3-playbook/` | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 |
+| `4-starter/` `5-casebook/` | Starter 專案、企業系統補充教材（建置中） |
 | `advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
 | `instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
 | `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
