@@ -28,6 +28,10 @@
 | Python 3.11 以上 | [python.org](https://www.python.org/downloads/) | `python3 --version`（Windows：`python --version`） |
 | 編輯器 | VS Code 或任何你習慣的 | 打得開 Markdown 檔，看得到 Mermaid 預覽更好 |
 
+> ⚠️ **Python 版本一定要先確認是 3.11 以上。** 版本太舊時，`pip install` 不一定會報錯，
+> 可能卡住好幾分鐘不動，看起來像當機。Linux / macOS 內建的 `python3` 常常是 3.10 或更舊。
+> 印出來的是 3.10 以下，就照上面的連結裝新版，再用 `python3.12 --version` 這種帶版本號的指令確認。
+
 ### AI coding agent（二選一）
 
 | | Claude Code | Codex |
@@ -87,4 +91,5 @@ cd leavebot-bootcamp
 | `claude` / `codex` 找不到指令 | 重開終端機。還是不行，照官方說明確認安裝路徑有加進 PATH |
 | 公司網路連不上 | 換手機熱點試一次。能連 → 是公司防火牆，找 IT |
 | `/compass` 或 `$compass` 沒反應 | 確認是在 repo 根目錄啟動；Windows 確認上面的 symlink 步驟 |
+| `pip install` 卡住好幾分鐘不動 | 先按 Ctrl+C，再跑 `python3 --version`。低於 3.11 就是版本問題：裝新版後刪掉 `.venv`，用新版重建 |
 | 以上都試過 | 把**完整錯誤訊息**截圖，開課前三天寄給講師 |
