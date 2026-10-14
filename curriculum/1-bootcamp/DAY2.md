@@ -171,7 +171,7 @@ LLM 的輸出一律要經過 schema 驗證才能進資料庫。
 
 **工程軌**：寫「怎麼跑、怎麼測、紅線是什麼」這一段。
 
-範本在 [`curriculum/2-templates/agent-rules/`](../2-templates/agent-rules/)，包含**通用安全模式**與 **TDD 強制模式**兩種。
+範本在 上課 repo 的 `templates/agent-rules/`，包含**通用安全模式**與 **TDD 強制模式**兩種。
 
 ### 可以這樣問 AI
 

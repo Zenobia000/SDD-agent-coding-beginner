@@ -1,4 +1,0 @@
--- 資料表定義寫在這裡，依你們的 2_architecture.md。
--- 每一張表都用 CREATE TABLE IF NOT EXISTS，app 每次啟動都會執行這個檔案。
---
--- 建議：員工原本打的那句話（raw_text）要存下來，AI 解析錯了才查得到。

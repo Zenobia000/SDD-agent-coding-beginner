@@ -550,4 +550,4 @@ COOKBOOK **不會**給你任何一個決定的答案。schema 怎麼設計、選
 
 ## 附錄：技能速查
 
-完整對照見 [`docs/SKILL-MAP.md`](../../../docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。
+完整對照見 [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/progressive-sdd/docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。

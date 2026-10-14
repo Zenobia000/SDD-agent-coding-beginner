@@ -2,7 +2,7 @@
 
 > **今天結束時**：每組有一份 `1_requirements.md`，裡面的每一條驗收條件，都是別人拿去就能判斷「過了沒」的句子。
 >
-> 課前：讀完 [`LEAVEBOT.md`](./LEAVEBOT.md)，並完成 `curriculum/0-setup/` 的環境檢核。
+> 課前：讀完上課 repo 的 [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md)，並完成 `curriculum/0-setup/` 的環境檢核。
 
 | 時間 | 單元 | 產出 |
 |---|---|---|
@@ -146,7 +146,7 @@
 /grilling
 
 我要做一個「一句話請假」系統：員工打一句自然語言，AI 轉成假單，
-規則由程式檢查，主管核准。公司規章在 @curriculum/1-bootcamp/LEAVEBOT.md。
+規則由程式檢查，主管核准。公司規章在 @LEAVEBOT.md。
 
 請扮演一個挑剔的人資主管，一次只問我一個問題，
 專挑規章裡沒寫清楚、但上線後一定會遇到的情況。
@@ -196,7 +196,7 @@
 
 ### 實作
 
-**規格軌（主導）**：用模板寫出 `1_requirements.md`，至少 5 個 Story、每個 Story 至少 2 條 Given/When/Then。模板在 [`curriculum/2-templates/1_requirements_template.md`](../2-templates/1_requirements_template.md)。
+**規格軌（主導）**：用模板寫出 `1_requirements.md`，至少 5 個 Story、每個 Story 至少 2 條 Given/When/Then。模板在 上課 repo 的 `templates/1_requirements_template.md`。
 
 **工程軌**：拿規格軌寫的驗收條件，挑 3 條問自己：「我能寫一個會失敗的測試來檢查它嗎？」不能的，退回給規格軌改。
 
@@ -205,7 +205,7 @@
 ### 可以這樣問 AI
 
 ```text
-根據我們剛剛的討論和 @curriculum/1-bootcamp/LEAVEBOT.md，
+根據我們剛剛的討論和 @LEAVEBOT.md，
 用以下格式產出 1_requirements.md：痛點、User Story、範圍（含不做什麼）、
 驗收條件（Given/When/Then）、待決事項。
 

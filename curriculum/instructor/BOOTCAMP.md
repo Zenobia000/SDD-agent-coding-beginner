@@ -26,7 +26,7 @@
 | 開課前 2 週 | 寄出 [`curriculum/0-setup/`](../0-setup/) 檢核表，要求學員回報第 4 步的結果 |
 | 開課前 1 週 | 追蹤沒回報的人。**環境沒好的人，第一天上午會拖住整組** |
 | 開課前 1 週 | 自己用乾淨的機器，Claude Code 與 Codex **各**走一次 Day 1 單元 2 |
-| 開課前 3 天 | 確認 `leavebot/` 能跑、`pytest` 全綠、假 LLM 能用 |
+| 開課前 3 天 | 確認 [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) 能跑（`bash scripts/check.sh` 全綠）、`pytest` 全綠、假 LLM 能用 |
 | 開課前 3 天 | 準備 eval 起始集：至少 30 句，正確答案人工確認過 |
 | 開課前 1 天 | 依報名資料分組，**確保每組至少有一位規格軌、一位工程軌** |
 | 開課當天 | 準備備用 API key 或備用帳號，以防有人的額度用完 |
@@ -95,5 +95,5 @@
 | 檔案 | 用途 |
 |---|---|
 | [`curriculum/1-bootcamp/README.md`](../1-bootcamp/README.md) | 學員看的課表總覽 |
-| [`curriculum/1-bootcamp/LEAVEBOT.md`](../1-bootcamp/LEAVEBOT.md) | 題目與公司規章 |
+| [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md) | 題目與公司規章 |
 | [`cookcard/README.md`](./cookcard/README.md) | 進階選修 CookCard 的帶課指南 |

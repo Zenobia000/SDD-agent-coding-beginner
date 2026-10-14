@@ -40,13 +40,14 @@
 
 ---
 
-## 3. 課程 repo
+## 3. 上課 repo
+
+上課用的是 [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp)，不是這份講義所在的 repo。
 
 ```bash
-git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
-cd SDD-agent-coding-beginner
-git switch progressive-sdd
-git config core.hooksPath .githooks
+# 先在 GitHub 上 fork 上課 repo，再 clone 你們組的那一份
+git clone https://github.com/<你的帳號>/leavebot-bootcamp.git
+cd leavebot-bootcamp
 ```
 
 ### Windows 使用者先做這一步

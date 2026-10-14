@@ -40,21 +40,6 @@ else
   printf '! 略過 hook 測試：找不到 jq\n'
 fi
 
-# --- 給學員的範本 hook（curriculum/2-templates/hooks/）的回歸規格 ----------------------
-# 不需要 jq：範本 hook 刻意不依賴它，學員機器上不一定有。
-for t in curriculum/2-templates/hooks/test-*.sh; do
-  [ -f "$t" ] || continue
-  run "$t" bash "$t"
-done
-
-# --- Starter 專案的測試 -------------------------------------------------------
-# 需要先在 leavebot/ 建好 .venv（見 leavebot/README.md）。沒建就明講略過，不假裝綠。
-if [ -x leavebot/.venv/bin/pytest ]; then
-  run "leavebot pytest" bash -c 'cd leavebot && .venv/bin/pytest -q'
-else
-  printf '! 略過 starter 測試：找不到 leavebot/.venv（照 leavebot/README.md 建一次）\n'
-fi
-
 # --- 檢查腳本自己的回歸規格 -------------------------------------------------
 for t in scripts/test-*.sh; do
   [ -f "$t" ] || continue

@@ -16,7 +16,7 @@ Day 1、Day 2 都是文件。如果直接進 Day 3，你會發現自己只是在
 
 ## 開工前
 
-1. 照 [`leavebot/README.md`](../../leavebot/README.md) 裝好環境。直接在 `leavebot/` 裡寫，不用複製 —— 每組的 fork 就是自己的一份。
+1. 照 [`leavebot-bootcamp` 的 README](https://github.com/Zenobia000/leavebot-bootcamp#開始) 裝好環境。直接在 repo 裡寫 —— 每組的 fork 就是自己的一份。
 2. 把 Day 1、Day 2 的三份文件放進專案：`1_requirements.md`、`2_architecture.md`、`CLAUDE.md` 或 `AGENTS.md`。
 3. 確認 `pytest` 可以跑，而且是綠的。**還沒動任何東西之前，測試就要是綠的。**
 
