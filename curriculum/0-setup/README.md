@@ -12,7 +12,7 @@
 |---|---|---|
 | GitHub 帳號 | 用來 fork 課程 repo | 能登入 github.com |
 | Claude 或 ChatGPT 付費方案 | Claude Code 需要 Claude Pro / Max 或 Anthropic API；Codex 需要 ChatGPT 付費方案或 OpenAI API。**兩個選一個就好** | 下面第 2 步能登入 |
-| LLM API key | Day 4 的 eval 要呼叫真的模型。Starter 內建 Anthropic（Claude）；用 OpenAI 的話，要在 Day 4 前讓 agent 照 `LLMClient` 介面補一個實作 | 拿到一串 key，**存在密碼管理器，不要貼在任何聊天室** |
+| （選用）Claude API key | D2 的 I4 要用真的模型跑 eval。**有 Claude 訂閱就不需要**：上課 repo 的 `LLM_PROVIDER=claude-cli` 會借用已登入的 Claude Code。只有 Codex 訂閱的人，I4 跟講師的示範機一起跑 | 有 key 的話，**存在密碼管理器，不要貼在任何聊天室** |
 
 > 公司電腦常擋安裝或擋連線。**先用公司電腦試一次**，不行就改帶個人電腦，並提前和 IT 確認。
 
@@ -26,6 +26,7 @@
 |---|---|---|
 | Git | [git-scm.com](https://git-scm.com/downloads) | `git --version` 印出版本號 |
 | Python 3.11 以上 | [python.org](https://www.python.org/downloads/) | `python3 --version`（Windows：`python --version`） |
+| Node.js 24 | [nodejs.org](https://nodejs.org/) | `node --version` 印出 v24 開頭。講師實測的是 24；更舊的版本能不能跑 Next.js 16 ⚠️ 未驗證 |
 | 編輯器 | VS Code 或任何你習慣的 | 打得開 Markdown 檔，看得到 Mermaid 預覽更好 |
 
 > ⚠️ **Python 版本一定要先確認是 3.11 以上。** 版本太舊時，`pip install` 不一定會報錯，
@@ -65,7 +66,27 @@ cd leavebot-bootcamp
 
 ---
 
-## 4. 最後確認
+## 4. 預熱：把要下載的東西先下載好
+
+D2 早上 40 個人同時下載套件，教室網路會塞爆。**課前在家先跑一次**，之後就是從快取拿。
+
+```bash
+# 在 leavebot-bootcamp 根目錄
+python3 -m venv .venv
+source .venv/bin/activate          # Windows：.venv\Scripts\activate
+pip install -e ".[dev]"
+pytest                             # 全綠才算過
+
+# 先把 Next.js 的骨架下載一次（版本要和 STACK.md 一樣），確認能建立之後刪掉
+npx --yes create-next-app@16.4.2 warmup --ts --app --eslint --tailwind --no-src-dir --import-alias "@/*" --use-npm --disable-git --yes
+rm -rf warmup                      # Windows：rmdir /s /q warmup
+```
+
+講師實測：create-next-app 第一次約 40 秒；跑不完或報錯，把完整訊息截圖寄給講師。
+
+---
+
+## 5. 最後確認
 
 在 repo 根目錄啟動 agent：
 
@@ -77,8 +98,10 @@ cd leavebot-bootcamp
 再請它做一件事：
 
 ```text
-只讀 README.md，告訴我這個 repo 是做什麼的，三句話以內。
+只讀 README.md 和 HARNESS.md，告訴我這個 repo 是做什麼的、哪個檔案會擋下危險的 git 指令，三句話以內。
 ```
+
+D1 的第一個單元會解剖這些設定檔，先有個印象就好。
 
 它回答得出來，你的環境就完成了。
 
@@ -91,5 +114,6 @@ cd leavebot-bootcamp
 | `claude` / `codex` 找不到指令 | 重開終端機。還是不行，照官方說明確認安裝路徑有加進 PATH |
 | 公司網路連不上 | 換手機熱點試一次。能連 → 是公司防火牆，找 IT |
 | `/compass` 或 `$compass` 沒反應 | 確認是在 repo 根目錄啟動；Windows 確認上面的 symlink 步驟 |
+| `npx create-next-app` 很慢或失敗 | 換手機熱點試一次；公司網路常擋 npm registry，找 IT 開 `registry.npmjs.org` |
 | `pip install` 卡住好幾分鐘不動 | 先按 Ctrl+C，再跑 `python3 --version`。低於 3.11 就是版本問題：裝新版後刪掉 `.venv`，用新版重建 |
 | 以上都試過 | 把**完整錯誤訊息**截圖，開課前三天寄給講師 |
