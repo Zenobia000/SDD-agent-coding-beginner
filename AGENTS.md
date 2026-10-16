@@ -21,6 +21,7 @@
 | `curriculum/` | **講義原稿**，底下依編號排。用 `scripts/export-handout.sh` 打包成 OneDrive 講義 |
 | `curriculum/0-setup/` | 課前環境檢核表 |
 | `curriculum/1-bootcamp/` | 4 天課表、自主期任務（題目 `LEAVEBOT.md` 在上課 repo） |
+| `curriculum/1-workshop/` | 2 天工作坊：只寫怎麼排、砍什麼、通過訊號，內容連回 4 天版的單元。**同一份內容只寫在 4 天版** |
 | `curriculum/3-playbook/` | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 |
 | [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **另一個 repo**：上課用的 Starter、題目 `LEAVEBOT.md`、規格模板 `templates/`、6 個技能。只有骨架，**不准加入請假業務邏輯** |
 | `curriculum/4-casebook/` | 企業系統補充教材：七個系統，固定六段結構 |

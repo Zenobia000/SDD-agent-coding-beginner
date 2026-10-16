@@ -41,7 +41,7 @@
 
 講義用 `bash scripts/export-handout.sh` 打包成 zip，放 OneDrive 發給學員。原稿留在這裡，才有版本紀錄與連結檢查。
 
-**學員**：照 [`curriculum/0-setup/`](./curriculum/0-setup/) 裝好環境、clone 上課 repo，下一步打開 [`curriculum/1-bootcamp/`](./curriculum/1-bootcamp/)。
+**學員**：照 [`curriculum/0-setup/`](./curriculum/0-setup/) 裝好環境、clone 上課 repo，下一步打開你報名的課表：[4 天實戰營](./curriculum/1-bootcamp/)或 [2 天工作坊](./curriculum/1-workshop/)。
 
 ---
 
@@ -61,7 +61,8 @@ AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
 | 位置 | 給誰 | 什麼時候打開 |
 |---|---|---|
 | [`0-setup/`](./curriculum/0-setup/) | 所有人 | **開課前一週**：環境檢核表 |
-| [`1-bootcamp/`](./curriculum/1-bootcamp/) | 所有人 | 上課期間：4 天課表、題目、自主期任務 |
+| [`1-bootcamp/`](./curriculum/1-bootcamp/) | 4 天班 | 上課期間：4 天課表、自主期任務 |
+| [`1-workshop/`](./curriculum/1-workshop/) | 2 天班 | 上課期間：2 天課表，內容連回 4 天版的單元 |
 | [`3-playbook/`](./curriculum/3-playbook/) | 所有人 | 隨時查：Prompt 魔法書、問題排解、防呆檢核表 |
 | [`4-casebook/`](./curriculum/4-casebook/) | 所有人 | 結訓後：報價、請款、庫存等七個企業系統的 AI 開發思考 |
 | [`advanced/cookcard/`](./curriculum/advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
