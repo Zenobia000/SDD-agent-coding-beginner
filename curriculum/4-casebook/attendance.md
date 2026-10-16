@@ -73,4 +73,4 @@ flowchart LR
 
 > 員工送出一筆整天特休 → 檢查剩餘天數 → 存進資料庫 → 回傳剩餘天數。
 
-不做打卡、不做加班、不做主管核准。這就是 4 天課程的 LeaveBot，完整題目見 [`../1-bootcamp/LEAVEBOT.md`](../1-bootcamp/LEAVEBOT.md)。
+不做打卡、不做加班、不做主管核准。這就是 4 天課程的 LeaveBot，完整題目見 [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md)。

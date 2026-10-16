@@ -69,7 +69,7 @@
 
 **LeaveBot —— 一句話請假。** 員工打一句話，AI 轉成假單，規則由程式碼檢查，主管核准。
 
-完整說明見 [`LEAVEBOT.md`](./LEAVEBOT.md)。**Day 1 開始前請先讀完。**
+完整說明見上課 repo 的 [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md)。**Day 1 開始前請先讀完。**
 
 ---
 
@@ -92,8 +92,8 @@
 
 | 資產 | 位置 | 狀態 |
 |---|---|---|
-| 規格 Markdown 模板 | [`curriculum/2-templates/`](../2-templates/) | ✅ |
-| `CLAUDE.md` / `AGENTS.md` 範本（安全模式、TDD 強制模式） | [`curriculum/2-templates/agent-rules/`](../2-templates/agent-rules/) | ✅ |
+| 規格 Markdown 模板 | 上課 repo 的 [`templates/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/templates) | ✅ |
+| `CLAUDE.md` / `AGENTS.md` 範本（安全模式、TDD 強制模式） | 上課 repo 的 [`templates/agent-rules/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/templates/agent-rules) | ✅ |
 | Prompt 魔法書、問題排解檢索表、防呆檢核表、導入評估表 | [`curriculum/3-playbook/`](../3-playbook/) | ✅ |
-| Starter 專案（FastAPI + SQLite + pytest） | [`leavebot/`](../../leavebot/) | ✅ |
+| Starter 專案（FastAPI + SQLite + pytest） | [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | ✅ |
 | 企業常見系統的 AI 開發思考指南 | [`curriculum/4-casebook/`](../4-casebook/) | ✅ |
