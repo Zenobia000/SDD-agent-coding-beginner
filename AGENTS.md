@@ -13,7 +13,7 @@
 學員來自不同職位（PM、SA、主管、初學工程師），混班分兩軌上課。
 
 > 上課用的專案在另一個 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp)，它有自己的 `AGENTS.md`。
-> 這一份是給維護教材原稿與完整工具鏈的人看的。學員專案（例如 CookCard 的 `cookcard/`）以該目錄的 `AGENTS.md` 為準。
+> 這一份是給維護講義原稿的人看的。學員的專案（LeaveBot、CookCard）都在各自的 repo，以那邊的 `AGENTS.md` 為準。
 
 | 檔案 | 角色 |
 |---|---|
@@ -27,9 +27,6 @@
 | `curriculum/4-casebook/` | 企業系統補充教材：七個系統，固定六段結構 |
 | `curriculum/advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
 | `curriculum/instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
-| `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
-| `.claude/skills/` | 本專案的工具鏈。36 個衍生自 luca-skills，另有 `/roast`、`/seduce`。**可以改**，見該目錄的 `README.md` |
-| `.agents/skills` | 指向 `.claude/skills` 的 symlink，給 Codex 讀 |
 | `.codex/hooks.json` | Codex 的 hook 登記。腳本仍是 `.claude/hooks/`，Codex 不讀 `settings.json` |
 | `THIRD-PARTY-NOTICES.md` | 上游授權聲明。**MIT 的要求，不要移除** |
 
@@ -85,50 +82,26 @@ Starter 的技術棧（FastAPI + SQLite + pytest）直接決定，因為 4 天�
 
 ---
 
-## 工具鏈
+## 工具鏈：技能不在這個 repo
 
-`.claude/skills/` 裡 36 個技能是**本專案自己的工具鏈**，衍生自
-[luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT，commit `1434be8`）並已修改。
-`roast` 與 `seduce` 是本 repo 的輸出風格，跟那 36 個放在一起，Codex 才掃得到。
+技能的唯一源頭是模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter)（38 個技能，衍生自
+[luca-skills](https://github.com/Luca0x5755/luca-skills)，MIT）。
+上課 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) 帶的是其中 6 個的精簡改寫版。**這個 repo 只放講義，不放技能。**
 
-### 技能可以改，但有三條規矩
+| 要改的是 | 去哪改 |
+|---|---|
+| 某個技能本身 | `agent-skills-starter`，改完那邊跑 `bash scripts/check.sh` |
+| 上課用的 6 個技能 | `leavebot-bootcamp`。上游有修正時手動搬過去，兩邊已經分岔 |
+| 講義裡提到技能的地方（例如 CookCard 的 `SKILL-MAP.md`） | 這裡。模板的技能改名或增刪時回來對一次，**沒有腳本自動擋** |
 
-1. **`docs/SKILL-MAP.md` 要同步。** 教材靠那張表指路，改了技能沒改表，學生會照著找不到的東西操作。
-2. **frontmatter 前不能有任何字元**，包括空行 —— 多一個空行整個技能會被靜默略過。
-3. **`name` 必須等於資料夾名。**
+這裡還留著的工具：
 
-已做過的修改列在 `.claude/skills/README.md`。要同步上游修正的話那裡也有 diff 指令 ——
-已經分岔了，不會是無痛合併。
+- `.claude/hooks/` 的兩支 guard，Claude Code 登記在 `.claude/settings.json`，Codex 登記在 `.codex/hooks.json`。
+  `scripts/check-hooks.sh` 擋兩邊登記不同步；guard 的回歸規格是同目錄的 `test-*.sh`。
+  guard 衍生自 luca-skills，所以 **`THIRD-PARTY-NOTICES.md` 不能刪**。
+- `.githooks/` 是 Git 層的防護，與 agent 無關，兩者不衝突。
 
-### 授權：可以改，不可以拿掉聲明
-
-MIT 要求 copyright notice 與 permission notice 保留在所有副本與實質部分中。
-所以可以改內容、改名、重組，但 **`THIRD-PARTY-NOTICES.md` 不能刪**。
-這個 repo 是公開的，拿掉聲明就是授權違規。
-
-### 支援 Claude Code 與 Codex，Copilot / Antigravity 有落差
-
-技能用 `disable-model-invocation` 區分「使用者觸發」與「模型觸發」。
-
-- **Codex**：透過 `.agents/skills → ../.claude/skills` symlink 讀同一份技能，用 `$技能名` 呼叫。
-  Codex 不認 `disable-model-invocation`，對應設定是每個使用者觸發技能的
-  `agents/openai.yaml`（`policy.allow_implicit_invocation: false`）。
-  **新增或改動使用者觸發技能時兩邊都要改**，`scripts/check-codex-skills.sh` 會擋不同步。
-  同一支 guard 腳本，Claude Code 登記在 `.claude/settings.json`，Codex 登記在 `.codex/hooks.json`。
-  Roast / Seduce 的原文在 `.claude/output-styles/`。技能在同一棵技能樹：Claude Code 打 `/roast`、`/seduce`，Codex 打 `$roast`、`$seduce`。
-  `scripts/check-codex-parity.sh` 擋這兩處接線鬆掉。
-- **Antigravity 與 Copilot**：不支援這個欄位，編排型技能會被 agent 自行啟動。
-  教材已在 `docs/SKILL-MAP.md` 標明這個落差，不要淡化它。
-
-### 技能放在 repo 裡，不用安裝
-
-技能直接放在 `.claude/skills/`（攤平，無 `core`/`draft` 中間層）。**fork 下來打開 Claude Code 或 Codex 就可用**，不需要跑上游的 `install.sh`。
-
-CookCard 學員的專案蓋在 fork 的**子目錄** `cookcard/`。Claude Code 與 Codex 都會從啟動目錄一路往上找到 repo 根的技能，所以在子目錄啟動一樣吃得到。
-
-不要為了「乾淨」把技能搬走或改成 submodule —— 上課現場多一個下載步驟就會有人卡住，這是刻意的取捨。
-
-`.githooks/` 是 Git 層的防護，與 agent 無關，兩者不衝突。
+Antigravity 與 Copilot 不支援「只准使用者觸發」，編排型技能會被 agent 自行啟動。教材提到工具支援時，不要淡化這個落差。
 
 ---
 
@@ -152,7 +125,7 @@ Conventional Commits。Body 三段：WHY（動機）／WHAT（決策與取捨，
 
 ```bash
 bash -n .githooks/pre-commit .githooks/pre-push   # git hooks 語法，有錯才有輸出
-bash scripts/check.sh                             # 全部檢查：連結、技能、Codex 設定、hook 測試
+bash scripts/check.sh                             # 全部檢查：連結、guard 登記、hook 測試
 ```
 
 `check.sh` 會自動找出 `scripts/check-*.sh` 與所有 hook 測試，逐項印 ✓／✗。

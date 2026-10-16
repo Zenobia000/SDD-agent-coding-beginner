@@ -1,12 +1,12 @@
 # 技能速查
 
-> 對應 [`.claude/skills/`](../.claude/skills/) 的 36 個工程技能，另有輸出風格 `/roast`、`/seduce`。
-> 改了技能就要回來改這張表 —— 教材靠它指路。
-> 漏改了 `bash scripts/check.sh` 會擋下來（它同時檢查 `compass/SKILL.md`）。
+> 對應模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) 的 `.claude/skills/`：36 個工程技能，另有輸出風格 `/roast`、`/seduce`。
+> ⚠️ 技能在模板 repo，這張表在講義，**沒有腳本自動擋兩邊不同步**。模板的技能改名、新增或刪除時，回來對一次：
+> 在任何從模板開出來的 repo 裡跑 `ROUTE_DOCS=<這份檔的路徑> bash scripts/check-skill-map.sh`。
 
 不確定用哪個 → **`/compass`**。
 
-每一站的指令與逐字可貼的提示詞 → [`COOKBOOK.md`](../curriculum/advanced/cookcard/COOKBOOK.md)（**逃生口，卡住才翻**）。
+每一站的指令與逐字可貼的提示詞 → [`COOKBOOK.md`](./COOKBOOK.md)（**逃生口，卡住才翻**）。
 
 ---
 
@@ -14,7 +14,7 @@
 
 七站、每站的技能、以及每站的跳過條件：
 
-[![路線圖：新題目 → 上線](../curriculum/assets/route.svg)](../curriculum/assets/route.svg)
+[![路線圖：新題目 → 上線](../../assets/route.svg)](../../assets/route.svg)
 
 **藍 = 你打字才會動；紫 = AI 也會自己用。第 5 站是唯一不能跳的。**
 

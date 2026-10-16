@@ -79,14 +79,12 @@ CookCard 是全新題目，所以從第 1 站開始。但真實工作裡，你�
 
 ## 開始之前
 
-工具箱已經在 repo 裡，**不用安裝**。fork 之後：
+工具箱已經在模板裡，**不用安裝**。先到 [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) 按 **Use this template**，開一個叫 `cookcard` 的 repo，然後：
 
 ```bash
-git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
-cd SDD-agent-coding-beginner
+git clone https://github.com/<你的帳號>/cookcard.git
+cd cookcard
 git config core.hooksPath .githooks
-
-mkdir cookcard && cd cookcard
 claude
 ```
 
@@ -100,16 +98,16 @@ claude
 
 追蹤器選 GitHub Issues 還是本地 markdown？現在還沒有票，這個決定**很便宜** —— 隨便選，不合適再換。這是這門課少數可以隨便決定的地方，不要卡在這裡。
 
-### 你的專案蓋在 fork 裡面
+### 你的專案就是一個獨立的 repo
 
 ```text
-SDD-agent-coding-beginner/          ← 你 fork 的這個 repo
-├── curriculum/advanced/cookcard/   ← 教材，讀的
-├── .claude/skills/                 ← 工具箱，不用管
-└── cookcard/                       ← 你要蓋的東西，所有產出都在這裡
+cookcard/                ← 從模板 agent-skills-starter 開出來的你自己的 repo
+├── .claude/skills/      ← 工具箱（38 個技能），不用管
+├── .claude/hooks/       ← 護欄，不用管
+└── （你的產出）          ← spec、架構、程式碼，全部直接放在這裡
 ```
 
-在 `cookcard/` 裡啟動 Claude Code 一樣吃得到根目錄的技能 —— 專案技能會從啟動目錄一路往上找到 repo 根。
+教材留在這個課程 repo，用瀏覽器讀；你的 repo 裡只有你自己的東西。
 
 ---
 
@@ -549,4 +547,4 @@ COOKBOOK **不會**給你任何一個決定的答案。schema 怎麼設計、選
 
 ## 附錄：技能速查
 
-完整對照見 [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。
+完整對照見 [`SKILL-MAP.md`](./SKILL-MAP.md)。不確定用哪個，打 `/compass`。

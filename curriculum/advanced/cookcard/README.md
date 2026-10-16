@@ -29,13 +29,13 @@
 ## 你的專案蓋在哪
 
 ```text
-SDD-agent-coding-beginner/
-├── curriculum/advanced/cookcard/   ← 教材，讀的
-├── .claude/skills/                 ← 工具箱，不用管
-└── cookcard/                       ← 你要蓋的東西，所有產出都在這裡
+cookcard/                ← 從模板 agent-skills-starter 開出來的你自己的 repo
+├── .claude/skills/      ← 工具箱（38 個技能），不用管
+├── .claude/hooks/       ← 護欄，不用管
+└── （你的產出）          ← spec、架構、程式碼，全部直接放在這裡
 ```
 
-在 `cookcard/` 裡啟動 Claude Code 一樣吃得到根目錄的技能 —— 專案技能會從啟動目錄一路往上找到 repo 根。
+教材留在這個課程 repo，用瀏覽器讀就好；你的 repo 裡只有你自己的東西。專案就在 repo 根目錄，Claude Code 的護欄 hook 才會生效。
 
 ## 已知狀態
 
