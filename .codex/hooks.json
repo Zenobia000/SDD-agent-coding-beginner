@@ -1,0 +1,22 @@
+{
+  "description": "與 .claude/settings.json 同一對 Bash 守衛。Codex 不讀那份檔，腳本仍只留一份在 .claude/hooks/。",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.claude/hooks/guard-git.sh\"",
+            "statusMessage": "Checking git command"
+          },
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.claude/hooks/guard-secrets.sh\"",
+            "statusMessage": "Checking staged secrets"
+          }
+        ]
+      }
+    ]
+  }
+}
