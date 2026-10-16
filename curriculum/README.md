@@ -1,6 +1,6 @@
 # 課程
 
-> 第一次來請先讀根目錄的 [`README.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/progressive-sdd/README.md)。這一頁只是資料夾目錄。
+> 第一次來請先讀根目錄的 [`README.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/README.md)。這一頁只是資料夾目錄。
 
 照編號往下走：
 
@@ -11,6 +11,7 @@
 | [`3-playbook/`](./3-playbook/) | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 | 隨時查 |
 | [`4-casebook/`](./4-casebook/) | 七個企業系統的 AI 開發思考 | 結訓後 |
 | [`advanced/cookcard/`](./advanced/cookcard/) | 進階選修：CookCard | 結訓後 |
-| [`instructor/`](https://github.com/Zenobia000/SDD-agent-coding-beginner/tree/progressive-sdd/curriculum/instructor) | 講師手冊 | 講師用 |
+| [`instructor/`](https://github.com/Zenobia000/SDD-agent-coding-beginner/tree/main/curriculum/instructor) | 講師手冊 | 講師用 |
 | [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **上課用的 repo**：LeaveBot 骨架、題目 `LEAVEBOT.md`、規格模板 `templates/`、6 個技能 | 開課前一週 clone |
+| [`slides/`](./slides/) | 開場投影片（8 頁生圖）、視覺規範與黏土貓吉祥物 | 講師開場用 |
 | `assets/` | 圖檔 | 被其他文件引用，不用直接打開 |

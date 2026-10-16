@@ -49,7 +49,6 @@
 ```bash
 git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
 cd SDD-agent-coding-beginner
-git switch progressive-sdd
 git config core.hooksPath .githooks
 
 mkdir cookcard && cd cookcard
@@ -833,5 +832,5 @@ git clone <你的 repo> && cd cookcard
 |---|---|
 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 心法。七條不變量 |
 | [`BUILD.md`](./BUILD.md) | 主線。每一站在判斷什麼、什麼時候可以跳過 |
-| [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/progressive-sdd/docs/SKILL-MAP.md) | 技能速查 |
-| [`curriculum/instructor/cookcard/README.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/progressive-sdd/curriculum/instructor/cookcard/README.md) | 講師手冊（學生不需要讀） |
+| [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/docs/SKILL-MAP.md) | 技能速查 |
+| [`curriculum/instructor/cookcard/README.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/curriculum/instructor/cookcard/README.md) | 講師手冊（學生不需要讀） |

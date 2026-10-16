@@ -47,9 +47,9 @@
 
 | | |
 |---|---|
-| **學生會打** | `git switch progressive-sdd` → `claude` → `/compass` → `/setup-skills` |
+| **學生會打** | `claude`（在 `cookcard/` 裡） → `/compass` → `/setup-skills` |
 | **巡場訊號** | 有沒有人在 repo 根跑 `claude` 而不是在 `cookcard/` 底下 |
-| **會卡在哪** | `/compass` 看不到技能。九成是 `git switch` 沒切成功，或人在錯的目錄 |
+| **會卡在哪** | `/compass` 看不到技能。九成是人在錯的目錄，或 Windows 沒開 symlink |
 | **放行** | 無門檻，直接讓他翻 COOKBOOK 第 0 站 |
 
 **時間上限 15 分鐘。** 超過就一對一處理，不要讓全班等 —— 這一站沒有任何教學價值。

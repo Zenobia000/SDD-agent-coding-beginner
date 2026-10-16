@@ -84,7 +84,6 @@ CookCard 是全新題目，所以從第 1 站開始。但真實工作裡，你�
 ```bash
 git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
 cd SDD-agent-coding-beginner
-git switch progressive-sdd
 git config core.hooksPath .githooks
 
 mkdir cookcard && cd cookcard
@@ -550,4 +549,4 @@ COOKBOOK **不會**給你任何一個決定的答案。schema 怎麼設計、選
 
 ## 附錄：技能速查
 
-完整對照見 [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/progressive-sdd/docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。
+完整對照見 [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/docs/SKILL-MAP.md)。不確定用哪個，打 `/compass`。
