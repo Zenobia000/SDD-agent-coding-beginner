@@ -31,11 +31,12 @@ for s in scripts/check-*.sh; do
 done
 
 # --- 護欄 hook 的回歸規格 ---------------------------------------------------
-# 不變量：每支 hooks/<name>.sh 都有 hooks/test-<name>.sh，由這裡跑。
+# 不變量：每支 .claude/hooks/<name>.sh 都有 .claude/hooks/test-<name>.sh，由這裡跑。
 if command -v jq >/dev/null 2>&1; then
-  while IFS= read -r t; do
-    run "${t#.claude/skills/}" bash "$t"
-  done < <(find .claude/skills -path '*/hooks/test-*.sh' | sort)
+  for t in .claude/hooks/test-*.sh; do
+    [ -f "$t" ] || continue
+    run "$t" bash "$t"
+  done
 else
   printf '! 略過 hook 測試：找不到 jq\n'
 fi

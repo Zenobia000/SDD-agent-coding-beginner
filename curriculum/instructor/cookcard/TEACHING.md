@@ -47,8 +47,8 @@
 
 | | |
 |---|---|
-| **學生會打** | `claude`（在 `cookcard/` 裡） → `/compass` → `/setup-skills` |
-| **巡場訊號** | 有沒有人在 repo 根跑 `claude` 而不是在 `cookcard/` 底下 |
+| **學生會打** | 從模板開 repo → `claude` → `/compass` → `/setup-skills` |
+| **巡場訊號** | 有沒有人 fork 了課程 repo 而不是從模板開 —— 課程 repo 已經沒有技能了 |
 | **會卡在哪** | `/compass` 看不到技能。九成是人在錯的目錄，或 Windows 沒開 symlink |
 | **放行** | 無門檻，直接讓他翻 COOKBOOK 第 0 站 |
 
