@@ -8,7 +8,7 @@
 |---|---|---|
 | [`0-setup/`](./0-setup/) | 課前環境檢核表 | 開課前一週 |
 | [`1-bootcamp/`](./1-bootcamp/) | 4 天實戰營：課表、自主期任務 | 4 天班上課期間 |
-| [`1-workshop/`](./1-workshop/) | 2 天工作坊：4 天版的濃縮排法、講師發的第一張票 | 2 天班上課期間 |
+| [`1-workshop/`](./1-workshop/) | 2 天工作坊：4 天版的濃縮排法、拆票卡住時的備案票 | 2 天班上課期間 |
 | [`3-playbook/`](./3-playbook/) | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 | 隨時查 |
 | [`4-casebook/`](./4-casebook/) | 七個企業系統的 AI 開發思考 | 結訓後 |
 | [`advanced/cookcard/`](./advanced/cookcard/) | 進階選修：CookCard | 結訓後 |
