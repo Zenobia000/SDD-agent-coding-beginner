@@ -9,7 +9,7 @@
 
 ## 這是什麼
 
-一門課的教材：**4 天規格驅動 × AI 開發實戰營**，題目是 LeaveBot（一句話請假）。
+一門課的教材：**2 天（14 小時）規格驅動 × AI 開發實戰營**，題目是 LeaveBot（一句話請假）。D1 寫六份規格，D2 用 SDD agentic coding 從 0 做出全端加 AI 的 app。
 學員來自不同職位（PM、SA、主管、初學工程師），混班分兩軌上課。
 
 > 上課用的專案在另一個 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp)，它有自己的 `AGENTS.md`。
@@ -20,13 +20,12 @@
 | `README.md` | **唯一入口**。適合誰、從哪裡開始 |
 | `curriculum/` | **講義原稿**，底下依編號排。用 `scripts/export-handout.sh` 打包成 OneDrive 講義 |
 | `curriculum/0-setup/` | 課前環境檢核表 |
-| `curriculum/1-bootcamp/` | 4 天課表、自主期任務（題目 `LEAVEBOT.md` 在上課 repo） |
-| `curriculum/1-workshop/` | 2 天工作坊：只寫怎麼排、砍什麼、通過訊號，內容連回 4 天版的單元。**同一份內容只寫在 4 天版** |
+| `curriculum/1-bootcamp/` | 2 天課表：`DAY1`（六份規格）、`DAY2`（I0–I4 疊代）。題目 `LEAVEBOT.md` 在上課 repo |
 | `curriculum/3-playbook/` | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 |
-| [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **另一個 repo**：上課用的 Starter、題目 `LEAVEBOT.md`、規格模板 `templates/`、6 個技能。只有骨架，**不准加入請假業務邏輯** |
+| [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **另一個 repo**：上課 repo。題目、六份規格模板與範例、`STACK.md`、LLM 工具包 `kit/`、`trace.py` / `run_eval.py`、6 個技能。**沒有 app 程式碼** |
 | `curriculum/4-casebook/` | 企業系統補充教材：七個系統，固定六段結構 |
 | `curriculum/advanced/cookcard/` | 進階選修 CookCard（原本的七站教材，教法不同，見下） |
-| `curriculum/instructor/` | 講師手冊。4 天版是 `BOOTCAMP.md` |
+| `curriculum/instructor/` | 講師手冊。主線是 `BOOTCAMP.md`（含保底 repo 與檢查點） |
 | `docs/SKILL-MAP.md` | 技能速查。`scripts/check-skill-map.sh` 綁這個路徑，**不要搬** |
 | `.claude/skills/` | 本專案的工具鏈。36 個衍生自 luca-skills，另有 `/roast`、`/seduce`。**可以改**，見該目錄的 `README.md` |
 | `.agents/skills` | 指向 `.claude/skills` 的 symlink，給 Codex 讀 |
@@ -35,13 +34,13 @@
 
 學生入口只有一個：根目錄 `README.md`，然後進 `curriculum/` 照編號往下走。
 **講義相關的一切都放 `curriculum/`**，根目錄只留入口、agent 規則、授權與工具鏈。新內容放進對應的編號資料夾。
-**agent 要用 `@` 讀的檔案**（題目、規格模板、程式骨架）放上課 repo，不放這裡 —— 講義包裡的檔案，學員專案裡的 agent 讀不到。
+**agent 要用 `@` 讀的檔案**（題目、規格模板、範例、STACK）放上課 repo，不放這裡 —— 講義包裡的檔案，學員專案裡的 agent 讀不到。
 
 ---
 
 ## 主線教材的設計原則
 
-主線以企業工作坊的形式為準：**給模板、給提示詞、給 Starter**。學員背景差異大，
+主線以企業工作坊的形式為準：**給模板、給範例、給提示詞、給邊界與工具**。學員背景差異大，
 沒有這些，一半的人會卡在空白頁。但給了之後，每一份都要守住下面四條，
 否則課程會退化成照貼照跑。
 
@@ -57,13 +56,14 @@
 
 ### 3. 給選項與取捨；只有在課程需要一致性時才直接決定
 
-Starter 的技術棧（FastAPI + SQLite + pytest）直接決定，因為 4 天沒有時間選型。
+技術棧（Next.js＋FastAPI＋SQLite，見上課 repo 的 `STACK.md`）與解析 API 合約直接決定，因為 2 天沒有時間選型，而且 eval 要能幫每一組量準確率。
 但「哪些交給 AI、哪些寫成規則」「準確率多少才能上線」這類判斷，**教材只列取捨，答案留給學員**。
 
-### 4. Starter 只給骨架，不給業務邏輯
+### 4. 上課 repo 給邊界與工具，不給 app
 
-`leavebot-bootcamp` 可以有 app 骨架、資料庫連線、測試框架、假 LLM。
-**請假的業務邏輯（解析、規則、核准）不能出現在 Starter 裡**，那是學員要讓 AI 寫、自己驗的部分。
+`leavebot-bootcamp` 可以有：邊界（`STACK.md`）、安全關鍵的 LLM 工具包（`kit/`）、驗收工具（`trace.py`、`run_eval.py`）、另一個題目的範例文件。
+**app 程式碼與請假的業務邏輯（解析、規則、核准）不能出現在上課 repo 裡**，那是學員 D2 依自己的規格讓 AI 從 0 生成、自己驗的部分。
+講師的保底版本放在 private repo，不公開。
 
 ### 混班兩軌
 
