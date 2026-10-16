@@ -1,0 +1,4 @@
+# Codex 不支援 SKILL.md 的 disable-model-invocation，這裡是它的對應設定：
+# 只有使用者打 $seduce 才會觸發，agent 不會自己啟動。
+policy:
+  allow_implicit_invocation: false
