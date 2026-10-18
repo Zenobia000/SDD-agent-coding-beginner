@@ -166,7 +166,7 @@ I1 必須是垂直切片：⚙️＜從哪裡開始，穿過哪些元件，到�
 
 ### 3-4 AI 功能的 eval
 
-上課 repo 已附 `scripts/run_eval.py`，直接跑：`python scripts/run_eval.py --min ⚙️＜門檻＞`。答錯之後：
+上課 repo 已附 `scripts/run_eval.py`，直接跑：`.venv/bin/python scripts/run_eval.py --min ⚙️＜門檻＞`。答錯之後：
 
 ```text
 這是 eval 答錯的清單：
@@ -217,7 +217,7 @@ I1 必須是垂直切片：⚙️＜從哪裡開始，穿過哪些元件，到�
 ### 4-4 規格與程式碼對不上
 
 ```text
-比對 @docs/03-srs.md 的需求與 ⚙️@＜程式碼目錄＞ 的實作，並參考 `python scripts/trace.py` 的缺口。
+比對 @docs/03-srs.md 的需求與 ⚙️@＜程式碼目錄＞ 的實作，並參考 `.venv/bin/python scripts/trace.py` 的缺口。
 列出：
 1. 規格有寫、程式碼沒做的
 2. 程式碼有做、規格沒寫的

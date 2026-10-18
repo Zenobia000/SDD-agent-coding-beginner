@@ -25,7 +25,7 @@ I1、I2 的時間各含 15 分鐘緩衝。17:15–17:30 問答。
   → 先要它說計畫（Claude Code：Shift+Tab 切 plan mode；Codex：/plan），你看過再讓它動手
   → /tdd：票上的 TC 一個一個，先紅燈、再綠燈，每個測試標 @pytest.mark.req("TC-xx", …)
   → 它說完成了 → 規格軌親手跑票上的驗收指令
-  → python scripts/trace.py，缺口少了才 commit
+  → .venv/bin/python scripts/trace.py，缺口少了才 commit
   → /clear，下一張票
 ```
 
@@ -168,7 +168,7 @@ D1 單元 5 那張「誰負責什麼」的表，在這裡回收：**你把核准
 
 ### 實作
 
-1. **eval（30 分鐘）**：`.env` 設好真的模型，backend 跑起來，執行 `python scripts/run_eval.py --min <你們 Test Plan 訂的門檻>`。答錯的句子挑一類共同原因，改 prompt 再跑一次。
+1. **eval（30 分鐘）**：`.env` 設好真的模型，backend 跑起來，執行 `.venv/bin/python scripts/run_eval.py --min <你們 Test Plan 訂的門檻>`。答錯的句子挑一類共同原因，改 prompt 再跑一次。
 2. **注入（30 分鐘）**：Test Plan 裡的注入 TC 寫成測試（用 `FakeLLM` 模擬模型「聽話了」的輸出），確認狀態不變。再對真的系統打這幾句看看：
 
 ```text
@@ -192,7 +192,7 @@ D1 單元 5 那張「誰負責什麼」的表，在這裡回收：**你把核准
 ### 追溯報告（15 分鐘）
 
 ```bash
-python scripts/trace.py --strict
+.venv/bin/python scripts/trace.py --strict
 ```
 
 沒過也沒關係 —— 把缺口念出來：哪些需求沒有測試、為什麼。**誠實的缺口清單，比假裝全綠有價值。**
