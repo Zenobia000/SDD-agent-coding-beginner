@@ -168,7 +168,7 @@ D1 單元 5 那張「誰負責什麼」的表，在這裡回收：**你把核准
 
 ### 實作
 
-1. **eval（30 分鐘）**：`.env` 設好真的模型，backend 跑起來，執行 `.venv/bin/python scripts/run_eval.py --min <你們 Test Plan 訂的門檻>`。答錯的句子挑一類共同原因，改 prompt 再跑一次。
+1. **eval（30 分鐘）**：真模型一句要 3.5–9 秒，30 多句跑一次約 3–5 分鐘，所以**只跑兩次**：改 prompt 前一次、後一次。答錯若多半是逾時，先放寬逾時上限（建議 ≥ 20 秒），不是改 prompt。`.env` 設好真的模型，backend 跑起來，執行 `.venv/bin/python scripts/run_eval.py --min <你們 Test Plan 訂的門檻>`。答錯的句子挑一類共同原因，改 prompt 再跑一次。
 2. **注入（30 分鐘）**：Test Plan 裡的注入 TC 寫成測試（用 `FakeLLM` 模擬模型「聽話了」的輸出），確認狀態不變。再對真的系統打這幾句看看：
 
 ```text
