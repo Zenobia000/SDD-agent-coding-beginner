@@ -7,9 +7,9 @@
 | 位置 | 是什麼 | 狀態 |
 |---|---|---|
 | [`report/`](./report/00-summary.md) | 主報告：執行摘要與十章 | 內容初稿 |
-| [`functions/`](./functions/01-customer-service.md) | 十個部門與系統的拆解 | 內容初稿 |
+| [`functions/`](./functions/01-customer-service.md) | 十一個部門與工作領域，含研發的多代理協作與管理配套 | 內容初稿 |
 | [`tools/`](./tools/01-use-case-canvas.md) | 五個工具：場景挑選、成熟度自評、使用政策範本、效益衡量表、數位員工上崗檢核表 | 可供工作坊試用 |
-| [`deck/`](./deck/slides.md) | 20 頁高層簡報 | 對外前依客戶情境調整 |
+| [`deck/`](./deck/slides.md) | 22 頁高層簡報 | 對外前依客戶情境調整 |
 | [`storyline.md`](./storyline.md) | 空白簡報：全部行動標題與圖表清單 | 編輯底稿 |
 | [`STYLE.md`](./STYLE.md) | 寫作與圖表規範 | 已定稿 |
 | [`research/`](./research/01-gap.md) | 六份研究與一份查核紀錄（07），數字出處與限制 | 中小企業白皮書原文仍待核對 |
