@@ -1,7 +1,7 @@
 # AI 開發問題排解檢索表
 
 > 先找症狀，照步驟做。**每一步做完都先檢查有沒有好，好了就停。**
-> 對應的提示詞在 [`PROMPT-BOOK.md`](./PROMPT-BOOK.md) 第四篇。
+> 對應的提示詞在 [`PROMPT-BOOK.md`](./prompt-book.md) 第四篇。
 
 ---
 

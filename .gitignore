@@ -1,37 +1,16 @@
-# `.claude/` 是專案核心，必須進版控。只忽略個人與執行期狀態。
-.claude/settings.local.json
-.claude/taskmaster-data/
-.claude/sessions/
-.claude/worktrees/
-
 # 本機秘密
 .env
 .env.*
-!.env.example
-!.env.*.example
-.mcp.json
 secrets/
 *.key
 *.pem
-*.p12
 
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Node / build
-node_modules/
+# 產生出來的東西（電子書 PDF、啟動包 zip 發在 GitHub Release，不進 repo）
 dist/
 build/
-.next/
-
-# Claude workflow 暫存；正式 spec 放 docs/specs/，產品 code 不放這裡。
-.scratch/
+.cache/
+node_modules/
+__pycache__/
 
 # 編輯器、作業系統與暫存檔
 .vscode/
@@ -40,20 +19,13 @@ build/
 Thumbs.db
 tmp/
 *.tmp
-*.bak
 *.log
 
 # 本機大型簡報原檔
 /*.pptx
 
 # 營運機密：含定價、成本結構、毛利與商業假設，不進公開 repo。
-# 公開版（課表 + Rubric，已去除商業內容）在 curriculum/instructor/sunny-sprint.md。
 Sunny_Sprint_*.md
 
 # 同上。course/ 放品牌 CIS、市場戰略、企業內訓報價與行銷素材，全數留在 repo 外。
 course/
-
-# Antigravity CLI 本機狀態（含絕對路徑，機器專屬）
-.antigravitycli/
-/site/
-/.zensical.build.toml
