@@ -136,3 +136,10 @@ li.task input { width: 1.05rem; height: 1.05rem; margin-right: .5rem; vertical-a
   a { color: inherit; text-decoration: none; }
   h1, h2, h3 { break-after: avoid; }
 }
+
+/* 註腳與待補標記 */
+.footnote { margin-top: 3rem; font-size: .82rem; color: var(--muted); border-top: 1px solid var(--line); }
+.footnote ol { padding-left: 1.4rem; }
+.footnote li { margin: .3rem 0; overflow-wrap: anywhere; }
+sup a { text-decoration: none; font-weight: 700; }
+.pending { background: var(--amber-soft); border-left: 4px solid #f59e0b; padding: .6rem 1rem; border-radius: 0 .4rem .4rem 0; }

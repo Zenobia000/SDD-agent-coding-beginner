@@ -40,6 +40,7 @@ BOOKS = {
         "subtitle": "白皮書・導入評估・防呆檢核",
         "chapters": [
             "starter-kit/README.md",
+            "starter-kit/book/02-why-stuck.md",
             "starter-kit/whitepaper/README.md",
             "starter-kit/whitepaper/attendance.md",
             "starter-kit/whitepaper/expense-claim.md",
@@ -76,7 +77,7 @@ def render_markdown(text: str) -> str:
     )
     return markdown.markdown(
         text,
-        extensions=["tables", "fenced_code", "sane_lists", "attr_list", "md_in_html", "toc"],
+        extensions=["tables", "fenced_code", "sane_lists", "attr_list", "md_in_html", "toc", "footnotes"],
         extension_configs={"toc": {"slugify": slugify}},
     )
 

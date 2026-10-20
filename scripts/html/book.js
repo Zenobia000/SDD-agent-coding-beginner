@@ -102,3 +102,8 @@ if (document.querySelector("pre.mermaid")) {
     })
     .catch(() => { /* 離線：留著原始圖碼 */ });
 }
+
+// 【桑尼觀點：待補】、【⚠️ 待查證】這類段落標成黃底，校稿時一眼看得到
+document.querySelectorAll(".chapter p, .chapter li").forEach((el) => {
+  if (/【(桑尼觀點|⚠️)/.test(el.textContent)) el.classList.add("pending");
+});
