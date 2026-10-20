@@ -1,16 +1,17 @@
-# 企業啟動包
+# 企業 AI 轉型啟動指南
 
-> 給結訓後要在公司推動 AI 開發的人。會另外打包成一份 zip 發給企業。
+> **讓 AI 從員工的個人工具，變成企業看得見、量得到的工作成果。**
+> 這是一套給企業決策者與部門主管的 AI 轉型啟動指南：盤點現況、挑選值得驗證的流程、設計人機分工與風險護欄，並用企業自己的數據決定下一步。它提供研究、框架與工作工具，不預設每家企業都能得到相同效益。
+> 原稿在這個資料夾；成品用 `python3 scripts/build-html.py` 產生 `dist/starter-kit.html`（報告）與 `dist/deck.html`（高層簡報），`bash scripts/package-starter-kit.sh` 打包成發給企業的 zip。
 
-| 檔案 | 是什麼 | 誰用 | 什麼時候用 |
-|---|---|---|---|
-| [`whitepaper/`](./whitepaper/README.md) | **AI 開發白皮書**：七個企業常見系統，哪些交給 AI、哪些不能 | 主管、決策者 | 評估要不要導入、從哪裡開始 |
-| [`assessment.md`](./assessment.md) | **導入評估表**：評估團隊成熟度 | 主管 | 結訓時填一次，導入三個月後再填一次 |
-| [`checklist.md`](./checklist.md) | **防呆檢核表**：PM、SA、QA、工程師、主管各一欄 | 所有人 | 印出來貼著，每天看 |
+| 位置 | 是什麼 | 狀態 |
+|---|---|---|
+| [`report/`](./report/00-summary.md) | 主報告：執行摘要與十章 | 內容初稿 |
+| [`functions/`](./functions/01-customer-service.md) | 十個部門與系統的拆解 | 內容初稿 |
+| [`tools/`](./tools/01-use-case-canvas.md) | 五個工具：場景挑選、成熟度自評、使用政策範本、效益衡量表、數位員工上崗檢核表 | 可供工作坊試用 |
+| [`deck/`](./deck/slides.md) | 20 頁高層簡報 | 對外前依客戶情境調整 |
+| [`storyline.md`](./storyline.md) | 空白簡報：全部行動標題與圖表清單 | 編輯底稿 |
+| [`STYLE.md`](./STYLE.md) | 寫作與圖表規範 | 已定稿 |
+| [`research/`](./research/01-gap.md) | 六份研究與一份查核紀錄（07），數字出處與限制 | 中小企業白皮書原文仍待核對 |
 
-## 回公司的第一週
-
-1. 填 [`assessment.md`](./assessment.md)，找出最低分的那一題。
-2. 從白皮書挑一個跟你工作最接近的系統，當作第一個練習題目。
-3. 把 [`checklist.md`](./checklist.md) 裡你角色那一欄印出來。
-4. 用模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) 開一個新專案，照講義 D1 的六份文件走一次。
+對外使用前，先處理查核檔標示的口徑差異與待核項目，並刪除編輯佔位內容。這份指南最適合搭配一次場景盤點工作坊使用：目標是帶團隊選出一個可驗證的流程、指定負責人、訂好基準線與停損條件。

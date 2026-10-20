@@ -17,8 +17,16 @@ function storageSet(key, value) {
 document.querySelectorAll(".chapter table").forEach((table) => {
   const wrap = document.createElement("div");
   wrap.className = "table-wrap";
+  wrap.tabIndex = 0;
+  wrap.setAttribute("role", "region");
+  wrap.setAttribute("aria-label", "資料表格，可水平捲動");
+  const columns = table.rows[0]?.cells.length || 1;
+  wrap.style.setProperty("--table-cols", columns);
+  if (columns > 3) wrap.classList.add("table-wrap--wide");
+  table.querySelectorAll("thead th").forEach((th) => th.setAttribute("scope", "col"));
   table.replaceWith(wrap);
   wrap.appendChild(table);
+  new ResizeObserver(() => wrap.classList.toggle("is-scrollable", wrap.scrollWidth > wrap.clientWidth + 1)).observe(wrap);
 });
 
 // 通過訊號
@@ -26,7 +34,7 @@ function renderProgress() {
   const all = document.querySelectorAll("li.task input");
   const done = [...all].filter((b) => b.checked).length;
   const top = document.querySelector(".topbar__progress");
-  if (all.length) {
+  if (all.length && book !== "starter-kit") {
     top.hidden = false;
     top.textContent = `通過訊號 ${done} / ${all.length}`;
   }
@@ -81,11 +89,33 @@ menu.addEventListener("click", () => {
   const open = document.body.classList.toggle("toc-open");
   menu.setAttribute("aria-expanded", String(open));
 });
-document.querySelectorAll(".toc a").forEach((a) => a.addEventListener("click", () => document.body.classList.remove("toc-open")));
+const toc = document.querySelector(".toc");
+function closeToc() {
+  document.body.classList.remove("toc-open");
+  menu.setAttribute("aria-expanded", "false");
+  if (matchMedia("(max-width: 60rem)").matches) toc.inert = true;
+}
+function syncToc() {
+  toc.inert = matchMedia("(max-width: 60rem)").matches && !document.body.classList.contains("toc-open");
+}
+menu.addEventListener("click", syncToc);
+window.addEventListener("resize", syncToc);
+syncToc();
+document.querySelectorAll(".toc a").forEach((a) => a.addEventListener("click", closeToc));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && document.body.classList.contains("toc-open")) {
+    closeToc();
+    menu.focus();
+  }
+});
+document.addEventListener("pointerdown", (event) => {
+  if (!event.target.closest(".toc, .menu")) closeToc();
+});
 
 const links = new Map([...document.querySelectorAll(".toc a")].map((a) => [a.getAttribute("href").slice(1), a]));
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
+    if (document.body.dataset.readingMode === "guided") return;
     if (!entry.isIntersecting) return;
     links.forEach((a) => a.classList.remove("is-active"));
     links.get(entry.target.id)?.classList.add("is-active");
@@ -97,8 +127,13 @@ document.querySelectorAll(".cover, .chapter").forEach((s) => observer.observe(s)
 if (document.querySelector("pre.mermaid")) {
   import("https://cdn.jsdelivr.net/npm/mermaid@11.17.2/dist/mermaid.esm.min.mjs")
     .then(({ default: mermaid }) => {
-      mermaid.initialize({ startOnLoad: false, theme: "base", themeVariables: { primaryColor: "#e8f5f4", primaryBorderColor: "#2c918c", lineColor: "#1e3a5f", fontFamily: "Noto Sans TC, sans-serif" } });
+      mermaid.initialize({ startOnLoad: false, theme: "base", themeVariables: { primaryColor: "#faf8f3", primaryBorderColor: "#34424b", primaryTextColor: "#10202c", lineColor: "#34424b", fontFamily: "Noto Sans TC, sans-serif" } });
       mermaid.run({ querySelector: "pre.mermaid" });
     })
     .catch(() => { /* 離線：留著原始圖碼 */ });
 }
+
+// 【桑尼現場：待補】、【⚠️ 待查證】這類段落加上底色，校稿時一眼看得到
+document.querySelectorAll(".chapter p, .chapter li").forEach((el) => {
+  if (/【(桑尼|⚠️|待)/.test(el.textContent)) el.classList.add("pending");
+});

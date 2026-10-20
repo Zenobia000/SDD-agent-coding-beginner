@@ -6,28 +6,35 @@
 <title>{{TITLE}}｜{{SUBTITLE}}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 {{CSS}}
 </style>
 </head>
 <body data-book="{{BOOK}}">
+<a class="skip-link" href="#reading-content">跳到內容</a>
 <header class="topbar">
-  <button class="menu" type="button" aria-label="目錄" aria-expanded="false">☰</button>
+  <button class="menu" type="button" aria-controls="book-toc" aria-expanded="false">目錄</button>
+  <span class="topbar__brand">SUNNY DATA SCIENCE</span>
   <span class="topbar__title">{{TITLE}}</span>
   <span class="topbar__progress" hidden></span>
+  {{READER_TOOLS}}
 </header>
-<nav class="toc" aria-label="目錄">
-  <a class="toc__cover" href="#cover">{{SUBTITLE}}</a>
+<nav class="toc" id="book-toc" aria-label="目錄">
+  <a class="toc__cover" href="#cover">{{TITLE}}</a>
   {{NAV}}
 </nav>
-<main>
+<main id="reading-content" tabindex="-1">
   <section class="cover" id="cover">
     <p class="cover__brand">{{BRAND}}</p>
-    <h1 class="cover__title">{{TITLE}}</h1>
-    <p class="cover__subtitle">{{SUBTITLE}}</p>
-    <p class="cover__note">通過訊號可以打勾，進度記在這台電腦的瀏覽器裡。要紙本或 PDF，用瀏覽器的列印。</p>
+    <div>
+      <h1 class="cover__title">{{TITLE}}</h1>
+      <p class="cover__subtitle">{{SUBTITLE}}</p>
+      {{COVER_ACTIONS}}
+    </div>
+    <p class="cover__note">{{COVER_NOTE}}</p>
   </section>
+  {{READER_BAR}}
   {{CONTENT}}
   <footer class="colophon">© 桑尼資料科學 Sunny Data Science</footer>
 </main>
