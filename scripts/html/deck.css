@@ -1,0 +1,60 @@
+/* 高層簡報：16:9，每頁一個行動標題。字級用容器寬度（cqw）換算，螢幕多大都等比例。 */
+body.deck { background: #d9d4ca; padding: 2rem 0; scroll-snap-type: y proximity; }
+.slide {
+  container-type: inline-size;
+  width: min(1280px, 100vw - 2rem); aspect-ratio: 16 / 9; margin: 0 auto 2rem;
+  background: var(--paper); color: var(--ink); scroll-snap-align: center;
+  overflow: hidden; border-radius: var(--r1);
+}
+.slide__inner { height: 100%; display: grid; grid-template-rows: auto 1fr auto; padding: 4.2cqw 5cqw 2.4cqw; }
+.slide__title { margin: 0 0 2.4cqw; max-width: 78%; font: 600 2.75cqw/1.38 var(--serif); }
+.slide__body { min-height: 0; font-size: 1.45cqw; line-height: 1.65; overflow: hidden; }
+.slide__body p, .slide__body li { max-width: none; }
+.slide__body > :first-child { margin-top: 0; }
+.slide__foot { display: flex; justify-content: space-between; gap: 2cqw; padding-top: 1cqw; border-top: 1px solid var(--line); font: .85cqw/1.5 var(--mono); color: var(--muted); }
+
+/* 版面：兩欄不對稱 */
+.slide .split { grid-template-columns: 7fr 5fr; gap: 3cqw; max-width: none; }
+.slide .keyfigs strong { font-size: 3.2cqw; }
+.slide .keyfigs > p { font-size: 1.2cqw; padding: 1cqw 0; }
+.slide .messages > li { padding: 1cqw 0 1cqw 3.4cqw; }
+.slide .messages > li::before { top: 1.2cqw; font-size: 1cqw; }
+.slide .messages > li > strong:first-child { font-size: 1.6cqw; }
+
+/* 圖表在簡報裡縮放 */
+.slide .exhibit { margin: 0; padding: 0; border: 0; max-width: none; }
+.slide .exhibit figcaption { display: none; }
+.slide .exhibit__source { display: none; }
+.slide .chart { font-size: 1.25cqw; }
+.slide .bar__row { grid-template-columns: minmax(10cqw, 22cqw) 1fr 6cqw; gap: 1.2cqw; padding: .5cqw 0; }
+.slide .bar__track { height: 1.6cqw; }
+.slide .bar__value { font-size: 1.3cqw; }
+.slide .col__plot { height: 20cqw; }
+.slide .col__value { font-size: 1.3cqw; transform: translateY(-2.2cqw); }
+.slide .col__label { font-size: 1.15cqw; }
+.slide .matrix__cell { min-height: 9cqw; padding: 1.4cqw; }
+.slide .matrix__cell b { font-size: 1.5cqw; }
+.slide .matrix__cell span { font-size: 1.15cqw; }
+.slide .ladder__step { min-height: calc(12cqw + var(--i) * 3cqw); padding: 1.3cqw; }
+.slide .ladder__step b { font-size: 1.5cqw; }
+.slide .ladder__text, .slide .ladder__signal { font-size: 1.1cqw; }
+.slide .stack__seg { min-height: 10cqw; }
+.slide .stack__seg b { font-size: 2.6cqw; }
+.slide .funnel__bar b { font-size: 1.4cqw; }
+.slide table { font-size: 1.2cqw; }
+
+/* 封面與分隔頁：Night */
+.slide--cover, .slide--divider { background: var(--night); color: var(--paper); }
+.slide--cover .slide__inner, .slide--divider .slide__inner { grid-template-rows: 1fr auto auto; }
+.slide--cover .slide__title { grid-row: 2; font-size: 4.4cqw; max-width: 70%; margin-bottom: 1.6cqw; }
+.slide--cover .slide__body { grid-row: 3; color: #c9d3d8; font: 400 1.7cqw/1.6 var(--serif); }
+.slide--divider .slide__title { grid-row: 2; font-size: 3.6cqw; }
+.slide--divider .slide__body { grid-row: 3; color: #9fb3bf; font: 500 1.1cqw var(--mono); letter-spacing: .16em; }
+.slide--cover .slide__foot, .slide--divider .slide__foot { grid-row: 4; border-color: #2a3a46; color: #9fb3bf; }
+.slide--cover .slide__inner > *, .slide--divider .slide__inner > * { grid-column: 1; }
+
+@media print {
+  @page { size: 13.333in 7.5in; margin: 0; }
+  body.deck { background: none; padding: 0; }
+  .slide { width: 13.333in; height: 7.5in; aspect-ratio: auto; margin: 0; border-radius: 0; break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

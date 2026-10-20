@@ -97,13 +97,13 @@ document.querySelectorAll(".cover, .chapter").forEach((s) => observer.observe(s)
 if (document.querySelector("pre.mermaid")) {
   import("https://cdn.jsdelivr.net/npm/mermaid@11.17.2/dist/mermaid.esm.min.mjs")
     .then(({ default: mermaid }) => {
-      mermaid.initialize({ startOnLoad: false, theme: "base", themeVariables: { primaryColor: "#e8f5f4", primaryBorderColor: "#2c918c", lineColor: "#1e3a5f", fontFamily: "Noto Sans TC, sans-serif" } });
+      mermaid.initialize({ startOnLoad: false, theme: "base", themeVariables: { primaryColor: "#faf8f3", primaryBorderColor: "#34424b", primaryTextColor: "#10202c", lineColor: "#34424b", fontFamily: "Noto Sans TC, sans-serif" } });
       mermaid.run({ querySelector: "pre.mermaid" });
     })
     .catch(() => { /* 離線：留著原始圖碼 */ });
 }
 
-// 【桑尼觀點：待補】、【⚠️ 待查證】這類段落標成黃底，校稿時一眼看得到
+// 【桑尼現場：待補】、【⚠️ 待查證】這類段落加上底色，校稿時一眼看得到
 document.querySelectorAll(".chapter p, .chapter li").forEach((el) => {
-  if (/【(桑尼觀點|⚠️)/.test(el.textContent)) el.classList.add("pending");
+  if (/【(桑尼|⚠️|待)/.test(el.textContent)) el.classList.add("pending");
 });
