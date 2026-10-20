@@ -155,7 +155,7 @@ def chart_column(spec: dict) -> str:
         cls = "col__fill" + (" is-key" if r.get("highlight") else "") + (" is-neg" if v < 0 else "")
         cols.append(
             f'<div class="col"><div class="col__plot"><span class="{cls}" style="{style}"></span>'
-            f'<span class="col__value" style="top:{(zero - height if v >= 0 else zero + height):.2f}%">{fmt(r, v, unit, signed=bottom < 0)}</span></div>'
+            f'<span class="col__value" style="top:{(zero - height if v >= 0 else zero):.2f}%">{fmt(r, v, unit, signed=bottom < 0)}</span></div>'
             f'<span class="col__label">{esc(r["label"])}</span></div>'
         )
     axis = f'<span class="col__zero" style="top:{zero:.2f}%"></span>' if bottom < 0 else ""

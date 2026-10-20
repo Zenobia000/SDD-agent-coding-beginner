@@ -180,13 +180,13 @@ sup a { text-decoration: none; font: 600 .72em var(--mono); }
 .bar__fill.is-neg { background: var(--clay); }
 .bar__value { font: 600 .9rem var(--mono); text-align: right; }
 /* 柱狀 */
-.col__grid { position: relative; display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 1.2rem; }
+.col__grid { position: relative; display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: 1.2rem; padding-top: 1.8rem; }
 .col__plot { position: relative; height: 13rem; border-bottom: 1px solid var(--line); }
 .col__fill { position: absolute; left: 18%; right: 18%; background: var(--graphite); border-radius: 2px 2px 0 0; }
 .col__fill.is-key { background: var(--alpine); }
 .col__fill.is-neg { background: var(--clay); border-radius: 0 0 2px 2px; }
 .col__value { position: absolute; left: 0; right: 0; text-align: center; transform: translateY(-1.5rem); font: 600 .9rem var(--mono); }
-.col__fill.is-neg + .col__value { transform: translateY(.3rem); }
+.col__fill.is-neg + .col__value { color: var(--clay); }
 .col__label { display: block; margin-top: .6rem; text-align: center; color: var(--graphite); font-size: .84rem; line-height: 1.45; }
 .col__zero { position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); z-index: 1; pointer-events: none; transform: translateY(0); }
 .chart--column .col__grid .col__zero { top: 0; }
@@ -227,7 +227,7 @@ sup a { text-decoration: none; font: 600 .72em var(--mono); }
 .colophon { margin-top: 6rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font: .76rem var(--mono); }
 
 /* ── 手機 ─────────────────────────────────────── */
-@media (max-width: 60rem) {
+@media screen and (max-width: 60rem) {
   .menu { display: block; }
   .topbar__brand { display: none; }
   .toc { transform: translateX(-100%); transition: transform .2s ease; z-index: 15; }

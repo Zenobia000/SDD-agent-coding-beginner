@@ -29,7 +29,8 @@ body.deck { background: #d9d4ca; padding: 2rem 0; scroll-snap-type: y proximity;
 .slide .bar__row { grid-template-columns: minmax(10cqw, 22cqw) 1fr 6cqw; gap: 1.2cqw; padding: .5cqw 0; }
 .slide .bar__track { height: 1.6cqw; }
 .slide .bar__value { font-size: 1.3cqw; }
-.slide .col__plot { height: 20cqw; }
+.slide .col__plot { height: 18cqw; }
+.slide .col__grid { padding-top: 2.4cqw; }
 .slide .col__value { font-size: 1.3cqw; transform: translateY(-2.2cqw); }
 .slide .col__label { font-size: 1.15cqw; }
 .slide .matrix__cell { min-height: 9cqw; padding: 1.4cqw; }
