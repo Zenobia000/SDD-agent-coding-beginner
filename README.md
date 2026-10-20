@@ -8,8 +8,10 @@
 ```text
 handbook/      學員講義：課前準備、兩天課程、提示詞與問題排解
 starter-kit/   企業啟動包：AI 開發白皮書、導入評估表、防呆檢核表
-scripts/       維護用的連結檢查
+scripts/       產生 HTML 講義、檢查連結
 ```
+
+**看講義**：`python3 scripts/build-html.py`（要先 `pip install markdown`），產出 `dist/handbook.html` 與 `dist/starter-kit.html`，雙擊用瀏覽器打開。要 PDF 就用瀏覽器列印。
 
 ## 要上課的人
 

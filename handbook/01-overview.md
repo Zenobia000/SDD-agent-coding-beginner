@@ -107,7 +107,7 @@ I1、I2 各含 15 分鐘緩衝（09:00–17:15，最後 15 分鐘問答）。**�
 |---|---|
 | 六份規格模板、追溯規則、`AGENTS.md` 範本、TDD hook | 上課 repo 的 [`templates/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/templates) |
 | 追溯檢查 `trace.py`、eval 工具 `run_eval.py` | 上課 repo 的 [`scripts/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/scripts) |
-| Prompt 魔法書、問題排解檢索表 | 本講義的[附錄](./appendix/) |
+| Prompt 魔法書、問題排解檢索表 | 本講義的[附錄](./appendix/prompt-book.md) |
 | 防呆檢核表、導入評估表 | [企業啟動包](../starter-kit/README.md) |
 | 完整工具鏈（38 個技能） | 模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) |
 | 企業常見系統的 AI 開發白皮書 | [企業啟動包](../starter-kit/README.md) |

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}｜{{SUBTITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+</style>
+</head>
+<body data-book="{{BOOK}}">
+<header class="topbar">
+  <button class="menu" type="button" aria-label="目錄" aria-expanded="false">☰</button>
+  <span class="topbar__title">{{TITLE}}</span>
+  <span class="topbar__progress" hidden></span>
+</header>
+<nav class="toc" aria-label="目錄">
+  <a class="toc__cover" href="#cover">{{SUBTITLE}}</a>
+  {{NAV}}
+</nav>
+<main>
+  <section class="cover" id="cover">
+    <p class="cover__brand">{{BRAND}}</p>
+    <h1 class="cover__title">{{TITLE}}</h1>
+    <p class="cover__subtitle">{{SUBTITLE}}</p>
+    <p class="cover__note">通過訊號可以打勾，進度記在這台電腦的瀏覽器裡。要紙本或 PDF，用瀏覽器的列印。</p>
+  </section>
+  {{CONTENT}}
+  <footer class="colophon">© 桑尼資料科學 Sunny Data Science</footer>
+</main>
+<script type="module">
+{{JS}}
+</script>
+</body>
+</html>
