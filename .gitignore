@@ -55,3 +55,5 @@ course/
 
 # Antigravity CLI 本機狀態（含絕對路徑，機器專屬）
 .antigravitycli/
+/site/
+/.zensical.build.toml

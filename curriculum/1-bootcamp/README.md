@@ -27,6 +27,10 @@
 
 **SDD agentic coding vs vibe coding**：兩者都讓 AI 寫程式。差別是我們的 AI 每一步都有規格可以對、有測試可以擋，做完了說得出「哪條需求被哪個測試驗過」。
 
+**V-model**：D1 寫左邊，D2 寫右邊，每一層規格都有一層測試接住。在網站上可以點選任一層看對照；在 GitHub 上看，對照表在上課 repo 的 [`TRACEABILITY.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/templates/TRACEABILITY.md)。
+
+<div id="vmodel"></div>
+
 ---
 
 ## 課表
