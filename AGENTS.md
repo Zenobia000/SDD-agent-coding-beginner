@@ -18,7 +18,8 @@
 | 檔案 | 角色 |
 |---|---|
 | `README.md` | **唯一入口**。適合誰、從哪裡開始 |
-| `curriculum/` | **講義原稿**，底下依編號排。用 `scripts/export-handout.sh` 打包成 OneDrive 講義 |
+| `curriculum/` | **講義原稿**，底下依編號排。`scripts/build-site.sh` 建成網站（main 有變動時 `.github/workflows/site.yml` 自動發佈到 GitHub Pages），`scripts/export-handout.sh` 打包成 OneDrive 講義 |
+| `scripts/site/` | 網站設定 `zensical.toml`。互動腳本與樣式在 `curriculum/assets/site/`。**根目錄不放網站設定** —— 根目錄只留第一次來就要知道的東西 |
 | `curriculum/0-setup/` | 課前環境檢核表 |
 | `curriculum/1-bootcamp/` | 2 天課表：`DAY1`（六份規格）、`DAY2`（I0–I4 疊代）。題目 `LEAVEBOT.md` 在上課 repo |
 | `curriculum/3-playbook/` | Prompt 魔法書、排解檢索表、防呆檢核表、導入評估表 |

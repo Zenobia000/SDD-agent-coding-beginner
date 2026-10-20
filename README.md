@@ -39,7 +39,8 @@
 | [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **上課用的 repo**：題目、六份規格模板與範例、固定的技術棧、驗收工具，只帶上課用的 6 個技能與護欄 | 學員，clone 下來直接寫 |
 | 這個 repo | **課程首頁與講義原稿**：`curriculum/` 的 2 天實戰營、開場投影片，加上維護講義用的 guard 與檢查腳本 | 講師與維護者 |
 
-講義用 `bash scripts/export-handout.sh` 打包成 zip，放 OneDrive 發給學員。原稿留在這裡，才有版本紀錄與連結檢查。
+**講義網站**：<https://zenobia000.github.io/SDD-agent-coding-beginner/>。通過訊號可以打勾記進度，V-model 可以點選對照。
+離線版用 `bash scripts/export-handout.sh` 打包成 zip，放 OneDrive。原稿都在 `curriculum/`，網站和 zip 都從這裡產生。
 
 **學員**：照 [`curriculum/0-setup/`](./curriculum/0-setup/) 裝好環境、clone 上課 repo，下一步打開[課表](./curriculum/1-bootcamp/)。
 
@@ -50,9 +51,9 @@
 ```text
 README.md        ← 你在這裡
 curriculum/      ← 講義原稿：從這裡開始
-scripts/         ← 檢查腳本、講義打包
+scripts/         ← 檢查腳本、講義打包、網站建置
 AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
-.claude/  .codex/  .githooks/   ← 護欄（guard hooks）與 Git 設定，在背景運作
+.claude/  .codex/  .githooks/  .github/   ← 護欄（guard hooks）、Git 設定、網站自動發佈，在背景運作
 ```
 
 `curriculum/` 裡面照編號往下走：
