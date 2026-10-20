@@ -1,11 +1,10 @@
 # Third-party notices
 
-本 repo 的 `.claude/skills/` 裡，36 個技能與其附帶的 guard hooks **衍生自**
+本 repo 的 `.claude/hooks/` 裡兩支 guard hooks（`guard-git.sh`、`guard-secrets.sh`）與其回歸規格 **衍生自**
 [Luca0x5755/luca-skills](https://github.com/Luca0x5755/luca-skills)，取自
 commit `1434be8ff814b51f0e7fa166bc2e767075e71d83`（2026-08-12），依 MIT License 使用。
 
-本專案已對其做出修改（目錄攤平、`ask-luca` 更名為 `compass`、範例人名中性化、
-`setup-skills` 的 hooks 取檔路徑改寫、流程圖改繪）。`roast` 與 `seduce` 是本 repo 的輸出風格，不是上游的一部分。完整清單見 `.claude/skills/README.md`。
+技能本身已搬到模板 repo [agent-skills-starter](https://github.com/Zenobia000/agent-skills-starter)，修改清單見該 repo 的 `.claude/skills/README.md`。
 
 依 MIT License 的要求，以下 copyright notice 與 permission notice 必須隨本專案保留。
 
@@ -66,5 +65,5 @@ luca-skills 中部分技能文字改寫自 [mattpocock/skills](https://github.co
 
 ---
 
-本 repo 自身的教材內容（`.claude/skills/` 以外的教材文件，如 `curriculum/`、`docs/`）
+本 repo 自身的教材內容（`curriculum/` 等 guard hooks 以外的檔案）
 為原創，依根目錄 `LICENSE` 的 MIT 授權。

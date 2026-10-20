@@ -46,12 +46,12 @@
 
 ## 打什麼
 
-```bash
-git clone https://github.com/<你的帳號>/SDD-agent-coding-beginner.git
-cd SDD-agent-coding-beginner
-git config core.hooksPath .githooks
+先到 [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) 按 **Use this template**，開一個叫 `cookcard` 的 repo，然後：
 
-mkdir cookcard && cd cookcard
+```bash
+git clone https://github.com/<你的帳號>/cookcard.git
+cd cookcard
+git config core.hooksPath .githooks
 claude
 ```
 
@@ -61,7 +61,7 @@ claude
 /compass
 ```
 
-看得到技能清單就成功了。看不到就是 `git switch` 沒切成功，或者你不在 repo 底下。
+看得到技能清單就成功了。看不到就是你不在 repo 底下；Windows 再確認 clone 前開了 `core.symlinks`。
 
 然後：
 
@@ -74,14 +74,14 @@ claude
 | 它問 | 怎麼答 |
 |---|---|
 | 議題追蹤器放哪 | GitHub Issues 或本地 markdown 都行。**這個決定很便宜，不要卡在這裡** |
-| 領域文件放哪 | `cookcard/docs/` |
+| 領域文件放哪 | `docs/` |
 | 要不要裝 guard hooks | 要 |
 
 ## 離站前自己勾
 
 - [ ] `/compass` 看得到技能清單
 - [ ] `/setup-skills` 跑完了（不跑的話後面每個技能都會停下來叫你先跑它）
-- [ ] 你人在 `cookcard/` 底下，不是在 repo 根
+- [ ] 你的 repo 是從模板開的，`.claude/skills/` 在根目錄
 
 ---
 
@@ -832,5 +832,5 @@ git clone <你的 repo> && cd cookcard
 |---|---|
 | [`PRINCIPLES.md`](./PRINCIPLES.md) | 心法。七條不變量 |
 | [`BUILD.md`](./BUILD.md) | 主線。每一站在判斷什麼、什麼時候可以跳過 |
-| [`docs/SKILL-MAP.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/docs/SKILL-MAP.md) | 技能速查 |
+| [`SKILL-MAP.md`](./SKILL-MAP.md) | 技能速查 |
 | [`curriculum/instructor/cookcard/README.md`](https://github.com/Zenobia000/SDD-agent-coding-beginner/blob/main/curriculum/instructor/cookcard/README.md) | 講師手冊（學生不需要讀） |

@@ -37,7 +37,7 @@
 | repo | 是什麼 | 誰用 |
 |---|---|---|
 | [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **上課用的 repo**：題目、六份規格模板與範例、固定的技術棧、驗收工具，只帶上課用的 6 個技能與護欄 | 學員，clone 下來直接寫 |
-| 這個 repo | **課程首頁與講義原稿**：`curriculum/` 的 2 天實戰營、開場投影片，加上完整工具鏈（38 個技能）與檢查腳本 | 講師與維護者；結訓後想要完整工具鏈的人 |
+| 這個 repo | **課程首頁與講義原稿**：`curriculum/` 的 2 天實戰營、開場投影片，加上維護講義用的 guard 與檢查腳本 | 講師與維護者 |
 
 講義用 `bash scripts/export-handout.sh` 打包成 zip，放 OneDrive 發給學員。原稿留在這裡，才有版本紀錄與連結檢查。
 
@@ -50,10 +50,9 @@
 ```text
 README.md        ← 你在這裡
 curriculum/      ← 講義原稿：從這裡開始
-docs/            ← 技能速查表
 scripts/         ← 檢查腳本、講義打包
 AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
-.claude/  .agents/  .codex/  .githooks/   ← agent 與 Git 的設定，在背景運作
+.claude/  .codex/  .githooks/   ← 護欄（guard hooks）與 Git 設定，在背景運作
 ```
 
 `curriculum/` 裡面照編號往下走：
@@ -73,14 +72,12 @@ AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
 
 ---
 
-## 工具箱
+## 工具箱在模板 repo
 
-[`.claude/skills/`](./.claude/skills/) 裡有 38 個工程技能（36 個衍生自上游，加上兩個輸出風格），打 `/` 加名稱就能叫出來，例如 `/grilling`、`/to-spec`、`/tdd`。上課 repo 只帶其中 6 個。輸出風格是 `/roast`、`/seduce`（Codex 用 `$roast`、`$seduce`）。
+38 個工程技能、agent 護欄、Git 安全閘門都在模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter)：按 **Use this template** 就能開一個 Claude Code 與 Codex 都能用的新專案。上課 repo 只帶其中 6 個。
 
-- 衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT），聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
-- Claude Code 用 `/技能名`，Codex 用 `$技能名`，兩邊讀的是同一份技能。
-- ⚠️ 只支援 Claude Code 與 Codex。Copilot、Antigravity 不認「使用者觸發」設定，編排型技能會被 agent 自己啟動，落差寫在 [`docs/SKILL-MAP.md`](./docs/SKILL-MAP.md)。
-- ⚠️ Windows 使用者 clone 前先跑 `git config --global core.symlinks true`（需開啟開發人員模式），否則 Codex 找不到技能。
+- 技能衍生自 [luca-skills](https://github.com/Luca0x5755/luca-skills)（MIT）。這個 repo 留著的 guard hooks 也是，聲明見 [`THIRD-PARTY-NOTICES.md`](./THIRD-PARTY-NOTICES.md)。
+- ⚠️ 只支援 Claude Code 與 Codex。Copilot、Antigravity 不認「使用者觸發」設定，編排型技能會被 agent 自己啟動。
 
 ---
 
