@@ -23,11 +23,11 @@ BCG 同年的調查得到相近的結論：只有 5% 的企業從 AI 拿到規�
    {"label": "至少一個部門使用 AI", "value": 88},
    {"label": "AI 貢獻 5% 以上營業利益（高績效者）", "value": 6, "highlight": true}
  ],
- "source": "McKinsey, The state of AI in 2025，約 2,000 位受訪者、105 國",
- "note": "88% 與 6% 經多篇報導交叉核對"}
+ "source": "McKinsey, The state of AI in 2025，1,993 位受訪者、105 國",
+ "note": "高績效者：AI 貢獻 5% 以上 EBIT，且自評價值顯著"}
 ```
 
-**這代表什麼**：「有沒有在用 AI」已經不是區分企業的指標，大家都在用。真正的分水嶺是「AI 有沒有改變公司的帳」。
+**這代表什麼**：「有沒有在用 AI」已經不是區分企業的指標，大家都在用。分水嶺在於「AI 有沒有改變公司的帳」。
 
 ## 台灣的落差更大：員工早就在用，公司還沒接手
 
@@ -136,7 +136,7 @@ MIT 資訊系統研究中心（CISR）把 721 家企業依 AI 成熟度分成四
 
 【桑尼現場：待補】一段你在企業現場看到的落差，例如「全員買了授權，三個月後真正每天在用的人有多少」。
 
-[^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025；約 2,000 位受訪者、105 國。88% 與 6% 經 [Raj Nandan 整理](https://rajnandan.com/posts/mckinsey-state-of-ai-2025-analysis/)等多篇報導交叉核對。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai
+[^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025-11-05；1,993 位受訪者、105 國。高績效者定義為 AI 貢獻 5% 以上 EBIT 且自評價值顯著。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025
 [^bcg-gap]: BCG,〈The Widening AI Value Gap〉，2025-09-30。https://www.bcg.com/press/30september2025-ai-leaders-outpace-laggards-revenue-growth-cost-savings
 [^ms]: Microsoft 台灣，2024 工作趨勢指數，2024-06-20。https://news.microsoft.com/zh-tw/ms-wti-ai/
 [^aif]: 人工智慧科技基金會，2026 台灣產業 AI 化大調查，228 家企業，樣本偏向較積極的企業。經理人，2026-05-04。https://www.managertoday.com.tw/articles/view/72095 ；CIO Taiwan，2026-04-30。https://www.cio.com.tw/111644/

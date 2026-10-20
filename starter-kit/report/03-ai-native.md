@@ -94,12 +94,12 @@ McKinsey 比較了 AI 高績效者和其他企業的做法，在所有測試過�
 
 [^leanware]: Leanware,〈What is an AI-native company〉，未標日期，屬業界觀點。https://leanware.co/insights/ai-native-companies-definition-strategic-framework
 [^mck-agentic]: McKinsey,〈The agentic organization: Contours of the next paradigm for the AI era〉，2025。https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-agentic-organization-contours-of-the-next-paradigm-for-the-ai-era
-[^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025。「重新設計流程的機率約 3 倍」引自原文。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai
+[^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025-11-05；1,993 位受訪者、105 國。高績效者定義為 AI 貢獻 5% 以上 EBIT 且自評價值顯著。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025
 [^anthropic]: Anthropic Economic Index，2025-09-15。https://www.anthropic.com/research/anthropic-economic-index-september-2025-report
 [^agentid]: Microsoft Learn，Entra Agent ID。https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id ；TechCrunch，Workday agent 管理平台，2025-02-11。https://techcrunch.com/2025/02/11/workday-launches-a-platform-for-enterprises-to-manage-all-of-their-ai-agents-in-one-place
 [^nanda]: MIT NANDA,〈The GenAI Divide: State of AI in Business 2025〉，受訪者自述。https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf
 [^bcg-kpi]: BCG，2025-01，1,803 位高階主管。https://www.bcg.com/press/15january2025-ai-optimism-autonomous-agents
-[^shopify]: TechCrunch，2025-04-07。https://techcrunch.com/2025/04/07/shopify-ceo-tells-teams-to-consider-using-ai-before-growing-headcount/ ；員工數約 8,100 人降到約 7,600 人，依年報轉述，Proactive Investors，2026-02。https://www.proactiveinvestors.co.uk/companies/news/1087574/shopify-q4-strength-highlights-ai-and-marketplace-growth-analysts-1087574.html
+[^shopify]: TechCrunch，2025-04-07。https://techcrunch.com/2025/04/07/shopify-ceo-tells-teams-to-consider-using-ai-before-growing-headcount/ ；員工數 2024 年底約 8,100 人、2025 年底約 7,600 人，依 Shopify 向 SEC 申報之年報（10-K）。
 [^duolingo]: Mind the Product，2025-04-28。https://www.mindtheproduct.com/duolingo-announces-ai-first-strategy/ ；Fortune，2025-08-18。https://fortune.com/2025/08/18/duolingo-ceo-admits-controversial-ai-memo-did-not-give-enough-context-insists-company-never-laid-off-full-time-employees ；148 門課依公司財報轉述，Nasdaq，2026。https://www.nasdaq.com/articles/duolingos-ai-first-strategy-data-secures-dominance-ed-tech
 [^klarna]: Klarna 新聞稿，2024-02-27。https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/ ；Fortune，2025-05-09。https://fortune.com/2025/05/09/klarna-ai-humans-return-on-investment/
 [^oecd]: OECD,〈AI adoption by small and medium-sized enterprises〉，2025-12，經第三方託管之 PDF。https://assets.geteasy.ai/internal/files/oecd-report-ai-adoption-by-small-and-medium-sized-enterprises.pdf

@@ -52,7 +52,7 @@
 
 本報告引用的數字都附註腳，寫明機構、發表日期與樣本。研究、顧問調查、廠商數據、個案的可信度不同，我們在正文裡分開標示。常被轉述的「95% 的 AI 專案失敗」來自一份樣本只有 52 個組織的初步研究，分母也不一致，本報告不採用。
 
-[^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉。約 2,000 位受訪者、105 國；高績效者定義為 AI 貢獻 5% 以上 EBIT 且自評有顯著價值。「重新設計流程的機率約 3 倍」引自 McKinsey 原文；88% 與 6% 經 [Raj Nandan 整理](https://rajnandan.com/posts/mckinsey-state-of-ai-2025-analysis/)等多篇報導交叉核對。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai
+[^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025-11-05；1,993 位受訪者、105 國。高績效者定義為 AI 貢獻 5% 以上 EBIT 且自評價值顯著。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025
 [^ms]: Microsoft 台灣，2024 工作趨勢指數，2024-06-20。https://news.microsoft.com/zh-tw/ms-wti-ai/
 [^aif]: 人工智慧科技基金會，2026 台灣產業 AI 化大調查，228 家企業，樣本偏向較積極的企業。經理人，2026-05-04。https://www.managertoday.com.tw/articles/view/72095
 [^bcg]: BCG，〈AI Adoption in 2024: 74% of Companies Struggle to Achieve and Scale Value〉，2024-10-24。https://www.bcg.com/press/24october2024-ai-adoption-in-2024-74-of-companies-struggle-to-achieve-and-scale-value
