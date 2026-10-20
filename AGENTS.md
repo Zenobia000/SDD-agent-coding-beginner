@@ -138,7 +138,7 @@ CookCard 學員的專案蓋在 fork 的**子目錄** `cookcard/`。Claude Code �
 
 - `main` 是課程首頁與講義原稿，也是預設分支。改動從 `main` 開分支、走 PR
 - 一個分支只做一件事，合併後刪掉。**不要再開長期分支當另一條課程線** —— 另一群讀者就另開 repo
-- 舊的 `claude`、`antigravity`、`progressive-sdd`、`sdd-lite` 線封存成 `archive/*` tag，不要復活成分支
+- 舊的 `claude`、`antigravity`、`progressive-sdd`、`sdd-lite` 線封存成 `archive/*` tag；4 天實戰營封存在 `archive/4-day-bootcamp`，不要復活成分支
 
 ### 不要動
 
