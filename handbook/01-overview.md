@@ -27,9 +27,7 @@
 
 **SDD agentic coding vs vibe coding**：兩者都讓 AI 寫程式。差別是我們的 AI 每一步都有規格可以對、有測試可以擋，做完了說得出「哪條需求被哪個測試驗過」。
 
-**V-model**：D1 寫左邊，D2 寫右邊，每一層規格都有一層測試接住。在網站上可以點選任一層看對照；在 GitHub 上看，對照表在上課 repo 的 [`TRACEABILITY.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/templates/TRACEABILITY.md)。
-
-<div id="vmodel"></div>
+**V-model**：D1 寫左邊，D2 寫右邊，每一層規格都有一層測試接住。對照表在上課 repo 的 [`TRACEABILITY.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/templates/TRACEABILITY.md)。
 
 ---
 
@@ -39,8 +37,8 @@
 
 | | 主題 | 產出 |
 |---|---|---|
-| [**D1**](./DAY1.md) | 規格：V 的左邊，加上右邊的計畫 | `docs/01-brief.md` … `docs/06-test-plan.md`、`AGENTS.md`、I0–I4 疊代票 |
-| [**D2**](./DAY2.md) | 從 0 到 1：V 的右邊 | 全端 app、標了需求的測試、eval 準確率、追溯報告 |
+| [**D1**](./02-day1.md) | 規格：V 的左邊，加上右邊的計畫 | `docs/01-brief.md` … `docs/06-test-plan.md`、`AGENTS.md`、I0–I4 疊代票 |
+| [**D2**](./03-day2.md) | 從 0 到 1：V 的右邊 | 全端 app、標了需求的測試、eval 準確率、追溯報告 |
 
 **D1**
 
@@ -109,8 +107,9 @@ I1、I2 各含 15 分鐘緩衝（09:00–17:15，最後 15 分鐘問答）。**�
 |---|---|
 | 六份規格模板、追溯規則、`AGENTS.md` 範本、TDD hook | 上課 repo 的 [`templates/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/templates) |
 | 追溯檢查 `trace.py`、eval 工具 `run_eval.py` | 上課 repo 的 [`scripts/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/scripts) |
-| Prompt 魔法書、問題排解檢索表、防呆檢核表、導入評估表 | [`3-playbook/`](../3-playbook/) |
+| Prompt 魔法書、問題排解檢索表 | 本講義的[附錄](./appendix/) |
+| 防呆檢核表、導入評估表 | [企業啟動包](../starter-kit/README.md) |
 | 完整工具鏈（38 個技能） | 模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) |
-| 企業常見系統的 AI 開發思考指南 | [`4-casebook/`](../4-casebook/) |
+| 企業常見系統的 AI 開發白皮書 | [企業啟動包](../starter-kit/README.md) |
 
 **課後延伸**：回公司挑一個**小**專案，從模板 repo 開一個新 repo，照 D1 的六份文件走一次。第一次不用寫滿，但 `trace.py` 要跑得出矩陣。
