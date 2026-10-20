@@ -1,7 +1,7 @@
 # 差勤系統（人資）
 
 > **一句話**：記錄上下班、請假、加班，月底算出每個人的出勤結果給薪資用。
-> **難度**：⭐ —— 規則明確、每個人都懂，是 4 天課程的主線題目（LeaveBot 就是它的一部分）。
+> **難度**：⭐ —— 規則明確、每個人都懂，是 2 天課程的主線題目（LeaveBot 就是它的一部分）。
 
 ---
 
@@ -73,4 +73,4 @@ flowchart LR
 
 > 員工送出一筆整天特休 → 檢查剩餘天數 → 存進資料庫 → 回傳剩餘天數。
 
-不做打卡、不做加班、不做主管核准。這就是 4 天課程的 LeaveBot，完整題目見 [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md)。
+不做打卡、不做加班、不做主管核准。這就是 2 天課程的 LeaveBot，完整題目見 [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md)。
