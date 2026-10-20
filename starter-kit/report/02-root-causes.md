@@ -141,8 +141,6 @@ S&P Global 的調查顯示，放棄大部分 AI 專案的企業比例，從 2024
 答「否」最多的那一項，就是你們要先處理的根因。
 </div>
 
-【桑尼現場：待補】一家你看過、卡在試點地獄的企業，四個根因各出現在哪裡，後來怎麼走出來（可匿名）。
-
 [^bcg]: BCG,〈AI Adoption in 2024: 74% of Companies Struggle to Achieve and Scale Value〉，2024-10-24。https://www.bcg.com/press/24october2024-ai-adoption-in-2024-74-of-companies-struggle-to-achieve-and-scale-value
 [^bcg-work]: BCG,〈AI at Work 2025〉，11 國 10,600 多人，2025-06-26。https://www.bcg.com/publications/2025/ai-at-work-momentum-builds-but-gaps-remain
 [^wti]: Microsoft Work Trend Index 2026，10 國 2 萬名 AI 使用者，2026-05-05。https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization ；KPMG × 墨爾本大學，2025。https://fbe.unimelb.edu.au/newsroom/media-release-global-study-reveals-trust-of-ai-remains-a-critical-challenge-reflecting-tension-between-benefits-and-risks
