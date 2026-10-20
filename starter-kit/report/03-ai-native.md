@@ -53,7 +53,7 @@ McKinsey 比較了 AI 高績效者和其他企業的做法，在所有測試過�
 | **執行權下放，問責集中** | 第一線可以試，每個專案有一位對結果負責的主管 | 能跨過試點的企業普遍這樣做 [^nanda] | 第 6 章 |
 | **量測內建** | 上線前就定好基準線與驗收標準，AI 的表現自動被記錄 | 60% 的企業沒有任何 AI 財務指標 [^bcg-kpi] | 第 8 章 |
 
-【桑尼現場：待補】請作者確認這五項的命名，或依現場經驗增刪。
+以下五項是本指南整理的工作假設，適合拿來檢視企業流程；它們是本指南的分析框架，不代表已由桑尼資料科學的多家客戶案例驗證。
 
 ## 同樣喊 AI-first，三家公司走出三種結局，差在人力政策和品質底線
 
@@ -90,7 +90,7 @@ McKinsey 比較了 AI 高績效者和其他企業的做法，在所有測試過�
 
 新創的人均產值確實驚人：瑞典的 Lovable 以 45 名全職員工、上線八個月達到年化營收 1 億美元；[^lovable] Gamma 以約 50 人做到年化營收 1 億美元並且獲利。[^gamma] 這些數字是公司自己公布的年化營收，不是經過審計的財報。大企業無法直接複製這樣的人數比例，可以學的是它們設計工作的方式：工程師用 AI 寫大部分的程式，中階管理層很少，產品本身就是 AI 的槓桿。
 
-【桑尼現場：待補】你看過最接近 AI-Native 的一家企業（可匿名），它在五個做法裡做對了哪幾個。
+**討論題**：請挑一個你熟悉的企業或部門，對照上面的五項做法，找出它最成熟的一項，以及下一個最該補強的地方。這是分析練習，不是本團隊的客戶案例。
 
 [^leanware]: Leanware,〈What is an AI-native company〉，未標日期，屬業界觀點。https://leanware.co/insights/ai-native-companies-definition-strategic-framework
 [^mck-agentic]: McKinsey,〈The agentic organization: Contours of the next paradigm for the AI era〉，2025。https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-agentic-organization-contours-of-the-next-paradigm-for-the-ai-era

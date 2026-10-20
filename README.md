@@ -13,6 +13,8 @@ scripts/       產生 HTML 講義、檢查連結
 
 **看講義**：`python3 scripts/build-html.py`（要先 `pip install markdown`），產出 `dist/handbook.html`、`dist/starter-kit.html` 與 `dist/deck.html`，雙擊用瀏覽器打開。要 PDF 就用瀏覽器列印。
 
+企業指南預設逐章導讀，可展開主題、來源與圖表數據，或切換「完整閱讀」。高層簡報提供上一頁、下一頁與頁面選單；手機會改用可閱讀的自然高度排版。列印時自動展開全文及全部簡報頁面。圖表與文字隨 HTML 一起打包，離線也能閱讀。
+
 ## 要上課的人
 
 | 你要 | 去哪 |

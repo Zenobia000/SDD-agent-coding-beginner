@@ -14,6 +14,7 @@ markdown 是唯一原稿；HTML 是產出，放 dist/（不進版控）。要 PD
 
 import html
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -48,15 +49,15 @@ BOOKS = {
         ],
     },
     "starter-kit": {
-        "title": "AI 的回報卡在組織",
-        "subtitle": "AI-Native 企業的五個決策與四個階段",
+        "title": "企業 AI 轉型啟動指南",
+        "subtitle": "五個決策、四個階段，用 90 天驗證第一個值得投入的場景",
         "chapters": sorted_md("starter-kit/report") + sorted_md("starter-kit/functions") + sorted_md("starter-kit/tools"),
     },
 }
 
 DECK = {
     "name": "deck",
-    "title": "AI 的回報卡在組織",
+    "title": "企業 AI 轉型啟動指南",
     "source": "starter-kit/deck/slides.md",
 }
 
@@ -137,14 +138,27 @@ def chart_bar(spec: dict) -> str:
             f'<span class="{cls}" style="left:{left:.2f}%;width:{width:.2f}%"></span></span>'
             f'<span class="bar__value">{fmt(r, v, unit, signed=diverging)}</span></div>'
         )
-    return f'<div class="chart chart--bar">{"".join(out)}</div>'
+    ticks = [-span, 0, span] if diverging else [0, span / 2, span]
+    axis = "".join(f'<span>{fmt({}, value, unit)}</span>' for value in ticks)
+    return (
+        f'<div class="chart chart--bar">{"".join(out)}'
+        f'<div class="bar__axis" aria-label="橫軸刻度">{axis}</div></div>'
+    )
 
 
 def chart_column(spec: dict) -> str:
     """柱狀：時間或階段的變化，支援負值。"""
     rows, unit = spec["data"], spec.get("unit", "")
     values = [r["value"] for r in rows]
-    top, bottom = max(max(values), 0), min(min(values), 0)
+    def ceiling(value: float) -> float:
+        if not value:
+            return 0
+        step = 10 ** math.floor(math.log10(value))
+        return math.ceil(value / step) * step
+
+    top, bottom = ceiling(max(max(values), 0)), -ceiling(abs(min(min(values), 0)))
+    if top == bottom:
+        top = 1
     span = (top - bottom) or 1
     zero = top / span * 100
     cols = []
@@ -154,12 +168,23 @@ def chart_column(spec: dict) -> str:
         style = f"top:{(zero - height if v >= 0 else zero):.2f}%;height:{height:.2f}%"
         cls = "col__fill" + (" is-key" if r.get("highlight") else "") + (" is-neg" if v < 0 else "")
         cols.append(
-            f'<div class="col"><div class="col__plot"><span class="{cls}" style="{style}"></span>'
-            f'<span class="col__value" style="top:{(zero - height if v >= 0 else zero):.2f}%">{fmt(r, v, unit, signed=bottom < 0)}</span></div>'
+            f'<div class="col"><div class="col__plot">'
+            f'<span class="col__zero" style="top:{zero:.2f}%"></span>'
+            f'<span class="{cls}" style="{style}"></span>'
+            f'<span class="col__value{" is-neg" if v < 0 else ""}" style="top:{(zero - height if v >= 0 else zero + height):.2f}%">{fmt(r, v, unit, signed=bottom < 0)}</span></div>'
             f'<span class="col__label">{esc(r["label"])}</span></div>'
         )
-    axis = f'<span class="col__zero" style="top:{zero:.2f}%"></span>' if bottom < 0 else ""
-    return f'<div class="chart chart--column" style="--cols:{len(rows)}"><div class="col__grid">{axis}{"".join(cols)}</div></div>'
+    ticks = sorted({top, bottom, 0}, reverse=True)
+    axis = "".join(
+        f'<span style="top:{(top - value) / span * 100:.2f}%">{fmt({}, value, unit)}</span>'
+        for value in ticks
+    )
+    return (
+        f'<div class="chart chart--column" style="--cols:{len(rows)}">'
+        f'<div class="column__desktop"><div class="col__axis">{axis}</div>'
+        f'<div class="col__grid">{"".join(cols)}</div></div>'
+        f'<div class="column__mobile">{chart_bar(spec)}</div></div>'
+    )
 
 
 def chart_stack(spec: dict) -> str:
@@ -167,38 +192,45 @@ def chart_stack(spec: dict) -> str:
     segs = spec["data"]
     total = sum(s["value"] for s in segs) or 1
     parts = "".join(
-        f'<span class="stack__seg{" is-key" if s.get("highlight") else ""}" style="flex:{s["value"]}">'
-        f'<b>{fmt(s, s["value"], spec.get("unit", ""))}</b><small>{esc(s["label"])}</small></span>'
+        f'<span class="stack__seg{" is-key" if s.get("highlight") else ""}" style="flex:{s["value"]}"></span>'
         for s in segs
     )
-    return f'<div class="chart chart--stack" data-total="{total}">{parts}</div>'
+    legend = "".join(
+        f'<div class="stack__item{" is-key" if s.get("highlight") else ""}">'
+        f'<b>{fmt(s, s["value"], spec.get("unit", ""))}</b><span>{esc(s["label"])}</span></div>'
+        for s in segs
+    )
+    return (
+        f'<div class="chart chart--stack" data-total="{total}">'
+        f'<div class="stack__bar" aria-hidden="true">{parts}</div>'
+        f'<div class="stack__legend">{legend}</div></div>'
+    )
 
 
 def chart_funnel(spec: dict) -> str:
-    """漏斗：一路縮小的比例。"""
-    rows, unit = spec["data"], spec.get("unit", "")
-    span = max(r["value"] for r in rows) or 1
-    out = "".join(
-        f'<div class="funnel__row"><span class="funnel__bar{" is-key" if r.get("highlight") else ""}" '
-        f'style="width:{max(r["value"] / span * 100, 8):.2f}%"><b>{fmt(r, r["value"], unit)}</b></span>'
-        f'<span class="funnel__label">{esc(r["label"])}</span></div>'
-        for r in rows
-    )
-    return f'<div class="chart chart--funnel">{out}</div>'
+    """相容舊稿；現有資料分母不同，以獨立長條避免誤讀為轉換率。"""
+    return chart_bar(spec)
 
 
 def chart_matrix(spec: dict) -> str:
     """2×2：選項定位。cells 依序為左上、右上、左下、右下。"""
     x, y = spec["x"], spec["y"]
-    cells = "".join(
-        f'<div class="matrix__cell{" is-key" if c.get("highlight") else ""}"><b>{esc(c["title"])}</b>'
-        f'<span>{esc(c.get("text", ""))}</span></div>'
-        for c in spec["cells"]
-    )
+    cells = []
+    for i, c in enumerate(spec["cells"]):
+        y_value, x_value = y["high" if i < 2 else "low"], x["high" if i % 2 else "low"]
+        cells.append(
+            f'<div class="matrix__cell{" is-key" if c.get("highlight") else ""}" '
+            f'data-x="{esc(x_value)}" data-y="{esc(y_value)}">'
+            f'<small class="matrix__position">{esc(y_value)} · {esc(x_value)}</small>'
+            f'<b>{esc(c["title"])}</b><span>{esc(c.get("text", ""))}</span></div>'
+        )
     return (
-        f'<div class="chart chart--matrix"><span class="matrix__y">{esc(y["label"])}<small>{esc(y["low"])} → {esc(y["high"])}</small></span>'
-        f'<div class="matrix__grid">{cells}</div>'
-        f'<span class="matrix__x">{esc(x["label"])}<small>{esc(x["low"])} → {esc(x["high"])}</small></span></div>'
+        f'<div class="chart chart--matrix">'
+        f'<p class="matrix__axis"><b>縱軸：{esc(y["label"])}</b>'
+        f'<span>上列：{esc(y["high"])} ／ 下列：{esc(y["low"])}</span></p>'
+        f'<div class="matrix__grid">{"".join(cells)}</div>'
+        f'<div class="matrix__x"><b>橫軸：{esc(x["label"])}</b>'
+        f'<span>左欄：{esc(x["low"])}</span><span>右欄：{esc(x["high"])}</span></div></div>'
     )
 
 
@@ -236,11 +268,25 @@ def render_exhibit(raw: str) -> str:
         return f'<pre class="exhibit-error">圖表格式錯誤：{esc(error)}\n{esc(raw)}</pre>'
     unit = f'<span class="exhibit__unit">單位：{esc(spec["unit"])}</span>' if spec.get("unit") else ""
     notes = "；".join(filter(None, [spec.get("source") and f'資料來源：{spec["source"]}', spec.get("note") and f'註：{spec["note"]}']))
+    data_table = ""
+    if spec.get("data"):
+        unit_label = f'（{esc(spec["unit"])}）' if spec.get("unit") else ""
+        rows = "".join(
+            f'<tr><th scope="row">{esc(row["label"])}</th>'
+            f'<td>{fmt(row, row["value"], spec.get("unit", ""))}</td></tr>'
+            for row in spec["data"]
+        )
+        data_table = (
+            f'<details class="chart-data"><summary>查看數據表</summary>'
+            f'<table><caption>{esc(spec["title"])}</caption>'
+            f'<thead><tr><th scope="col">項目</th><th scope="col">數值{unit_label}'
+            f'</th></tr></thead><tbody>{rows}</tbody></table></details>'
+        )
     return (
         f'<figure class="exhibit" data-exhibit="{esc(spec.get("id", ""))}"><figcaption>'
         f'<span class="exhibit__no">圖表 {esc(spec.get("id", ""))}</span>'
         f'<span class="exhibit__title">{esc(spec["title"])}</span>{unit}</figcaption>'
-        f'{chart}<p class="exhibit__source">{esc(notes)}</p></figure>'
+        f'{chart}<p class="exhibit__source">{esc(notes)}</p>{data_table}</figure>'
     )
 
 
@@ -287,24 +333,85 @@ def fill(template: str, values: dict) -> str:
     return template
 
 
+def reading_topics(body: str) -> str:
+    """依既有 h2 分段，以原生 details 提供可列印、無 JS 也可用的漸進揭露。"""
+    source_match = re.search(r'<div class="footnote">.*$', body, flags=re.S)
+    source = ""
+    if source_match:
+        source = (
+            '<details class="chapter-sources" open><summary>本章來源與註腳</summary>'
+            + source_match.group(0) + "</details>"
+        )
+        body = body[:source_match.start()]
+    chunks = re.split(r'(<h2\b[^>]*>.*?</h2>)', body, flags=re.S)
+    parts = [f'<div class="chapter-intro">{chunks[0]}</div>']
+    for i in range(1, len(chunks), 2):
+        parts.append(
+            '<details class="topic" open><summary>'
+            + chunks[i]
+            + '<span class="topic__cue" aria-hidden="true"></span></summary>'
+            + f'<div class="topic__body">{chunks[i + 1]}</div></details>'
+        )
+    return "".join(parts) + source
+
+
+def chapter_group(src: str) -> str:
+    if "/functions/" in src:
+        return "部門與場景"
+    if "/tools/" in src:
+        return "工作工具"
+    name = Path(src).name
+    if name < "04-":
+        return "看懂現況"
+    if name < "09-":
+        return "五個決策"
+    return "90 天行動"
+
+
 def build_book(name: str, book: dict) -> Path:
     chapters = book["chapters"]
     sections, nav = [], []
-    for src in chapters:
+    last_group = None
+    for index, src in enumerate(chapters):
         text = (ROOT / src).read_text(encoding="utf-8")
         cid = chapter_id(src)
         body = task_lists(rewrite_links(render_markdown(text), src, chapters))
-        sections.append(f'<section class="chapter" id="{cid}" data-source="{src}">{body}</section>')
-        nav.append(f'<a href="#{cid}">{html.escape(nav_label(first_heading(text, src)))}</a>')
+        if name == "starter-kit":
+            body = reading_topics(body)
+            previous = chapters[index - 1] if index else None
+            following = chapters[index + 1] if index + 1 < len(chapters) else None
+            next_title = nav_label(first_heading((ROOT / following).read_text(encoding="utf-8"), following)) if following else "回到封面"
+            body += (
+                '<nav class="chapter-pager" aria-label="章節導覽">'
+                f'<a href="#{chapter_id(previous) if previous else "cover"}">← {"上一章" if previous else "封面"}</a>'
+                f'<a href="#{chapter_id(following) if following else "cover"}">'
+                f'<small>{"繼續閱讀" if following else "完成本指南"}</small>{esc(next_title)} →</a></nav>'
+            )
+            group = chapter_group(src)
+            if group != last_group:
+                nav.append(f'<p class="toc__group">{esc(group)}</p>')
+                last_group = group
+        sections.append(f'<section class="chapter" id="{cid}" data-source="{src}" aria-label="{esc(nav_label(first_heading(text, src)))}">{body}</section>')
+        nav.append(f'<a href="#{cid}" title="{esc(first_heading(text, src))}">{html.escape(nav_label(first_heading(text, src)))}</a>')
+    reader = name == "starter-kit"
+    cover_actions = (
+        f'<div class="cover__actions"><a class="action action--primary" href="#{chapter_id(chapters[0])}">開始導讀 <span aria-hidden="true">→</span></a>'
+        f'<a class="action" href="#{chapter_id("starter-kit/functions/01-customer-service.md")}">依部門找場景</a>'
+        f'<a class="action" href="#{chapter_id("starter-kit/tools/01-use-case-canvas.md")}">直接使用工具</a></div>'
+    ) if reader else ""
     page = fill((ASSETS / "book.html").read_text(encoding="utf-8"), {
         "TITLE": html.escape(book["title"]),
         "SUBTITLE": html.escape(book["subtitle"]),
         "BRAND": html.escape(BRAND),
         "BOOK": name,
+        "READER_TOOLS": '<button class="reader-mode" type="button" hidden>完整閱讀</button><button class="print-button" type="button" hidden>列印</button>' if reader else "",
+        "COVER_ACTIONS": cover_actions,
+        "COVER_NOTE": "先讀重點，再展開證據。你可以逐章前進、直接跳到自己的部門，或切換完整閱讀。列印時會自動展開全文。" if reader else "有勾選框的地方可以打勾，進度記在這台電腦的瀏覽器裡。要紙本或 PDF，請用瀏覽器列印。",
+        "READER_BAR": '<div class="reader-bar" hidden><span class="reader-status" aria-live="polite"></span><button class="topic-toggle" type="button">展開本章</button><a class="reader-prev" href="#cover" aria-label="上一章">←</a><a class="reader-next" href="#cover" aria-label="下一章">→</a></div>' if reader else "",
         "NAV": "\n".join(nav),
         "CONTENT": "\n".join(sections),
-        "CSS": (ASSETS / "theme.css").read_text(encoding="utf-8"),
-        "JS": (ASSETS / "book.js").read_text(encoding="utf-8"),
+        "CSS": (ASSETS / "theme.css").read_text(encoding="utf-8") + ((ASSETS / "reader.css").read_text(encoding="utf-8") if reader else ""),
+        "JS": (ASSETS / "book.js").read_text(encoding="utf-8") + ((ASSETS / "reader.js").read_text(encoding="utf-8") if reader else ""),
     })
     return write(name, page)
 
@@ -333,12 +440,17 @@ def build_deck() -> Path:
         out.append(
             f'<section class="{cls}" id="s{number}"><div class="slide__inner">'
             f'<h2 class="slide__title">{title}</h2><div class="slide__body">{body}</div>'
-            f'<footer class="slide__foot"><span>{source}</span><span>{BRAND}　{number:02d}</span></footer>'
+            f'<footer class="slide__foot"><span>{source}</span><span>{number:02d} / {len(slides):02d}</span></footer>'
             f"</div></section>"
         )
     page = fill((ASSETS / "deck.html").read_text(encoding="utf-8"), {
         "TITLE": html.escape(DECK["title"]),
         "SLIDES": "\n".join(out),
+        "SLIDE_NAV": "".join(
+            f'<option value="s{i}">{i:02d}　{esc(nav_label(first_heading(raw, "簡報")))}</option>'
+            for i, raw in enumerate(slides, 1)
+        ),
+        "JS": (ASSETS / "deck.js").read_text(encoding="utf-8"),
         "CSS": (ASSETS / "theme.css").read_text(encoding="utf-8") + (ASSETS / "deck.css").read_text(encoding="utf-8"),
     })
     return write(DECK["name"], page)

@@ -113,7 +113,7 @@ agent 的採購量正在上升。Salesforce 財報顯示，Agentforce 在 2025 �
 五欄有空格的先停權或補齊；第 3 題答「是」的，這週就加上人工核准點。附錄的[〈數位員工上崗檢核表〉](../tools/05-agent-onboarding-checklist.md)可以直接拿來填。
 </div>
 
-【桑尼現場：待補】一個你在企業看到的 agent 權限問題，例如共用帳號、沒有負責人、測試環境碰得到正式資料。
+**盤點題**：公司現有的 AI agent 是否使用共用帳號？誰負責它的輸出？測試環境能否碰到正式資料？任何一題答不出來，都先列入上線前的治理工作。
 
 [^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025-11-05；1,993 位受訪者、105 國。高績效者定義為 AI 貢獻 5% 以上 EBIT 且自評價值顯著。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025
 [^deloitte]: Deloitte,〈State of AI in the Enterprise 2026〉，問卷 2025 年 8–9 月；3,235 位主管、24 國。https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-generative-ai-in-enterprise.html

@@ -34,7 +34,7 @@
 - ⚠️ 未驗證：McKinsey「五大維度」框架（策略、營運模式、技術資料、人才組織、治理）只見於二手部落格，未在 McKinsey 原文確認。
 
 **為什麼這個區分重要（有數據的部分）**：
-- McKinsey《The state of AI in 2025》：近九成受訪組織經常使用 AI，但「高績效者」（AI 貢獻 ≥5% EBIT，約佔樣本 6%）**根本性重新設計 workflow 的機率約是其他人的 3 倍**，且在多數職能中「正在規模化 agent」的機率至少是同儕的 3 倍。——[The state of AI in 2025: Agents, innovation, and transformation (McKinsey)](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)（2025）[B，轉述]
+- McKinsey《The state of AI in 2025》：近九成受訪組織經常使用 AI，但「高績效者」（AI 貢獻 ≥5% EBIT，約佔樣本 6%）**根本性重新設計 workflow 的機率約是其他人的 3 倍**，且在多數職能中「正在規模化 agent」的機率至少是同儕的 3 倍。——[The state of AI in 2025: Agents, innovation, and transformation (McKinsey)](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025)（2025）[B，轉述]
 - 同調查：預期未來一年員工數減少 32%、不變 43%、增加 13%。——同上 [B，轉述]
 - BCG：只有 5% 公司屬於「future-built」，相較落後者營收成長 1.7 倍、三年 TSR 3.6 倍、EBIT margin 1.6 倍；60% 屬落後者，幾乎沒有實質營收或成本效益。Agent 佔 2025 年 AI 總價值 17%，預估 2028 年 29%。——[BCG press release: AI leaders outpace laggards](https://www.bcg.com/press/30september2025-ai-leaders-outpace-laggards-revenue-growth-cost-savings)（2025-09-30）；[The Widening AI Value Gap (BCG PDF)](https://media-publications.bcg.com/The-Widening-AI-Value-Gap-October-2025.pdf)（2025-10）[B]
 - MIT NANDA《The GenAI Divide: State of AI in Business 2025》：企業在 GenAI 投入 300–400 億美元，95% 組織沒有可量測的報酬；主因是「學習落差」：workflow 脆弱、無法保留回饋與 context、跟日常營運脫節，而不是模型品質。——[MIT report finds most AI business investments fail (Virtualization Review)](https://virtualizationreview.com/articles/2025/08/19/mit-report-finds-most-ai-business-investments-fail-reveals-genai-divide.aspx)（2025-08-19）[B，轉述]
@@ -200,7 +200,7 @@
 
 ### 4.2 勞動市場：入門職位先受衝擊
 
-- Stanford Digital Economy Lab（Brynjolfsson、Chandar、Chen），以 ADP 薪資資料分析：GenAI 普及後，AI 曝險最高職業中 22–25 歲員工的就業**相對下降約 13%**（控制公司層衝擊後）；資深員工持平或成長；下降集中在 AI「自動化」而非「增強」的職業。——[Canaries in the Coal Mine? Six Facts about the Recent Employment Effects of AI (Stanford)](https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/)（2025-08，2025-11 修訂）[A]；⚠️ 有報導引用 16%，可能是修訂版，引用前回查最新版本
+- Stanford Digital Economy Lab（Brynjolfsson、Chandar、Chen）最新版以 ADP 薪資資料分析：截至 2026-06，AI 曝險最高職業中 22–25 歲員工的就業，較其若跟上低曝險同齡者原應達到的水準低 **19%**；資深員工沒有相同缺口。這是描述性差距，不是因果估計。——[Canaries in the Coal Mine? Six Facts about the Recent Employment Effects of AI (Stanford)](https://siepr.stanford.edu/publications/working-paper/canaries-coal-mine-six-facts-about-recent-employment-effects-artificial)（2026-08，資料至 2026-06）[A]
 - 對企業的意涵：「AI 做不到才加人」政策最先擋掉的是入門職位，這會影響企業 5–10 年後的中階人才池。（推論，非研究結論）
 
 ### 4.3 三類企業比較表
@@ -212,7 +212,7 @@
 | **可行路徑（有來源支撐）** | 以 workflow 為單位重設（McKinsey 高績效者 3 倍）；「控制增量」型政策（Shopify：加人前證明 AI 做不到）優於「削減存量」；建立 agent 身分＋負責人＋最小權限治理 | 維持小團隊、讓產品本身承載 AI 槓桿；早期證明獲利（Gamma） | 選一個後勤流程先做（MIT NANDA 指出後勤自動化報酬常優於投入最多的銷售行銷）；用平台內建 agent 而非自建；先補資料與技能（OECD 四大 enabler：連網、資料與算力、技能、資金） |
 
 - G7 SME AI Adoption Blueprint：許多中小企業有在試 AI 工具，但難以嵌入核心營運，生產力效益沒有實現。——[SME AI Adoption Blueprint (G7 2025 Canada)](https://g7g20-documents.org/fileadmin/G7G20_documents/2025/G7/Canada/Ministerial%20Meetings/IDT%20Ministers/3%20Miscellaneous/SME%20AI%20Adoption%20Blueprint_20251209.pdf)（2025-12-09）[A]
-- MIT NANDA：樣本中銷售與行銷拿走約 50–70% 的 AI 預算（報導不一），但後勤自動化往往報酬更好。——[Virtualization Review](https://virtualizationreview.com/articles/2025/08/19/mit-report-finds-most-ai-business-investments-fail-reveals-genai-divide.aspx)（2025-08）[B，轉述]
+- MIT NANDA：研究摘要寫約 50% 預算流向銷售與行銷，內文另以假設性預算分配寫約 70%；後勤自動化常被受訪者認為回報更好。數字為小樣本自述，僅供看方向。——[MIT NANDA, The GenAI Divide](https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf)（2025）[B]
 
 ---
 
@@ -232,13 +232,13 @@
 
 ## 對企業白皮書最有用的 10 個洞見
 
-1. **有報酬的公司重新設計流程，不是買工具**：AI 高績效者根本性重設 workflow 的機率是其他人的約 3 倍。——[McKinsey, The state of AI in 2025](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)（2025）
+1. **有報酬的公司重新設計流程，不是買工具**：AI 高績效者根本性重設 workflow 的機率是其他人的約 3 倍。——[McKinsey, The state of AI in 2025](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025)（2025）
 2. **多數企業還沒拿到 AI 報酬**：BCG 只有 5% 公司「future-built」、60% 幾乎無實質效益；MIT NANDA 稱 95% 組織沒有可量測報酬（樣本小，屬方向性）。——[BCG](https://www.bcg.com/press/30september2025-ai-leaders-outpace-laggards-revenue-growth-cost-savings)（2025-09-30）；[Virtualization Review](https://virtualizationreview.com/articles/2025/08/19/mit-report-finds-most-ai-business-investments-fail-reveals-genai-divide.aspx)（2025-08-19）
 3. **「人機比例」沒有標準答案**：Microsoft 提出 human-agent ratio 作為新指標，但明說依任務而定、沒有給數字。——[Microsoft WorkLab, WTI 2025](https://www.microsoft.com/en-us/worklab/work-trend-index/2025-the-year-the-frontier-firm-is-born)（2025-04-23）
 4. **控制增量比削減存量更可行**：Shopify「加人前先證明 AI 做不到」讓員工數透過自然流失降約 6%、反彈低；Duolingo 把 AI 跟取代約聘綁在一起，引發強烈反彈並兩度澄清。——[TechCrunch](https://techcrunch.com/2025/04/07/shopify-ceo-tells-teams-to-consider-using-ai-before-growing-headcount/)（2025-04-07）；[Fortune](https://fortune.com/2025/08/18/duolingo-ceo-admits-controversial-ai-memo-did-not-give-enough-context-insists-company-never-laid-off-full-time-employees)（2025-08-18）
 5. **只量成本不量品質會翻車**：Klarna AI 客服做了 700 人的量，但 CEO 承認品質較低，改回人機雙軌。——[Tech.co](https://tech.co/news/klarna-reverses-ai-overhaul)（2025-05）
 6. **Agent 出錯，責任在公司**：Air Canada 主張 chatbot 是獨立實體，被仲裁庭駁回。——[Moffatt v. Air Canada (Barry Sookman)](https://barrysookman.com/2024/02/16/moffatt-v-air-canada-a-misrepresentation-by-an-ai-chatbot/)（2024-02-16）
 7. **數位員工要有身分、負責人、最小權限**：Microsoft Entra Agent ID 為每個 agent 建身分並指定 sponsor；Workday 以「像管員工一樣」登記角色、權限、成本與績效。——[Microsoft Learn](https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id)；[TechCrunch](https://techcrunch.com/2025/02/11/workday-launches-a-platform-for-enterprises-to-manage-all-of-their-ai-agents-in-one-place)（2025-02-11）
-8. **企業 agent 平台正在起量，但滲透仍淺**：Agentforce ARR 從約 1 億（2025-05）成長到破 15 億美元（2026-07，口徑已擴大），2025 年底付費滲透約 6% 客戶。——[Salesforce FY26 Q3](https://www.salesforce.com/news/press-releases/2025/12/03/fy26-q3-earnings/)（2025-12-03）；[Q2 FY27 Investor Deck](https://s205.q4cdn.com/626266368/files/doc_financials/2027/q2/CRM-Q2-FY27-Quarterly-Investor-Deck.pdf)（2026）
-9. **入門職位最先受衝擊**：AI 高曝險職業中 22–25 歲員工就業相對下降約 13%，資深者不受影響；企業要規劃人才梯隊。——[Stanford Digital Economy Lab](https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/)（2025-08）
+8. **企業 agent 平台正在起量**：Salesforce 財報揭露 Agentforce 上線以來成交超過 18,500 筆，其中付費交易超過 9,500 筆；公司沒有公布客戶滲透率。——[Salesforce FY26 Q3](https://www.salesforce.com/news/press-releases/2025/12/03/fy26-q3-earnings/)（2025-12-03）
+9. **入門職位最先受衝擊**：最新版 Stanford 研究估計，AI 高曝險職業中 22–25 歲員工就業較「跟上低曝險同齡者」的反事實水準低 19%；這是描述性差距，不是因果估計。——[Stanford Digital Economy Lab](https://siepr.stanford.edu/publications/working-paper/canaries-coal-mine-six-facts-about-recent-employment-effects-artificial)（2026-08，資料至 2026-06）
 10. **中小企業的瓶頸是資料、技能和主管時間，不只是錢**：小企業 AI 採用率只有大企業約三分之一；控制既有數位能力後，AI 生產力溢價大幅縮小，所以要先補基礎。——[OECD, AI adoption by SMEs](https://assets.geteasy.ai/internal/files/oecd-report-ai-adoption-by-small-and-medium-sized-enterprises.pdf)（2025-12）；[U.S. Census Bureau](https://census.gov/library/stories/2026/05/ai-use-businesses.html)（2026-05）

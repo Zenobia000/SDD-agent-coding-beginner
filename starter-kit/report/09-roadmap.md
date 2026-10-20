@@ -106,7 +106,7 @@ CISR 的資料裡，34% 的企業在第二階，是四個階段裡人數最多�
 附錄的[〈成熟度自評〉](../tools/02-maturity-self-assessment.md)有每一題的判斷標準與計分方式。第 10 章的 90 天計畫，就從這一題開始。
 </div>
 
-【桑尼現場：待補】一家你看過卡在第二階的企業（可匿名），它有幾個試點、為什麼都沒有擴大。
+**主管討論題**：公司目前有幾個 AI 試點？哪些有基準線、流程負責人與擴大決策日期？若答不出來，先挑一個試點補齊這三項。
 
 [^cisr]: Weill, Woerner & Sebastian, MIT CISR,〈Enterprise AI Maturity Model〉，2024-12；721 家企業，2022 年調查加 2024 年訪談。https://cisr.mit.edu/publication/2024_1201_EnterpriseAIMaturityModel_WeillWoernerSebastian
 [^mck-paradox]: McKinsey,〈Seizing the agentic AI advantage〉，2025-06。顧問調查。https://www.mckinsey.com/capabilities/quantumblack/our-insights/seizing-the-agentic-ai-advantage

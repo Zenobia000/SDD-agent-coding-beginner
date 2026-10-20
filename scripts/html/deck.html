@@ -12,18 +12,23 @@
 </style>
 </head>
 <body class="deck">
+<a class="skip-link" href="#deck-content">跳到簡報內容</a>
+<header class="deck-header">
+  <a href="starter-kit.html">企業 AI 轉型啟動指南</a>
+  <button class="deck-view" type="button" hidden>完整瀏覽</button>
+  <button class="deck-print" type="button" hidden>列印</button>
+</header>
+<main class="deck-stage" id="deck-content" tabindex="-1">
 {{SLIDES}}
+</main>
+<nav class="deck-controls" aria-label="簡報頁面" hidden>
+  <button class="deck-prev" type="button" aria-label="上一頁">←</button>
+  <label class="deck-jump">跳至頁面<select aria-label="選擇簡報頁面">{{SLIDE_NAV}}</select></label>
+  <span class="deck-position" aria-live="polite"></span>
+  <button class="deck-next" type="button" aria-label="下一頁">→</button>
+</nav>
 <script>
-// 左右鍵或空白鍵換頁；列印時每頁一張 16:9
-const slides = [...document.querySelectorAll(".slide")];
-const current = () => Math.max(0, slides.findIndex((s) => s.getBoundingClientRect().bottom > window.innerHeight / 2));
-document.addEventListener("keydown", (e) => {
-  const step = { ArrowRight: 1, ArrowDown: 1, PageDown: 1, " ": 1, ArrowLeft: -1, ArrowUp: -1, PageUp: -1 }[e.key];
-  if (!step) return;
-  e.preventDefault();
-  slides[Math.min(slides.length - 1, Math.max(0, current() + step))].scrollIntoView({ behavior: "smooth" });
-});
-document.querySelectorAll(".slide table").forEach((t) => { const w = document.createElement("div"); w.className = "table-wrap"; t.replaceWith(w); w.appendChild(t); });
+{{JS}}
 </script>
 </body>
 </html>

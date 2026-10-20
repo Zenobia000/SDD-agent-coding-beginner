@@ -69,7 +69,7 @@
 業務主管最常被廠商推銷的是「AI 幫你找客戶」。先把順序倒過來：讓 AI 幫業務準備已經在手上的客戶，三個月後拿準備時間與 CRM 完整度的前後數字，再決定要不要往對外的開發走。
 </div>
 
-【桑尼現場：待補】一家公司的 CRM 資料品質，在 AI 上線前後各是什麼樣子。
+**盤點題**：先抽樣檢查 CRM 的客戶欄位完整率、重複率與最近更新時間，再決定 AI 是否有足夠資料準備客戶摘要。沒有前後實測前，不預設導入會改善資料品質。
 
 [^lumen]: Microsoft Source，2024，廠商自述。https://news.microsoft.com/source/features/digital-transformation/the-only-way-how-copilot-is-helping-propel-an-evolution-at-lumen-technologies/
 [^dynamics]: Microsoft 365 Message Center MC1159615，2025-10。https://mc.merill.net/message/MC1159615

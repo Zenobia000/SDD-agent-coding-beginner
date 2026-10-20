@@ -77,7 +77,7 @@
 本季就可以做的一件事：把費用報銷的稽核方式從「抽查」改成「AI 全查、人看例外」。即使你還沒導入任何 AI 處理單據，只要員工拿得到生成式 AI，你的報銷流程就已經暴露在假收據的風險裡。
 </div>
 
-【桑尼現場：待補】一個財務部門導入發票比對時，第一個月例外清單長什麼樣子。
+**示例問題**：第一個月的例外清單可能包含金額不符、找不到採購單、重複發票與欄位辨識不確定。這是用來規劃測試集的假設分類，實際例外類型要依企業資料確認。
 
 [^gartner]: Gartner 新聞稿，2025-11-18；183 位財務長與財務主管，調查期間 2025-05 至 06。https://www.gartner.com/en/newsroom/press-releases/2025-11-18-gartner-survey-shows-finance-ai-adoption-remains-steady-in-2025
 [^nanda]: MIT NANDA,〈The GenAI Divide: State of AI in Business 2025〉，Fortune 報導，2025-08-18；52 個組織訪談、153 位主管問卷，多為受訪者自述。https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/

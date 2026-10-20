@@ -94,11 +94,11 @@ AI 帶來生產力，這件事有嚴謹的研究支持，但效益很不平均�
 {"id": "1.5", "type": "bar", "unit": "%",
  "title": "資深工程師覺得 AI 讓自己快了 20%，實測慢了 19%",
  "data": [
-   {"label": "自己感覺的速度變化", "value": 20},
-   {"label": "實際量測的速度變化", "value": -19, "highlight": true}
+   {"label": "主觀估計的工時變化", "value": -20},
+   {"label": "實際量測的工時變化", "value": 19, "highlight": true}
  ],
  "source": "METR，2025-07-10；16 位資深開發者、246 個任務的隨機對照實驗",
- "note": "研究對象是熟悉自己程式碼庫的資深工程師，不代表所有人與所有工作"}
+ "note": "相對無 AI 的工時；負值代表省時，正值代表更耗時。研究對象是熟悉自己程式碼庫的資深工程師，不代表所有人與所有工作"}
 ```
 
 **這代表什麼**：靠問卷問員工「有沒有變快」，會得到過度樂觀的答案。每個試點都要先量沒有 AI 時的基準線，上線後用同一把尺再量一次。第 8 章會講怎麼量。
@@ -134,7 +134,7 @@ MIT 資訊系統研究中心（CISR）把 721 家企業依 AI 成熟度分成四
 三題都答不出來，你的公司在第一階段。第 9 章有完整的自評方法。
 </div>
 
-【桑尼現場：待補】一段你在企業現場看到的落差，例如「全員買了授權，三個月後真正每天在用的人有多少」。
+**可帶回團隊討論**：公司買了多少 AI 授權？每週實際使用的人有多少？哪些工作因此改變，哪些只是多了一個工具？先用這三個問題盤點現況，再對照本章的市場數據。
 
 [^mck]: McKinsey,〈The state of AI in 2025: Agents, innovation, and transformation〉，2025-11-05；1,993 位受訪者、105 國。高績效者定義為 AI 貢獻 5% 以上 EBIT 且自評價值顯著。https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2025
 [^bcg-gap]: BCG,〈The Widening AI Value Gap〉，2025-09-30。https://www.bcg.com/press/30september2025-ai-leaders-outpace-laggards-revenue-growth-cost-savings
