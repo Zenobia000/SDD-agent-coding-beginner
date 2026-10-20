@@ -36,12 +36,12 @@
 
 | repo | 是什麼 | 誰用 |
 |---|---|---|
-| [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **上課用的專案**：LeaveBot 骨架、題目、規格模板，只帶上課用的 6 個技能與護欄 | 學員，clone 下來直接寫 |
-| 這個 repo | **課程首頁與講義原稿**：`curriculum/` 的 4 天實戰營、開場投影片，加上完整工具鏈（38 個技能）與檢查腳本 | 講師與維護者；結訓後想要完整工具鏈的人 |
+| [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) | **上課用的 repo**：題目、六份規格模板與範例、固定的技術棧、驗收工具，只帶上課用的 6 個技能與護欄 | 學員，clone 下來直接寫 |
+| 這個 repo | **課程首頁與講義原稿**：`curriculum/` 的 2 天實戰營、開場投影片，加上完整工具鏈（38 個技能）與檢查腳本 | 講師與維護者；結訓後想要完整工具鏈的人 |
 
 講義用 `bash scripts/export-handout.sh` 打包成 zip，放 OneDrive 發給學員。原稿留在這裡，才有版本紀錄與連結檢查。
 
-**學員**：照 [`curriculum/0-setup/`](./curriculum/0-setup/) 裝好環境、clone 上課 repo，下一步打開你報名的課表：[4 天實戰營](./curriculum/1-bootcamp/)或 [2 天工作坊](./curriculum/1-workshop/)。
+**學員**：照 [`curriculum/0-setup/`](./curriculum/0-setup/) 裝好環境、clone 上課 repo，下一步打開[課表](./curriculum/1-bootcamp/)。
 
 ---
 
@@ -61,15 +61,14 @@ AGENTS.md  CLAUDE.md  LICENSE  THIRD-PARTY-NOTICES.md
 | 位置 | 給誰 | 什麼時候打開 |
 |---|---|---|
 | [`0-setup/`](./curriculum/0-setup/) | 所有人 | **開課前一週**：環境檢核表 |
-| [`1-bootcamp/`](./curriculum/1-bootcamp/) | 4 天班 | 上課期間：4 天課表、自主期任務 |
-| [`1-workshop/`](./curriculum/1-workshop/) | 2 天班 | 上課期間：2 天課表，內容連回 4 天版的單元 |
+| [`1-bootcamp/`](./curriculum/1-bootcamp/) | 所有人 | 上課期間：D1 六份規格、D2 從 0 疊代出 app |
 | [`3-playbook/`](./curriculum/3-playbook/) | 所有人 | 隨時查：Prompt 魔法書、問題排解、防呆檢核表 |
 | [`4-casebook/`](./curriculum/4-casebook/) | 所有人 | 結訓後：報價、請款、庫存等七個企業系統的 AI 開發思考 |
 | [`advanced/cookcard/`](./curriculum/advanced/cookcard/) | 想挑戰完整系統的人 | 結訓後的進階選修：把料理影片轉成食譜卡，多模態加部署 |
 | [`slides/`](./curriculum/slides/) | 講師 | 開場投影片與視覺規範（莫蘭迪色票、黏土貓） |
 | [`instructor/`](./curriculum/instructor/) | 講師 | 學員不用看，也不會打包進講義 |
 
-規格模板、題目 `LEAVEBOT.md` 與程式骨架在上課 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp)，因為 agent 要在專案裡用 `@` 讀得到它們。
+規格模板、範例、題目 `LEAVEBOT.md` 與 `STACK.md` 在上課 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp)，因為 agent 要在專案裡用 `@` 讀得到它們。
 
 
 ---
