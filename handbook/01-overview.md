@@ -1,7 +1,20 @@
-# 規格驅動 × AI 開發實戰營（2 天｜14 小時）
+# SDD × AI Coding Agent 實戰營（2 天｜14 小時）
 
-> **D1 寫規格，D2 從 0 做出 app。** 以 Claude Code / Codex 為核心，用 SDD agentic coding 走完一條 V-model：
-> 左邊六份規格文件，右邊一個能跑的全端加 AI 應用，中間用編號一路串起來。
+> **D1 理解與探索，D2 從 0 做出一個能驗收的功能。** 以 Claude Code 為核心，
+> 第一天弄懂 AI 時代的軟體工程怎麼運作、怎麼駕馭 coding agent；第二天用一個請假系統，從需求一路走到測試驗收。
+
+---
+
+## 一條主線
+
+| | 問題 | 在哪 |
+|---|---|---|
+| **01 WHY** | 為什麼開發模式正在改變 | D1 單元 1–2 |
+| **02 WHAT** | 現代軟體工程怎麼運作：Plan → Build → Verify → Ship | D1 單元 3 |
+| **03 HOW** | 怎麼駕馭 Claude Code：操作、Context、Skills、Hooks | D1 單元 4–7 |
+| **04 DO** | 一個請假功能，從需求走到測試驗收 | D2 單元 8–14 |
+
+**口訣**：先理解再操作；做一條完整流程；能測試才算完成。
 
 ---
 
@@ -12,9 +25,9 @@
 | 你是 | 你會帶走什麼 |
 |---|---|
 | **主管** | 判斷團隊導入 AI 開發的成熟度，知道哪些環節不能交給 AI |
-| **PM / SA** | 寫出 AI 讀得懂、人驗得了的六份規格；不寫程式也能審查 AI 的產出 |
-| **QA** | 寫測試計畫，讓 AI 窮舉邊界、由你判斷哪些有意義，並訂出 AI 的上線門檻 |
-| **初學工程師** | 用 agent 依規格一個疊代一個疊代做出 app，每一步都有測試接住 |
+| **PM / SA** | 寫出 AI 讀得懂、人驗得了的規格；不寫程式也能審查 AI 的產出 |
+| **QA** | 把驗收條件變成測試案例，讓 AI 先寫會失敗的測試，再讓它寫程式 |
+| **工程師** | 用 agent 依規格做出一條垂直切片，每一步都有測試接住 |
 
 **課前要會的**：用過任何一種 AI 聊天工具；能照著說明在終端機打指令。
 **不用會的**：寫程式。
@@ -25,67 +38,105 @@
 
 **人收斂，AI 發散。** AI 生成草稿、窮舉情境、寫程式；人決定要做什麼、不做什麼、什麼叫做完。
 
-**SDD agentic coding vs vibe coding**：兩者都讓 AI 寫程式。差別是我們的 AI 每一步都有規格可以對、有測試可以擋，做完了說得出「哪條需求被哪個測試驗過」。
-
-**V-model**：D1 寫左邊，D2 寫右邊，每一層規格都有一層測試接住。對照表在上課 repo 的 [`TRACEABILITY.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/templates/TRACEABILITY.md)。
+**SDD（Spec-Driven Development）vs Vibe Coding**：兩者都讓 AI 寫程式。差別是 SDD 的 AI 每一步都有規格可以對、有測試可以擋，做完了說得出「哪條需求被哪個測試驗過」。兩種可以混用：探索時 vibe，要交付時回到規格。
 
 ---
 
 ## 課表
 
-每天 09:00–17:30，扣掉 1 小時午休與兩次 15 分鐘休息，淨 7 小時。
+每天 09:00–17:30。休息 10:30–10:45、12:30–13:30、15:00–15:15，淨授課 7 小時。
 
-| | 主題 | 產出 |
+### D1｜理解與探索（觀念 50%、Demo 與操作 50%）
+
+| 時間 | 單元 | 產出 |
 |---|---|---|
-| [**D1**](./02-day1.md) | 規格：V 的左邊，加上右邊的計畫 | `docs/01-brief.md` … `docs/06-test-plan.md`、`AGENTS.md`、I0–I4 疊代票 |
-| [**D2**](./03-day2.md) | 從 0 到 1：V 的右邊 | 全端 app、標了需求的測試、eval 準確率、追溯報告 |
+| 09:00–09:45 | 1. AI 時代的軟體開發典範轉移 | — |
+| 09:45–10:30 | 2. 從傳統開發走向 AI 協作 | — |
+| 10:45–12:30 | 3. AI 時代的軟體工程與規格治理 | 一句模糊需求改寫成的驗收條件 |
+| 13:30–14:15 | 4. Claude Code 基礎操作 | 讓 agent 解釋上課 repo；看過一次 diff |
+| 14:15–15:00 | 5. Context Engineering 與 Agent Harness | `git add -A` 被 hook 擋下，說得出是哪個檔案擋的 |
+| 15:15–16:30 | 6. Coding Agent 能力體驗 Demo | 觀察紀錄：AI 做對了什麼、做錯了什麼 |
+| 16:30–17:30 | 7. 使用 Archify 建立專案規格 | `playground/` 裡的 PRD 草稿與一張流程圖 |
 
-**D1**
+### D2｜請假系統從 0 到 1（講解 20%、操作 80%）
 
-| 時長 | 單元 | 技能 |
-|---|---|---|
-| 0.75h | 1. Harness 解剖與典範轉移 | `/compass` |
-| 0.5h | 2. Project Brief | `/grilling` |
-| 1.5h | 3. PRD：persona、user flow、epic、story、BDD | `/grilling` |
-| 1h | 4. SRS：use case、FR、NFR | — |
-| 1h | 5. SAD：C4、資訊流、技術選型 | `/to-architecture` |
-| 1h | 6. SDS：ER、API、畫面、模組 | `/to-architecture` |
-| 0.75h | 7. Test Plan：AI 窮舉、人篩選、訂門檻 | — |
-| 0.5h | 8. 專案大腦與疊代拆票 | `/to-tickets` |
+| 時間 | 單元 | 提示詞卡 | 產出 |
+|---|---|---|---|
+| 09:00–09:45 | 8. 專案啟動與需求探索 | — | `docs/01-brief.md` |
+| 09:45–10:30 | 9. AI 輔助需求分析 | A、B | `docs/02-prd.md` |
+| 10:45–12:30 | 10. 規格驅動的系統分析與設計 | C、D、E | `docs/03-srs.md`、`diagrams/`、`docs/04-sad.md`、`docs/05-sds.md` |
+| 13:30–14:15 | 11. 任務拆解與 TDD 測試先行 | F、G | `docs/06-test-plan.md`、`issues/`、骨架起得來 |
+| 14:15–15:00 | 12. 垂直切片開發 | H | 新增請假的切片，測試由紅轉綠 |
+| 15:15–16:30 | 13. AI 除錯、重構與驗證 | I、J | 破壞測試紀錄、需求變更的影響分析與回歸結果 |
+| 16:30–17:30 | 14. 版本交付與企業導入 | K | commit、交付檢查表、成果發表 |
 
-**D2**
-
-| 時長 | 疊代 | 技能 |
-|---|---|---|
-| 0.75h | I0 骨架：依 `STACK.md` 生成前後端 | — |
-| 1.5h | I1 第一條垂直切片 | `/tdd` |
-| 1.25h | I2 規則與破壞測試 | `/tdd` |
-| 1h | I3 主管核准與交換審查 | `/code-review` |
-| 1h | I4 驗收 AI 本身：eval 與 prompt injection | — |
-| 1h | 追溯報告、落地 SOP、成果發表 | — |
-
-I1、I2 各含 15 分鐘緩衝（09:00–17:15，最後 15 分鐘問答）。**每個疊代結束都有講師檢查點**；落後的組，講師會給上一個疊代的保底版本讓你們接著做。
+提示詞卡在 [附錄](./appendix/prompt-book.md)。
 
 ---
 
 ## 分組
 
-每組 3–4 人，**角色混搭**：至少一位寫規格的（PM / SA / 主管 / QA）、一位寫程式的（工程師）。
+每組 3–4 人，**角色混搭**：至少一位寫規格的、一位寫程式的。
 
-| 軌 | D1 | D2 |
-|---|---|---|
-| 📋 **規格軌** | 主寫 Brief、PRD、SRS、Test Plan | 守住規格：親手跑驗收、判斷 AI 有沒有誤解、記錄誤解 |
-| 🛠️ **工程軌** | 主寫 SAD、SDS，審 PRD 寫不寫得出來 | 驅動 agent 一個疊代一個疊代做 |
+| 軌 | 誰 | D1 | D2 |
+|---|---|---|---|
+| 📋 **規格軌** | PM、主管、業務、SA | 觀念、練習寫驗收條件、Demo 觀察 | 定義問題與範圍、審 AI 產出的需求與設計、親手跑驗收 |
+| 🛠️ **工程軌** | 工程師、QA | 同上，加上 Claude Code 操作 | 操作 agent 生骨架、做切片、跑測試、除錯、審 `git diff` |
 
-兩軌在同一個 repo 裡工作。規格軌寫的文件，就是工程軌餵給 agent 的輸入 —— 寫得不清楚，D2 當場就會卡住，這是故意的。
+三種背景在同一個請假系統裡各有位置：
+
+| 背景 | 要能回答的問題 |
+|---|---|
+| PM／主管／業務 | 使用者要完成什麼？哪些暫時不做？怎麼知道真的成功？ |
+| SA／SD | 流程有沒有漏掉狀況？API 欄位、資料欄位、需求編號對得上嗎？ |
+| 工程師／QA | 測試先紅再綠了嗎？AI 改了哪些檔案？有沒有偷改測試？ |
+
+兩軌用同一套規格和驗收條件。規格軌寫的文件，就是工程軌餵給 agent 的輸入。寫得不清楚，下午當場就會卡住，這是故意的。
 
 ---
 
 ## 題目與上課 repo
 
-**LeaveBot —— 一句話請假。** 題目、公司規章與這兩天的 MVP 範圍，見上課 repo 的 [`LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/LEAVEBOT.md)。**課前讀完。**
+**LeaveBot：好日子科技的請假系統。** 題目、公司規章與範圍，見上課 repo 的 [`course/LEAVEBOT.md`](https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/LEAVEBOT.md)。**D1 結束後讀完。**
 
-上課 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) 裡有：六份文件模板與另一個題目的完整範例、固定的技術棧（`STACK.md`）、LLM 工具包、追溯檢查與 eval 工具。**沒有 app 程式碼** —— 那是 D2 你們自己生出來的。
+### 基本完成標準（全班）
+
+一條完整的垂直切片：
+
+```text
+員工選自己 → 填請假表單 → 系統驗證日期與必填欄位 → API 存進 SQLite → 「我的假單」顯示「待審核」
+                                                                      → 自動化測試通過 ＋ 人工驗收
+```
+
+### 進階挑戰（做完基本的組自選）
+
+| | 挑戰 | 需要 |
+|---|---|---|
+| C1 | 主管待核准畫面：核准／駁回 | — |
+| C2 | 特休剩餘額度檢查 | — |
+| C3 | 同組同日人數提醒 | — |
+| C4 | 一句話 AI 解析（`POST /api/parse`）與 eval 準確率 | Anthropic API key |
+| C5 | Prompt injection：理由欄塞指令，狀態不可改變 | Anthropic API key |
+
+**「從 0 到 1」的意思是從問題定義做到一個可驗收的功能，不是蓋完整個 HR 系統。**
+
+上課 repo [`leavebot-bootcamp`](https://github.com/Zenobia000/leavebot-bootcamp) 的 `main` 是一片空地：六份文件模板與另一個題目的完整範例（`course/`）、固定的技術棧（`course/STACK.md`：FastAPI ＋ 靜態 HTML/JS ＋ SQLite ＋ pytest）、技能與護欄（`.claude/`）。**沒有 app 程式碼**，那是 D2 你們讓 agent 生出來的。
+
+---
+
+## Checkpoint：落後了就切過去
+
+講師把 D2 從頭到尾跑過一次，每過一個關卡就推一個分支：
+
+| 分支 | 時間 | 裡面有什麼 |
+|---|---|---|
+| `cp1-requirements` | 10:30 | Brief、PRD |
+| `cp2-design` | 12:30 | 再加 SRS、SAD、SDS、流程圖 |
+| `cp3-tests` | 14:15 | 再加 Test Plan、票、骨架（還沒有業務測試） |
+| `cp4-working-feature` | 15:00 | 新增請假的切片，測試全綠 |
+| `cp5-delivered` | 17:00 | 需求變更已處理、回歸全綠、交付檢查表 |
+
+**落後超過 15 分鐘就切，不要硬撐。** 切過去是讓你們接著做下一個單元，不是對答案。指令在 [D2 開頭](./03-day2.md#落後了怎麼切-checkpoint)。
 
 ---
 
@@ -95,8 +146,8 @@ I1、I2 各含 15 分鐘緩衝（09:00–17:15，最後 15 分鐘問答）。**�
 |---|---|
 | **為什麼** | 這個單元要解決的問題 |
 | **重點** | 講師會講的觀念 |
-| **實作** | 規格軌、工程軌各做什麼 |
-| **可以這樣問 AI** | 參考提示詞。先改成你的版本再用，原封不動貼上的效果通常最差 |
+| **實作** | 規格軌、工程軌各做什麼。D2 另外列 INPUT／ACTION／OUTPUT／GATE |
+| **提示詞卡** | 參考提示詞，完整版在附錄。先改成你的版本再用，原封不動貼上的效果通常最差 |
 | **通過訊號** | 你自己能檢查的東西，做到了才算完成這個單元 |
 
 ---
@@ -105,10 +156,10 @@ I1、I2 各含 15 分鐘緩衝（09:00–17:15，最後 15 分鐘問答）。**�
 
 | 資產 | 位置 |
 |---|---|
-| 六份規格模板、追溯規則、`AGENTS.md` 範本、TDD hook | 上課 repo 的 [`templates/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/templates) |
-| 追溯檢查 `trace.py`、eval 工具 `run_eval.py` | 上課 repo 的 [`scripts/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/scripts) |
-| Prompt 魔法書、問題排解檢索表 | 本講義的[附錄](./appendix/prompt-book.md) |
+| 六份規格模板、追溯規則、`AGENTS.md` 範本、TDD hook | 上課 repo 的 [`course/templates/`](https://github.com/Zenobia000/leavebot-bootcamp/tree/main/course/templates) |
+| 每個階段的參考版本 | 上課 repo 的 `cp1-requirements` … `cp5-delivered` 分支 |
+| 提示詞卡、問題排解檢索表 | 本講義的[附錄](./appendix/prompt-book.md) |
 | 完整工具鏈（38 個技能） | 模板 repo [`agent-skills-starter`](https://github.com/Zenobia000/agent-skills-starter) |
 | AI-Native 企業策略報告、部門拆解、成熟度自評與導入工具 | [企業啟動包](../starter-kit/README.md) |
 
-**課後延伸**：回公司挑一個**小**專案，從模板 repo 開一個新 repo，照 D1 的六份文件走一次。第一次不用寫滿，但 `trace.py` 要跑得出矩陣。
+**課後延伸**：回公司挑一個**小**專案，從模板 repo 開一個新 repo，照 D2 的流程走一次。第一次不用寫滿六份，但每條需求都要對得到一個測試。
