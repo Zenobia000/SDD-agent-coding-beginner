@@ -2,7 +2,7 @@
 
 ## 教材與工具
 - 兩repo的課程版本一致，`sync-course.py --check`與教材檢查通過。
-- 第一天下載Linear固定截圖。太空電梯三影格與動作說明須手動準備；原站有驗證時不臨場等待，改做塔羅或網站臨摹。
+- 第一天下載Linear固定截圖。C題已附Apple產品頁三個固定影格與捲動位置。課堂只重建短段，影片可靜態近似，不做整站；原太空電梯可留作課後參考，不作現場必備素材。
 - 在授課電腦分別試Claude Code／Codex。帳號能用、skills可讀、MCP真正呼叫、Archify輸出能開；未驗證工具明記。
 - Windows、macOS/Linux分別核對Python命令。主線不需LLM API key。
 
