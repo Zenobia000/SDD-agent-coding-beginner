@@ -1,0 +1,296 @@
+{
+  "version": "2026.10-unified-1",
+  "student_repository": "Zenobia000/leavebot-bootcamp",
+  "day1": {
+    "title": "Vibe Coding：從驚喜到 PRD",
+    "workspace": "獨立 D1 練習資料夾",
+    "deliverable": "所選作品的 PRD 草稿",
+    "demos": [
+      "網站首屏臨摹",
+      "深夜塔羅抽牌室",
+      "捲動動畫重建"
+    ]
+  },
+  "day2": {
+    "title": "SDD：從 PRD 到可驗收的功能",
+    "stack": "FastAPI + HTML/CSS/JavaScript + SQLite + pytest",
+    "core": "表單 → 後端驗證 → SQLite → 我的假單（pending）",
+    "tickets": [
+      "issues/000-skeleton.md",
+      "issues/001-submit-leave.md"
+    ],
+    "change_ticket": "issues/002-reason-limit.md",
+    "units": [
+      {
+        "number": 8,
+        "time": "09:00–09:45",
+        "title": "從 D1 體驗接到 LeaveBot：確認問題與範圍",
+        "why": "昨天學會把創意說清楚；今天換共同題目，把決策留下來。",
+        "action": "讀題目、完成最小 Brief，訪談理由、過去日期與重複送出三項決策。",
+        "gate": "主線與延伸分清楚；三個問題已定案或由講師接手。",
+        "cards": [
+          "A"
+        ]
+      },
+      {
+        "number": 9,
+        "time": "09:45–10:30",
+        "title": "把共識寫成 PRD 與 SRS",
+        "why": "先定義可判斷的成功與失敗，再設計系統。",
+        "action": "先產 PRD 並審 AC，再把同一組承諾轉成 SRS；不一次寫完六份文件。",
+        "gate": "PRD 有成功與失敗條件；每個 AC 在 SRS 有對應，沒有新增範圍。",
+        "cards": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "number": 10,
+        "time": "10:45–11:30",
+        "title": "Archify 流程檢查與最小系統設計",
+        "why": "用圖找漏掉的錯誤分支，再定資料與 API。",
+        "action": "先把 SRS 畫成流程，再依固定技術棧建立最小 SAD／SDS。",
+        "gate": "圖與 SRS 一致；成功、拒絕與不存檔分支明確；API 與欄位可直接實作。",
+        "cards": [
+          "D",
+          "E"
+        ]
+      },
+      {
+        "number": 11,
+        "time": "11:30–12:30",
+        "title": "人定預期結果，選案例再拆兩張票",
+        "why": "AI 提議案例，預期結果與範圍由人審。",
+        "action": "選 6–12 個代表 TC，建立追溯表，拆骨架與表單切片兩張票。",
+        "gate": "每個 TC 有來源與人工確認的預期結果；兩張票能在新對話接手。",
+        "cards": [
+          "F",
+          "G"
+        ]
+      },
+      {
+        "number": 12,
+        "time": "13:30–15:00",
+        "title": "從空白骨架到一條可驗收的表單功能",
+        "why": "先接通首頁與 API，再逐一做紅燈、綠燈。",
+        "action": "先完成 000 骨架，再於新對話實作 001；第一個業務測試的紅燈由全組親眼確認。",
+        "gate": "表單、驗證、SQLite、我的假單接通；測試實際執行，拒絕輸入不存檔。",
+        "cards": [
+          "H"
+        ]
+      },
+      {
+        "number": 13,
+        "time": "15:15–16:30",
+        "title": "重現錯誤、修復，再走一次需求變更",
+        "why": "測試要能抓住錯誤，需求改動也要回到規格。",
+        "action": "在可還原的練習分支做一次講師指定的錯誤，再修復；將理由長度上限由 200 改為 100，先審影響。",
+        "gate": "有修復前後證據；依規格→案例→測試→程式更新，舊測試仍通過。",
+        "cards": [
+          "I",
+          "J"
+        ]
+      },
+      {
+        "number": 14,
+        "time": "16:30–17:30",
+        "title": "操作驗收與交付",
+        "why": "程式、文件與口頭宣稱必須對得起來。",
+        "action": "展示成功與失敗、核對一條追溯鏈、保存版本並說明未驗證項。",
+        "gate": "他人可依 README 啟動；測試與人工操作有證據，不含秘密或資料庫。",
+        "cards": [
+          "K"
+        ]
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "A",
+      "title": "需求訪談與 Brief",
+      "skill": "grill-with-docs",
+      "file": "course/prompts/A.md",
+      "inputs": [
+        "course/WORKFLOW.md",
+        "course/LEAVEBOT.md"
+      ],
+      "outputs": [
+        "docs/01-brief.md"
+      ]
+    },
+    {
+      "id": "B",
+      "title": "寫成最小 PRD",
+      "skill": "to-spec",
+      "file": "course/prompts/B.md",
+      "inputs": [
+        "docs/01-brief.md",
+        "course/templates/02-prd.md"
+      ],
+      "outputs": [
+        "docs/02-prd.md"
+      ]
+    },
+    {
+      "id": "C",
+      "title": "從 AC 到系統規則",
+      "skill": "to-spec",
+      "file": "course/prompts/C.md",
+      "inputs": [
+        "docs/02-prd.md",
+        "course/templates/03-srs.md"
+      ],
+      "outputs": [
+        "docs/03-srs.md"
+      ]
+    },
+    {
+      "id": "D",
+      "title": "用 Archify 檢查流程",
+      "skill": "archify",
+      "file": "course/prompts/D.md",
+      "inputs": [
+        "docs/03-srs.md"
+      ],
+      "outputs": [
+        "diagrams/submit-leave.html"
+      ]
+    },
+    {
+      "id": "E",
+      "title": "最小 SAD 與 SDS",
+      "skill": "to-architecture",
+      "file": "course/prompts/E.md",
+      "inputs": [
+        "docs/02-prd.md",
+        "docs/03-srs.md",
+        "course/STACK.md"
+      ],
+      "outputs": [
+        "docs/04-sad.md",
+        "docs/05-sds.md"
+      ]
+    },
+    {
+      "id": "F",
+      "title": "測試計畫與人工預期結果",
+      "skill": "to-test-plan",
+      "file": "course/prompts/F.md",
+      "inputs": [
+        "docs/02-prd.md",
+        "docs/03-srs.md",
+        "docs/05-sds.md"
+      ],
+      "outputs": [
+        "docs/06-test-plan.md"
+      ]
+    },
+    {
+      "id": "G",
+      "title": "拆骨架與表單兩張票",
+      "skill": "to-tickets",
+      "file": "course/prompts/G.md",
+      "inputs": [
+        "docs/05-sds.md",
+        "docs/06-test-plan.md",
+        "course/WORKFLOW.md"
+      ],
+      "outputs": [
+        "issues/000-skeleton.md",
+        "issues/001-submit-leave.md"
+      ]
+    },
+    {
+      "id": "H",
+      "title": "一張票一個對話，逐個行為實作",
+      "skill": "implement",
+      "file": "course/prompts/H.md",
+      "inputs": [
+        "issues/000-skeleton.md",
+        "issues/001-submit-leave.md",
+        "course/STACK.md"
+      ],
+      "outputs": [
+        "backend/",
+        "pyproject.toml",
+        "docs/06-test-plan.md"
+      ]
+    },
+    {
+      "id": "I",
+      "title": "有證據的除錯",
+      "skill": "diagnosing-bugs",
+      "file": "course/prompts/I.md",
+      "inputs": [
+        "docs/06-test-plan.md"
+      ],
+      "outputs": [
+        "docs/LESSONS.md"
+      ]
+    },
+    {
+      "id": "J",
+      "title": "變更需求先分析影響",
+      "skill": "grill-with-docs",
+      "file": "course/prompts/J.md",
+      "inputs": [
+        "docs/02-prd.md",
+        "docs/03-srs.md",
+        "docs/05-sds.md",
+        "docs/06-test-plan.md"
+      ],
+      "outputs": [
+        "docs/02-prd.md",
+        "docs/03-srs.md",
+        "docs/05-sds.md",
+        "docs/06-test-plan.md",
+        "issues/002-reason-limit.md"
+      ]
+    },
+    {
+      "id": "K",
+      "title": "交付檢查與操作展示",
+      "skill": "code-review",
+      "file": "course/prompts/K.md",
+      "inputs": [
+        "docs/06-test-plan.md",
+        "issues/"
+      ],
+      "outputs": [
+        "docs/DELIVERY.md"
+      ]
+    }
+  ],
+  "checkpoints": [
+    {
+      "ref": "cp1-requirements",
+      "time": "10:30",
+      "content": "Brief、PRD、SRS 已確認",
+      "resume": "單元10／卡D、E"
+    },
+    {
+      "ref": "cp2-design",
+      "time": "12:30",
+      "content": "設計、TC、兩張票，尚無app",
+      "resume": "單元12／卡H骨架"
+    },
+    {
+      "ref": "cp3-tests",
+      "time": "14:15",
+      "content": "骨架測試綠；首個業務測試預期紅",
+      "resume": "單元12／卡H表單TDD"
+    },
+    {
+      "ref": "cp4-working-feature",
+      "time": "16:30",
+      "content": "表單主線與測試通過",
+      "resume": "單元13／卡I、J"
+    },
+    {
+      "ref": "cp5-delivered",
+      "time": "17:30",
+      "content": "變更後的交付範例與證據",
+      "resume": "單元14／卡K或課後比對"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "version": "2026.10-unified-1",
+  "sha256": {
+    "course/PLAN.json": "3a077eb3e0cb60a70f976e5c26cf224c066e3b380b963eebfd5af2063c7573fa",
+    "course/WORKFLOW.md": "01e7878032f9bd987ffd30326a7163c6e80af702860fa138c0060d58e93eacb7",
+    "course/SETUP.md": "58074290480f15bf2df150ead21c6eb3b7d9ba6fcbae5bba77387aca6e5d526f",
+    "course/CHECKPOINTS.md": "039d96e2564deb6145f5defee9e6fdefaf32847427f789c3d2734dbef41624d7",
+    "course/prompts/A.md": "e23fe9ff320b3d7dc6fa6f9104e5d4f3ec2cb9aaa1726fbc3274803399d43ddd",
+    "course/prompts/B.md": "b8eec6c551d7a86d6301202b19daf2ffdda035c999b2d75dccbc26b17fe4eee0",
+    "course/prompts/C.md": "2c9f7225b075bc3e5c4739f10650d3311aad2e68ee9a7adbe502ebbb63460af0",
+    "course/prompts/D.md": "a8e8e8a68b4471ac52f78ec1fa56a53d6f792bcefdcd3856a73a5e472ac4cd84",
+    "course/prompts/E.md": "718fe1b87e3ee9525a55352a4c7cefd01752b7d5cc40eaf4800ba5ca5739a160",
+    "course/prompts/F.md": "fa98e4ba33dae9c0c831e0ab5aa18fd8470d453a6fe0864cf6fd53a90a450880",
+    "course/prompts/G.md": "2d80f2c200c1718d5f585ee47be1a6883ce0c533f6a82c65c51c1f5237c1fa58",
+    "course/prompts/H.md": "5e560307ee494e4bcb21b55730b337406bb6bf38a433f09070a600d10dad1a2d",
+    "course/prompts/I.md": "96f231285cfefb4028e7b8730b2f6e4e2f043f782da9063544d53a40b0ffb6ae",
+    "course/prompts/J.md": "9385b0f041490510d6f1662718770d48473dc8a636131e07c49f59fd22e591c6",
+    "course/prompts/K.md": "425da434dc88f7c6010bc12a702000252f460c19c45625a2de2972aad98fb0e4"
+  }
+}

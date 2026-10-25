@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>D1 Vibe Coding 到 PRD · SDD × AI 實戰營講義</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/style.css" rel="stylesheet"/>
+</head>
+<body data-ch="day1" data-page="day1">
+<main>
+<section class="hero">
+<div class="wrap">
+<div>
+<span class="eyebrow">Chapter 3 · D1</span>
+<h1>Vibe Coding：從驚喜到 PRD</h1>
+<p class="lead">學會操作 Claude Code 或 Codex，用幾個提示詞做出作品、比較差異，最後將已確認需求收斂成 PRD。今天使用獨立練習資料夾，第二天再進入 LeaveBot。</p>
+<div class="hero-meta"><span class="pill ch">先體驗，再收斂</span><span class="pill">三題精選 · 選一題實作</span><span class="pill">今天交付 PRD 草稿</span></div>
+</div>
+<img alt="" class="cat" src="assets/cat-front.jpg"/>
+</div>
+</section>
+<section class="block" style="padding-top:0">
+<div class="wrap">
+<div class="card progress-card"><div class="progress" data-progress=""><b>D1 驗收進度</b><div class="bar"><i></i></div><span class="n">0 / 0</span></div></div><div class="reading-tools"><p>只展開正在上的單元；複習時可一次展開。</p><button data-lessons="open" type="button">展開全部單元</button><button data-lessons="close" type="button">收合全部單元</button></div>
+<p class="small muted" style="margin-top:12px">先看單元目標，展開目前這一節就好；操作提醒需要時再讀。進度會記在這台電腦。</p>
+<p class="small">練習位置：與 LeaveBot 分開的 vibe-day1/。每題另開資料夾；今天不使用請假公司規則、完整六份模板或 Archify。</p></div>
+</section>
+<section class="block">
+<div class="wrap">
+<!-- Unit 1 -->
+<article class="unit" id="unit-1"><details class="lesson" open=""><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">1</div><div><h3>認識 Coding Agent：交代任務，看到作品</h3><p class="why">用自然語言讓 Agent 建立作品，先體驗它能做什麼。</p></div><div class="unit-time">09:00–09:45</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>觀察講師下任務、產出檔案、啟動與操作的過程。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u1" type="checkbox"/><span>說出 Agent 與純聊天工具的一個差別。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p>今天只走四步：交代任務 → 看到作品 → 親手操作 → 寫下需求。SDD、Archify 與工程護欄留到第二天。</p></div></details></details></article>
+<!-- Unit 2 -->
+<article class="unit" id="unit-2"><details class="lesson"><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">2</div><div><h3>Claude Code 基礎操作</h3><p class="why">會啟動、交代任務、查看改動與停止操作。</p></div><div class="unit-time">09:45–10:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>在自己的練習資料夾啟動工具，先做唯讀探索，再建立一個小頁面。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u2" type="checkbox"/><span>能啟動工具，指出產出的檔案，並在瀏覽器看到畫面。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p>先指定工作資料夾、要求與完成條件；每題使用獨立資料夾。操作參考：<a href="prompts.html#d1-read">唯讀探索提示詞</a>。查看變更用 <code>git status</code> 與 <code>git diff</code>；不確定的執行動作先請 Agent 解釋。</p></div></details></details></article>
+<!-- Unit 3 -->
+<article class="unit" id="unit-3"><details class="lesson"><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">3</div><div><h3>三種吸睛 Demo，觀察不同能力</h3><p class="why">看懂三題各在測什麼，再挑一題親手試。</p></div><div class="unit-time">10:45–12:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>看網站臨摹、塔羅抽牌與捲動動畫的短示範；每題以 6 分鐘製作＋2 分鐘操作為上限。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u3" type="checkbox"/><span>能區分還原精度、設計品味與互動邏輯。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p><a href="#demo-lab">前往三題體驗清單 →</a> 不要求三題都做；先看示範，再選一題。時間是課堂預算，並非保證完成。</p></div></details></details></article>
+<!-- Unit 4 -->
+<article class="unit" id="unit-4"><details class="lesson"><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">4</div><div><h3>自己做一次：一個提示詞、一個作品</h3><p class="why">一次給出要求，觀察它如何補足未指定的細節。</p></div><div class="unit-time">13:30–14:15</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>選一題，將共同規則與題目合併成一次輸入；保留第一版，不補提示。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u4" type="checkbox"/><span>留下可執行的第一版或實際失敗紀錄。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p>可讓 Agent 自行執行與修正；若人補提示，記錄一次人工介入。未完成也保留成果，不挑掉失敗版本。</p></div></details></details></article>
+<!-- Unit 5 -->
+<article class="unit" id="unit-5"><details class="lesson"><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">5</div><div><h3>補上上下文，比較第二次結果</h3><p class="why">提示詞之外，參考圖、素材與限制也會改變結果。</p></div><div class="unit-time">14:15–15:00</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>在新資料夾重跑同題，加入固定截圖或更清楚的規格，再與第一版並排。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u5" type="checkbox"/><span>指出一項因上下文改變而改善或退步的地方。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p>任務單的五個零件：目標、上下文、限制、完成標準、輸出格式。<a href="prompts.html#parts">需要時看完整說明 →</a> 同一提示詞重跑也可能不同；這次觀察不能直接當作模型排名。</p></div></details></details></article>
+<!-- Unit 6 -->
+<article class="unit" id="unit-6"><details class="lesson"><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">6</div><div><h3>操作驗收：好看之外，真的完成了嗎？</h3><p class="why">成品看起來完成，仍要實際操作才知道。</p></div><div class="unit-time">15:15–16:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>依題目的五項條件操作，記錄通過項目，再讓 Agent 修一個最明顯的問題。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u6" type="checkbox"/><span>留下通過項數、人工介入次數，以及修復前後結果。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p>比較時固定題目、素材、時間與起始專案，記錄模型與 Harness 的工具設定。成果與品味分開看；沒執行的項目寫「未驗證」。<a href="prompts.html#d1-3">修一個問題的提示詞 →</a></p></div></details></details></article>
+<!-- Unit 7 -->
+<article class="unit" id="unit-7"><details class="lesson"><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">7</div><div><h3>把體驗收斂成 PRD 草稿</h3><p class="why">把剛才試出來的需求寫下來，今天到 PRD 為止。</p></div><div class="unit-time">16:30–17:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>列出 AI 自行決定的事，由人確認保留、修改或不做，再整理為 PRD。</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input data-k="v2-u7" type="checkbox"/><span>PRD 有使用者、核心流程、範圍、待決事項與至少三條驗收條件。</span></label></li></ul></div></div><details class="more"><summary>操作提醒與延伸說明</summary><div><p><a href="prompts.html#d1-4">先回顧假設 →</a> <a href="prompts.html#d1-5">再寫 PRD →</a> 至少一條驗收條件要是失敗情境。今天不畫流程圖；第二天用請假系統練習 SDD，再用 Archify 檢查流程。</p></div></details></details></article>
+</div>
+</section>
+<section class="block" id="demo-lab"><div class="wrap"><div class="sec-head"><h2>三題體驗：先選一題</h2><p>每題 6 分鐘製作＋2 分鐘操作。一次提示，允許 Agent 自行修正；人補提示另記次數。以下為課堂設計題，未實測保證完成時間。</p></div>
+<details class="more"><summary>先了解：我們在觀察哪些能力？</summary><div><div class="tbl-wrap"><table class="tbl"><tr><th>面向</th><th>看什麼</th></tr><tr><td>需求遵循</td><td>要求是否完整落地，有無自行改規格</td></tr><tr><td>視覺實現</td><td>A 看還原精度；B 看片面、字體與配色是否一致，分開評</td></tr><tr><td>互動完整</td><td>操作、回饋、結果、重設是否連貫</td></tr><tr><td>邏輯正確</td><td>條件、不重複選取、狀態重設是否正確</td></tr><tr><td>空間與時間</td><td>位置、動態與事件順序是否一致</td></tr><tr><td>自主完成</td><td>有無真正啟動、操作、找錯與修復</td></tr></table></div><p>有圖片輸入並對照輸出，才能進一步觀察多模態理解。漂亮畫面不直接證明內部推理；一次結果也不代表模型整體排名。</p></div></details><article class="demo-task" id="demo-reference"><h3>A｜網站首屏臨摹</h3><p>主要觀察：讀圖與還原精度。</p><a href="https://linear.app/" rel="noopener" target="_blank">開啟目標成品：Linear 首頁 →</a><details class="more"><summary>① 準備上下文</summary><div><p>已附固定尺寸 1440 × 900 的原站截圖：<a download="reference.png" href="assets/demo-reference/linear-reference.png">下載 reference.png</a>（擷取日期：2026-10-25；來源：Linear 官網）。下載後放到練習資料夾，再與提示詞一起交給 Agent。這張圖就是還原目標，網址只供對照；測讀圖時不要讓 Agent 讀原站程式。截圖沒有獨立素材包，缺圖可本地近似並註明差異。</p></div></details><details class="more"><summary>② 展開完整提示詞</summary><div><pre class="prompt">請在目前的獨立練習資料夾建立可於瀏覽器執行的作品，不要只提供計畫或程式碼片段。直接動手，不要提問；未指定的細節自行決定。使用既有套件，不建後端、不登入、不呼叫付費 API 或圖片影片生成服務。不要下載新素材；可用 CSS、SVG 或 Canvas 自製圖形。介面使用繁體中文（臨摹題保留參考圖原文）。
+製作預算為 6 分鐘，由講師計時；時間到就保留當前版本，另用 2 分鐘操作。優先完成核心流程，再改善外觀。允許自行執行與修正；有瀏覽器工具就實際開啟、操作與檢查。沒有工具不得假裝驗證。完成時回報啟動方式、實際驗證項目、未完成或未驗證項目。
+
+附件 reference.png 是必須重現的完成畫面，不是風格靈感。請還原這一屏的導覽、標題、按鈕、產品展示區、文字、比例、間距與配色，不得自行改版。不做截圖範圍外的區塊。若有 assets 資料夾，只使用其中素材；缺圖以本地 SVG 近似，交付時列出差異。
+以 1440 × 900 驗收；縮至 1024 × 768 時核心內容不得重疊。主按鈕點擊後顯示可關閉的體驗說明，導覽項目有 hover 與鍵盤焦點回饋；這兩項是課堂新增的互動，不是對原站行為的推測。</pre></div></details><details class="more"><summary>③ 操作驗收：五件事</summary><div><ol><li>同尺寸並排比較主要區塊位置</li><li>標題與內文完整</li><li>主按鈕及關閉有效</li><li>鍵盤可聚焦導覽與按鈕</li><li>縮小視窗不重疊</li></ol><p>記錄通過幾項／5、首次可用時間、補提示次數、手動改碼次數，以及修復前後結果。品味另由同學盲選，不與功能分數混算。</p></div></details></article><article class="demo-task" id="demo-tarot"><h3>B｜深夜塔羅抽牌室</h3><p>主要觀察：品味、互動與狀態。</p><details class="more"><summary>① 準備上下文</summary><div><p>這是創作題，不需臨摹圖。固定八張牌的需求與配色，允許自製 SVG 牌面；比較品味時與還原精度分開評。</p></div></details><details class="more"><summary>② 展開完整提示詞</summary><div><pre class="prompt">請在目前的獨立練習資料夾建立可於瀏覽器執行的作品，不要只提供計畫或程式碼片段。直接動手，不要提問；未指定的細節自行決定。使用既有套件，不建後端、不登入、不呼叫付費 API 或圖片影片生成服務。不要下載新素材；可用 CSS、SVG 或 Canvas 自製圖形。介面使用繁體中文（臨摹題保留參考圖原文）。
+製作預算為 6 分鐘，由講師計時；時間到就保留當前版本，另用 2 分鐘操作。優先完成核心流程，再改善外觀。允許自行執行與修正；有瀏覽器工具就實際開啟、操作與檢查。沒有工具不得假裝驗證。完成時回報啟動方式、實際驗證項目、未完成或未驗證項目。
+
+製作「深夜天文館」風格的塔羅抽牌體驗：深藍背景、暖金細線、米白文字，不要一般企業表單版型。
+輸入問題後才能開始；洗牌後展示八張牌背，依序選三張不同牌，放到過去、現在、未來。每張點選後翻面，顯示不同牌名、自製 SVG 牌面與本地預寫解讀。八張牌皆須不同，不呼叫外部解讀服務。翻牌與洗牌期間防止重複點擊，抽滿三張不可再抽。結果頁可重新開始，清除問題、已選牌與動畫狀態。標示「娛樂與自我探索用途」。讓選牌與揭曉有清楚節奏。</pre></div></details><details class="more"><summary>③ 操作驗收：五件事</summary><div><ol><li>空白問題無法開始</li><li>三張牌不重複且對應三個位置</li><li>翻面後內容可讀且各不相同</li><li>快速連點不多抽</li><li>重新開始後狀態清空</li></ol><p>記錄通過幾項／5、首次可用時間、補提示次數、手動改碼次數，以及修復前後結果。品味另由同學盲選，不與功能分數混算。</p></div></details></article><article class="demo-task" id="demo-scroll"><h3>C｜太空電梯捲動重建</h3><p>主要觀察：動態映射與時序。</p><a href="https://neal.fun/space-elevator/" rel="noopener" target="_blank">開啟目標成品：Neal.fun Space Elevator →</a><details class="more"><summary>① 準備上下文</summary><div><p>講師選原站開場的一小段，固定起點、中段、終點三張同尺寸截圖，並註明物件移動方向；有錄影則一起提供。此次自動擷取遇到原站人機驗證，尚未附有效截圖，課前需由講師手動準備。全班使用同一份檔案，不復刻整站。</p></div></details><details class="more"><summary>② 展開完整提示詞</summary><div><pre class="prompt">請在目前的獨立練習資料夾建立可於瀏覽器執行的作品，不要只提供計畫或程式碼片段。直接動手，不要提問；未指定的細節自行決定。使用既有套件，不建後端、不登入、不呼叫付費 API 或圖片影片生成服務。不要下載新素材；可用 CSS、SVG 或 Canvas 自製圖形。介面使用繁體中文（臨摹題保留參考圖原文）。
+製作預算為 6 分鐘，由講師計時；時間到就保留當前版本，另用 2 分鐘操作。優先完成核心流程，再改善外觀。允許自行執行與修正；有瀏覽器工具就實際開啟、操作與檢查。沒有工具不得假裝驗證。完成時回報啟動方式、實際驗證項目、未完成或未驗證項目。
+
+請重建附件三張截圖與動作說明（若有錄影則一併參照）所指定的太空電梯短段體驗，不要自由重新設計，也不做整個原站。三張截圖依序對應頁面捲動進度的 0%、50%、100%；視覺以截圖為準，移動方向與物件出入順序以動作說明或錄影為準。
+畫面有固定的電梯觀景框、高度讀數與背景物件。物件位置和高度由捲動進度決定，向上捲動要能還原之前狀態，不能只播放一次動畫。以本地 SVG 或 CSS 近似缺少的插圖，保留參考中的構圖和色彩，列出未還原部分。快速往返捲動或縮放視窗後仍維持同步。</pre></div></details><details class="more"><summary>③ 操作驗收：五件事</summary><div><ol><li>起點構圖接近參考</li><li>中段物件位置對應參考</li><li>終點內容對應參考</li><li>高度與物件隨捲動同步</li><li>反向捲動恢復先前狀態</li></ol><p>記錄通過幾項／5、首次可用時間、補提示次數、手動改碼次數，以及修復前後結果。品味另由同學盲選，不與功能分數混算。</p></div></details></article><details class="more"><summary>講師備課：怎麼準備 Reference 與公平比較？</summary><div><p>上課前親自開啟原站，固定相同尺寸與截取範圍，將 reference.png 或 start.png、middle.png、end.png 與 scroll.mp4 放進各組題目資料夾。確認 Agent 能讀取提供的格式；不能讀影片時，改提供相同關鍵影格與動作文字。先試跑，確認套件與啟動方式。原站網址是可對照的目標成品，不能以元件庫代替。</p><p>比較不同模型與 Harness 時，固定提示詞語言、素材、工具權限、起始專案與時間；記錄模型、版本及設定。測讀圖時禁止讀原站程式；測網站逆向重建才另外允許。不要把兩種條件混算。</p></div></details><details class="more"><summary>延伸挑戰：3D 場景與敘事動畫</summary><div><p><a href="https://bruno-simon.com/" rel="noopener" target="_blank">Bruno Simon 互動作品集</a>可作 3D 場景參考，限定小車、地面與跟隨鏡頭，完整網站不適合八分鐘臨摹。敘事題可挑「機器人點亮月亮」，固定分鏡與接上插頭才亮燈的時序；第一次上課不要求完成。</p></div></details></div></section><section class="block">
+<div class="wrap">
+<div class="grid g2">
+<div class="card tint"><h3>D1 覆盤（5 分鐘）</h3><p>每組分享：哪個效果最驚喜？哪個要求沒做對？如果事先多寫一句話，結果可能怎麼變？</p></div>
+<div class="card"><h3>今晚作業</h3><ul class="checks">
+<li><label><input data-k="hw1" type="checkbox"/><span>讀完題目 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/LEAVEBOT.md"><code>course/LEAVEBOT.md</code></a></span></label></li>
+<li><label><input data-k="hw2" type="checkbox"/><span>確認第二天的 fork 可讀到 course/WORKFLOW.md；保留今天的 PRD，明天練同一方法、換共同題目。</span></label></li>
+</ul></div>
+</div>
+<div class="callout" style="margin-top:16px"><b>預告 D2：</b>從今天的 PRD 經驗出發，以請假系統練習 SDD：確認需求 → Archify 畫流程 → 設計與測試 → 實作與驗收。</div>
+</div>
+</section>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>

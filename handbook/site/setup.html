@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>課前準備：先跑一次 · SDD × AI 實戰營講義</title>
+<link rel="stylesheet" href="assets/style.css"></head>
+<body data-page="setup" data-ch="setup"><main>
+<section class="hero"><div class="wrap"><div><h1>課前準備：先跑一次</h1><p class="lead">Git、Python、Agent 與瀏覽器先確認；畫圖與工具串接各自驗證。</p></div><img class="cat" src="assets/cat-wave.jpg" alt=""></div></section>
+<section class="block"><div class="wrap"><p>第一天用獨立資料夾，第二天 clone LeaveBot。先確認能執行，再檢查 skills、MCP 與畫圖能力。</p></div></section><section class="block"><div class="wrap"><details class="more" open><summary>1．工具與帳號</summary><div><ul>
+<li>GitHub：能登入並 fork 專案。</li>
+<li>Claude Code 或 Codex：依官方安裝與帳號說明設定，實際啟動後能完成一次小任務。帳號方案與額度以官方當時資訊為準。</li>
+<li>Git：<code>git --version</code> 有版本號。</li>
+<li>Python 3.12：macOS/Linux 用 <code>python3 --version</code>；Windows 用 <code>py -3.12 --version</code>。</li>
+<li>瀏覽器、編輯器；Node 可執行 repo 內 Archify（最低18；選受支援版本並課前試跑），context7／playwright MCP 也需要 Node。</li>
+</ul>
+<p><a href="https://code.claude.com/docs/en/setup">Claude Code 官方安裝說明</a>、<a href="https://developers.openai.com/codex/cli/">Codex CLI 官方說明</a>、<a href="https://developers.openai.com/codex/skills/">Codex skills 官方說明</a>。先確認能登入與執行，再確認專案層設定；不把安裝完成當成全部工具接通。</p>
+<p><b>主線不需要應用程式用的 Anthropic API key。</b> C4/C5 才需要另外準備；Agent 登入費用與成品內 LLM API 是不同用途。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>2．第一天的練習位置</summary><div><p>建立與 LeaveBot 分開的資料夾，例如 <code>vibe-day1/</code>，每題再分 <code>reference-v1/</code>、<code>tarot-v1/</code>。用相同工具與時間比較時，記下模型、Harness、素材與人工介入。不要從 LeaveBot 根目錄產生塔羅或動畫，避免請假規格干擾。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>3．取得第二天學生專案</summary><div><p>Fork <code>https://github.com/Zenobia000/leavebot-bootcamp</code> 的 main，<b>只複製main即可</b>。使用自己的 fork clone，再設定講師 upstream：</p>
+<pre class="code">git clone https://github.com/&lt;你的帳號&gt;/leavebot-bootcamp.git
+cd leavebot-bootcamp
+git remote add upstream https://github.com/Zenobia000/leavebot-bootcamp.git
+git fetch upstream
+git branch -r</pre>
+<p>Checkpoint 是否可用以 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/CHECKPOINTS.md">CHECKPOINTS</a> 與遠端實際分支為準。缺少時先詢問講師，不重 fork、不切不存在的分支。</p>
+<p>Windows 的 <code>.agents/skills</code> 需要符號連結權限。使用 Codex 前確認該路徑連到 <code>../.claude/skills</code>，不是只有路徑文字的普通檔案；若 clone 前未啟用連結，請講師協助重建連結。不要刪除已有學生成果重 clone。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>4．套件預熱（不建立 app）</summary><div><p>可在 LeaveBot 根目錄先建未追蹤的 <code>.venv</code>，下載主線套件：</p>
+<p>macOS/Linux：</p>
+<pre class="code">python3 -m venv .venv
+.venv/bin/python -m pip install -c course/constraints.txt fastapi uvicorn httpx pytest
+.venv/bin/python -c &quot;import fastapi, uvicorn, httpx, pytest; print(&#x27;ok&#x27;)&quot;</pre>
+<p>Windows PowerShell：</p>
+<pre class="code">py -3.12 -m venv .venv
+.venv\Scripts\python.exe -m pip install -c course/constraints.txt fastapi uvicorn httpx pytest
+.venv\Scripts\python.exe -c &quot;import fastapi, uvicorn, httpx, pytest; print(&#x27;ok&#x27;)&quot;</pre>
+<p>第二天生成 <code>pyproject.toml</code> 後，再依 STACK 安裝 <code>-e &quot;.[dev]&quot;</code>。不需先產業務程式，也不需要刪除 venv。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>5．開場連線檢查</summary><div><p>從 repo 根目錄打開工具，讀 <code>AGENTS.md</code> 與 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/WORKFLOW.md">WORKFLOW</a>。用 <code>/compass</code>（Codex：<code>$compass</code>）要求建議下一步、所讀資料及產出；確認它依本課路線回答，而非只數技能。</p>
+<p>有 Node 的人先跑：</p>
+<pre class="code">node .claude/skills/archify/bin/archify.mjs doctor</pre>
+<p>請 Agent 實際用 playwright 開啟一頁並回報標題，再用 context7 查一個 FastAPI 操作。沒有接通就記下實際錯誤；由人開瀏覽器、查官方文件或用 Mermaid 接續，不宣稱工具已驗證。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>常見阻礙</summary><div><p>公司網路阻擋安裝／套件下載時，先找 IT 或依公司允許方式處理。套件錯誤先看完整輸出與 Python 版本，不把所有安裝失敗都歸因版本。Archify 不能執行時先採 Mermaid；環境問題交給講師，不消耗整堂實作時間。</p></div></details></div></section>
+</main><script src="assets/app.js"></script></body></html>
