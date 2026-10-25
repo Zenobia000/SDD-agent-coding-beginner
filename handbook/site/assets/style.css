@@ -1,5 +1,5 @@
 /* SDD × AI Coding Agent 實戰營 · 學員講義
-   Morandi palette from handbook/slides/STYLE.md; one hue per chapter. */
+   Morandi palette; one hue per chapter. */
 
 :root {
   --paper: #EDE9E4;
@@ -372,6 +372,10 @@ footer.site { padding: 26px 0 40px; color: var(--muted); font-size: 14px; }
 }
 
 /* Progressive reading: headings first, current task next, supporting detail on demand. */
+.follow-guide { max-width: 70ch; }
+.follow-guide h2 { margin-bottom: 16px; }
+.follow-guide li + li { margin-top: 10px; }
+.follow-guide p { margin-top: 18px; }
 .reading-tools { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:16px 0; }
 .reading-tools p { flex:1 1 100%; color:var(--ink-2); font-size:15px; }
 .reading-tools button { font:inherit; font-size:15px; padding:8px 14px; border:1px solid var(--line-2); border-radius:8px; background:var(--card); color:var(--ink); cursor:pointer; }

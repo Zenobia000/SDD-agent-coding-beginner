@@ -22,7 +22,32 @@ tmp/
 *.log
 
 # 本機大型簡報原檔
-/*.pptx
+*.pptx
+*.pdf
+
+# 授課備課、粗剪、產檔與封存；本機保留，公開版只放學員會用的內容。
+/class_plan/
+/output/
+/封存/
+/handbook/slides/
+
+# Markdown 匯出副本不是學員入口；保留同步工具真正讀取的來源。
+/handbook/*.md
+!/handbook/README.md
+!/handbook/d1-prompts.md
+/handbook/appendix/
+
+# 企業贈禮只發布這兩份 HTML 簡報與各自的素材、授權。
+/starter-kit/*
+!/starter-kit/README.md
+!/starter-kit/index.html
+!/starter-kit/deck/
+!/starter-kit/skill-deck/
+
+# 本機 Agent 工作紀錄與異常轉儲
+/.claude/
+/.agents/
+*.stackdump
 
 # 營運機密：含定價、成本結構、毛利與商業假設，不進公開 repo。
 Sunny_Sprint_*.md

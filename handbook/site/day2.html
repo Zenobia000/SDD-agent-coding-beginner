@@ -4,7 +4,38 @@
 <link rel="stylesheet" href="assets/style.css"></head>
 <body data-page="day2" data-ch="day2"><main>
 <section class="hero"><div class="wrap"><div><h1>SDD：從 PRD 到可驗收的功能</h1><p class="lead">用同一份題目、通用 skills 與最小規格，完成表單、驗證、存檔與驗收。</p></div><img class="cat" src="assets/cat-wave.jpg" alt=""></div></section>
-<section class="block"><div class="wrap"><div class="card progress-card"><div class="progress" data-progress><b>D2 驗收進度</b><div class="bar"><i></i></div><span class="n">0 / 0</span></div></div><div class="reading-tools"><p>先看目前單元，操作細節需要時展開。</p><button type="button" data-lessons="open">展開全部單元</button><button type="button" data-lessons="close">收合全部單元</button></div><p>昨天的 PRD 練習教你把創意說清楚；今天換共同題目 LeaveBot，不沿用昨天作品的功能。<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/WORKFLOW.md">學生專案的同版工作流程 →</a></p></div></section><section class="block"><div class="wrap"><details class="more"><summary>今天的技能路線與對話節奏</summary><div><h2>WORKFLOW — 第二天從空白到交付</h2>
+<section class="block"><div class="wrap"><div class="card progress-card"><div class="progress" data-progress><b>D2 驗收進度</b><div class="bar"><i></i></div><span class="n">0 / 0</span></div></div><div class="reading-tools"><p>先看目前單元，操作細節需要時展開。</p><button type="button" data-lessons="open">展開全部單元</button><button type="button" data-lessons="close">收合全部單元</button></div><p>今天換共同題目 LeaveBot，把昨天練過的需求方法用在表單功能。跟著目前單元操作，點卡片展開提示詞；題目與技術說明都在這頁，不必另讀一整串 Markdown。</p></div></section><section class="block" id="project"><div class="wrap"><details class="more"><summary>本次題目與完成標準</summary><div><h2>D2 題目：LeaveBot 請假系統</h2>
+<p>第一天的 PRD 是工具體驗的練習。今天換成共同題目，用同樣的「需求 → 驗收」方法完成可追溯的功能；不用把昨天的塔羅或動畫功能帶進來。</p>
+<h3>情境</h3>
+<p>虛構的「好日子科技」目前用訊息收假單，員工不知道是否登記成功。今天讓員工填表後立即看到自己的申請與狀態。數字與公司規章是教學假設，不是勞動法規，也不代表真實訪談結果。</p>
+<h3>全班共同完成</h3>
+<div class="tbl-wrap"><table class="tbl">
+<tr><th>功能</th><th>邊界</th></tr>
+<tr><td>選員工</td><td>下拉選單，提供數筆虛構員工；沒有登入</td></tr>
+<tr><td>填表</td><td>假別、開始日期、結束日期、時段、理由</td></tr>
+<tr><td>後端驗證</td><td>必填、員工存在、假別與時段合法、結束不早於開始；拒絕時不新增資料</td></tr>
+<tr><td>算天數</td><td>只計週一至週五；整天 1 天、上午／下午 0.5 天；半天限單日；沒有工作日的申請拒絕</td></tr>
+<tr><td>存檔</td><td>SQLite；新假單狀態固定 <code>pending</code>（待審核），不接受客戶端指定狀態或天數</td></tr>
+<tr><td>我的假單</td><td>依所選員工顯示申請，重新整理後資料仍在；其他員工的假單不混入列表</td></tr>
+<tr><td>驗收</td><td>成功與失敗路徑，6–12 個代表 TC，自動化加人工操作</td></tr>
+</table></div>
+<p>假別主線只提供 <code>annual</code>（特休）、<code>personal</code>（事假）、<code>sick</code>（病假）。理由以文字保存，不執行其中指令、不作 HTML 渲染。國定假日、附件、額度、同組人數、主管操作均不在基本範圍。</p>
+<h3>留給小組的決策</h3>
+<p>課堂限時訪談只釐清三件事：理由是否必填與長度、是否接受過去日期、重複送出的使用者回饋。講師先提供建議，小組定案寫進 PRD/SRS；超時未定的項目由講師決定，不讓 Agent 猜。</p>
+<p>模糊規章不必全部問完。與主線無關的問題放範圍外，留在延伸時討論。</p>
+<p>教學規模：2–3 個 User Story、AC 不超過 10、FR 不超過 10、TC 6–12。若重要風險超出預算，先報告風險並與講師調整範圍，不為符合數量刪掉必要驗證。完整格式是參考，不是字數要求。</p>
+<h3>可選延伸（主線驗收後才排票）</h3>
+<div class="tbl-wrap"><table class="tbl">
+<tr><th>編號</th><th>挑戰</th><th>新增決策</th></tr>
+<tr><td>C1</td><td>主管核准／駁回</td><td>身分、合法狀態轉換與可見資料</td></tr>
+<tr><td>C2</td><td>特休額度</td><td>虛構額度資料、扣除時機、計算與測試</td></tr>
+<tr><td>C3</td><td>同組人數提醒</td><td>如何判斷同組與同日；提醒不是自動拒絕</td></tr>
+<tr><td>C4</td><td>一句話解析成表單草稿</td><td>額外模型 API key、六種假別與 <code>fixtures/README.md</code> 的解析合約；先預覽、驗證後才送出</td></tr>
+<tr><td>C5</td><td>模型輸入防護與評測</td><td>以 C4 為前提，固定句子集與比較規則；模型不可核准或決定天數</td></tr>
+</table></div>
+<p><code>course/fixtures/</code> 只用於 C4/C5。其六種假別比主線多，挑戰票必須同步擴充 SRS/SDS 與表單，不可直接套上後宣稱相容。</p>
+<h3>交付</h3>
+<p>一份小而完整的 <code>docs/01</code>–<code>06</code>、兩張主線票、一條可跑的表單功能、測試與人工驗收證據。至少親手核對一條「AC → FR → API → TC → 測試結果」。技術邊界見 <a href="day2.html#stack">STACK</a>，步驟見 <a href="day2.html#workflow">WORKFLOW</a>。</p></div></details></div></section><section class="block" id="workflow"><div class="wrap"><details class="more"><summary>今天的技能路線與對話節奏</summary><div><h2>WORKFLOW — 第二天從空白到交付</h2>
 <p>這份是本課操作入口；通用 skills 本身不固定課表、檔數或票數。本課版本：2026.10-unified-1。</p>
 <p>第一天在獨立資料夾做三題體驗、選一題實作、比較提示詞／上下文，最後只交該作品 PRD。第二天用 LeaveBot 重新練習相同方法，不沿用昨天作品的功能。</p>
 <h3>開場（在 repo 根目錄）</h3>
@@ -14,13 +45,13 @@
 <h3>今天依序做</h3>
 <div class="tbl-wrap"><table class="tbl">
 <tr><th>時間</th><th>單元</th><th>卡</th><th>人的審查</th></tr>
-<tr><td>09:00–09:45</td><td>8 從 D1 體驗接到 LeaveBot：確認問題與範圍</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/A.md">A</a></td><td>主線與延伸分清楚；三個問題已定案或由講師接手。</td></tr>
-<tr><td>09:45–10:30</td><td>9 把共識寫成 PRD 與 SRS</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/B.md">B</a>、<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/C.md">C</a></td><td>PRD 有成功與失敗條件；每個 AC 在 SRS 有對應，沒有新增範圍。</td></tr>
-<tr><td>10:45–11:30</td><td>10 Archify 流程檢查與最小系統設計</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/D.md">D</a>、<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/E.md">E</a></td><td>圖與 SRS 一致；成功、拒絕與不存檔分支明確；API 與欄位可直接實作。</td></tr>
-<tr><td>11:30–12:30</td><td>11 人定預期結果，選案例再拆兩張票</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/F.md">F</a>、<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/G.md">G</a></td><td>每個 TC 有來源與人工確認的預期結果；兩張票能在新對話接手。</td></tr>
-<tr><td>13:30–15:00</td><td>12 從空白骨架到一條可驗收的表單功能</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/H.md">H</a></td><td>表單、驗證、SQLite、我的假單接通；測試實際執行，拒絕輸入不存檔。</td></tr>
-<tr><td>15:15–16:30</td><td>13 重現錯誤、修復，再走一次需求變更</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/I.md">I</a>、<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/J.md">J</a></td><td>有修復前後證據；依規格→案例→測試→程式更新，舊測試仍通過。</td></tr>
-<tr><td>16:30–17:30</td><td>14 操作驗收與交付</td><td><a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/prompts/K.md">K</a></td><td>他人可依 README 啟動；測試與人工操作有證據，不含秘密或資料庫。</td></tr>
+<tr><td>09:00–09:45</td><td>8 從 D1 體驗接到 LeaveBot：確認問題與範圍</td><td><a href="prompts.html#card-a">A</a></td><td>主線與延伸分清楚；三個問題已定案或由講師接手。</td></tr>
+<tr><td>09:45–10:30</td><td>9 把共識寫成 PRD 與 SRS</td><td><a href="prompts.html#card-b">B</a>、<a href="prompts.html#card-c">C</a></td><td>PRD 有成功與失敗條件；每個 AC 在 SRS 有對應，沒有新增範圍。</td></tr>
+<tr><td>10:45–11:30</td><td>10 Archify 流程檢查與最小系統設計</td><td><a href="prompts.html#card-d">D</a>、<a href="prompts.html#card-e">E</a></td><td>圖與 SRS 一致；成功、拒絕與不存檔分支明確；API 與欄位可直接實作。</td></tr>
+<tr><td>11:30–12:30</td><td>11 人定預期結果，選案例再拆兩張票</td><td><a href="prompts.html#card-f">F</a>、<a href="prompts.html#card-g">G</a></td><td>每個 TC 有來源與人工確認的預期結果；兩張票能在新對話接手。</td></tr>
+<tr><td>13:30–15:00</td><td>12 從空白骨架到一條可驗收的表單功能</td><td><a href="prompts.html#card-h">H</a></td><td>表單、驗證、SQLite、我的假單接通；測試實際執行，拒絕輸入不存檔。</td></tr>
+<tr><td>15:15–16:30</td><td>13 重現錯誤、修復，再走一次需求變更</td><td><a href="prompts.html#card-i">I</a>、<a href="prompts.html#card-j">J</a></td><td>有修復前後證據；依規格→案例→測試→程式更新，舊測試仍通過。</td></tr>
+<tr><td>16:30–17:30</td><td>14 操作驗收與交付</td><td><a href="prompts.html#card-k">K</a></td><td>他人可依 README 啟動；測試與人工操作有證據，不含秘密或資料庫。</td></tr>
 </table></div>
 <h3>每階段的節奏</h3>
 <p>讀卡片與指定檔案 → 叫通用技能並給本課限制 → 產出 → 人依 Gate 審查 → 決策寫檔。</p>
@@ -31,8 +62,8 @@
 <p><code>docs/01-brief.md</code>、<code>02-prd.md</code>、<code>03-srs.md</code>、<code>04-sad.md</code>、<code>05-sds.md</code>、<code>06-test-plan.md</code>；圖在 <code>diagrams/</code>（或 SRS 的 Mermaid）；偏差在 <code>docs/LESSONS.md</code>。</p>
 <p>主線票 <code>issues/000-skeleton.md</code>、<code>issues/001-submit-leave.md</code>。變更練習票 <code>issues/002-reason-limit.md</code>。只有實作階段才建立 <code>backend/</code> 與套件設定。</p>
 <h3>當工具或時間不足</h3>
-<p>無 Archify 用 Mermaid；無瀏覽器工具由人操作。超過預定進度15分鐘先請講師協助，依 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/CHECKPOINTS.md">CHECKPOINTS</a> 確認可用快照，不執行不存在的分支。</p>
-<p>核心規則必須清楚，延伸功能不拖住主線；<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/LEAVEBOT.md">LEAVEBOT</a> 定範圍，<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/STACK.md">STACK</a> 定技術。題目、模板或講義矛盾時列出差異，由講師處理。</p>
+<p>無 Archify 用 Mermaid；無瀏覽器工具由人操作。超過預定進度15分鐘先請講師協助，依 <a href="day2.html#rescue">CHECKPOINTS</a> 確認可用快照，不執行不存在的分支。</p>
+<p>核心規則必須清楚，延伸功能不拖住主線；<a href="day2.html#project">LEAVEBOT</a> 定範圍，<a href="day2.html#stack">STACK</a> 定技術。題目、模板或講義矛盾時列出差異，由講師處理。</p>
 <h3>課後</h3>
 <p>將相同方法用於另一個小任務。通用技能可以帶走；LeaveBot 的票數、檔名與公司假設是本課選擇。完整 IT 設備範例與 LLM eval 留作延伸。</p></div></details></div></section><section class="block"><div class="wrap"><article class="unit" id="unit-8"><details class="lesson" open><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">8</div><div><h3>從 D1 體驗接到 LeaveBot：確認問題與範圍</h3><p class="why">昨天學會把創意說清楚；今天換共同題目，把決策留下來。</p></div><div class="unit-time">09:00–09:45</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>讀題目、完成最小 Brief，訪談理由、過去日期與重複送出三項決策。</p><p><a class="cardlink" href="prompts.html#card-a">卡 A →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u8"><span>主線與延伸分清楚；三個問題已定案或由講師接手。</span></label></li></ul></div></div></details></article><article class="unit" id="unit-9"><details class="lesson" ><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">9</div><div><h3>把共識寫成 PRD 與 SRS</h3><p class="why">先定義可判斷的成功與失敗，再設計系統。</p></div><div class="unit-time">09:45–10:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>先產 PRD 並審 AC，再把同一組承諾轉成 SRS；不一次寫完六份文件。</p><p><a class="cardlink" href="prompts.html#card-b">卡 B →</a> <a class="cardlink" href="prompts.html#card-c">卡 C →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u9"><span>PRD 有成功與失敗條件；每個 AC 在 SRS 有對應，沒有新增範圍。</span></label></li></ul></div></div></details></article><article class="unit" id="unit-10"><details class="lesson" ><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">10</div><div><h3>Archify 流程檢查與最小系統設計</h3><p class="why">用圖找漏掉的錯誤分支，再定資料與 API。</p></div><div class="unit-time">10:45–11:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>先把 SRS 畫成流程，再依固定技術棧建立最小 SAD／SDS。</p><p><a class="cardlink" href="prompts.html#card-d">卡 D →</a> <a class="cardlink" href="prompts.html#card-e">卡 E →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u10"><span>圖與 SRS 一致；成功、拒絕與不存檔分支明確；API 與欄位可直接實作。</span></label></li></ul></div></div></details></article><article class="unit" id="unit-11"><details class="lesson" ><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">11</div><div><h3>人定預期結果，選案例再拆兩張票</h3><p class="why">AI 提議案例，預期結果與範圍由人審。</p></div><div class="unit-time">11:30–12:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>選 6–12 個代表 TC，建立追溯表，拆骨架與表單切片兩張票。</p><p><a class="cardlink" href="prompts.html#card-f">卡 F →</a> <a class="cardlink" href="prompts.html#card-g">卡 G →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u11"><span>每個 TC 有來源與人工確認的預期結果；兩張票能在新對話接手。</span></label></li></ul></div></div></details></article><article class="unit" id="unit-12"><details class="lesson" ><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">12</div><div><h3>從空白骨架到一條可驗收的表單功能</h3><p class="why">先接通首頁與 API，再逐一做紅燈、綠燈。</p></div><div class="unit-time">13:30–15:00</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>先完成 000 骨架，再於新對話實作 001；第一個業務測試的紅燈由全組親眼確認。</p><p><a class="cardlink" href="prompts.html#card-h">卡 H →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u12"><span>表單、驗證、SQLite、我的假單接通；測試實際執行，拒絕輸入不存檔。</span></label></li></ul></div></div></details></article><article class="unit" id="unit-13"><details class="lesson" ><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">13</div><div><h3>重現錯誤、修復，再走一次需求變更</h3><p class="why">測試要能抓住錯誤，需求改動也要回到規格。</p></div><div class="unit-time">15:15–16:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>在可還原的練習分支做一次講師指定的錯誤，再修復；將理由長度上限由 200 改為 100，先審影響。</p><p><a class="cardlink" href="prompts.html#card-i">卡 I →</a> <a class="cardlink" href="prompts.html#card-j">卡 J →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u13"><span>有修復前後證據；依規格→案例→測試→程式更新，舊測試仍通過。</span></label></li></ul></div></div></details></article><article class="unit" id="unit-14"><details class="lesson" ><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">14</div><div><h3>操作驗收與交付</h3><p class="why">程式、文件與口頭宣稱必須對得起來。</p></div><div class="unit-time">16:30–17:30</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>展示成功與失敗、核對一條追溯鏈、保存版本並說明未驗證項。</p><p><a class="cardlink" href="prompts.html#card-k">卡 K →</a></p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u14"><span>他人可依 README 啟動；測試與人工操作有證據，不含秘密或資料庫。</span></label></li></ul></div></div></details></article></div></section><section class="block" id="rescue"><div class="wrap"><details class="more"><summary>落後了怎麼接 checkpoint</summary><div><h2>Checkpoint：先確認可用，再切換</h2>
 <p><code>main</code> 保持空白學生起點。五個 <code>cp*</code> 分支是講師的參考快照，採用同一份課程規格；來源與驗證證據見各快照的 <code>course/CHECKPOINT-RECEIPT.md</code>。</p>
@@ -57,5 +88,47 @@ git branch -r</pre>
 git show-ref --verify refs/remotes/upstream/cp2-design
 git switch -c rescue-cp2 upstream/cp2-design</pre>
 <p><code>show-ref</code> 找不到就停止並詢問講師。<code>rescue-cp2</code> 已存在時先看該分支進度，不能刪掉重建。切換前先停止開發伺服器；含程式的快照重新建 venv 並依 STACK 安裝，資料庫不隨 Git 分支變動。</p>
-<p><code>cp3-tests</code> 的首個業務測試預期失敗；這是給學生完成綠燈的起點，不是完整功能。保底快照只提供一組已確認決策，可能與本組不同，切過去後先讀差異。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>完成主線後：延伸挑戰</summary><div><p>C1主管核准、C2額度、C3人數提醒、C4一句話解析、C5模型防護與評測。先更新需求再排挑戰票；API key與六種假別只在C4/C5適用。<a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/LEAVEBOT.md">看完整範圍 →</a></p></div></details></div></section>
+<p><code>cp3-tests</code> 的首個業務測試預期失敗；這是給學生完成綠燈的起點，不是完整功能。保底快照只提供一組已確認決策，可能與本組不同，切過去後先讀差異。</p></div></details></div></section><section class="block" id="stack"><div class="wrap"><details class="more"><summary>需要查指令時：技術棧、安裝與啟動</summary><div><h2>STACK — D2 固定技術棧</h2>
+<p>全班只有一個 HTTP 服務。Agent 從空白專案生成骨架，選型由本檔固定，產品細節由已確認的 SDS 決定。</p>
+<div class="tbl-wrap"><table class="tbl">
+<tr><th>層</th><th>選擇</th></tr>
+<tr><td>前端</td><td>HTML、CSS、原生 JavaScript，<code>backend/app/static/</code></td></tr>
+<tr><td>後端</td><td>Python 3.12、FastAPI、uvicorn</td></tr>
+<tr><td>資料</td><td>標準庫 sqlite3；開發預設 <code>backend/data/leavebot.db</code></td></tr>
+<tr><td>測試</td><td>pytest、httpx／FastAPI TestClient</td></tr>
+<tr><td>畫圖</td><td>隨 repo 提供的 Archify；Node 最低 18；無法執行時用 Mermaid</td></tr>
+</table></div>
+<p>主線不建立 <code>frontend/</code>、不使用 Next.js、不需要 <code>dev.sh</code> 或模型 API key。Node 只給畫圖與已設定的 MCP 使用。</p>
+<h3>骨架票 000 的要求</h3>
+<p>1. 在根目錄生成 <code>pyproject.toml</code>。套件白名單為 <code>fastapi</code>、<code>uvicorn</code>、<code>httpx</code>；<code>[dev]</code> 加 <code>pytest</code>。<code>requires-python = &quot;&gt;=3.12&quot;</code>。將<b>彩排或本機實際驗證過的相容版本</b>記在交付紀錄，不聲稱未跑過的版本已驗證。</p>
+<p>2. setuptools 使用明確的 package discovery：<code>package-dir = {&quot;&quot; = &quot;backend&quot;}</code>、<code>[tool.setuptools.packages.find] where = [&quot;backend&quot;]</code>，包含靜態頁 package data。避免把 <code>course/</code>、<code>issues/</code> 當 Python package。</p>
+<p>3. pytest 設定：<code>testpaths = [&quot;backend/tests&quot;]</code>、<code>pythonpath = [&quot;backend&quot;]</code>、<code>addopts = &quot;--import-mode=importlib&quot;</code>，註冊 <code>req</code> marker。</p>
+<p>4. 生成 <code>backend/app/__init__.py</code>、<code>main.py</code> 與 <code>static/index.html</code>、<code>app.js</code>、<code>style.css</code>；<code>main.py</code> 提供 <code>app = FastAPI()</code>、<code>GET /api/health</code>。所有 <code>/api</code> 路由先登記，最後掛載靜態目錄 <code>/</code>。</p>
+<p>5. 首頁以 <code>fetch(&#x27;/api/health&#x27;)</code> 顯示連線結果；加入一個 health 測試。這張票不做請假功能。</p>
+<h3>安裝與執行（repo 根目錄）</h3>
+<p>macOS / Linux：</p>
+<pre class="code">python3 -m venv .venv
+.venv/bin/python -m pip install -c course/constraints.txt -e &quot;.[dev]&quot;
+.venv/bin/python -m uvicorn app.main:app --app-dir backend --reload
+.venv/bin/python -m pytest</pre>
+<p>Windows PowerShell（啟動與測試分別在兩個終端機）：</p>
+<pre class="code">py -3.12 -m venv .venv
+.venv\Scripts\python.exe -m pip install -c course/constraints.txt -e &quot;.[dev]&quot;
+.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --reload
+.venv\Scripts\python.exe -m pytest</pre>
+<p>瀏覽器開 <code>http://127.0.0.1:8000/</code>。port 被占用加 <code>--port 8001</code>。Ctrl+C 停止後重啟一次，確認能再開。</p>
+<h3>表單票 001 的邊界</h3>
+<ul>
+<li>API 都在 <code>/api/</code>，前端用相對路徑；同來源，不開 CORS。具體端點、欄位與錯誤碼由 SDS 指定。</li>
+<li>驗證放後端。天數由程式以包含首尾的日期範圍計算，扣掉週末；半天限單日工作日。客戶端不決定天數與狀態。</li>
+<li>資料庫路徑從 <code>LEAVEBOT_DB</code> 讀；測試每次使用暫存資料庫，初始化與關閉連線要可重複執行。</li>
+<li>若規則使用「今天」，從 <code>LEAVEBOT_TODAY</code> 讀，課堂固定 <code>2026-10-12</code>；測試明確注入。開發可未設時讀真實日期，但要在畫面／紀錄說明。</li>
+<li>SQL 使用參數，理由以 <code>textContent</code> 呈現。拒絕的輸入不存檔；前端顯示可理解的錯誤。</li>
+<li>主線測試以 <code>backend/tests/acceptance/</code> 與 <code>backend/tests/unit/</code> 為主；測試層級依實際接縫選擇，不硬湊四層。</li>
+</ul>
+<h3>C4/C5 才適用</h3>
+<p>先建立挑戰票與更新規格，再加入 Anthropic SDK 選用依賴及必要的環境載入方式。金鑰只存在環境或未追蹤 <code>.env</code>，模型名稱明確設定並記錄實測版本；不把 Agent CLI 當後端。</p>
+<p>模型輸出是草稿，經 schema 與程式規則驗證，使用者確認後才送出。一般測試使用 deterministic fake，真正模型 eval 分開執行。解析合約與 fixture 的 <code>today</code>、六種假別、比對規則見 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/fixtures/README.md">fixtures/README.md</a>；規劃寫入 06 的選用區。</p>
+<h3>已驗證的套件組合</h3>
+<p><code>course/constraints.txt</code>記錄2026-10-25在Windows／Python3.12.9實際通過20項參考測試的版本。安裝時以 <code>-c</code> 套用；它不是新的套件白名單。其他平台與Agent仍須課前試跑。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>完成主線後：延伸挑戰</summary><div><p>C1主管核准、C2額度、C3人數提醒、C4一句話解析、C5模型防護與評測。先更新需求再排挑戰票；API key與六種假別只在C4/C5適用。<a href="#project">看完整範圍 →</a></p></div></details></div></section>
 </main><script src="assets/app.js"></script></body></html>

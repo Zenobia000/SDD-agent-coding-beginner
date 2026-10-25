@@ -3,6 +3,8 @@
   "sha256": {
     "course/PLAN.json": "3a077eb3e0cb60a70f976e5c26cf224c066e3b380b963eebfd5af2063c7573fa",
     "course/WORKFLOW.md": "01e7878032f9bd987ffd30326a7163c6e80af702860fa138c0060d58e93eacb7",
+    "course/LEAVEBOT.md": "47836ad9a55ac729c516d5323c861abe46785abb4eb0952403db611cf44356eb",
+    "course/STACK.md": "1199cbf74fd8c6968973c955535bb7cff4714e1ad0367ac25cd6b546446106b5",
     "course/SETUP.md": "58074290480f15bf2df150ead21c6eb3b7d9ba6fcbae5bba77387aca6e5d526f",
     "course/CHECKPOINTS.md": "039d96e2564deb6145f5defee9e6fdefaf32847427f789c3d2734dbef41624d7",
     "course/prompts/A.md": "e23fe9ff320b3d7dc6fa6f9104e5d4f3ec2cb9aaa1726fbc3274803399d43ddd",

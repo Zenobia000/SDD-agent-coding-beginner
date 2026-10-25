@@ -1,18 +1,14 @@
-# 企業 AI 轉型啟動指南
+# 企業贈禮
 
-> **讓 AI 從員工的個人工具，變成企業看得見、量得到的工作成果。**
-> 這是一套給企業決策者與部門主管的 AI 轉型啟動指南：盤點現況、挑選值得驗證的流程、設計人機分工與風險護欄，並用企業自己的數據決定下一步。它提供研究、框架與工作工具，不預設每家企業都能得到相同效益。
-> 報告、部門篇與工具是 markdown 原稿；高層簡報是 [`deck/index.html`](./deck/index.html)，雙擊用瀏覽器打開即可播放。簡報的版式與播放程式衍生自 [guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)，`deck/` 與 `skill-deck/` 採 AGPL-3.0（見各自資料夾的 LICENSE），其餘內容維持 MIT。
+雙擊 **[index.html](index.html)** 選擇簡報，或直接開啟下方任一份。兩份都保留在公開專案，並可用 `python scripts/package-materials.py` 另打包為 `dist/企業贈禮.zip`。
 
-| 位置 | 是什麼 | 狀態 |
-|---|---|---|
-| [`report/`](./report/00-summary.md) | 主報告：執行摘要與十章 | 內容初稿 |
-| [`functions/`](./functions/01-customer-service.md) | 十一個部門與工作領域，含研發的多代理協作與管理配套 | 內容初稿 |
-| [`tools/`](./tools/01-use-case-canvas.md) | 五個工具：場景挑選、成熟度自評、使用政策範本、效益衡量表、數位員工上崗檢核表 | 可供工作坊試用 |
-| [`deck/`](./deck/index.html) | 23 頁高層簡報（瑞士國際主義版式、Codex 深色配色，含演講者模式與講稿備註） | 對外前依客戶情境調整 |
-| [`skill-deck/`](./skill-deck/index.html) | 22 頁學習簡報：從「造一堆 Agent」到「模組化 Skill」，含流程圖、Skill 資料夾結構與 Skill.md 範本 | 可直接使用 |
-| [`storyline.md`](./storyline.md) | 空白簡報：全部行動標題與圖表清單 | 編輯底稿 |
-| [`STYLE.md`](./STYLE.md) | 寫作與圖表規範 | 已定稿 |
-| [`research/`](./research/01-gap.md) | 六份研究與一份查核紀錄（07），數字出處與限制 | 中小企業白皮書原文仍待核對 |
+| 簡報 | 入口 |
+|---|---|
+| 企業 AI 轉型啟動指南 | [deck/index.html](deck/index.html) |
+| AI 架構大轉向：從 Agent 到模組化 Skill | [skill-deck/index.html](skill-deck/index.html) |
 
-對外使用前，先處理查核檔標示的口徑差異與待核項目，並刪除編輯佔位內容。這份指南最適合搭配一次場景盤點工作坊使用：目標是帶團隊選出一個可驗證的流程、指定負責人、訂好基準線與停損條件。
+收件人完整解壓後，用瀏覽器開啟即可。簡報會嘗試載入 Google Fonts；沒有網路時使用系統替代字體。請保留各資料夾的 `assets/` 與 `LICENSE`。
+
+簡報的版式與播放程式衍生自 [guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)。兩份簡報保留各自的 AGPL-3.0 授權與原始出處，詳見 [deck/LICENSE](deck/LICENSE) 與 [skill-deck/LICENSE](skill-deck/LICENSE)。
+
+其餘研究、報告、部門篇、工作工具與編輯草稿留在本機，不放進這次贈禮，也不作為學生上課入口。

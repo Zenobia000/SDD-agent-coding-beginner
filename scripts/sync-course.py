@@ -66,14 +66,21 @@ def student_links(text,path):
         url=m[2]
         if '://' in url or url.startswith('#'):return m[0]
         from posixpath import normpath,dirname
-        return '['+m[1]+']('+BASE+normpath(dirname(path)+'/'+url)+')'
+        target=normpath(dirname(path)+'/'+url)
+        local={'course/WORKFLOW.md':'day2.html#workflow','course/SETUP.md':'setup.html',
+               'course/CHECKPOINTS.md':'day2.html#rescue','course/LEAVEBOT.md':'day2.html#project',
+               'course/STACK.md':'day2.html#stack'}
+        if re.fullmatch(r'course/prompts/[A-K]\.md',target):
+            href='prompts.html#card-'+target.rsplit('/',1)[1][0].lower()
+        else:href=local.get(target,BASE+target)
+        return '['+m[1]+']('+href+')'
     return re.sub(r'\[([^\]]+)\]\(([^)]+)\)',link,text)
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--student-root',type=Path,default=ROOT.parent/'leavebot-bootcamp');ap.add_argument('--check',action='store_true');args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--student-root',type=Path,default=ROOT.parent/'leavebot-bootcamp');ap.add_argument('--check',action='store_true');ap.add_argument('--export-markdown',action='store_true',help='Also export local Markdown copies; not needed for the student website');args=ap.parse_args()
     src=args.student_root.resolve(); plan=json.loads((src/'course/PLAN.json').read_text(encoding='utf-8'))
     dest=ROOT/'handbook';site=dest/'site'; outputs={}
-    inputs=['course/PLAN.json','course/WORKFLOW.md','course/SETUP.md','course/CHECKPOINTS.md']+[c['file'] for c in plan['cards']]
+    inputs=['course/PLAN.json','course/WORKFLOW.md','course/LEAVEBOT.md','course/STACK.md','course/SETUP.md','course/CHECKPOINTS.md']+[c['file'] for c in plan['cards']]
     # Git may check out CRLF on Windows and LF elsewhere; hash canonical text.
     fingerprints={p:hashlib.sha256((src/p).read_text(encoding='utf-8').encode('utf-8')).hexdigest() for p in inputs}
     outputs['handbook/course-source.json']=json.dumps({'version':plan['version'],'sha256':fingerprints},ensure_ascii=False,indent=2)+'\n'
@@ -89,16 +96,18 @@ def main():
 
     progress='<div class="card progress-card"><div class="progress" data-progress><b>D2 驗收進度</b><div class="bar"><i></i></div><span class="n">0 / 0</span></div></div>'
     toolbar='<div class="reading-tools"><p>先看目前單元，操作細節需要時展開。</p><button type="button" data-lessons="open">展開全部單元</button><button type="button" data-lessons="close">收合全部單元</button></div>'
-    course_intro='<p>昨天的 PRD 練習教你把創意說清楚；今天換共同題目 LeaveBot，不沿用昨天作品的功能。<a href="'+BASE+'course/WORKFLOW.md">學生專案的同版工作流程 →</a></p>'
+    course_intro='<p>今天換共同題目 LeaveBot，把昨天練過的需求方法用在表單功能。跟著目前單元操作，點卡片展開提示詞；題目與技術說明都在這頁，不必另讀一整串 Markdown。</p>'
     content=block(progress+toolbar+course_intro)
-    content+=block(disclosure('今天的技能路線與對話節奏',md(student_links((src/'course/WORKFLOW.md').read_text(encoding='utf-8'),'course/WORKFLOW.md'))))
+    content+=block(disclosure('本次題目與完成標準',md(student_links((src/'course/LEAVEBOT.md').read_text(encoding='utf-8'),'course/LEAVEBOT.md'))),'project')
+    content+=block(disclosure('今天的技能路線與對話節奏',md(student_links((src/'course/WORKFLOW.md').read_text(encoding='utf-8'),'course/WORKFLOW.md'))),'workflow')
     units=''
     for u in plan['day2']['units']:
         links=' '.join(f'<a class="cardlink" href="prompts.html#card-{c.lower()}">卡 {c} →</a>' for c in u['cards'])
         units+=f'''<article class="unit" id="unit-{u['number']}"><details class="lesson" {'open' if u['number']==8 else ''}><summary class="lesson-summary"><div class="unit-head"><div class="unit-no">{u['number']}</div><div><h3>{u['title']}</h3><p class="why">{u['why']}</p></div><div class="unit-time">{u['time']}</div></div></summary><div class="unit-body"><div class="unit-col"><div class="col-label">現在做這件事</div><p>{u['action']}</p><p>{links}</p></div><div class="unit-col"><div class="col-label">完成就打勾</div><ul class="checks"><li><label><input type="checkbox" data-k="unified-u{u['number']}"><span>{u['gate']}</span></label></li></ul></div></div></details></article>'''
     content+=block(units)
     content+=block(disclosure('落後了怎麼接 checkpoint',md(checkpoint_md)), 'rescue')
-    content+=block(disclosure('完成主線後：延伸挑戰','<p>C1主管核准、C2額度、C3人數提醒、C4一句話解析、C5模型防護與評測。先更新需求再排挑戰票；API key與六種假別只在C4/C5適用。<a href="'+BASE+'course/LEAVEBOT.md">看完整範圍 →</a></p>'))
+    content+=block(disclosure('需要查指令時：技術棧、安裝與啟動',md(student_links((src/'course/STACK.md').read_text(encoding='utf-8'),'course/STACK.md'))),'stack')
+    content+=block(disclosure('完成主線後：延伸挑戰','<p>C1主管核准、C2額度、C3人數提醒、C4一句話解析、C5模型防護與評測。先更新需求再排挑戰票；API key與六種假別只在C4/C5適用。<a href="#project">看完整範圍 →</a></p>'))
     outputs['handbook/site/day2.html']=shell('day2',plan['day2']['title'],'用同一份題目、通用 skills 與最小規格，完成表單、驗證、存檔與驗收。',content)
 
     prompt_body=block('<p>每張卡明確指定方法、上下文、產出與審查；不用背完所有技能。Codex 使用相同正文，把技能呼叫改成 <code>$名稱</code>；API 路徑保持不變。卡 H 的兩段分兩次對話執行。</p><div class="toc">'+''.join(f'<a href="#card-{c["id"].lower()}"><b>{c["id"]}</b>{c["title"]}</a>' for c in plan['cards'])+'</div>')
@@ -164,8 +173,9 @@ def main():
 '''
     outputs['handbook/01-overview.md']=overview
     outputs['handbook/site/overview.html']=shell('overview','兩天如何接起來','第一天看見可能，第二天學會穩定交付。',block(md(overview)))
-    home=block('''<div class="daymap"><div class="day d1"><h2>D1｜Vibe Coding 到 PRD</h2><p>三題體驗、選一題動手、補上下文比較，最後只交PRD。</p><a class="go" href="day1.html">開始第一天 →</a></div><div class="day d2"><h2>D2｜SDD 實作與驗收</h2><p>LeaveBot從空白開始：規格、Archify、測試、表單與資料庫。</p><a class="go" href="day2.html">開始第二天 →</a></div></div>''')
-    home+=block('<h2>現在需要什麼？</h2><div class="toc"><a href="setup.html">課前準備</a><a href="overview.html">兩天課表與分工</a><a href="prompts.html">當前任務提示詞</a><a href="troubleshooting.html">依症狀排解</a></div><p>講義與學生教材版本：'+plan['version']+'。<a href="'+BASE+'course/WORKFLOW.md">學生專案操作入口 →</a></p>')
+    home=block('''<div class="follow-guide"><h2>上課怎麼跟著做</h2><ol><li>看講師的 PPT，知道這一段要完成什麼。</li><li>在這份講義打開目前單元，照「現在做這件事」操作。</li><li>需要時展開提示詞，做完再依驗收條件打勾。</li></ol><p>初次上課先完成 <a href="setup.html">課前準備</a>，不用預先讀完整份教材。</p></div>''')
+    home+=block('''<div class="daymap"><div class="day d1"><h2>D1｜Vibe Coding 到 PRD</h2><p>在獨立資料夾體驗作品，選一題動手，最後留下 PRD。</p><a class="go" href="day1.html">開始第一天 →</a></div><div class="day d2"><h2>D2｜SDD 實作與驗收</h2><p>在 LeaveBot 學生專案操作，依 A–K 卡片完成表單與驗收。</p><a class="go" href="day2.html">開始第二天 →</a></div></div>''')
+    home+=block('<h2>需要時再看</h2><div class="toc"><a href="overview.html">兩天課表與分工</a><a href="prompts.html">當前任務提示詞</a><a href="troubleshooting.html">依症狀排解</a></div>'+disclosure('如何開啟這份講義','<p>下載講師提供的學生講義 ZIP，先完整解壓縮，再雙擊「開啟講義.html」。也可以直接開 handbook/site/index.html，不必啟動伺服器。請保留整個資料夾，圖片與腳本才會一起載入。</p><p>講義本體可以離線閱讀；使用 Agent、安裝工具與開啟外部網站仍需網路。第二天另取得 <a href="https://github.com/Zenobia000/leavebot-bootcamp">LeaveBot 學生專案</a>，程式寫在自己的專案，不寫進講義資料夾。</p>')+'<p>講義與學生教材版本：'+plan['version']+'。</p>')
     outputs['handbook/site/index.html']=shell('home','從做得出來，到交付得出去','兩天、14小時。先用Agent完成吸睛作品，再用規格與驗證完成一條真正接通的功能。',home)
 
     troubles='''# 問題排解：先看證據，再選下一步
@@ -206,6 +216,8 @@ def main():
         title,_,body=part.partition('\n');trouble_body+=block(disclosure(title,md(body)),chr(97+i))
     outputs['handbook/site/troubleshooting.html']=shell('trouble','卡住了，先找症狀','保留重現步驟、實際輸出與規格依據；做完一步就重新驗證。',trouble_body)
 
+    if not args.export_markdown:
+        outputs={path:text for path,text in outputs.items() if not path.endswith('.md')}
     changed=[]
     for path,text in outputs.items():
         target=ROOT/path

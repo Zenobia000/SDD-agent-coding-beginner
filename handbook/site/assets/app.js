@@ -25,7 +25,8 @@
     for (let parent = target.parentElement; parent; parent = parent.parentElement) {
       if (parent.tagName === 'DETAILS') parent.open = true;
     }
-    target.querySelectorAll(':scope > details').forEach(detail => { detail.open = true; });
+    if (target.tagName === 'DETAILS') target.open = true;
+    target.querySelectorAll(':scope > details, :scope > .wrap > details').forEach(detail => { detail.open = true; });
     requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
   }
   window.addEventListener('hashchange', revealTarget);
@@ -107,13 +108,37 @@
   });
 
   // ---- copy buttons ----
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (_) { /* file:// or browser permissions may block the Clipboard API. */ }
+    const focused = document.activeElement;
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.readOnly = true;
+    field.tabIndex = -1;
+    field.setAttribute('aria-hidden', 'true');
+    field.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+    document.body.appendChild(field);
+    try {
+      field.focus();
+      field.select();
+      return document.execCommand('copy');
+    } catch (_) {
+      return false;
+    } finally {
+      field.remove();
+      if (focused && typeof focused.focus === 'function') focused.focus({ preventScroll: true });
+    }
+  }
   document.querySelectorAll(".code, .prompt").forEach(block => {
     const btn = document.createElement("button");
     btn.type = "button"; btn.className = "copy"; btn.textContent = "複製";
     btn.addEventListener("click", async () => {
       const text = block.dataset.copy || [...block.childNodes].filter(n => n !== btn).map(n => n.textContent).join("");
-      try { await navigator.clipboard.writeText(text.trim()); btn.textContent = "已複製"; btn.classList.add("done"); }
-      catch (e) { btn.textContent = "請手動選取"; }
+      if (await copyText(text.trim())) { btn.textContent = "已複製"; btn.classList.add("done"); }
+      else { btn.textContent = "請手動選取"; }
       setTimeout(() => { btn.textContent = "複製"; btn.classList.remove("done"); }, 1600);
     });
     block.appendChild(btn);

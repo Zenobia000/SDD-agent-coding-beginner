@@ -19,7 +19,9 @@ class Page(HTMLParser):
 
 ap=argparse.ArgumentParser();ap.add_argument('--student-root',type=Path,default=ROOT.parent/'leavebot-bootcamp');args=ap.parse_args()
 subprocess.run([sys.executable,str(ROOT/'scripts/sync-course.py'),'--student-root',str(args.student_root),'--check'],check=True)
-pages={p:Page(p.read_text(encoding='utf-8')) for p in (ROOT/'handbook/site').glob('*.html')}
+html_files=list((ROOT/'handbook/site').glob('*.html'))
+html_files += [ROOT/'開啟講義.html', ROOT/'starter-kit/index.html']
+pages={p:Page(p.read_text(encoding='utf-8')) for p in html_files}
 problems=[]
 for path,page in pages.items():
     if len(page.ids)!=len(set(page.ids)):problems.append(f'duplicate IDs: {path}')
@@ -35,5 +37,7 @@ for u in plan['day2']['units']:
     if f'unit-{u["number"]}' not in pages[ROOT/'handbook/site/day2.html'].ids:problems.append(f'missing unit {u["number"]}')
 for c in plan['cards']:
     if 'card-'+c['id'].lower() not in pages[ROOT/'handbook/site/prompts.html'].ids:problems.append(f'missing card {c["id"]}')
+for ident in ['project','workflow','stack','rescue']:
+    if ident not in pages[ROOT/'handbook/site/day2.html'].ids:problems.append(f'missing HTML reference {ident}')
 if problems:raise SystemExit('\n'.join(problems))
 print(f'PASS: {len(pages)} pages, local assets/anchors and {len(plan["cards"])} prompt cards; version {plan["version"]}')
