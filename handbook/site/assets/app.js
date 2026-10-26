@@ -77,7 +77,7 @@
     main.appendChild(pager);
     const foot = document.createElement("footer");
     foot.className = "site";
-    foot.innerHTML = '<div class="wrap">SDD × AI Coding Agent 實戰營 · 桑尼資料科學 · 打勾的進度只存在你這台電腦的瀏覽器裡</div>';
+    foot.innerHTML = '<div class="wrap">© 2026 Sunny 桑尼 · 桑尼資料科學 · 原創教材保留著作權 · 學習進度僅儲存於你的瀏覽器</div>';
     document.body.appendChild(foot);
   }
 

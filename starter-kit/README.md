@@ -6,4 +6,6 @@
 
 版式與播放程式衍生自 [guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)，保留 AGPL-3.0 授權與原始出處，見 [skill-deck/LICENSE](skill-deck/LICENSE)。
 
+此簡報依檔案內既有 AGPL 聲明辦理，不套用原創課程教材的額外限制。Motion 動畫程式庫保留 [自身的 MIT 授權](skill-deck/assets/MOTION-LICENSE.txt)；完整範圍見 [第三方內容與授權說明](../THIRD-PARTY-NOTICES.md)。
+
 企業 AI 轉型簡報另作企業贈禮，不包含在公開教材與學生講義 ZIP。

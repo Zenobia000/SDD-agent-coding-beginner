@@ -1,58 +1,62 @@
-MIT License
+Sunny Data Science 桑尼資料科學 — 教材著作權與有限學習授權
+All Rights Reserved; Limited Personal Learning Permission
 
-Copyright (c) 2026 Zenobia000
+Copyright (c) 2026 Sunny 桑尼（Sunny Data Science／桑尼資料科學；GitHub: Zenobia000）
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+一、適用範圍
+本聲明適用於本版本中著作權人依法享有權利的原創課程文字、講義、
+課程編排、提示詞說明、原創視覺設計及其他原創教材。
+除本聲明明確允許，或另有書面授權、法定使用權利或既有有效授權外，
+相關權利均由各著作權人保留。本聲明不是對整個儲存庫的 MIT 授權。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+二、允許的學習使用
+合法取得教材的學習者，得為個人非商業學習、課堂操作與課後複習，
+閱讀、下載保存合理份數的副本，並於本機執行及修改練習所必要的範例。
+使用時應保留著作權與授權聲明；本授權不得轉授權。
+學員可將所學概念與方法運用於工作及自行創作的專案。本聲明不主張
+學員獨立創作成果的著作權；但不因此授權重製或再散布本教材本身。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+三、須先取得書面授權的使用
+未取得著作權人書面同意，不得就第一項所述原創教材進行下列使用：
+1. 全部或實質部分的公開轉載、重新上傳、散布、轉售或付費提供。
+2. 改作、翻譯、重新編排、製作衍生教材，供對外發布、授課、企業內訓、
+   其他教育服務或商業使用；免費授課亦須另行取得授權。
+3. 將教材編入課程平台、教材庫、商品、顧問服務或其他供第三人使用的產品。
+4. 移除來源、冒稱作者、換名發布，或暗示獲得 Sunny／桑尼資料科學背書。
+法律明定無須取得同意的利用，以及另有有效授權的情形，不受本項限制。
 
-## Attribution
+四、品牌與人格權
+本聲明不授予 Sunny、桑尼資料科學、Sunny Data Science 的名稱、標誌、
+肖像或其他品牌識別之商標、代言或宣傳授權。
+依法受保護的署名、作品完整性及其他著作人格權，仍由權利人保有。
 
-This repository incorporates the following components:
+五、GitHub 平台與法定權利
+公開可見不等於授予任意商業使用或再授課的權利。本聲明不排除 GitHub
+平台條款所要求的瀏覽與站內 fork 權利，也不限制法律不得排除的權利。
 
-### Agent Customization Harnesses
-The teaching material and its working harness live on the `antigravity` and
-`claude` branches, under .agents/ and .claude/ respectively. This branch
-carries only navigation and the shared Git hooks.
+六、第三方與另行授權的內容
+第三方程式庫、字體、商標、網站截圖與另有授權的檔案，不適用於第三項
+的額外限制；各自依其原有授權或權利狀態辦理。
+特別是 starter-kit/skill-deck/index.html 已標示依 AGPL-3.0 散布，相關
+衍生內容依該授權辦理。本聲明不得用來限制 AGPL 所授予的權利。
+Motion 等第三方元件的 MIT 授權聲明亦應保留。
+詳細範圍見 THIRD-PARTY-NOTICES.md 與各檔案附帶的授權。
 
-### Linus Development Philosophy
-The development principles and technical debt prevention strategies
-are inspired by Linus Torvalds' development philosophy.
+七、既有版本與先前授權
+本次授權調整不撤回使用者就過往已合法取得版本所享有的有效授權，
+也不把第三方或其他權利人的內容變更為本人的專有著作。
+先前以 MIT 發布的內容，仍可能依該版本的授權被使用；歷史授權文字
+保留於 LICENSES/LEGACY-MIT.txt。本版本新增或修訂的原創內容依本聲明辦理。
 
-## Usage Rights
+八、教材性質
+案例、公司名稱與情境如標示為教學假設，僅供練習。教材不構成對
+學習成果、特定工具可用性或正式上線系統適用性的保證。
 
-You are free to:
-- Use this template for personal and commercial projects
-- Modify and customize the template according to your needs
-- Distribute modified versions of the template
-- Create derivative works based on this template
+九、授權洽詢
+課程重製、企業內訓、教材改作或其他使用授權，請先聯絡：
+Sunny Data Science 桑尼資料科學
+網站：https://sunnydatascience.com/
+Email：sunne.commercial@gmail.com
+LINE：https://line.me/R/ti/p/%40055zjitb
 
-## Attribution Requirements
-
-When using this template, please consider:
-- Keeping this LICENSE file in derivative works
-- Acknowledging the template source in your project documentation
-- Contributing improvements back to the template community (optional but appreciated)
-
-## Disclaimer
-
-This template is provided for educational and productivity purposes.
-Users are responsible for:
-- Ensuring compliance with their organization's development policies
-- Properly configuring API keys and security settings
-- Maintaining the security and integrity of their projects
-- Following applicable laws and regulations in their jurisdiction
+除另行明確書面約定外，不授予超出上述學習範圍的使用權。
