@@ -22,11 +22,11 @@ git branch -r</pre>
 <p>Windows 的 <code>.agents/skills</code> 需要符號連結權限。使用 Codex 前確認該路徑連到 <code>../.claude/skills</code>，不是只有路徑文字的普通檔案；若 clone 前未啟用連結，請講師協助重建連結。不要刪除已有學生成果重 clone。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>4．套件預熱（不建立 app）</summary><div><p>可在 LeaveBot 根目錄先建未追蹤的 <code>.venv</code>，下載主線套件：</p>
 <p>macOS/Linux：</p>
 <pre class="code">python3 -m venv .venv
-.venv/bin/python -m pip install -c course/constraints.txt fastapi uvicorn httpx pytest
+.venv/bin/python -m pip install -c course/01-上課/05-constraints.txt fastapi uvicorn httpx pytest
 .venv/bin/python -c &quot;import fastapi, uvicorn, httpx, pytest; print(&#x27;ok&#x27;)&quot;</pre>
 <p>Windows PowerShell：</p>
 <pre class="code">py -3.12 -m venv .venv
-.venv\Scripts\python.exe -m pip install -c course/constraints.txt fastapi uvicorn httpx pytest
+.venv\Scripts\python.exe -m pip install -c course/01-上課/05-constraints.txt fastapi uvicorn httpx pytest
 .venv\Scripts\python.exe -c &quot;import fastapi, uvicorn, httpx, pytest; print(&#x27;ok&#x27;)&quot;</pre>
 <p>第二天生成 <code>pyproject.toml</code> 後，再依 STACK 安裝 <code>-e &quot;.[dev]&quot;</code>。不需先產業務程式，也不需要刪除 venv。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>5．開場連線檢查</summary><div><p>從 repo 根目錄打開工具，讀 <code>AGENTS.md</code> 與 <a href="day2.html#workflow">WORKFLOW</a>。用 <code>/compass</code>（Codex：<code>$compass</code>）要求建議下一步、所讀資料及產出；確認它依本課路線回答，而非只數技能。</p>
 <p>有 Node 的人先跑：</p>

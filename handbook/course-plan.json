@@ -109,10 +109,10 @@
       "id": "A",
       "title": "需求訪談與 Brief",
       "skill": "grill-with-docs",
-      "file": "course/prompts/A.md",
+      "file": "course/01-上課/prompts/01-A.md",
       "inputs": [
-        "course/WORKFLOW.md",
-        "course/LEAVEBOT.md"
+        "course/01-上課/02-WORKFLOW.md",
+        "course/01-上課/03-LEAVEBOT.md"
       ],
       "outputs": [
         "docs/01-brief.md"
@@ -122,10 +122,10 @@
       "id": "B",
       "title": "寫成最小 PRD",
       "skill": "to-spec",
-      "file": "course/prompts/B.md",
+      "file": "course/01-上課/prompts/02-B.md",
       "inputs": [
         "docs/01-brief.md",
-        "course/templates/02-prd.md"
+        "course/01-上課/templates/02-prd.md"
       ],
       "outputs": [
         "docs/02-prd.md"
@@ -135,10 +135,10 @@
       "id": "C",
       "title": "從 AC 到系統規則",
       "skill": "to-spec",
-      "file": "course/prompts/C.md",
+      "file": "course/01-上課/prompts/03-C.md",
       "inputs": [
         "docs/02-prd.md",
-        "course/templates/03-srs.md"
+        "course/01-上課/templates/03-srs.md"
       ],
       "outputs": [
         "docs/03-srs.md"
@@ -148,7 +148,7 @@
       "id": "D",
       "title": "用 Archify 檢查流程",
       "skill": "archify",
-      "file": "course/prompts/D.md",
+      "file": "course/01-上課/prompts/04-D.md",
       "inputs": [
         "docs/03-srs.md"
       ],
@@ -160,11 +160,11 @@
       "id": "E",
       "title": "最小 SAD 與 SDS",
       "skill": "to-architecture",
-      "file": "course/prompts/E.md",
+      "file": "course/01-上課/prompts/05-E.md",
       "inputs": [
         "docs/02-prd.md",
         "docs/03-srs.md",
-        "course/STACK.md"
+        "course/01-上課/04-STACK.md"
       ],
       "outputs": [
         "docs/04-sad.md",
@@ -175,7 +175,7 @@
       "id": "F",
       "title": "測試計畫與人工預期結果",
       "skill": "to-test-plan",
-      "file": "course/prompts/F.md",
+      "file": "course/01-上課/prompts/06-F.md",
       "inputs": [
         "docs/02-prd.md",
         "docs/03-srs.md",
@@ -189,11 +189,11 @@
       "id": "G",
       "title": "拆骨架與表單兩張票",
       "skill": "to-tickets",
-      "file": "course/prompts/G.md",
+      "file": "course/01-上課/prompts/07-G.md",
       "inputs": [
         "docs/05-sds.md",
         "docs/06-test-plan.md",
-        "course/WORKFLOW.md"
+        "course/01-上課/02-WORKFLOW.md"
       ],
       "outputs": [
         "issues/000-skeleton.md",
@@ -204,11 +204,11 @@
       "id": "H",
       "title": "一張票一個對話，逐個行為實作",
       "skill": "implement",
-      "file": "course/prompts/H.md",
+      "file": "course/01-上課/prompts/08-H.md",
       "inputs": [
         "issues/000-skeleton.md",
         "issues/001-submit-leave.md",
-        "course/STACK.md"
+        "course/01-上課/04-STACK.md"
       ],
       "outputs": [
         "backend/",
@@ -220,7 +220,7 @@
       "id": "I",
       "title": "有證據的除錯",
       "skill": "diagnosing-bugs",
-      "file": "course/prompts/I.md",
+      "file": "course/01-上課/prompts/09-I.md",
       "inputs": [
         "docs/06-test-plan.md"
       ],
@@ -232,7 +232,7 @@
       "id": "J",
       "title": "變更需求先分析影響",
       "skill": "grill-with-docs",
-      "file": "course/prompts/J.md",
+      "file": "course/01-上課/prompts/10-J.md",
       "inputs": [
         "docs/02-prd.md",
         "docs/03-srs.md",
@@ -251,7 +251,7 @@
       "id": "K",
       "title": "交付檢查與操作展示",
       "skill": "code-review",
-      "file": "course/prompts/K.md",
+      "file": "course/01-上課/prompts/11-K.md",
       "inputs": [
         "docs/06-test-plan.md",
         "issues/"

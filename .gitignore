@@ -29,6 +29,7 @@ tmp/
 /class_plan/
 /output/
 /封存/
+/上課資料包/
 /handbook/slides/
 
 # Markdown 匯出副本不是學員入口；保留同步工具真正讀取的來源。

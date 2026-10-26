@@ -33,13 +33,13 @@
 <tr><td>C4</td><td>一句話解析成表單草稿</td><td>額外模型 API key、六種假別與 <code>fixtures/README.md</code> 的解析合約；先預覽、驗證後才送出</td></tr>
 <tr><td>C5</td><td>模型輸入防護與評測</td><td>以 C4 為前提，固定句子集與比較規則；模型不可核准或決定天數</td></tr>
 </table></div>
-<p><code>course/fixtures/</code> 只用於 C4/C5。其六種假別比主線多，挑戰票必須同步擴充 SRS/SDS 與表單，不可直接套上後宣稱相容。</p>
+<p><code>course/02-補充/fixtures/</code> 只用於 C4/C5。其六種假別比主線多，挑戰票必須同步擴充 SRS/SDS 與表單，不可直接套上後宣稱相容。</p>
 <h3>交付</h3>
 <p>一份小而完整的 <code>docs/01</code>–<code>06</code>、兩張主線票、一條可跑的表單功能、測試與人工驗收證據。至少親手核對一條「AC → FR → API → TC → 測試結果」。技術邊界見 <a href="day2.html#stack">STACK</a>，步驟見 <a href="day2.html#workflow">WORKFLOW</a>。</p></div></details></div></section><section class="block" id="workflow"><div class="wrap"><details class="more"><summary>今天的技能路線與對話節奏</summary><div><h2>WORKFLOW — 第二天從空白到交付</h2>
 <p>這份是本課操作入口；通用 skills 本身不固定課表、檔數或票數。本課版本：2026.10-unified-1。</p>
 <p>第一天在獨立資料夾做三題體驗、選一題實作、比較提示詞／上下文，最後只交該作品 PRD。第二天用 LeaveBot 重新練習相同方法，不沿用昨天作品的功能。</p>
 <h3>開場（在 repo 根目錄）</h3>
-<pre class="code">只讀 AGENTS.md、course/WORKFLOW.md、course/LEAVEBOT.md。
+<pre class="code">只讀 AGENTS.md、course/01-上課/02-WORKFLOW.md、course/01-上課/03-LEAVEBOT.md。
 說明本課基本範圍、現在資料夾已有的成果與下一個動作。不要修改檔案。</pre>
 <p>接著使用 <code>/compass</code>（Codex：<code>$compass</code>），附上「依 WORKFLOW 建議現在第一步及其輸入、產出」。確認它能讀課程與辨識技能；不要把技能清單當唯一通過訊號。</p>
 <h3>今天依序做</h3>
@@ -108,12 +108,12 @@ git switch -c rescue-cp2 upstream/cp2-design</pre>
 <h3>安裝與執行（repo 根目錄）</h3>
 <p>macOS / Linux：</p>
 <pre class="code">python3 -m venv .venv
-.venv/bin/python -m pip install -c course/constraints.txt -e &quot;.[dev]&quot;
+.venv/bin/python -m pip install -c course/01-上課/05-constraints.txt -e &quot;.[dev]&quot;
 .venv/bin/python -m uvicorn app.main:app --app-dir backend --reload
 .venv/bin/python -m pytest</pre>
 <p>Windows PowerShell（啟動與測試分別在兩個終端機）：</p>
 <pre class="code">py -3.12 -m venv .venv
-.venv\Scripts\python.exe -m pip install -c course/constraints.txt -e &quot;.[dev]&quot;
+.venv\Scripts\python.exe -m pip install -c course/01-上課/05-constraints.txt -e &quot;.[dev]&quot;
 .venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --reload
 .venv\Scripts\python.exe -m pytest</pre>
 <p>瀏覽器開 <code>http://127.0.0.1:8000/</code>。port 被占用加 <code>--port 8001</code>。Ctrl+C 停止後重啟一次，確認能再開。</p>
@@ -128,7 +128,7 @@ git switch -c rescue-cp2 upstream/cp2-design</pre>
 </ul>
 <h3>C4/C5 才適用</h3>
 <p>先建立挑戰票與更新規格，再加入 Anthropic SDK 選用依賴及必要的環境載入方式。金鑰只存在環境或未追蹤 <code>.env</code>，模型名稱明確設定並記錄實測版本；不把 Agent CLI 當後端。</p>
-<p>模型輸出是草稿，經 schema 與程式規則驗證，使用者確認後才送出。一般測試使用 deterministic fake，真正模型 eval 分開執行。解析合約與 fixture 的 <code>today</code>、六種假別、比對規則見 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/fixtures/README.md">fixtures/README.md</a>；規劃寫入 06 的選用區。</p>
+<p>模型輸出是草稿，經 schema 與程式規則驗證，使用者確認後才送出。一般測試使用 deterministic fake，真正模型 eval 分開執行。解析合約與 fixture 的 <code>today</code>、六種假別、比對規則見 <a href="https://github.com/Zenobia000/leavebot-bootcamp/blob/main/course/02-補充/fixtures/README.md">fixtures/README.md</a>；規劃寫入 06 的選用區。</p>
 <h3>已驗證的套件組合</h3>
-<p><code>course/constraints.txt</code>記錄2026-10-25在Windows／Python3.12.9實際通過20項參考測試的版本。安裝時以 <code>-c</code> 套用；它不是新的套件白名單。其他平台與Agent仍須課前試跑。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>完成主線後：延伸挑戰</summary><div><p>C1主管核准、C2額度、C3人數提醒、C4一句話解析、C5模型防護與評測。先更新需求再排挑戰票；API key與六種假別只在C4/C5適用。<a href="#project">看完整範圍 →</a></p></div></details></div></section>
+<p><code>course/01-上課/05-constraints.txt</code>記錄2026-10-25在Windows／Python3.12.9實際通過20項參考測試的版本。安裝時以 <code>-c</code> 套用；它不是新的套件白名單。其他平台與Agent仍須課前試跑。</p></div></details></div></section><section class="block"><div class="wrap"><details class="more"><summary>完成主線後：延伸挑戰</summary><div><p>C1主管核准、C2額度、C3人數提醒、C4一句話解析、C5模型防護與評測。先更新需求再排挑戰票；API key與六種假別只在C4/C5適用。<a href="#project">看完整範圍 →</a></p></div></details></div></section>
 </main><script src="assets/app.js"></script></body></html>

@@ -1,47 +1,45 @@
 # Vibe Coding × SDD × AI 開發實戰營
 
-**上課看 PPT 跟講解，實作跟著 HTML 講義做。學生只需要一個講義入口。**
+**講師用 PPT 帶講解，學生跟 HTML 做操作。**
+
+本機授課統一開 `上課資料包/00-開始這裡.html`，不用再找其他資料夾。此包包含行前檢核、五分鐘導讀、PPT 頁碼對照、學生 HTML 講義、兩份企業贈禮與發放 ZIP；完整複製到授課電腦即可。
+
+## 哪些和上課有關
+
+| 位置 | 用途 |
+|---|---|
+| `上課資料包/` | 講師實際帶進教室的一包檔案，本機保存、不納入 Git |
+| [handbook/site/index.html](handbook/site/index.html) | 學生 HTML 講義來源，保留公開版與必要素材 |
+| [starter-kit/index.html](starter-kit/index.html) | 課後企業贈禮，保留兩份完整簡報 |
+| `封存/2026-10-26_課程整理/` | 舊備課、粗剪 PDF、舊簡報、研究草稿與維護工具；原位置與去向見整理清單 CSV |
+
+`class_plan`、`output`、`scripts` 與根目錄重複的「開啟講義.html」已移至封存。上課只開資料包入口，不需要操作封存。
 
 ## 學生怎麼開啟
 
-1. 下載講師提供的「學生講義 ZIP」，或下載此專案的 ZIP。
-2. **先完整解壓縮**，再雙擊根目錄的 **[開啟講義.html](開啟講義.html)**。
-3. 初次上課先看「課前準備」，之後依講師進度進入「第一天」或「第二天」。
+1. 收到「學生講義.zip」後，先完整解壓縮。
+2. 雙擊 ZIP 解壓後的「開啟講義.html」。
+3. 初次上課先看課前準備，之後跟著講師進入當前單元，按需展開提示詞與驗收。
 
-講義可以直接用瀏覽器閱讀，不必啟動伺服器、安裝套件或開 Markdown。請保留 `handbook/site/` 的完整結構，圖片與功能才會一起載入。GitHub 檔案頁顯示的是 HTML 原始碼，請下載、解壓後開啟。
+若下載的是此 GitHub 專案 ZIP，解壓後直接開 `handbook/site/index.html`。講義不用啟動伺服器；Agent、安裝下載與外部連結仍需要網路。
 
-| 上課材料 | 用法 |
-|---|---|
-| 雙日主講 PPTX | 講師投影，說明目標與示範 |
-| HTML handbook | 學生看當前任務、展開提示詞、操作與勾選驗收 |
-| [LeaveBot 學生專案](https://github.com/Zenobia000/leavebot-bootcamp) | 第二天 fork `main`，在自己的專案實作 |
-
-第一天在獨立資料夾體驗作品，最後留下簡版 PRD。第二天換共同題目 LeaveBot，以規格與測試完成表單、驗證、SQLite 與我的假單。只需閱讀目前單元，提示詞與補充說明需要時再展開。
+第一天在獨立資料夾體驗作品，最後留下簡版 PRD；第二天 fork [LeaveBot 學生專案](https://github.com/Zenobia000/leavebot-bootcamp) 的 main，依 A–K 卡片完成表單、驗證、SQLite 與我的假單。
 
 ## 企業贈禮
 
-兩份 HTML 簡報另放在 **[企業贈禮入口](starter-kit/index.html)**，不影響學生上課順序。下載後可直接以瀏覽器開啟。
+[企業贈禮入口](starter-kit/index.html)包含「企業 AI 轉型啟動指南」與「從 Agent 到模組化 Skill」兩份簡報，課後另發企業贈禮 ZIP。原始素材與各自 LICENSE 均保留。
 
 <details>
-<summary>維護者：哪些上傳、哪些留在本機</summary>
+<summary>本機維護與重新打包</summary>
 
-| 保留在 Git | 用途 |
-|---|---|
-| `開啟講義.html`、`handbook/site/` | 學生入口、實作講義與必要圖片、腳本 |
-| `handbook/d1-prompts.md`、`course-*.json`、`scripts/` | 維護、同步、檢查及打包網站 |
-| `starter-kit/deck/`、`starter-kit/skill-deck/` | 企業贈禮，保留各自的素材與 LICENSE |
-| README、LICENSE、Git 設定 | 使用說明與版本管理 |
-
-`class_plan/`、`output/`、`封存/`、`handbook/slides/`、Markdown 匯出副本，以及企業啟動包的研究／報告／工具草稿均留在本機，不進公開版本。PPTX 與 PDF 另外交付，不放進學生操作專案。
-
-網站維護方式見 [handbook/README.md](handbook/README.md)。產出兩個互相獨立的發放包：
+工具已放進本機封存的 `09-教材維護/scripts/`，可從專案根目錄執行：
 
 ```bash
-python scripts/package-materials.py
+python 封存/2026-10-26_課程整理/09-教材維護/scripts/prepare-class.py
 ```
 
-學生包只含講義網站。企業包只含兩份贈禮簡報與相關授權。ZIP 產出到已忽略的 `dist/`。
+此指令沿用上課資料包的最新版 44 頁 PPTX，更新 HTML 講義、導讀與兩個發放 ZIP。維護來源與同步說明見 [handbook/README.md](handbook/README.md)。
 
-`.gitignore` 只影響未追蹤檔案。已上傳過的檔案還要取消 Git 追蹤，才會從下一個版本移除；歷史提交仍保留。
+封存、授課包、PPTX 與 PDF 不納入 Git。已取消追蹤的內容仍存在歷史提交，這次整理沒有改寫歷史。
 
 </details>
