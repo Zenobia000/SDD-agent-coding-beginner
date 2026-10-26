@@ -38,11 +38,9 @@ tmp/
 !/handbook/d1-prompts.md
 /handbook/appendix/
 
-# 企業贈禮只發布這兩份 HTML 簡報與各自的素材、授權。
+# 學生 Skill 簡報公開；企業 deck 與贈禮入口僅留本機。
 /starter-kit/*
 !/starter-kit/README.md
-!/starter-kit/index.html
-!/starter-kit/deck/
 !/starter-kit/skill-deck/
 
 # 本機 Agent 工作紀錄與異常轉儲

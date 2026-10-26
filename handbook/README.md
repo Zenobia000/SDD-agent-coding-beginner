@@ -1,6 +1,6 @@
 # HTML 講義
 
-學生請在解壓後雙擊根目錄的 學生 ZIP 內的「開啟講義.html」，或直接打開 [site/index.html](site/index.html)。講師以 PPT 帶節奏，學生依 HTML 的當前單元操作，提示詞與補充內容按需展開。
+學生請在完整解壓後雙擊學生 ZIP 內的「開啟講義.html」，或直接打開 [site/index.html](site/index.html)。講師以 PPT 帶節奏，學生依 HTML 的當前單元操作，提示詞與補充內容按需展開。
 
 以下是網站維護說明，學生不需執行。
 
@@ -30,3 +30,5 @@ python 封存/2026-10-26_課程整理/09-教材維護/scripts/check-handbook.py 
 企業贈禮另外打包，不混進學生講義。講師 PPTX、粗剪 PDF、備課稿、舊圖片投影片與產檔暫存均在 Git 之外保存。
 
 講師需要把上課檔案帶到另一台電腦時，執行 `python 封存/2026-10-26_課程整理/09-教材維護/scripts/prepare-class.py`，使用根目錄的 `上課資料包/`。這個包有獨立的 HTML 導讀，不需要攜帶教材維護來源或封存。
+
+學生公開的 Skill Deck 位於 `../starter-kit/skill-deck/`，可從講義首頁「課後補充」進入，學生 ZIP 也包含同一份簡報。企業 Deck 只在本機企業贈禮包內，不公開、不放入學生包。
