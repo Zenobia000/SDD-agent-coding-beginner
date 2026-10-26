@@ -50,7 +50,7 @@ AI 讓更多人有機會親手做出網站、互動體驗與工作工具。接�
 | [HTML 實作講義](handbook/site/index.html) | 回看各階段任務、操作步驟與驗收條件 |
 | [提示詞與任務卡](handbook/site/prompts.html) | 練習交代上下文、限制與當前產出 |
 | [四題測試與播放器素材](handbook/site/day1.html#demo-lab) | 取得固定初始指令、追加時點、Apple Music 參考圖與指定封面資料 |
-| [Harness 概念短片](handbook/site/assets/media/harness-overview-60s.mp4) | 60 秒、無旁白，搭配上下文、工具、權限與執行回饋的解說 |
+| [Harness 講座：AI Engineer](https://www.youtube.com/watch?v=C_GG5g38vLU&t=180s) | Tejas Kumar（IBM）主講，全長 20:26；課堂建議播放 03:00–05:59，認識 Harness 定義與構成 |
 | [問題排解手冊](handbook/site/troubleshooting.html) | 遇到困難時，先留下證據，再選下一個動作 |
 | [LeaveBot 學生專案](https://github.com/Zenobia000/leavebot-bootcamp) | 從空白起點重新練習，搭配課堂 Checkpoint 比對進度 |
 | [從 Agent 到模組化 Skill](starter-kit/skill-deck/index.html) | 理解如何將工作方法整理成可重用的技能 |
