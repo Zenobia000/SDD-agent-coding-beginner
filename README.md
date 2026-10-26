@@ -2,6 +2,13 @@
 
 **把想法做成作品，建立能帶回工作現場的 AI 開發能力。**
 
+## 上課教材
+
+- [正式版學生教材 PDF（64 頁）](materials/SDD_AI_Coding_Agent_企業內訓_學生教材.pdf)：供課堂閱讀與課後複習。
+- [下載配套操作講義與素材 ZIP](https://github.com/Zenobia000/SDD-agent-coding-beginner/archive/7216711856e2ba56a0e25e2b804b71bce8aab5b2.zip)：包含四題能力測試、音樂播放器素材與第二天的實作講義。
+
+將 ZIP 完整解壓後，以瀏覽器開啟 `handbook/site/index.html`，依投影片標示的單元進行實作。PDF 中的講義連結會回到本節，影片與其他外部網站可直接點選。
+
 AI 讓更多人有機會親手做出網站、互動體驗與工作工具。接下來的挑戰，是把需求說清楚、判斷結果是否正確，並在想法改變時，知道如何繼續修改。
 
 這是 **Sunny Data Science 桑尼資料科學**為開發入門者設計的兩天工作坊。我們從一個看得見的作品開始，帶你練習與 Coding Agent 協作，再用規格驅動開發（Specification-Driven Development，SDD）把需求、實作與驗收接起來。你會在實際操作中，逐步建立自己的開發與判斷方法。

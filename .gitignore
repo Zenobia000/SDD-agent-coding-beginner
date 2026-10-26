@@ -24,6 +24,7 @@ tmp/
 # 本機大型簡報原檔
 *.pptx
 *.pdf
+!/materials/SDD_AI_Coding_Agent_企業內訓_學生教材.pdf
 
 # 授課備課、粗剪、產檔與封存；本機保留，公開版只放學員會用的內容。
 /class_plan/
