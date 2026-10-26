@@ -1,0 +1,76 @@
+{
+  "generator": "Built-in image_gen",
+  "purpose": "14 course unit illustrations; title and time are editable text outside each image",
+  "assets": [
+    {
+      "unit": 1,
+      "file": "unit-01.png",
+      "prompt": "Create one editorial illustration for chapter 01 of a premium Traditional Chinese AI coding workshop slide deck. IMAGE ONLY, NO TEXT, NO LETTERS, NO NUMBERS, NO LOGOS. Landscape 16:9. Warm ivory textured paper background (#f3f0e8), fine black ink engraving, restrained antique bronze accent, sophisticated cut-paper collage, quiet negative space. All illustrated objects arranged entirely in the RIGHT 45 percent of the frame; LEFT 55 percent completely empty ivory paper for editable slide text added later. Subject: a small mechanical assistant at a desk opens a project folder, creates a browser page, and a human hand checks the result; represent reading files, producing an artifact, testing it. A clear single focal composition, not cards or infographic boxes. High quality editorial print illustration, consistent black and cream palette."
+    },
+    {
+      "unit": 2,
+      "file": "unit-02.png",
+      "prompt": "Create ONE editorial chapter illustration for a premium AI coding workshop. Landscape 16:9. IMAGE ONLY: no text, letters, numbers, logos or labels. Warm ivory textured paper (#f3f0e8), precise black ink engraving, restrained antique bronze accents, sophisticated cut-paper collage. LEFT 55% completely empty ivory paper for editable slide typography. Entire subject confined to RIGHT 45%, with comfortable margins. One clear editorial composition, no infographic panels, no card grid. A terminal window and an open folder on a clean desk, with a small browser window beside it; a hand places one project file in its own separate folder. Theme: learning coding agent basics in an independent practice workspace."
+    },
+    {
+      "unit": 3,
+      "file": "unit-03.png",
+      "prompt": "Create ONE editorial chapter illustration for a premium AI coding workshop. Landscape 16:9. IMAGE ONLY: no text, letters, numbers, logos or labels. Warm ivory textured paper (#f3f0e8), precise black ink engraving, restrained antique bronze accents, sophisticated cut-paper collage. LEFT 55% completely empty ivory paper for editable slide typography. Entire subject confined to RIGHT 45%, with comfortable margins. One clear editorial composition, no infographic panels, no card grid. Three small exhibition objects arranged as a cohesive tabletop still life: a miniature browser storefront, a mystical tarot card with gold star illustration, and a curled film strip showing a moving moon. Theme: website imitation, tarot interaction, scrolling animation demos."
+    },
+    {
+      "unit": 4,
+      "file": "unit-04.png",
+      "prompt": "Create ONE editorial chapter illustration for a premium AI coding workshop. Landscape 16:9. IMAGE ONLY: no text, letters, numbers, logos or labels. Warm ivory textured paper (#f3f0e8), precise black ink engraving, restrained antique bronze accents, sophisticated cut-paper collage. LEFT 55% completely empty ivory paper for editable slide typography. Entire subject confined to RIGHT 45%, with comfortable margins. One clear editorial composition, no infographic panels, no card grid. A single handwritten note with abstract illegible strokes feeds into a mechanical assistant, producing one miniature website on a monitor; a first draft sheet rests on the desk. Theme: one prompt, one first version, hands-on creation."
+    },
+    {
+      "unit": 5,
+      "file": "unit-05.png",
+      "prompt": "One premium editorial chapter illustration for a coding workshop. Landscape 16:9. No readable text, no letters, no digits, no logos. Ivory textured paper, black ink etching and a few antique bronze highlights, elegant tactile paper collage. Left 58 percent blank paper. All objects confined to right 42 percent, one cohesive still life, with generous margins, no infographic panels. Two versions of the same small browser page sit side by side on a desk, one simple and one refined; a reference photograph and extra project documents explain the change. Theme: adding context and comparing the second result."
+    },
+    {
+      "unit": 6,
+      "file": "unit-06.png",
+      "prompt": "One premium editorial chapter illustration for a coding workshop. Landscape 16:9. No readable text, no letters, no digits, no logos. Ivory textured paper, black ink etching and a few antique bronze highlights, elegant tactile paper collage. Left 58 percent blank paper. All objects confined to right 42 percent, one cohesive still life, with generous margins, no infographic panels. A human magnifying glass over a small browser page, a tiny broken gear being repaired, a test checklist with empty squares, one check stamp. Theme: operate the result, reproduce a problem, repair and verify."
+    },
+    {
+      "unit": 7,
+      "file": "unit-07.png",
+      "prompt": "One premium editorial chapter illustration for a coding workshop. Landscape 16:9. No readable text, no letters, no digits, no logos. Ivory textured paper, black ink etching and a few antique bronze highlights, elegant tactile paper collage. Left 58 percent blank paper. All objects confined to right 42 percent, one cohesive still life, with generous margins, no infographic panels. A tidy product requirements manuscript with illegible short strokes and a simple flow sketch, a fountain pen, a folded prototype page and a human hand reviewing decisions. Theme: turning a tested idea into a PRD draft."
+    },
+    {
+      "unit": 8,
+      "file": "unit-08.png",
+      "prompt": "Create one refined editorial illustration for a chapter cover of an AI development workshop. Wide 16:9 composition. No text, no letters, numbers, words, logos or labels. Ivory paper texture, fine black ink engraving, cut-paper collage with restrained antique bronze details. Entire illustrated subject on the far RIGHT 42 percent; LEFT 58 percent completely empty paper. One meaningful still life, no panels or card grid. Two human hands agree on a small leave request form beside a desk calendar and a project folder; a small assistant listens in the background. Theme: enterprise requirements interview, deciding the problem and project scope."
+    },
+    {
+      "unit": 9,
+      "file": "unit-09.png",
+      "prompt": "Create one refined editorial illustration for a chapter cover of an AI development workshop. Wide 16:9 composition. No text, no letters, numbers, words, logos or labels. Ivory paper texture, fine black ink engraving, cut-paper collage with restrained antique bronze details. Entire illustrated subject on the far RIGHT 42 percent; LEFT 58 percent completely empty paper. One meaningful still life, no panels or card grid. Two neatly aligned specification manuscripts resting on an open folder, one with a human-centered storyboard sketch, the other with precise small rule marks and checkboxes; no legible writing. Theme: shared PRD and SRS requirements."
+    },
+    {
+      "unit": 10,
+      "file": "unit-10.png",
+      "prompt": "Create one refined editorial illustration for a chapter cover of an AI development workshop. Wide 16:9 composition. No text, no letters, numbers, words, logos or labels. Ivory paper texture, fine black ink engraving, cut-paper collage with restrained antique bronze details. Entire illustrated subject on the far RIGHT 42 percent; LEFT 58 percent completely empty paper. One meaningful still life, no panels or card grid. An architect's drafting desk with a simple system blueprint, a browser miniature, small server blocks and a database cylinder as physical desk models, joined by thin threads. Theme: checking workflow and minimal system architecture."
+    },
+    {
+      "unit": 11,
+      "file": "unit-11.png",
+      "prompt": "Create one refined editorial illustration for a chapter cover of an AI development workshop. Wide 16:9 composition. No text, no letters, numbers, words, logos or labels. Ivory paper texture, fine black ink engraving, cut-paper collage with restrained antique bronze details. Entire illustrated subject on the far RIGHT 42 percent; LEFT 58 percent completely empty paper. One meaningful still life, no panels or card grid. A balance scale weighs an expected result against a small completed form, beside test case sheets and exactly two work ticket slips, no legible writing. Theme: people define expected results and split two implementation tickets."
+    },
+    {
+      "unit": 12,
+      "file": "unit-12.png",
+      "prompt": "One elegant editorial illustration for a coding workshop chapter cover, 16:9 landscape. No readable words, no letters, no numbers, no logos. Warm ivory paper, precise black ink engraving, tactile cut-paper collage with subtle antique bronze highlights. LEFT 58% entirely empty ivory paper, all subject matter confined to the RIGHT 42%. One cohesive object composition, no UI panels or infographic boxes. An architectural framework grows into a small working leave-request web form on a monitor, connected physically to a tiny server and stacked database discs, with a human hand placing the last component. Theme: implement one complete working feature from a blank skeleton."
+    },
+    {
+      "unit": 13,
+      "file": "unit-13.png",
+      "prompt": "One elegant editorial illustration for a coding workshop chapter cover, 16:9 landscape. No readable words, no letters, no numbers, no logos. Warm ivory paper, precise black ink engraving, tactile cut-paper collage with subtle antique bronze highlights. LEFT 58% entirely empty ivory paper, all subject matter confined to the RIGHT 42%. One cohesive object composition, no UI panels or infographic boxes. A human uses a jeweller's magnifying glass and screwdriver to repair a cracked small gear inside a miniature monitor; beside it is a revised specification sheet and a small brass check stamp. Theme: reproduce a bug, fix it, then handle a controlled requirements change."
+    },
+    {
+      "unit": 14,
+      "file": "unit-14.png",
+      "prompt": "One elegant editorial illustration for a coding workshop chapter cover, 16:9 landscape. No readable words, no letters, no numbers, no logos. Warm ivory paper, precise black ink engraving, tactile cut-paper collage with subtle antique bronze highlights. LEFT 58% entirely empty ivory paper, all subject matter confined to the RIGHT 42%. One cohesive object composition, no UI panels or infographic boxes. An open delivery box holding a neatly bound project notebook, a small functioning browser monitor, a test checklist and a sealed version tag without lettering; two human hands pass it to one another. Theme: verified handover and honest delivery."
+    }
+  ]
+}

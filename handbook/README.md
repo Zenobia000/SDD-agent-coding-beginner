@@ -6,7 +6,7 @@
 
 ## 來源與同步
 
-- `site/day1.html`：第一天的單元、三題完整 Demo 與 Reference，目前直接維護此頁。
+- `site/day1.html`：第一天的單元、四題初始與追加提示詞、固定播放器素材及驗收方式。由 `d1-challenges.json`、`unit-map.json` 與維護腳本產生。
 - `d1-prompts.md`：第一天的通用補充提示詞，是同步工具的必要輸入。
 - 第二天與課前準備：讀取相鄰 `leavebot-bootcamp/course/01-上課/` 的 `01-SETUP.md`、`02-WORKFLOW.md`、`03-LEAVEBOT.md`、`04-STACK.md` 與編號 `prompts/`。
 - 課程資料與 Checkpoint：讀取學生專案 `course/02-補充/04-PLAN.json` 與 `02-CHECKPOINTS.md`。

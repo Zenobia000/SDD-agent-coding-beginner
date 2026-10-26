@@ -23,6 +23,10 @@ Skill Deck 透過外部服務載入 Google Fonts，字體依各字體的授權�
 
 `handbook/site/assets/demo-reference/` 的網站畫面取自 [Linear](https://linear.app/) 與 [Apple](https://www.apple.com/airpods-pro/)，供課堂對照及視覺還原練習。畫面、商標與產品圖像的權利歸各權利人所有，本教材不授予這些第三方內容的額外重製、商業或品牌使用權。公開或商用作品應自行確認素材使用權。
 
+`handbook/site/assets/demo-player/reference.png` 是 [Apple Music「Today’s Hits」](https://music.apple.com/au/playlist/todays-hits/pl.f4d106fed2bd41149aaacabb233eb5eb) 的固定課堂參考圖，於 2026-10-27 以 1440 × 900 擷取。圖中網站介面、商標及既有封面的權利歸原權利人所有，不適用本專案原創教材的授權。擷取來源及檔案雜湊見同目錄 `reference-source.json`。
+
+第四題指定的 `cover-01.png` 至 `cover-03.png` 與 `tracks.json` 來自使用者提供的 `Music_Player_Demo_Assets`，包含原創幾何封面與虛構歌曲資料，依原素材包說明供本課堂使用及修改。它們與 Apple Music 原站截圖分開標示，不包含音訊或 Apple Music 串接。
+
 ## 歷史版本
 
 授權調整不撤回使用者對過往已合法取得版本享有的有效權利。歷史 MIT 聲明保存於 [LICENSES/LEGACY-MIT.txt](LICENSES/LEGACY-MIT.txt)，用於說明先前版本，不是新原創教材的 MIT 授權。

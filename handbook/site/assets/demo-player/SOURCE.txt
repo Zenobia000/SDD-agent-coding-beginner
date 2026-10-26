@@ -1,0 +1,11 @@
+音樂播放器復刻：固定課堂輸入
+
+reference.png：Apple Music 原站固定 1440 × 900 截圖，來源 URL、擷取時間與 SHA256 詳見 reference-source.json；網站畫面與品牌屬原權利人。這是臨摹參考，不是模型實測成果。
+tracks.json、assets/cover-01.png 至 cover-03.png：來自使用者提供的根目錄 Music_Player_Demo_Assets 原始包。三張原創幾何封面為 800 × 800；曲目與藝人皆屬虛構，沒有音訊。
+
+正式 player-input.zip 只包含 reference.png、tracks.json 與三張封面。請各受測系統解壓同一份 ZIP，以同提示、同素材、同時限比較。
+截圖只定義側欄、歌單、欄位比例與播放區位置；Studio Music／Studio Sessions 與三首虛構歌曲依文字題目和 tracks.json 置換。真實歌曲、登入、訂閱與地區橫幅不列入驗收。
+受測 Agent 不讀原站程式，不把截圖當作介面背景；只模擬播放進度，不連 Apple Music API。
+
+原始包的 PROMPT.txt 保留原樣供教師查考；本課正式初始提示詞在 D1 講義及 assets/demo-prompts/player-initial.txt，已將切歌狀態要求移至固定追加。教師在製作截止前兩分鐘才送追加，不將追加提示或原始 PROMPT.txt 預放受測資料夾。
+封面可供本課堂使用與修改，依原始包說明；Apple 截圖與品牌權利另外保留。這個包不是完整播放器答案。

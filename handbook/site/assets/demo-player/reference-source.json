@@ -1,0 +1,17 @@
+{
+  "url": "https://music.apple.com/au/playlist/todays-hits/pl.f4d106fed2bd41149aaacabb233eb5eb",
+  "title": "‎Today’s Hits - Playlist - Apple Music",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captured": "2026-10-27",
+  "type": "Apple Music原站瀏覽器截圖",
+  "note": "只作版面參考。真實歌曲、登入、訂閱與地區提示不列入驗收，學生採用指定虛構歌曲及封面。",
+  "width": 1440,
+  "height": 900,
+  "sha256": "1fa13b139810b0a901816a5fabac9ff885116ec6d7b08809c3847bf6b82df3cf",
+  "role": "固定原站截圖；用於布局對照，不是模型實測成果",
+  "asset_source": "Music_Player_Demo_Assets/Music_Player_Demo_Assets",
+  "teacher_prompt_note": "本課初始指令移除切歌歸零及保留狀態，保留到製作截止前兩分鐘的固定追加。原始素材包不變。"
+}

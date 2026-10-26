@@ -1,0 +1,35 @@
+{
+  "playlist": {
+    "title": "Studio Sessions",
+    "description": "Three fictional tracks for a classroom UI exercise. No audio files.",
+    "tracks": [
+      {
+        "id": "track-01",
+        "title": "Afterglow",
+        "artist": "Mira Vale",
+        "album": "Afterglow",
+        "duration_seconds": 198,
+        "duration_display": "3:18",
+        "cover": "assets/cover-01.png"
+      },
+      {
+        "id": "track-02",
+        "title": "Night Transit",
+        "artist": "North Arcade",
+        "album": "Night Transit",
+        "duration_seconds": 225,
+        "duration_display": "3:45",
+        "cover": "assets/cover-02.png"
+      },
+      {
+        "id": "track-03",
+        "title": "Tidal Light",
+        "artist": "Lumen Coast",
+        "album": "Tidal Light",
+        "duration_seconds": 252,
+        "duration_display": "4:12",
+        "cover": "assets/cover-03.png"
+      }
+    ]
+  }
+}

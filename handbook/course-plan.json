@@ -1,18 +1,85 @@
 {
-  "version": "2026.10-unified-1",
+  "version": "2026.10-four-challenges-apple-1",
   "student_repository": "Zenobia000/leavebot-bootcamp",
   "day1": {
-    "title": "Vibe Coding：從驚喜到 PRD",
+    "title": "Vibe Coding：體驗、比較與需求整理",
     "workspace": "獨立 D1 練習資料夾",
     "deliverable": "所選作品的 PRD 草稿",
     "demos": [
-      "網站首屏臨摹",
-      "深夜塔羅抽牌室",
-      "捲動動畫重建"
-    ]
+      "鵜鶘騎腳踏車 SVG",
+      "無素材塔羅抽牌",
+      "太空射擊遊戲",
+      "音樂播放器看圖復刻"
+    ],
+    "units": [
+      {
+        "number": 1,
+        "day": "D1",
+        "time": "09:00–09:45",
+        "title": "認識 Coding Agent",
+        "coverTitle": "認識\nCoding Agent",
+        "outcome": "看到讀檔、產出與操作",
+        "image": "assets/unit-covers/unit-01.png"
+      },
+      {
+        "number": 2,
+        "day": "D1",
+        "time": "09:45–10:30",
+        "title": "Claude Code／Codex 基本操作",
+        "coverTitle": "Claude Code／Codex\n基本操作",
+        "outcome": "在獨立練習資料夾啟動工具與作品",
+        "image": "assets/unit-covers/unit-02.png"
+      },
+      {
+        "number": 3,
+        "day": "D1",
+        "time": "10:45–12:30",
+        "title": "四題 Coding Agent 能力體驗",
+        "coverTitle": "四題 Coding Agent\n能力體驗",
+        "outcome": "分辨空間表達、互動流程、遊戲狀態與看圖復刻",
+        "image": "assets/unit-covers/unit-03.png"
+      },
+      {
+        "number": 4,
+        "day": "D1",
+        "time": "13:30–14:15",
+        "title": "固定指令實作與追加要求",
+        "coverTitle": "固定指令實作\n與追加要求",
+        "outcome": "保存初始與固定追加後結果，記錄失敗",
+        "image": "assets/unit-covers/unit-04.png"
+      },
+      {
+        "number": 5,
+        "day": "D1",
+        "time": "14:15–15:00",
+        "title": "補上下文比較",
+        "coverTitle": "補上下文比較",
+        "outcome": "以同一題比較兩版差異",
+        "image": "assets/unit-covers/unit-05.png"
+      },
+      {
+        "number": 6,
+        "day": "D1",
+        "time": "15:15–16:30",
+        "title": "操作驗收與修一個問題",
+        "coverTitle": "操作驗收\n與修一個問題",
+        "outcome": "留下通過項目、介入次數與修復證據",
+        "image": "assets/unit-covers/unit-06.png"
+      },
+      {
+        "number": 7,
+        "day": "D1",
+        "time": "16:30–17:30",
+        "title": "收斂 PRD",
+        "coverTitle": "收斂 PRD",
+        "outcome": "確認三條以上驗收條件與待決事項",
+        "image": "assets/unit-covers/unit-07.png"
+      }
+    ],
+    "test_protocol": "初始指令＋一次固定追加，製作截止前兩分鐘送出，截止後保留原版"
   },
   "day2": {
-    "title": "SDD：從 PRD 到可驗收的功能",
+    "title": "D2：完整示範到自己的小專案",
     "stack": "FastAPI + HTML/CSS/JavaScript + SQLite + pytest",
     "core": "表單 → 後端驗證 → SQLite → 我的假單（pending）",
     "tickets": [
@@ -23,84 +90,160 @@
     "units": [
       {
         "number": 8,
-        "time": "09:00–09:45",
-        "title": "從 D1 體驗接到 LeaveBot：確認問題與範圍",
-        "why": "昨天學會把創意說清楚；今天換共同題目，把決策留下來。",
-        "action": "讀題目、完成最小 Brief，訪談理由、過去日期與重複送出三項決策。",
-        "gate": "主線與延伸分清楚；三個問題已定案或由講師接手。",
+        "day": "D2",
+        "time": "09:00–09:30",
+        "title": "LeaveBot 示範：問題與範圍",
+        "coverTitle": "LeaveBot 示範\n問題與範圍",
+        "outcome": "看見如何從問題釐清出 Brief",
+        "image": "assets/unit-covers/unit-08.png",
+        "mode": "demo",
         "cards": [
           "A"
-        ]
+        ],
+        "action": "觀察講師讀題目、訪談並決定本次範圍。",
+        "why": "先確認問題，再選擇要解的流程。",
+        "gate": "能指出使用者、痛點與一項由人決定的限制。"
       },
       {
         "number": 9,
-        "time": "09:45–10:30",
-        "title": "把共識寫成 PRD 與 SRS",
-        "why": "先定義可判斷的成功與失敗，再設計系統。",
-        "action": "先產 PRD 並審 AC，再把同一組承諾轉成 SRS；不一次寫完六份文件。",
-        "gate": "PRD 有成功與失敗條件；每個 AC 在 SRS 有對應，沒有新增範圍。",
+        "day": "D2",
+        "time": "09:30–10:00",
+        "title": "LeaveBot 示範：PRD 與 SRS",
+        "coverTitle": "LeaveBot 示範\nPRD 與 SRS",
+        "outcome": "看見成功、失敗條件如何寫成規則",
+        "image": "assets/unit-covers/unit-09.png",
+        "mode": "demo",
         "cards": [
           "B",
           "C"
-        ]
+        ],
+        "action": "觀察同一組承諾如何從 PRD 轉成 SRS。",
+        "why": "文件之間需要指向同一組已定需求。",
+        "gate": "能指出一條成功與一條失敗驗收條件。"
       },
       {
         "number": 10,
-        "time": "10:45–11:30",
-        "title": "Archify 流程檢查與最小系統設計",
-        "why": "用圖找漏掉的錯誤分支，再定資料與 API。",
-        "action": "先把 SRS 畫成流程，再依固定技術棧建立最小 SAD／SDS。",
-        "gate": "圖與 SRS 一致；成功、拒絕與不存檔分支明確；API 與欄位可直接實作。",
+        "day": "D2",
+        "time": "10:00–10:30",
+        "title": "LeaveBot 示範：流程與最小設計",
+        "coverTitle": "LeaveBot 示範\n流程與最小設計",
+        "outcome": "看見流程、資料與 API 如何接起來",
+        "image": "assets/unit-covers/unit-10.png",
+        "mode": "demo",
         "cards": [
           "D",
           "E"
-        ]
+        ],
+        "action": "看 Archify 檢查分支，再確認最小資料模型與 API。",
+        "why": "需要的設計做到能實作就好。",
+        "gate": "能指出拒絕分支與資料存檔的接縫。"
       },
       {
         "number": 11,
-        "time": "11:30–12:30",
-        "title": "人定預期結果，選案例再拆兩張票",
-        "why": "AI 提議案例，預期結果與範圍由人審。",
-        "action": "選 6–12 個代表 TC，建立追溯表，拆骨架與表單切片兩張票。",
-        "gate": "每個 TC 有來源與人工確認的預期結果；兩張票能在新對話接手。",
+        "day": "D2",
+        "time": "10:45–11:15",
+        "title": "LeaveBot 示範：驗收案例與任務票",
+        "coverTitle": "LeaveBot 示範\n驗收案例與任務票",
+        "outcome": "看見人定預期結果，再拆兩張票",
+        "image": "assets/unit-covers/unit-11.png",
+        "mode": "demo",
         "cards": [
           "F",
           "G"
-        ]
+        ],
+        "action": "看講師挑代表案例、確認預期結果，拆骨架與表單票。",
+        "why": "測試的答案由規格與人工算例決定。",
+        "gate": "能說出一個案例為何能抓到錯誤。"
       },
       {
         "number": 12,
-        "time": "13:30–15:00",
-        "title": "從空白骨架到一條可驗收的表單功能",
-        "why": "先接通首頁與 API，再逐一做紅燈、綠燈。",
-        "action": "先完成 000 骨架，再於新對話實作 001；第一個業務測試的紅燈由全組親眼確認。",
-        "gate": "表單、驗證、SQLite、我的假單接通；測試實際執行，拒絕輸入不存檔。",
+        "day": "D2",
+        "time": "11:15–12:30",
+        "title": "LeaveBot 示範：從骨架到可用功能",
+        "coverTitle": "LeaveBot 示範\n從骨架到可用功能",
+        "outcome": "看見測試紅燈、實作與操作驗證",
+        "image": "assets/unit-covers/unit-12.png",
+        "mode": "demo",
         "cards": [
           "H"
-        ]
+        ],
+        "action": "觀察骨架接通、第一個業務紅燈，以及表單到 SQLite 的流程。",
+        "why": "做完後需要用實際結果核對。",
+        "gate": "能分辨環境問題、測試預期與功能錯誤。"
       },
       {
         "number": 13,
-        "time": "15:15–16:30",
-        "title": "重現錯誤、修復，再走一次需求變更",
-        "why": "測試要能抓住錯誤，需求改動也要回到規格。",
-        "action": "在可還原的練習分支做一次講師指定的錯誤，再修復；將理由長度上限由 200 改為 100，先審影響。",
-        "gate": "有修復前後證據；依規格→案例→測試→程式更新，舊測試仍通過。",
+        "day": "D2",
+        "time": "13:30–14:00",
+        "title": "LeaveBot 示範：除錯、變更與交付",
+        "coverTitle": "LeaveBot 示範\n除錯、變更與交付",
+        "outcome": "看見如何重現、修復、審核與交付",
+        "image": "assets/unit-covers/unit-13.png",
+        "mode": "demo",
         "cards": [
           "I",
-          "J"
-        ]
+          "J",
+          "K"
+        ],
+        "action": "看講師重現一個錯誤，示範 200 改 100 的需求變更並交付。",
+        "why": "14:00 結束示範，後面換成自己的專案。",
+        "gate": "能說出自己開發時要保留哪些驗證證據。"
       },
       {
         "number": 14,
-        "time": "16:30–17:30",
-        "title": "操作驗收與交付",
-        "why": "程式、文件與口頭宣稱必須對得起來。",
-        "action": "展示成功與失敗、核對一條追溯鏈、保存版本並說明未驗證項。",
-        "gate": "他人可依 README 啟動；測試與人工操作有證據，不含秘密或資料庫。",
-        "cards": [
-          "K"
-        ]
+        "day": "D2",
+        "time": "14:00–15:00",
+        "title": "自己的問題與種子 Brief",
+        "coverTitle": "自己的問題\n與種子 Brief",
+        "outcome": "定義痛點，確認今天的一條核心流程",
+        "image": "assets/unit-covers/unit-14-v5.png",
+        "mode": "practice",
+        "cards": [],
+        "action": "使用專案 Starter，完成五題 Brief；由 Agent 釐清後，確認最小規格與至少三條驗收。",
+        "why": "從自己的使用情境開始，先縮範圍。",
+        "gate": "有具體使用者、痛點、一條流程、不做範圍與一條失敗情境。"
+      },
+      {
+        "number": 15,
+        "day": "D2",
+        "time": "15:15–16:30",
+        "title": "完成自己的最小專案",
+        "coverTitle": "完成自己的\n最小專案",
+        "outcome": "實作一條功能，親手操作並修復",
+        "image": "assets/unit-covers/unit-15-v5.png",
+        "mode": "practice",
+        "cards": [],
+        "action": "依自己的規格完成一條功能。15:45 先看可操作版本，16:15 停止加功能，驗證成功與失敗。",
+        "why": "使用自己已準備好的環境，先守住一條流程。",
+        "gate": "能執行並展示成功、失敗與重新操作；未完成項如實記錄。"
+      },
+      {
+        "number": 16,
+        "day": "D2",
+        "time": "16:30–17:15",
+        "title": "成果展示與作品紀錄",
+        "coverTitle": "成果展示\n與作品紀錄",
+        "outcome": "展示成果，在網站留下開發與學習紀錄",
+        "image": "assets/unit-covers/unit-16-v5.png",
+        "mode": "portfolio",
+        "cards": [],
+        "action": "用三分鐘說明問題、做法與驗證；登入 Sunny 網站，在「我的作品」新增並送出專案紀錄。",
+        "why": "未完成也可記錄實際進度、卡點與下一步。",
+        "gate": "作品有問題、做法、驗證、心得與目前限制；公開授權自行決定。"
+      },
+      {
+        "number": 17,
+        "day": "D2",
+        "time": "17:15–17:30",
+        "title": "課後回饋與企業落地教材",
+        "coverTitle": "課後回饋\n與企業落地教材",
+        "outcome": "留下課後回饋，確認帳號 email 可收信",
+        "image": "assets/unit-covers/unit-17-v5.png",
+        "mode": "feedback",
+        "cards": [],
+        "action": "在「寫給 Sunny 的話」送出真實回饋；確認作品紀錄已送出、帳號 email 正確。",
+        "why": "完成作品紀錄與回饋後，課後由 Sunny 以 email 寄送企業數位教材。",
+        "gate": "兩項紀錄皆已送出，知道教材會寄到帳號 email。"
       }
     ]
   },
